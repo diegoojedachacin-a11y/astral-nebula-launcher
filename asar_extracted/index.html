@@ -584,7 +584,7 @@ select.inp option{background:#12121e;color:white;}
 
 /* ═══════ LOGIN ═══════ */
 [data-theme="vangogh"] {
-  background: url('bg-vangogh.jpg') no-repeat center center fixed;
+  background: url('assets/starry_night.png') no-repeat center center fixed;
   background-size: cover;
 }
 #shooting-stars {
@@ -636,7 +636,7 @@ select.inp option{background:#12121e;color:white;}
 
 /* ═══════ MAIN SHELL ═══════ */
 #main-launcher{position:fixed;inset:0;z-index:7000;display:none;border-radius:18px;overflow:hidden;}
-.launcher-shell{width:100%;height:100%;display:flex;border-radius:18px;overflow:hidden;background:var(--glass);backdrop-filter:blur(16px) saturate(180%);-webkit-backdrop-filter:blur(16px) saturate(180%);border:.5px solid var(--border);}
+.launcher-shell{width:100%;height:100%;display:flex;border-radius:18px;overflow:hidden;background:var(--glass);backdrop-filter:blur(8px) saturate(160%);-webkit-backdrop-filter:blur(16px) saturate(180%);border:.5px solid var(--border);}
 
 /* ═══════ SIDEBAR ═══════ */
 .sidebar{width:var(--sidebar-w);min-width:var(--sidebar-w);background:rgba(0,0,0,.28);border-right:.5px solid var(--border);display:flex;flex-direction:column;padding:58px 14px 18px;position:relative;}
@@ -2027,7 +2027,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;heigh
   <div class="orb" id="o4"></div>
   <div class="stars"></div>
 </div>
-<canvas id="vanGoghCanvas" style="position:fixed;inset:0;z-index:7500;pointer-events:none;width:100%;height:100%;"></canvas>
+<canvas id="vanGoghCanvas" style="position:fixed;inset:0;z-index:7050;pointer-events:none;width:100%;height:100%;"></canvas>
 <div id="drag-bar"></div>
 <div id="traffic">
   <button class="light close"    onclick="ipc.send('window-close')"></button>

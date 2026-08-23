@@ -247,14 +247,13 @@ function initSystemTray() {
 
 // ── Window ───────────────────────────────────────────────────────
 function createWindow() {
-    // Crear ventana principal instantánea y directamente visible
     win = new BrowserWindow({
         width: 1360, height: 800,
         minWidth: 1080, minHeight: 680,
-        frame: false, transparent: true,
+        frame: false,
+        transparent: true,
         resizable: true, hasShadow: true,
         show: true,
-        opacity: 1,
         backgroundColor: '#00000000',
         webPreferences: {
             nodeIntegration: true,
@@ -264,8 +263,11 @@ function createWindow() {
         }
     });
     win.loadFile(path.join(__dirname, 'index.html'));
-    win.center();
+        win.center();
+    win.show();
     win.focus();
+    win.setAlwaysOnTop(true);
+    win.setAlwaysOnTop(false);
 
     win.on('minimize', (event) => {
         const s = loadSettings();

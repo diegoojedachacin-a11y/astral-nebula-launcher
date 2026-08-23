@@ -30,4 +30,11 @@ FUSSIONBORN.zip
 historial.db
 nul
 app_core.asar
+app.asar
+*.mkv
+*.mp4
+*.zip
+*.exe
+*.rar
+*.7z
 .env

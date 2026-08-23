@@ -9,5 +9,10 @@
     "projectId": "astral-nebula-social",
     "authDomain": "astral-nebula-social.firebaseapp.com",
     "appId": "1:289159955650:web:7906ba01ca236ae92ca75b"
-  }
+  },
+  "gameDir": "",
+  "language": "es",
+  "updateUrl": "https://raw.githubusercontent.com/fonduev/astral-nebula-launcher/main/update.json",
+  "systemTotalRamGb": 16,
+  "systemRecommendedRamGb": 8
 }
