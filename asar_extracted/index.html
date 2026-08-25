@@ -288,6 +288,14 @@
 
 
 /* ═══════ UPDATES & CHANGELOG FEED STYLES ═══════ */
+
+#tab-updates.active {
+  display: flex !important;
+  flex-direction: column;
+  overflow: hidden;
+  height: 100%;
+}
+
 .changelog-container {
   display: flex;
   flex-direction: column;
@@ -2574,7 +2582,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;heigh
     </div>
 
       <!-- ═══ TAB PANEL: ACTUALIZACIONES & REGISTRO DE NOVEDADES ═══ -->
-      <div class="tab-panel" id="tab-updates" style="padding:52px 40px 26px; overflow:hidden; display:none; flex-direction:column;">
+      <div class="tab-panel" id="tab-updates" style="padding:52px 40px 26px;">
         <h1 class="panel-title">Novedades & Actualizaciones</h1>
         <p class="panel-sub">Conoce todas las mejoras, optimizaciones y novedades añadidas a Nebula Launcher.</p>
 
@@ -4536,7 +4544,7 @@ function clearCustomBgImage() {
 
 // ═══════ TABS ═══════
 // Mapeo de tab-id → texto parcial en el nav-item (para evitar bugs con traducción)
-const NAV_TAB_MAP = { play:'jugar', mods:'mods', modpacks:'modpacks', versiones:'versiones', console:'consola', settings:'config', social:'social', servers:'servidores' };
+const NAV_TAB_MAP = { play:'jugar', mods:'mods', modpacks:'modpacks', versiones:'versiones', console:'consola', settings:'config', social:'social', servers:'servidores', updates:'actualizaciones' };
 function showTab(id) {
   document.querySelectorAll('.tab-panel').forEach(t=>t.classList.remove('active'));
   document.getElementById('tab-'+id).classList.add('active');
