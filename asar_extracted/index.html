@@ -76,6 +76,88 @@
   --border:rgba(251,146,60,0.12);--border-glow:rgba(251,146,60,0.4);
   --btn-glass:rgba(251,146,60,0.12);--btn-border:rgba(251,146,60,0.3);
 }
+
+
+/* ═══════ MINIMALIST SOLID THEMES (CERO DISTRACCIONES) ═══════ */
+[data-theme="oled"]{
+  --orb1:#000000;--orb2:#050505;--orb3:#0a0a0a;--orb4:#000000;
+  --accent:#f4f4f5;--accent2:#d4d4d8;--accent3:#a1a1aa;
+  --accent-glow:rgba(255,255,255,0.18);
+  --glass:rgba(14, 14, 16, 0.94);--glass-light:rgba(255,255,255,0.06);--glass-mid:rgba(255,255,255,0.03);
+  --border:rgba(255,255,255,0.10);--border-glow:rgba(255,255,255,0.25);
+  --btn-glass:rgba(255,255,255,0.12);--btn-border:rgba(255,255,255,0.25);
+}
+[data-theme="oled"] #bg .orb,
+[data-theme="oled"] #vanGoghCanvas {
+  display: none !important;
+}
+
+[data-theme="midnight"]{
+  --orb1:#0b0f19;--orb2:#0f172a;--orb3:#1e293b;--orb4:#020617;
+  --accent:#38bdf8;--accent2:#60a5fa;--accent3:#93c5fd;
+  --accent-glow:rgba(56,189,248,0.20);
+  --glass:rgba(15, 23, 42, 0.92);--glass-light:rgba(56,189,248,0.06);--glass-mid:rgba(56,189,248,0.03);
+  --border:rgba(56,189,248,0.12);--border-glow:rgba(56,189,248,0.30);
+  --btn-glass:rgba(56,189,248,0.12);--btn-border:rgba(56,189,248,0.28);
+}
+[data-theme="midnight"] #bg .orb,
+[data-theme="midnight"] #vanGoghCanvas {
+  display: none !important;
+}
+
+[data-theme="carbon"]{
+  --orb1:#121214;--orb2:#18181b;--orb3:#27272a;--orb4:#09090b;
+  --accent:#22c55e;--accent2:#4ade80;--accent3:#86efac;
+  --accent-glow:rgba(34,197,94,0.20);
+  --glass:rgba(24, 24, 27, 0.92);--glass-light:rgba(34,197,94,0.06);--glass-mid:rgba(34,197,94,0.03);
+  --border:rgba(34,197,94,0.12);--border-glow:rgba(34,197,94,0.30);
+  --btn-glass:rgba(34,197,94,0.12);--btn-border:rgba(34,197,94,0.28);
+}
+[data-theme="carbon"] #bg .orb,
+[data-theme="carbon"] #vanGoghCanvas {
+  display: none !important;
+}
+
+[data-theme="amethyst"]{
+  --orb1:#0f0919;--orb2:#1a0f2e;--orb3:#281747;--orb4:#07030d;
+  --accent:#a855f7;--accent2:#c084fc;--accent3:#e9d5ff;
+  --accent-glow:rgba(168,85,247,0.20);
+  --glass:rgba(20, 12, 36, 0.92);--glass-light:rgba(168,85,247,0.06);--glass-mid:rgba(168,85,247,0.03);
+  --border:rgba(168,85,247,0.12);--border-glow:rgba(168,85,247,0.30);
+  --btn-glass:rgba(168,85,247,0.12);--btn-border:rgba(168,85,247,0.28);
+}
+[data-theme="amethyst"] #bg .orb,
+[data-theme="amethyst"] #vanGoghCanvas {
+  display: none !important;
+}
+
+[data-theme="cyberpunk"]{
+  --orb1:#2a0845;--orb2:#640d5f;--orb3:#0f172a;--orb4:#07020d;
+  --accent:#f43f5e;--accent2:#06b6d4;--accent3:#facc15;
+  --accent-glow:rgba(244,63,94,0.35);
+  --glass:rgba(16, 6, 26, 0.52);--glass-light:rgba(244,63,94,0.08);--glass-mid:rgba(6,182,212,0.05);
+  --border:rgba(6,182,212,0.25);--border-glow:rgba(244,63,94,0.55);
+  --btn-glass:rgba(244,63,94,0.18);--btn-border:rgba(6,182,212,0.40);
+}
+
+[data-theme="deepocean"]{
+  --orb1:#020617;--orb2:#082f49;--orb3:#0e7490;--orb4:#01040a;
+  --accent:#2dd4bf;--accent2:#38bdf8;--accent3:#a5f3fc;
+  --accent-glow:rgba(45,212,191,0.30);
+  --glass:rgba(2, 12, 27, 0.52);--glass-light:rgba(45,212,191,0.08);--glass-mid:rgba(56,189,248,0.04);
+  --border:rgba(45,212,191,0.22);--border-glow:rgba(45,212,191,0.50);
+  --btn-glass:rgba(45,212,191,0.16);--btn-border:rgba(56,189,248,0.35);
+}
+
+[data-theme="pixel8bit"]{
+  --orb1:#080c14;--orb2:#0f172a;--orb3:#064e3b;--orb4:#020617;
+  --accent:#22c55e;--accent2:#facc15;--accent3:#38bdf8;
+  --accent-glow:rgba(34,197,94,0.35);
+  --glass:rgba(10, 16, 26, 0.55);--glass-light:rgba(34,197,94,0.10);--glass-mid:rgba(250,204,21,0.06);
+  --border:rgba(34,197,94,0.30);--border-glow:rgba(34,197,94,0.60);
+  --btn-glass:rgba(34,197,94,0.22);--btn-border:rgba(34,197,94,0.45);
+}
+
 [data-theme="sakura"]{
   --orb1:#3b0720;--orb2:#500724;--orb3:#831843;--orb4:#150209;
   --accent:#f472b6;--accent2:#fb7185;--accent3:#fda4af;
@@ -104,6 +186,193 @@
 .sidebar, .play-left, .play-right, .tab-panel {
   contain: layout style;
 }
+
+
+/* ═══════ INTERACTIVE 3D TILT FX ═══════ */
+.tilt-card {
+  position: relative;
+  transition: transform 0.16s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.16s ease;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+.tilt-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(circle at var(--glare-x, 50%) var(--glare-y, 50%), rgba(255, 255, 255, 0.14) 0%, transparent 65%);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  pointer-events: none;
+}
+.tilt-card:hover::after {
+  opacity: 1;
+}
+
+
+
+.btn-clean-ram-action {
+  padding: 3px 8px;
+  font-size: 0.60rem;
+  font-weight: 700;
+  border-radius: 6px;
+  background: rgba(34, 197, 94, 0.15);
+  border: 1px solid rgba(34, 197, 94, 0.4);
+  color: #4ade80;
+  cursor: pointer;
+  transition: all 0.2s;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.btn-clean-ram-action:hover {
+  background: rgba(34, 197, 94, 0.35);
+  border-color: #4ade80;
+  box-shadow: 0 0 10px rgba(34, 197, 94, 0.4);
+  transform: translateY(-1px);
+}
+
+/* ═══════ QUALITY OF LIFE ERGONOMIC STYLES ═══════ */
+.btn-ram-preset {
+  flex: 1;
+  min-width: 48px;
+  padding: 5px 6px;
+  border-radius: 8px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.04);
+  color: var(--text);
+  cursor: pointer;
+  transition: all 0.18s;
+  text-align: center;
+}
+.btn-ram-preset:hover {
+  background: var(--btn-glass);
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateY(-1px);
+}
+.btn-ram-preset.active {
+  background: var(--accent);
+  color: #000;
+  border-color: var(--accent);
+  box-shadow: 0 0 12px var(--accent-glow);
+}
+
+.btn-quick-dir {
+  padding: 7px 4px;
+  font-size: 0.64rem;
+  font-weight: 600;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.035);
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+  cursor: pointer;
+  transition: all 0.18s;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+.btn-quick-dir:hover {
+  background: var(--btn-glass);
+  border-color: var(--accent);
+  color: var(--text);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+
+/* ═══════ UPDATES & CHANGELOG FEED STYLES ═══════ */
+.changelog-container {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 20px;
+  max-height: 440px;
+  overflow-y: auto;
+  padding-right: 6px;
+  -webkit-app-region: no-drag;
+}
+.changelog-card {
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 16px 20px;
+  backdrop-filter: blur(18px);
+  transition: all 0.22s ease;
+}
+.changelog-card:hover {
+  border-color: var(--border-glow);
+  background: rgba(255, 255, 255, 0.055);
+  box-shadow: 0 6px 24px rgba(0,0,0,0.35);
+  transform: translateY(-1.5px);
+}
+.changelog-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding-bottom: 8px;
+}
+.changelog-ver {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #fff;
+}
+.changelog-badge-latest {
+  font-size: 0.62rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  color: #000;
+  padding: 2px 8px;
+  border-radius: 10px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.changelog-date {
+  font-size: 0.72rem;
+  color: var(--text-dim);
+}
+.changelog-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.changelog-item {
+  font-size: 0.78rem;
+  color: var(--text);
+  line-height: 1.45;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+.cl-tag {
+  font-size: 0.58rem;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 6px;
+  flex-shrink: 0;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  margin-top: 1px;
+}
+.cl-tag-new { background: rgba(74, 222, 128, 0.2); color: #4ade80; border: 1px solid rgba(74, 222, 128, 0.4); }
+.cl-tag-opt { background: rgba(56, 189, 248, 0.2); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.4); }
+.cl-tag-fix { background: rgba(251, 146, 60, 0.2); color: #fb923c; border: 1px solid rgba(251, 146, 60, 0.4); }
+.cl-tag-art { background: rgba(244, 114, 182, 0.2); color: #f472b6; border: 1px solid rgba(244, 114, 182, 0.4); }
 
 /* ═══════ BASE ═══════ */
 :root{
@@ -1080,6 +1349,13 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;heigh
 .ts-aurora{background:linear-gradient(135deg,#021c15,#144a36);}
 .ts-supernova{background:linear-gradient(135deg,#2a1008,#5c3516);}
 .ts-cosmos{background:linear-gradient(135deg,#241406,#5c460d);}
+.ts-oled{background:#09090b;border:1px solid #3f3f46;box-shadow:0 0 10px rgba(255,255,255,0.15);}
+.ts-midnight{background:#0f172a;border:1px solid #1e3a8a;box-shadow:0 0 10px rgba(56,189,248,0.25);}
+.ts-carbon{background:#18181b;border:1px solid #15803d;box-shadow:0 0 10px rgba(34,197,94,0.25);}
+.ts-amethyst{background:#1e1035;border:1px solid #6b21a8;box-shadow:0 0 10px rgba(168,85,247,0.25);}
+.ts-cyberpunk{background:linear-gradient(135deg,#f43f5e,#8b5cf6,#06b6d4);box-shadow:0 0 14px rgba(244,63,94,0.45);}
+.ts-deepocean{background:linear-gradient(135deg,#082f49,#0e7490,#2dd4bf);box-shadow:0 0 14px rgba(45,212,191,0.45);}
+.ts-pixel8bit{background:linear-gradient(135deg,#064e3b,#22c55e,#facc15);box-shadow:0 0 14px rgba(34,197,94,0.45);}
 .ts-sakura{background:linear-gradient(135deg,#500724,#db2777,#f472b6);box-shadow:0 0 14px rgba(244,114,182,0.45);}
 .theme-label{font-size:.6rem;text-align:center;margin-top:4px;color:var(--text-dim);}
 
@@ -2214,7 +2490,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;heigh
   <div class="launcher-shell">
     
     <div class="sidebar">
-      <div class="user-pill">
+      <div class="user-pill tilt-card">
         <div class="user-avatar" id="user-avatar">👤</div>
         <div style="flex:1;overflow:hidden;">
           <div class="user-name" id="username-display">Usuario</div>
@@ -2297,55 +2573,149 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;heigh
       </div>
     </div>
 
-      <!-- ═══ TAB PANEL: ACTUALIZACIONES ═══ -->
-      <div class="tab-panel" id="tab-updates" style="padding:52px 40px 26px;">
-        <h1 class="panel-title">Actualizaciones</h1>
-        <p class="panel-sub">Mantén el launcher al día con las últimas mejoras y correcciones.</p>
+      <!-- ═══ TAB PANEL: ACTUALIZACIONES & REGISTRO DE NOVEDADES ═══ -->
+      <div class="tab-panel" id="tab-updates" style="padding:52px 40px 26px; overflow:hidden; display:none; flex-direction:column;">
+        <h1 class="panel-title">Novedades & Actualizaciones</h1>
+        <p class="panel-sub">Conoce todas las mejoras, optimizaciones y novedades añadidas a Nebula Launcher.</p>
 
-        <div class="updater-panel-card">
-          <!-- Cabecera -->
-          <div style="display:flex;align-items:center;gap:14px;margin-bottom:20px;">
-            <div style="width:48px;height:48px;border-radius:14px;background:linear-gradient(135deg,rgba(192,132,252,.15),rgba(129,140,248,.08));border:.5px solid rgba(192,132,252,.3);display:flex;align-items:center;justify-content:center;font-size:1.5rem;box-shadow:0 4px 14px rgba(192,132,252,.2);">&#x1F504;</div>
-            <div>
-              <div style="font-size:.66rem;letter-spacing:.1em;color:var(--text-dim);text-transform:uppercase;margin-bottom:3px;">VERSIÓN ACTUAL</div>
-              <div style="font-size:1.1rem;font-weight:700;" id="updater-panel-ver">—</div>
+        <!-- Tarjeta de Estado del Updater -->
+        <div class="updater-panel-card" style="margin-bottom:18px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px;">
+            <div style="display:flex;align-items:center;gap:14px;">
+              <div style="width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,rgba(192,132,252,.2),rgba(56,189,248,.1));border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:1.35rem;">🚀</div>
+              <div>
+                <div style="font-size:.64rem;letter-spacing:.1em;color:var(--text-dim);text-transform:uppercase;margin-bottom:2px;">ESTADO DEL LAUNCHER</div>
+                <div style="font-size:1.05rem;font-weight:700;display:flex;align-items:center;gap:8px;">
+                  <span id="updater-panel-ver">Nebula Launcher v4.3.1</span>
+                  <span style="font-size:0.65rem; background:rgba(74,222,128,0.15); color:#4ade80; border:1px solid rgba(74,222,128,0.4); padding:2px 7px; border-radius:10px;">🟢 Actualizado</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Botones de Acción -->
+            <div class="updater-btn-row" style="margin:0;">
+              <button class="btn btn-glass btn-sm" id="updater-btn-check" onclick="Updater.check()">
+                🔍 Buscar Actualizaciones
+              </button>
+              <button class="btn btn-primary btn-sm" id="updater-btn-download" style="display:none;" onclick="Updater.download()">
+                ⬇️ Descargar Actualización
+              </button>
+              <button class="btn btn-glass btn-sm" id="updater-btn-apply" style="display:none;color:#4ade80;" onclick="Updater.apply()">
+                🔄 Reiniciar Launcher
+              </button>
             </div>
           </div>
 
-          <!-- Estado -->
-          <div class="updater-status updater-status--idle" id="updater-panel-status">Haz clic en &ldquo;Buscar actualizaciones&rdquo; para comprobar.</div>
-
-          <!-- Notas de versión -->
+          <!-- Estado & Barra de Descarga -->
+          <div class="updater-status updater-status--idle" id="updater-panel-status" style="margin-top:10px;font-size:0.75rem;">Sistema al día con la versión oficial de GitHub.</div>
           <div class="updater-notes-box" id="updater-panel-notes" style="display:none;"></div>
-
-          <!-- Barra de progreso de descarga -->
-          <div class="updater-progress-wrap" id="updater-dl-progress">
+          <div class="updater-progress-wrap" id="updater-dl-progress" style="margin-top:10px;">
             <div class="updater-progress-label">
-              <span>Descargando</span>
+              <span>Descargando parche</span>
               <span id="updater-dl-text">0%</span>
             </div>
             <div class="updater-progress-track">
               <div class="updater-progress-fill" id="updater-dl-bar"></div>
             </div>
           </div>
-
-          <!-- Botones de acción -->
-          <div class="updater-btn-row">
-            <button class="btn btn-glass" id="updater-btn-check" onclick="Updater.check()">
-              &#x1F50D; Buscar actualizaciones
-            </button>
-            <button class="btn btn-primary" id="updater-btn-download" style="display:none;background:linear-gradient(135deg,rgba(192,132,252,.25),rgba(129,140,248,.15));border-color:rgba(192,132,252,.4);" onclick="Updater.download()">
-              &#x2B07;&#xFE0F; Descargar actualización
-            </button>
-            <button class="btn btn-glass" id="updater-btn-apply" style="display:none;color:#4ade80;border-color:rgba(74,222,128,.3);" onclick="Updater.apply()">
-              &#x1F504; Reiniciar Launcher
-            </button>
-          </div>
         </div>
 
-        <p style="font-size:.68rem;color:var(--text-dim);margin-top:18px;">
-          Las actualizaciones se aplican automáticamente en segundo plano. Si hay una nueva versión disponible, se te notificará en la esquina superior de la ventana.
-        </p>
+        <!-- ═══ FEED HISTORIAL DE NOVEDADES & CHANGELOG ═══ -->
+        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:8px;">
+          <h3 style="font-size:0.88rem; font-weight:700; color:var(--text); letter-spacing:0.04em; margin:0;">
+            📰 REGISTRO DE CAMBIOS Y NOVEDADES
+          </h3>
+          <a href="#" onclick="event.preventDefault();require('electron').shell.openExternal('https://github.com/fonduev/astral-nebula-launcher/releases')" style="font-size:0.70rem; color:var(--accent); text-decoration:none; font-weight:600;">
+            Ver en GitHub Releases ↗
+          </a>
+        </div>
+
+        <div class="changelog-container">
+          <!-- Versión 4.3.1 (Actual) -->
+          <div class="changelog-card">
+            <div class="changelog-header">
+              <div class="changelog-ver">
+                <span>Versión 4.3.1</span>
+                <span class="changelog-badge-latest">Versión Activa</span>
+              </div>
+              <span class="changelog-date">25 Agosto 2026</span>
+            </div>
+            <ul class="changelog-list">
+              <li class="changelog-item">
+                <span class="cl-tag cl-tag-art">Temas</span>
+                <span><strong>Temas Sólidos Minimalistas:</strong> Modos <em>OLED Dark (Negro Puro)</em>, <em>Midnight Clean</em>, <em>Carbon Dark</em> y <em>Amethyst Sleek</em> sin distracciones.</span>
+              </li>
+              <li class="changelog-item">
+                <span class="cl-tag cl-tag-art">Temas</span>
+                <span><strong>Temas Especiales Interactivos:</strong> <em>Sakura</em> con pétalos 3D, <em>Cyberpunk</em> con rejilla synthwave láser, <em>Deep Ocean</em> con burbujas marinas y <em>8-Bit Arcade</em> retro.</span>
+              </li>
+              <li class="changelog-item">
+                <span class="cl-tag cl-tag-new">Ergonomía</span>
+                <span><strong>Presets de RAM de 1-Clic:</strong> Botones rápidos <code>4 GB</code>, <code>6 GB ⭐</code>, <code>8 GB 🔥</code> y <code>12 GB 🚀</code> para asignación instantánea.</span>
+              </li>
+              <li class="changelog-item">
+                <span class="cl-tag cl-tag-new">Ergonomía</span>
+                <span><strong>Barra de Accesos Rápidos:</strong> Botones directos a <code>.minecraft</code>, <code>mods</code>, <code>screenshots</code>, <code>saves</code>, <code>shaders</code> y limpiador en la pantalla de inicio.</span>
+              </li>
+              <li class="changelog-item">
+                <span class="cl-tag cl-tag-opt">Rendimiento</span>
+                <span><strong>Optimizador Nativo de Juego:</strong> Prioridad CPU Alta para <code>javaw.exe</code>, aceleración de GPU dedicada NVIDIA/AMD y pre-reserva de RAM con <code>-XX:+AlwaysPreTouch</code>.</span>
+              </li>
+              <li class="changelog-item">
+                <span class="cl-tag cl-tag-opt">Rendimiento</span>
+                <span><strong>Optimización GPU Blitting:</strong> Cacheo de sprites en offscreen canvas para animaciones a 60 FPS con mínimo consumo de CPU.</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Versión 4.2.0 -->
+          <div class="changelog-card">
+            <div class="changelog-header">
+              <div class="changelog-ver">
+                <span>Versión 4.2.0</span>
+              </div>
+              <span class="changelog-date">21 Agosto 2026</span>
+            </div>
+            <ul class="changelog-list">
+              <li class="changelog-item">
+                <span class="cl-tag cl-tag-new">Modpacks</span>
+                <span><strong>Navegador Integrado de Modpacks:</strong> Búsqueda e instalación en 1 clic de paquetes de Modrinth y CurseForge con filtrado por categorías.</span>
+              </li>
+              <li class="changelog-item">
+                <span class="cl-tag cl-tag-new">Idiomas</span>
+                <span><strong>Soporte Tri-Idioma Oficial:</strong> Interfaz completa disponible en Español, English y Português.</span>
+              </li>
+              <li class="changelog-item">
+                <span class="cl-tag cl-tag-fix">Java</span>
+                <span><strong>Detector Inteligente de Java:</strong> Detección automática de OpenJDK 8, 17 y 21 con compatibilidad automática por versión.</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Versión 4.1.0 -->
+          <div class="changelog-card">
+            <div class="changelog-header">
+              <div class="changelog-ver">
+                <span>Versión 4.1.0</span>
+              </div>
+              <span class="changelog-date">18 Agosto 2026</span>
+            </div>
+            <ul class="changelog-list">
+              <li class="changelog-item">
+                <span class="cl-tag cl-tag-opt">Núcleo</span>
+                <span><strong>Reducción Masiva de Tamaño:</strong> Optimización del núcleo del launcher pasando de 35 MB a solo 10 MB.</span>
+              </li>
+              <li class="changelog-item">
+                <span class="cl-tag cl-tag-new">Social</span>
+                <span><strong>Red Social & Amigos:</strong> Sistema de presencia en vivo, chat y visor de perfiles.</span>
+              </li>
+              <li class="changelog-item">
+                <span class="cl-tag cl-tag-art">Skins</span>
+                <span><strong>Visor 3D de Skins y Capas:</strong> Renderizado 3D de avatares con soporte para capas personalizadas.</span>
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
 
       
@@ -2484,7 +2854,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;heigh
 
         <div class="play-layout">
           <div class="play-left">
-            <div class="launch-card" style="flex:1;min-height:0;display:flex;flex-direction:column;">
+            <div class="launch-card tilt-card" style="flex:1;min-height:0;display:flex;flex-direction:column;">
               <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
                 <div class="lc-title" style="margin:0;">VERSIÓN</div>
                 <button class="vb-toggle-snap" id="vb-snap-toggle" onclick="vbToggleSnapshots()" title="Mostrar/ocultar snapshots">SNAP</button>
@@ -2516,16 +2886,39 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;heigh
               <option value="">Ninguno</option>
             </select>
 
-            <div class="launch-card">
+            <div class="launch-card tilt-card">
               <div class="lc-title">MEMORIA RAM <span id="ramRecLabel" style="font-size:0.6rem;color:var(--text-dim);text-transform:none;font-weight:400;margin-left:4px;"></span></div>
               <div class="ram-row">
                 <span class="label" style="margin:0;">ASIGNADA</span>
                 <span class="ram-val"><span id="ramDisplay">4</span> GB</span>
               </div>
               <input type="range" id="ramSlider" min="1" max="16" value="4" oninput="updateRamSetting(this.value)">
+              <div style="display:flex; gap:6px; margin-top:8px;" id="ramPresetsRow">
+                <button class="btn-ram-preset" id="ramPre-4" onclick="setRamPreset(4)">4 GB</button>
+                <button class="btn-ram-preset" id="ramPre-6" onclick="setRamPreset(6)">6 GB ⭐</button>
+                <button class="btn-ram-preset" id="ramPre-8" onclick="setRamPreset(8)">8 GB 🔥</button>
+                <button class="btn-ram-preset" id="ramPre-12" onclick="setRamPreset(12)">12 GB 🚀</button>
+              </div>
             </div>
 
-            <button id="launchBtn" onclick="launchGame()">
+            
+            <!-- QUICK FOLDERS DIRECT ACCESS -->
+            <div class="launch-card tilt-card" style="padding:12px;">
+              <div class="lc-title" style="margin-bottom:6px; display:flex; justify-content:space-between; align-items:center;">
+                <span>📂 ACCESOS RÁPIDOS</span>
+                <span style="font-size:0.58rem; color:var(--accent); font-weight:700;">EXPLORADOR</span>
+              </div>
+              <div style="display:grid; grid-template-columns: 1fr 1fr 1fr; gap:6px;">
+                <button class="btn-quick-dir" onclick="openGameFolder('game')" title="Abrir carpeta .minecraft">📁 .minecraft</button>
+                <button class="btn-quick-dir" onclick="openGameFolder('mods')" title="Abrir carpeta de mods">📦 Mods</button>
+                <button class="btn-quick-dir" onclick="openGameFolder('screenshots')" title="Abrir capturas F2">📸 Fotos F2</button>
+                <button class="btn-quick-dir" onclick="openGameFolder('saves')" title="Abrir mundos guardados">🌍 Mundos</button>
+                <button class="btn-quick-dir" onclick="openGameFolder('shaderpacks')" title="Abrir shaders">🌅 Shaders</button>
+                <button class="btn-quick-dir" onclick="cleanDiskCache()" title="Limpiar caché y liberar espacio">🧹 Limpiar</button>
+              </div>
+            </div>
+
+            <button id="launchBtn" class="tilt-card" onclick="launchGame()">
               ⚡ INICIAR SALTO
             </button>
 
@@ -3175,7 +3568,19 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;heigh
               </label>
             </div>
 
-            <!-- 1. TEMAS CLÁSICOS -->
+            <!-- 1. TEMAS SÓLIDOS Y MINIMALISTAS -->
+            <div class="settings-card">
+              <h3>🖤 TEMAS SÓLIDOS & MINIMALISTAS (CERO DISTRACCIONES)</h3>
+              <p style="font-size:0.68rem; color:var(--text-dim); margin-bottom:10px;">Fondos limpios de un solo color oscuro sin partículas animadas. Máxima claridad y rendimiento.</p>
+              <div class="theme-grid">
+                <div class="theme-swatch ts-oled" onclick="setTheme('oled')" title="OLED Dark (Negro Puro Sólido)" style="display:flex;align-items:center;justify-content:center;font-size:1.1rem;cursor:pointer;">🖤</div>
+                <div class="theme-swatch ts-midnight" onclick="setTheme('midnight')" title="Midnight Clean (Azul Pizarra Sólido)" style="display:flex;align-items:center;justify-content:center;font-size:1.1rem;cursor:pointer;">🌑</div>
+                <div class="theme-swatch ts-carbon" onclick="setTheme('carbon')" title="Carbon Dark (Gris Carbón & Verde)" style="display:flex;align-items:center;justify-content:center;font-size:1.1rem;cursor:pointer;">🪙</div>
+                <div class="theme-swatch ts-amethyst" onclick="setTheme('amethyst')" title="Amethyst Sleek (Violeta Oscuro Mate)" style="display:flex;align-items:center;justify-content:center;font-size:1.1rem;cursor:pointer;">🟣</div>
+              </div>
+            </div>
+
+            <!-- 2. TEMAS CLÁSICOS CÓSMICOS -->
             <div class="settings-card">
               <h3>🎨 TEMAS CLÁSICOS</h3>
               <div class="theme-grid">
@@ -3193,6 +3598,9 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;heigh
               <div class="theme-grid">
                 <div class="theme-swatch ts-vangogh" onclick="setTheme('vangogh')" title="Van Gogh (Noche Estrellada)"></div>
                 <div class="theme-swatch ts-sakura" onclick="setTheme('sakura')" title="Sakura (Cerezo en Flor)" style="display:flex;align-items:center;justify-content:center;font-size:1.25rem;cursor:pointer;">🌸</div>
+                <div class="theme-swatch ts-cyberpunk" onclick="setTheme('cyberpunk')" title="Cyberpunk (Synthwave)" style="display:flex;align-items:center;justify-content:center;font-size:1.25rem;cursor:pointer;">🌆</div>
+                <div class="theme-swatch ts-deepocean" onclick="setTheme('deepocean')" title="Deep Ocean (Abismo Marino)" style="display:flex;align-items:center;justify-content:center;font-size:1.25rem;cursor:pointer;">🌊</div>
+                <div class="theme-swatch ts-pixel8bit" onclick="setTheme('pixel8bit')" title="Retro 8-Bit (Arcade Pixel)" style="display:flex;align-items:center;justify-content:center;font-size:1.25rem;cursor:pointer;">👾</div>
                 <div class="theme-swatch ts-custom" onclick="setTheme('custom')" title="Personalizado (Tus colores e imagen)">✨</div>
               </div>
             </div>
@@ -3498,7 +3906,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;heigh
 
 
 
-<div id="launcher-version-tag" style="position: fixed; right: 16px; bottom: 14px; font-size: 0.68rem; color: rgba(255, 255, 255, 0.22); font-family: 'Outfit', sans-serif; font-weight: 700; pointer-events: none; z-index: 99999; letter-spacing: 0.5px; text-shadow: 0 1px 3px rgba(0,0,0,0.6);">v4.3.0</div>
+<div id="launcher-version-tag" style="position: fixed; right: 16px; bottom: 14px; font-size: 0.68rem; color: rgba(255, 255, 255, 0.22); font-family: 'Outfit', sans-serif; font-weight: 700; pointer-events: none; z-index: 99999; letter-spacing: 0.5px; text-shadow: 0 1px 3px rgba(0,0,0,0.6);">v4.3.1</div>
 
 <script>
 const { ipcRenderer: ipc } = require('electron');
@@ -10781,6 +11189,33 @@ function updateMyStatus(status, activity) {
               ],
               stars: ['#ffffff', '#fb923c', '#fdba74', '#fef08a', '#facc15']
             };
+                    case 'cyberpunk':
+            return {
+              shooting: [
+                { head: '#ffffff', mid: '#f43f5e', tail: 'rgba(244, 63, 94, 0)' },
+                { head: '#ffffff', mid: '#06b6d4', tail: 'rgba(6, 182, 212, 0)' },
+                { head: '#ffffff', mid: '#facc15', tail: 'rgba(250, 204, 21, 0)' }
+              ],
+              stars: ['#ffffff', '#f43f5e', '#06b6d4', '#facc15', '#e879f9']
+            };
+          case 'deepocean':
+            return {
+              shooting: [
+                { head: '#ffffff', mid: '#2dd4bf', tail: 'rgba(45, 212, 191, 0)' },
+                { head: '#ffffff', mid: '#38bdf8', tail: 'rgba(56, 189, 248, 0)' },
+                { head: '#ffffff', mid: '#a5f3fc', tail: 'rgba(165, 243, 252, 0)' }
+              ],
+              stars: ['#ffffff', '#2dd4bf', '#38bdf8', '#a5f3fc', '#0284c7']
+            };
+          case 'pixel8bit':
+            return {
+              shooting: [
+                { head: '#ffffff', mid: '#22c55e', tail: 'rgba(34, 197, 94, 0)' },
+                { head: '#ffffff', mid: '#facc15', tail: 'rgba(250, 204, 21, 0)' },
+                { head: '#ffffff', mid: '#38bdf8', tail: 'rgba(56, 189, 248, 0)' }
+              ],
+              stars: ['#22c55e', '#facc15', '#38bdf8', '#ef4444', '#a855f7']
+            };
           case 'sakura':
             return {
               shooting: [
@@ -10873,6 +11308,56 @@ function updateMyStatus(status, activity) {
         };
       }
       const sakuraPetals = Array.from({ length: 60 }, () => createSakuraPetal(true));
+
+      
+      // ── 1. Deep Ocean Bubbles ──
+      const oceanBubbles = Array.from({ length: 45 }, () => ({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        radius: Math.random() * 6 + 3,
+        speedY: Math.random() * 0.9 + 0.4,
+        swaySpeed: Math.random() * 0.02 + 0.01,
+        swayAngle: Math.random() * Math.PI * 2,
+        alpha: Math.random() * 0.4 + 0.35
+      }));
+
+      // ── 2. Cyberpunk Lasers ──
+      const cyberLasers = Array.from({ length: 35 }, () => ({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        length: Math.random() * 65 + 30,
+        speed: Math.random() * 12 + 8,
+        color: Math.random() > 0.5 ? '#f43f5e' : '#06b6d4',
+        alpha: Math.random() * 0.5 + 0.4
+      }));
+
+      // ── 3. 8-Bit Pixel Blocks ──
+      const pixel8bitBlocks = Array.from({ length: 45 }, () => ({
+        x: Math.floor(Math.random() * (width / 8)) * 8,
+        y: Math.floor(Math.random() * (height / 8)) * 8,
+        size: (Math.floor(Math.random() * 2) + 1) * 6,
+        speedY: (Math.random() * 1.5 + 0.5),
+        color: ['#22c55e', '#facc15', '#38bdf8', '#a855f7', '#ef4444'][Math.floor(Math.random() * 5)],
+        alpha: Math.random() * 0.5 + 0.4
+      }));
+
+      // ── 4. Interactive Mouse Stardust Trail ──
+      const cursorParticles = [];
+      window.addEventListener('mousemove', (e) => {
+        if (cursorParticles.length < 35) {
+          const themeConf = getThemeColors();
+          const col = themeConf.stars[Math.floor(Math.random() * themeConf.stars.length)];
+          cursorParticles.push({
+            x: e.clientX,
+            y: e.clientY,
+            vx: (Math.random() - 0.5) * 2.2,
+            vy: (Math.random() - 0.5) * 2.2 - 0.6,
+            size: Math.random() * 3.2 + 1.5,
+            alpha: 0.85,
+            color: col
+          });
+        }
+      }, { passive: true });
 
       const stars = Array.from({ length: 280 }, (_, idx) => ({
         x: Math.random() * width,
@@ -11203,6 +11688,144 @@ function updateMyStatus(status, activity) {
           }
         }
 
+        
+        // ── Render Cursor Stardust Trail ──
+        for (let i = cursorParticles.length - 1; i >= 0; i--) {
+          const cp = cursorParticles[i];
+          cp.x += cp.vx * deltaFactor;
+          cp.y += cp.vy * deltaFactor;
+          cp.alpha -= 0.026 * deltaFactor;
+          if (cp.alpha <= 0) {
+            cursorParticles.splice(i, 1);
+            continue;
+          }
+          ctx.save();
+          ctx.globalAlpha = cp.alpha;
+          ctx.fillStyle = cp.color;
+          ctx.shadowColor = cp.color;
+          ctx.shadowBlur = 8;
+          ctx.beginPath();
+          ctx.arc(cp.x, cp.y, cp.size, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.restore();
+        }
+
+        // ── Render Deep Ocean Bubbles ──
+        if (currentActiveTheme === 'deepocean') {
+          for (let b of oceanBubbles) {
+            b.swayAngle += b.swaySpeed * deltaFactor;
+            b.y -= b.speedY * deltaFactor;
+            b.x += Math.sin(b.swayAngle) * 0.8 * deltaFactor;
+            if (b.y < -20) {
+              b.y = height + 20;
+              b.x = Math.random() * width;
+            }
+            ctx.save();
+            ctx.globalAlpha = b.alpha;
+            ctx.strokeStyle = '#38bdf8';
+            ctx.lineWidth = 1.2;
+            ctx.fillStyle = 'rgba(45, 212, 191, 0.15)';
+            ctx.shadowColor = '#2dd4bf';
+            ctx.shadowBlur = 6;
+            ctx.beginPath();
+            ctx.arc(b.x, b.y, b.radius, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.stroke();
+            // Highlight
+            ctx.beginPath();
+            ctx.arc(b.x - b.radius * 0.3, b.y - b.radius * 0.3, b.radius * 0.25, 0, Math.PI * 2);
+            ctx.fillStyle = 'rgba(255,255,255,0.7)';
+            ctx.fill();
+            ctx.restore();
+          }
+        }
+
+        // ── Render 8-Bit Pixel Blocks ──
+        if (currentActiveTheme === 'pixel8bit') {
+          for (let p of pixel8bitBlocks) {
+            p.y -= p.speedY * deltaFactor;
+            if (p.y < -20) {
+              p.y = height + 20;
+              p.x = Math.floor(Math.random() * (width / 8)) * 8;
+            }
+            ctx.save();
+            ctx.globalAlpha = p.alpha;
+            ctx.fillStyle = p.color;
+            ctx.shadowColor = p.color;
+            ctx.shadowBlur = 8;
+            ctx.fillRect(Math.floor(p.x), Math.floor(p.y), p.size, p.size);
+            ctx.restore();
+          }
+        }
+
+        // ── Render Cyberpunk 3D Perspective Grid & Lasers ──
+        if (currentActiveTheme === 'cyberpunk') {
+          const horizonY = height * 0.68;
+          ctx.save();
+          
+          // Horizon glowing line
+          const horizGrad = ctx.createLinearGradient(0, horizonY, width, horizonY);
+          horizGrad.addColorStop(0, 'rgba(244, 63, 94, 0)');
+          horizGrad.addColorStop(0.5, 'rgba(6, 182, 212, 0.6)');
+          horizGrad.addColorStop(1, 'rgba(244, 63, 94, 0)');
+          ctx.strokeStyle = horizGrad;
+          ctx.lineWidth = 2;
+          ctx.beginPath();
+          ctx.moveTo(0, horizonY);
+          ctx.lineTo(width, horizonY);
+          ctx.stroke();
+
+          // Perspective vertical grid lines converging to center horizon
+          const centerX = width * 0.5;
+          const numLines = 18;
+          for (let i = -numLines; i <= numLines; i++) {
+            const bottomX = centerX + i * (width / numLines * 1.6);
+            ctx.strokeStyle = 'rgba(6, 182, 212, 0.18)';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(centerX + i * 8, horizonY);
+            ctx.lineTo(bottomX, height);
+            ctx.stroke();
+          }
+
+          // Moving horizontal perspective grid lines
+          if (!window._cyberGridOffset) window._cyberGridOffset = 0;
+          window._cyberGridOffset = (window._cyberGridOffset + 0.8 * deltaFactor) % 30;
+          for (let y = horizonY; y < height; y += (height - horizonY) / 7) {
+            const currentY = y + (window._cyberGridOffset * ((y - horizonY) / (height - horizonY)));
+            if (currentY <= height) {
+              const alpha = Math.min(0.35, ((currentY - horizonY) / (height - horizonY)) * 0.4);
+              ctx.strokeStyle = `rgba(244, 63, 94, ${alpha})`;
+              ctx.lineWidth = 1;
+              ctx.beginPath();
+              ctx.moveTo(0, currentY);
+              ctx.lineTo(width, currentY);
+              ctx.stroke();
+            }
+          }
+          ctx.restore();
+
+          // Falling Neon Lasers
+          for (let l of cyberLasers) {
+            l.y += l.speed * deltaFactor;
+            if (l.y > height + 50) {
+              l.y = -50;
+              l.x = Math.random() * width;
+            }
+            ctx.save();
+            ctx.globalAlpha = l.alpha;
+            ctx.strokeStyle = l.color;
+            ctx.lineWidth = 1.6;
+            ctx.shadowColor = l.color;
+            ctx.shadowBlur = 10;
+            ctx.beginPath();
+            ctx.moveTo(l.x, l.y);
+            ctx.lineTo(l.x, l.y - l.length);
+            ctx.stroke();
+            ctx.restore();
+          }
+        }
+
         // Renderizar Estrellas Fugaces independientes de caídas de FPS
         for (let i = shootingStars.length - 1; i >= 0; i--) {
           let st = shootingStars[i];
@@ -11450,6 +12073,85 @@ function updateMyStatus(status, activity) {
     </div>
   </div>
 </div>
+
+
+  <!-- ═══ 3D TILT INTERACTIVE ENGINE ═══ -->
+  <script>
+    (function init3DTiltFX() {
+      document.addEventListener('mousemove', (e) => {
+        const tiltCards = document.querySelectorAll('.tilt-card');
+        tiltCards.forEach(card => {
+          const rect = card.getBoundingClientRect();
+          if (
+            e.clientX >= rect.left && e.clientX <= rect.right &&
+            e.clientY >= rect.top && e.clientY <= rect.bottom
+          ) {
+            const x = (e.clientX - rect.left) / rect.width - 0.5;
+            const y = (e.clientY - rect.top) / rect.height - 0.5;
+            card.style.transform = `perspective(700px) rotateX(${-y * 10}deg) rotateY(${x * 10}deg) translateY(-2.5px)`;
+            card.style.setProperty('--glare-x', `${(x + 0.5) * 100}%`);
+            card.style.setProperty('--glare-y', `${(y + 0.5) * 100}%`);
+          } else if (card.style.transform && card.style.transform.includes('rotateX')) {
+            card.style.transform = 'perspective(700px) rotateX(0deg) rotateY(0deg) translateY(0px)';
+          }
+        });
+      }, { passive: true });
+
+      document.addEventListener('mouseleave', () => {
+        document.querySelectorAll('.tilt-card').forEach(card => {
+          card.style.transform = 'perspective(700px) rotateX(0deg) rotateY(0deg) translateY(0px)';
+        });
+      });
+    })();
+  </script>
+
+
+  <!-- ═══ QUALITY OF LIFE JS ENGINE ═══ -->
+  <script>
+    function setRamPreset(val) {
+      const slider = document.getElementById('ramSlider');
+      if (slider) {
+        slider.value = val;
+        if (typeof updateRamSetting === 'function') updateRamSetting(val);
+        else if (typeof updateRam === 'function') updateRam(val);
+      }
+      document.querySelectorAll('.btn-ram-preset').forEach(b => b.classList.remove('active'));
+      const activeBtn = document.getElementById('ramPre-' + val);
+      if (activeBtn) activeBtn.classList.add('active');
+    }
+
+    function openGameFolder(type) {
+      ipc.send('open-game-folder', type);
+      toast('📂 Abriendo carpeta en el explorador...', 'info');
+    }
+
+    async function cleanDiskCache() {
+      toast('🧹 Limpiando logs y caché...', 'info');
+      try {
+        const res = await ipc.invoke('clean-temp-cache');
+        if (res.success) {
+          toast(`✅ ¡Espacio liberado! Se limpiaron ${res.freedMB} MB de archivos temporales.`, 'success');
+        } else {
+          toast('⚠️ No se encontraron archivos temporales para limpiar.', 'info');
+        }
+      } catch (err) {
+        toast(`❌ Error en la limpieza: ${err.message}`, 'error');
+      }
+    }
+
+    function filterVersionsListUI(query) {
+      const q = (query || '').toLowerCase().trim();
+      const items = document.querySelectorAll('.version-card, .ver-row, .version-item');
+      items.forEach(el => {
+        const text = el.textContent.toLowerCase();
+        if (!q || text.includes(q)) {
+          el.style.display = '';
+        } else {
+          el.style.display = 'none';
+        }
+      });
+    }
+  </script>
 
 </body>
 </html>
