@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" data-theme="vangogh">
+<html lang="es" data-theme="sakura">
 <head>
 <meta charset="UTF-8">
 <title>Nebula Launcher</title>
@@ -76,6 +76,14 @@
   --border:rgba(251,146,60,0.12);--border-glow:rgba(251,146,60,0.4);
   --btn-glass:rgba(251,146,60,0.12);--btn-border:rgba(251,146,60,0.3);
 }
+[data-theme="sakura"]{
+  --orb1:#3b0720;--orb2:#500724;--orb3:#831843;--orb4:#150209;
+  --accent:#f472b6;--accent2:#fb7185;--accent3:#fda4af;
+  --accent-glow:rgba(244,114,182,0.35);
+  --glass:rgba(20, 8, 14, 0.45);--glass-light:rgba(244,114,182,0.08);--glass-mid:rgba(244,114,182,0.04);
+  --border:rgba(244,114,182,0.18);--border-glow:rgba(244,114,182,0.50);
+  --btn-glass:rgba(244,114,182,0.16);--btn-border:rgba(244,114,182,0.35);
+}
 [data-theme="cosmos"]{
   --orb1:#241406;--orb2:#331f02;--orb3:#5c460d;--orb4:#070401;
   --accent:#fbbf24;--accent2:#fcd34d;--accent3:#fde68a;
@@ -83,6 +91,18 @@
   --glass:rgba(10, 8, 3, 0.48);--glass-light:rgba(251,191,36,0.07);--glass-mid:rgba(251,191,36,0.04);
   --border:rgba(251,191,36,0.10);--border-glow:rgba(251,191,36,0.4);
   --btn-glass:rgba(251,191,36,0.12);--btn-border:rgba(251,191,36,0.3);
+}
+
+
+/* ═══════ PERFORMANCE & GPU OPTIMIZATIONS ═══════ */
+.version-card, .mod-card, .modpack-item, .modrinth-preview-card, .instance-card {
+  contain: content;
+  content-visibility: auto;
+  contain-intrinsic-size: 72px;
+  will-change: transform;
+}
+.sidebar, .play-left, .play-right, .tab-panel {
+  contain: layout style;
 }
 
 /* ═══════ BASE ═══════ */
@@ -135,6 +155,10 @@ html[data-theme="vangogh"] #bg, [data-theme="vangogh"] #bg, body[data-theme="van
 [data-theme="nebula"] body, body[data-theme="nebula"] {
   border: 1px solid rgba(192, 132, 252, 0.38) !important;
   box-shadow: 0 0 25px rgba(192, 132, 252, 0.30), inset 0 0 15px rgba(192, 132, 252, 0.08) !important;
+}
+[data-theme="sakura"] body, body[data-theme="sakura"] {
+  border: 1px solid rgba(244, 114, 182, 0.38) !important;
+  box-shadow: 0 0 25px rgba(244, 114, 182, 0.30), inset 0 0 15px rgba(244, 114, 182, 0.08) !important;
 }
 [data-theme="galaxy"] body, body[data-theme="galaxy"] {
   border: 1px solid rgba(56, 189, 248, 0.38) !important;
@@ -1056,6 +1080,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;heigh
 .ts-aurora{background:linear-gradient(135deg,#021c15,#144a36);}
 .ts-supernova{background:linear-gradient(135deg,#2a1008,#5c3516);}
 .ts-cosmos{background:linear-gradient(135deg,#241406,#5c460d);}
+.ts-sakura{background:linear-gradient(135deg,#500724,#db2777,#f472b6);box-shadow:0 0 14px rgba(244,114,182,0.45);}
 .theme-label{font-size:.6rem;text-align:center;margin-top:4px;color:var(--text-dim);}
 
 /* ═══════ SCREENSHOTS ═══════ */
@@ -3167,6 +3192,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;heigh
               <h3>🌟 TEMAS ESPECIALES</h3>
               <div class="theme-grid">
                 <div class="theme-swatch ts-vangogh" onclick="setTheme('vangogh')" title="Van Gogh (Noche Estrellada)"></div>
+                <div class="theme-swatch ts-sakura" onclick="setTheme('sakura')" title="Sakura (Cerezo en Flor)" style="display:flex;align-items:center;justify-content:center;font-size:1.25rem;cursor:pointer;">🌸</div>
                 <div class="theme-swatch ts-custom" onclick="setTheme('custom')" title="Personalizado (Tus colores e imagen)">✨</div>
               </div>
             </div>
@@ -10755,6 +10781,16 @@ function updateMyStatus(status, activity) {
               ],
               stars: ['#ffffff', '#fb923c', '#fdba74', '#fef08a', '#facc15']
             };
+          case 'sakura':
+            return {
+              shooting: [
+                { head: '#ffffff', mid: '#f472b6', tail: 'rgba(244, 114, 182, 0)' },
+                { head: '#ffffff', mid: '#fb7185', tail: 'rgba(251, 113, 133, 0)' },
+                { head: '#ffffff', mid: '#fda4af', tail: 'rgba(253, 164, 175, 0)' },
+                { head: '#ffffff', mid: '#fecdd3', tail: 'rgba(254, 205, 211, 0)' }
+              ],
+              stars: ['#ffffff', '#f472b6', '#fb7185', '#fda4af', '#fecdd3', '#ffe4e6']
+            };
           case 'cosmos':
             return {
               shooting: [
@@ -10790,6 +10826,54 @@ function updateMyStatus(status, activity) {
       }
 
       // 280 Estrellas brillantes, parpadeantes y espectaculares
+      
+      // ═══════ HIGH-PERFORMANCE SPRITE CACHE ═══════
+      const petalSprite = document.createElement('canvas');
+      petalSprite.width = 64;
+      petalSprite.height = 64;
+      (function preRenderPetal() {
+        const pctx = petalSprite.getContext('2d');
+        const pgrad = pctx.createRadialGradient(32, 22, 1, 32, 32, 28);
+        pgrad.addColorStop(0, '#ffffff');
+        pgrad.addColorStop(0.35, '#fda4af');
+        pgrad.addColorStop(0.85, '#f472b6');
+        pgrad.addColorStop(1, '#db2777');
+        pctx.fillStyle = pgrad;
+        pctx.shadowColor = 'rgba(244, 114, 182, 0.45)';
+        pctx.shadowBlur = 6;
+        pctx.beginPath();
+        pctx.moveTo(32, 4);
+        pctx.bezierCurveTo(54, 10, 58, 48, 32, 60);
+        pctx.bezierCurveTo(6, 48, 10, 10, 32, 4);
+        pctx.fill();
+        pctx.beginPath();
+        pctx.moveTo(32, 8);
+        pctx.lineTo(32, 24);
+        pctx.strokeStyle = 'rgba(219, 39, 119, 0.35)';
+        pctx.lineWidth = 1.5;
+        pctx.stroke();
+      })();
+
+      // ═══════ SAKURA PETALS SIMULATION ENGINE ═══════
+      function createSakuraPetal(initial = false) {
+        return {
+          x: Math.random() * (width + 200) - 100,
+          y: initial ? Math.random() * height : -20 - Math.random() * 50,
+          size: Math.random() * 8 + 6,
+          speedY: Math.random() * 0.85 + 0.55,
+          speedX: Math.random() * 0.55 + 0.35,
+          swaySpeed: Math.random() * 0.02 + 0.012,
+          swayAmount: Math.random() * 1.6 + 0.8,
+          swayAngle: Math.random() * Math.PI * 2,
+          rotX: Math.random() * Math.PI * 2,
+          rotSpeedX: (Math.random() - 0.5) * 0.03,
+          rotZ: Math.random() * Math.PI * 2,
+          rotSpeedZ: (Math.random() - 0.5) * 0.02,
+          alpha: Math.random() * 0.35 + 0.58
+        };
+      }
+      const sakuraPetals = Array.from({ length: 60 }, () => createSakuraPetal(true));
+
       const stars = Array.from({ length: 280 }, (_, idx) => ({
         x: Math.random() * width,
         y: Math.random() * height,
@@ -11089,6 +11173,34 @@ function updateMyStatus(status, activity) {
           ctx.arc(s.x + mouseX * (s.size * 0.25), s.y + mouseY * (s.size * 0.25), s.size, 0, Math.PI * 2);
           ctx.fill();
           ctx.restore();
+        }
+
+        
+        // Renderizar Pétalos de Cerezo Flotando cuando el tema activo sea Sakura
+        const currentActiveTheme = getActiveTheme();
+        if (currentActiveTheme === 'sakura') {
+          for (let i = 0; i < sakuraPetals.length; i++) {
+            let p = sakuraPetals[i];
+            p.swayAngle += p.swaySpeed * deltaFactor;
+            p.rotX += p.rotSpeedX * deltaFactor;
+            p.rotZ += p.rotSpeedZ * deltaFactor;
+            p.y += p.speedY * deltaFactor;
+            p.x += (p.speedX + Math.sin(p.swayAngle) * p.swayAmount + mouseX * 0.06) * deltaFactor;
+
+            if (p.y > height + 35 || p.x > width + 120) {
+              sakuraPetals[i] = createSakuraPetal(false);
+              p = sakuraPetals[i];
+            }
+
+            ctx.save();
+            ctx.translate(p.x, p.y);
+            ctx.rotate(p.rotZ);
+            ctx.scale(Math.cos(p.rotX), 1);
+            ctx.globalAlpha = p.alpha;
+            const drawSize = p.size * 2;
+            ctx.drawImage(petalSprite, -drawSize / 2, -drawSize / 2, drawSize, drawSize);
+            ctx.restore();
+          }
         }
 
         // Renderizar Estrellas Fugaces independientes de caídas de FPS

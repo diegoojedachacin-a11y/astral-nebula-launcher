@@ -38,3 +38,4 @@ app.asar
 *.rar
 *.7z
 .env
+backup_asar_extracted_*/

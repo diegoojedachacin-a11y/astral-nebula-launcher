@@ -877,7 +877,14 @@ function getRecommendedRamGb() {
     }
 }
 
+let _cachedSettings = null;
+let _cachedSettingsTime = 0;
+
 function loadSettings() {
+    const now = Date.now();
+    if (_cachedSettings && (now - _cachedSettingsTime < 2000)) {
+        return _cachedSettings;
+    }
     const defaultSettings = { 
         ram: getRecommendedRamGb(), 
         javaPath: '', 
@@ -922,6 +929,8 @@ function loadSettings() {
         data.systemTotalRamGb = Math.round(totalBytes / (1024 * 1024 * 1024));
         data.systemRecommendedRamGb = getRecommendedRamGb();
 
+        _cachedSettings = data;
+        _cachedSettingsTime = Date.now();
         return data;
     } catch {
         return defaultSettings;
@@ -4516,10 +4525,55 @@ ipcMain.on('launch-game', async (event, data) => {
             const verJsonPath = path.join(mcPath, 'versions', launchVerId, launchVerId + '.json');
             enrichVersionJsonWithUserProperties(verJsonPath);
         } catch (e) { /* ignorar: el juego se lanza igual */ }
+        
+        // ═══════ AUTO GAME OPTIMIZER (SIN MODS) ═══════
+        // 1. Forzar uso de GPU dedicada NVIDIA/AMD y bypass de latencia DWM en Windows
+        try {
+            process.env.__NV_PRIME_RENDER_OFFLOAD = '1';
+            process.env.__GLX_VENDOR_LIBRARY_NAME = 'nvidia';
+            process.env.DRI_PRIME = '1';
+            process.env.SHIM_MCCOMPAT = '0x800000001';
+            process.env.DISABLE_LAYER_AMD_SWITCHABLE_GRAPHICS_1 = '1';
+        } catch {}
+
+        // 2. Inyección automática de argumentos de rendimiento multihilo y pre-reserva de RAM
+        try {
+            if (!opts.customArgs) opts.customArgs = [];
+            const cpuCores = require('os').cpus().length || 4;
+            const perfArgs = [
+                `-XX:ActiveProcessorCount=${cpuCores}`,
+                `-XX:ParallelGCThreads=${cpuCores}`,
+                `-XX:ConcGCThreads=${Math.max(1, Math.floor(cpuCores / 4))}`,
+                '-XX:+AlwaysPreTouch',
+                '-XX:+UseNUMA',
+                '-XX:+PerfDisableSharedMem',
+                '-Dsun.rmi.dgc.server.gcInterval=2147483646',
+                '-Dsun.rmi.dgc.client.gcInterval=2147483646'
+            ];
+            for (const arg of perfArgs) {
+                if (!opts.customArgs.includes(arg)) {
+                    opts.customArgs.push(arg);
+                }
+            }
+            sendLog(`🚀 Optimizador del Launcher: ${cpuCores} núcleos CPU asignados y RAM pre-reservada (-XX:+AlwaysPreTouch).`);
+        } catch {}
+
         launcher.launch(opts);
 
         // Registrar instancia activa
         const instanceDisplayName = data.modpackName ? modpackDispName : `Minecraft ${launchVersion}${launchModId && launchModId !== launchVersion ? ` (${launchModId})` : ''}`;
+        
+        // Elevar prioridad del proceso de Minecraft a ALTA en Windows
+        try {
+            launcher.on('spawn', (childProc) => {
+                if (childProc && childProc.pid) {
+                    const psCmd = `Get-Process -Id ${childProc.pid} -ErrorAction SilentlyContinue | ForEach-Object { $_.PriorityClass = 'High' }`;
+                    require('child_process').spawn('powershell', ['-NoProfile', '-NonInteractive', '-Command', psCmd], { detached: true, stdio: 'ignore' });
+                    sendLog(`⚡ Prioridad de Minecraft (PID: ${childProc.pid}) elevada a ALTA en Windows.`);
+                }
+            });
+        } catch {}
+
         runningInstances.set(instanceId, { launcher, version: launchVersion, displayName: instanceDisplayName });
         win?.webContents.send('instances-update', { count: runningInstances.size, newId: instanceId, displayName: instanceDisplayName });
 
