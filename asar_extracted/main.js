@@ -102,19 +102,23 @@ function initDiscordRPC() {
     }
 }
 
-// Presencia: navegando el launcher
+// Presencia: navegando el launcher (con botones de descarga y comunidad)
 function setRPCLauncher() {
     if (!rpcReady || !rpcClient) return;
     try {
         rpcClient.setActivity({
             details: '🪐 En el menú principal',
-            state: 'Nebula Launcher',
+            state: 'Nebula Launcher v4.3.1',
             startTimestamp: rpcStartTime,
             largeImageKey: 'launcher_logo',
             largeImageText: 'Nebula Launcher',
             smallImageKey: 'mc_logo',
             smallImageText: 'Minecraft',
             instance: false,
+            buttons: [
+                { label: '🪐 Descargar Nebula', url: 'https://astralnebula.com' },
+                { label: '⭐ Ver en GitHub', url: 'https://github.com/fonduev/astral-nebula-launcher' }
+            ]
         });
     } catch { }
 }
@@ -148,6 +152,10 @@ function setRPCPlaying(mcVersion, modType = null, modpackName = null) {
             smallImageKey: 'launcher_logo',
             smallImageText: 'Nebula Launcher',
             instance: true,
+            buttons: [
+                { label: '🪐 Descargar Nebula', url: 'https://astralnebula.com' },
+                { label: '⭐ Ver en GitHub', url: 'https://github.com/fonduev/astral-nebula-launcher' }
+            ]
         });
     } catch { }
 }
