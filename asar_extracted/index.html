@@ -4566,20 +4566,28 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;heigh
 
       <!-- Perfil Nebula Tab -->
       <div class="tab-panel" id="tab-profile">
-        <h1 class="panel-title">Mi Perfil Nebula</h1>
-        <p class="panel-sub">Personaliza tu aspecto y gestiona tu skin en el juego.</p>
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom: 4px;">
+          <div>
+            <h1 class="panel-title">Mi Perfil</h1>
+            <p class="panel-sub">Personaliza tu aspecto y gestiona tu skin en el juego.</p>
+          </div>
+          <div id="profile-account-pill" style="display:inline-flex; align-items:center; gap:8px; background:rgba(168,85,247,0.12); border:1px solid rgba(168,85,247,0.28); padding:6px 14px; border-radius:20px; font-size:0.75rem; font-weight:700; color:#c084fc; letter-spacing:0.04em;">
+            <span style="width:7px; height:7px; border-radius:50%; background:#10b981; box-shadow:0 0 10px #10b981;"></span>
+            <span id="profile-account-badge-text">ONLINE</span>
+          </div>
+        </div>
 
         <div style="display:flex;gap:24px;flex:1;overflow:hidden;margin-top:20px;">
           <!-- Columna Izquierda: Visor 3D -->
           <div class="glass-card" style="flex: 1; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:24px; position:relative; min-width:280px; max-width:320px;">
-            <div id="skin-viewer-container" style="width:100%; height:320px; background:rgba(0,0,0,0.15); border-radius:18px; border:1px solid var(--border); overflow:hidden; display:flex; align-items:center; justify-content:center; position:relative;">
+            <div id="skin-viewer-container" style="width:100%; height:320px; background:radial-gradient(circle at 50% 30%, rgba(35, 24, 65, 0.5) 0%, rgba(10, 8, 20, 0.85) 100%); border-radius:20px; border:1px solid rgba(168, 85, 247, 0.2); box-shadow: inset 0 0 35px rgba(168, 85, 247, 0.08), 0 8px 30px rgba(0, 0, 0, 0.4); overflow:hidden; display:flex; align-items:center; justify-content:center; position:relative;">
               <div id="skin-viewer-placeholder" style="color:var(--text-dim);font-size:0.75rem;text-align:center;">
                 Cargando previsualización 3D...
               </div>
             </div>
             <div style="margin-top:16px; display:flex; gap:8px; width:100%;">
-              <button class="btn btn-ghost btn-sm" style="flex:1;" onclick="rotateSkinViewer(true)">↺ Rotar</button>
-              <button class="btn btn-ghost btn-sm" style="flex:1;" onclick="toggleSkinViewerAnimation()">⏸️ Animación</button>
+              <button class="btn btn-ghost btn-sm" style="flex:1; border-radius:10px; background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); font-size:0.75rem; font-weight:600;" onclick="rotateSkinViewer(true)">↺ Rotar</button>
+              <button class="btn btn-ghost btn-sm" style="flex:1; border-radius:10px; background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); font-size:0.75rem; font-weight:600;" onclick="toggleSkinViewerAnimation()">🚶 Animación</button>
             </div>
             <!-- Apartado Copiar URL Skin para Servidores No Premium -->
             <div style="margin-top:20px; width:100%; display:flex; flex-direction:column; gap:6px;">
@@ -4595,21 +4603,24 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;heigh
           <div class="glass-card" style="flex: 2; display:flex; flex-direction:column; padding:24px; overflow-y:auto;">
             <h3 style="margin-bottom:16px; font-weight:600; letter-spacing:0.05em; color:var(--accent);">INFORMACIÓN DE LA CUENTA</h3>
             <div class="settings-grid" style="grid-template-columns: 1fr 1fr; gap:16px; margin-bottom:28px;">
-              <div class="settings-card" style="padding:16px; display:flex; justify-content:space-between; align-items:center;">
-                <div style="flex:1;">
-                  <span class="label" style="font-size:0.65rem;">NICKNAME (EN JUEGO)</span>
-                  <div id="profile-display-username" style="font-size:1.1rem; font-weight:600; color:var(--text); margin-top:4px;">Cargando...</div>
-                  <div id="profile-edit-username-container" style="display:none; margin-top:8px; align-items:center; gap:8px;">
-                    <input type="text" id="profile-edit-username-input" class="inp" style="max-width:180px; padding:6px 10px; font-size:0.9rem; background:rgba(0,0,0,0.3); border:1px solid rgba(255,255,255,0.1); color:var(--text); border-radius:6px;" placeholder="Nuevo nickname">
-                    <button class="btn btn-primary btn-sm" style="padding:6px 10px; font-size:0.75rem; border-radius:6px;" onclick="saveNewNebulaNickname()">Guardar</button>
-                    <button class="btn btn-ghost btn-sm" style="padding:6px 10px; font-size:0.75rem; border-radius:6px;" onclick="cancelNebulaNicknameEdit()">Cancelar</button>
+              <div class="settings-card" style="padding:16px; display:flex; justify-content:space-between; align-items:center; background:rgba(18, 16, 32, 0.45); border:1px solid rgba(255,255,255,0.06); border-radius:14px;">
+                <div style="display:flex; align-items:center; gap:14px; flex:1;">
+                  <img id="profile-avatar-head" src="https://minotar.net/avatar/char/48" alt="Skin Avatar" style="width:42px; height:42px; border-radius:10px; border:1px solid rgba(168,85,247,0.3); background:rgba(0,0,0,0.3); image-rendering:pixelated; flex-shrink:0;">
+                  <div style="flex:1;">
+                    <span class="label" style="font-size:0.65rem;">NICKNAME (EN JUEGO)</span>
+                    <div id="profile-display-username" style="font-size:1.15rem; font-weight:700; color:var(--text); margin-top:2px;">Cargando...</div>
+                    <div id="profile-edit-username-container" style="display:none; margin-top:8px; align-items:center; gap:8px;">
+                      <input type="text" id="profile-edit-username-input" class="inp" style="max-width:180px; padding:6px 10px; font-size:0.9rem; background:rgba(0,0,0,0.3); border:1px solid rgba(255,255,255,0.1); color:var(--text); border-radius:6px;" placeholder="Nuevo nickname">
+                      <button class="btn btn-primary btn-sm" style="padding:6px 10px; font-size:0.75rem; border-radius:6px;" onclick="saveNewNebulaNickname()">Guardar</button>
+                      <button class="btn btn-ghost btn-sm" style="padding:6px 10px; font-size:0.75rem; border-radius:6px;" onclick="cancelNebulaNicknameEdit()">Cancelar</button>
+                    </div>
                   </div>
                 </div>
                 <button class="btn btn-ghost btn-sm" id="profile-edit-username-btn" style="padding:6px 10px; font-size:0.75rem; border-radius:8px;" onclick="showNebulaNicknameEdit()">✏️ Cambiar</button>
               </div>
-              <div class="settings-card" style="padding:16px;">
+              <div class="settings-card" style="padding:16px; background:rgba(18, 16, 32, 0.45); border:1px solid rgba(255,255,255,0.06); border-radius:14px;">
                 <span class="label" style="font-size:0.65rem;">CORREO VINCULADO</span>
-                <div id="profile-display-email" style="font-size:1.1rem; font-weight:600; color:var(--text); margin-top:4px;">Cargando...</div>
+                <div id="profile-display-email" style="font-size:1.05rem; font-weight:600; color:var(--text-dim); margin-top:4px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">Cargando...</div>
               </div>
             </div>
 
@@ -4628,10 +4639,10 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;heigh
             </div>
 
             <!-- Zona de Carga/Arrastrar archivo -->
-            <div id="skin-drop-zone" class="glass-card" style="border: 2px dashed rgba(139,92,246,0.3); border-radius:18px; padding:32px; text-align:center; cursor:pointer; transition:all 0.2s; margin-bottom:10px;" onclick="selectSkinFile()" ondragover="event.preventDefault(); this.style.borderColor='var(--accent)'" ondragleave="this.style.borderColor='rgba(139,92,246,0.3)'" ondrop="handleSkinFileDrop(event)">
-              <span id="skin-drop-zone-icon" style="font-size:2rem; display:block; margin-bottom:10px;">👕</span>
-              <span id="skin-drop-zone-text" style="font-size:0.8rem; font-weight:600; display:block; margin-bottom:4px;">Selecciona o arrastra tu archivo .png</span>
-              <span id="skin-drop-zone-sub" style="font-size:0.68rem; color:var(--text-dim);">Máx. 50 KB • Formato clásico</span>
+            <div id="skin-drop-zone" class="glass-card" style="border: 1.5px dashed rgba(168,85,247,0.35); background: rgba(14, 12, 28, 0.4); border-radius:16px; padding:28px; text-align:center; cursor:pointer; transition:all 0.25s cubic-bezier(0.16,1,0.3,1); margin-bottom:10px;" onclick="selectSkinFile()" ondragover="event.preventDefault(); this.style.borderColor='var(--accent)'; this.style.background='rgba(168,85,247,0.08)';" ondragleave="this.style.borderColor='rgba(168,85,247,0.35)'; this.style.background='rgba(14, 12, 28, 0.4)';" ondrop="handleSkinFileDrop(event)">
+              <span id="skin-drop-zone-icon" style="font-size:2.2rem; display:block; margin-bottom:8px;">👕</span>
+              <span id="skin-drop-zone-text" style="font-size:0.85rem; font-weight:700; display:block; margin-bottom:4px; color:var(--text);">Selecciona o arrastra tu archivo .png</span>
+              <span id="skin-drop-zone-sub" style="font-size:0.7rem; color:var(--text-dim);">Máx. 50 KB • Formato clásico</span>
               <input type="file" id="skin-file-input" style="display:none;" accept="image/png" onchange="handleSkinFileSelect(event)">
             </div>
             
@@ -5018,14 +5029,16 @@ async function completeLogin() {
   document.getElementById('username-display').textContent=authUser;
   
   const isNebula = authType === 'nebula';
-  document.getElementById('nav-profile').style.display = isNebula ? 'flex' : 'none';
+  document.getElementById('nav-profile').style.display = 'flex';
   const isOffline = authType === 'offline';
   document.getElementById('nav-social').style.display = isOffline ? 'none' : 'flex';
   if (isNebula) {
     document.getElementById('user-type').textContent = 'Nebula';
-    loadNebulaProfileData();
   } else {
     document.getElementById('user-type').textContent = authType==='microsoft'?'Microsoft':'Offline';
+  }
+  if (typeof loadUserProfileData === 'function') {
+    loadUserProfileData();
   }
   
   ipc.send('renderer-ready-step', { text: 'Cargando ajustes y preferencias...', progress: 55 });
@@ -5341,7 +5354,7 @@ function clearCustomBgImage() {
 
 // ═══════ TABS ═══════
 // Mapeo de tab-id → texto parcial en el nav-item (para evitar bugs con traducción)
-const NAV_TAB_MAP = { play:'jugar', mods:'mods', modpacks:'modpacks', versiones:'versiones', console:'consola', settings:'config', social:'social', servers:'servidores', updates:'actualizaciones' };
+const NAV_TAB_MAP = { play:'jugar', mods:'mods', modpacks:'modpacks', versiones:'versiones', console:'consola', settings:'config', social:'social', profile:'perfil', servers:'servidores', updates:'actualizaciones' };
 function showTab(id) {
   document.querySelectorAll('.tab-panel').forEach(t=>t.classList.remove('active'));
   document.getElementById('tab-'+id).classList.add('active');
@@ -5359,14 +5372,12 @@ function showTab(id) {
   if (id === 'servers') {
     loadSponsoredServers();
   }
-  if (id === 'profile' && authData && authData.skinUrl !== undefined) {
-    // Re-inicializar el visor ahora que el contenedor es visible y tiene dimensiones reales
+  if (id === 'profile') {
     setTimeout(() => {
-      const modelType = document.getElementById('skin-model-select') ? document.getElementById('skin-model-select').value : 'default';
-      initSkinViewer(authData.skinUrl || '', modelType);
-      loadSkinHistory();
-      initCapeGallery();
-    }, 80);
+      if (typeof loadUserProfileData === 'function') {
+        loadUserProfileData();
+      }
+    }, 60);
   }
 }
 
@@ -10077,7 +10088,60 @@ function svRenderList() {
       }
     }
 
-    async function loadNebulaProfileData() {
+        function loadUserProfileData() {
+      const currentUsername = authUser || (authData && (authData.name || authData.username)) || 'Usuario';
+      const usernameEl = document.getElementById('profile-display-username');
+      if (usernameEl) {
+        usernameEl.textContent = currentUsername;
+        usernameEl.style.display = 'block';
+      }
+
+      const emailEl = document.getElementById('profile-display-email');
+      const editBtn = document.getElementById('profile-edit-username-btn');
+      const copyInput = document.getElementById('skin-url-copy-input');
+      const badgeText = document.getElementById('profile-account-badge-text');
+
+      let skinUrl = '';
+      let emailText = '';
+
+      if (authType === 'microsoft') {
+        emailText = (authData && (authData.email || (authData.auth && authData.auth.email))) || window.t('Cuenta Oficial Microsoft');
+        if (editBtn) editBtn.style.display = 'none';
+        if (badgeText) badgeText.textContent = 'MICROSOFT';
+        skinUrl = (authData && authData.skinUrl) || `https://minotar.net/skin/${encodeURIComponent(currentUsername)}`;
+      } else if (authType === 'nebula') {
+        emailText = (authData && authData.email) || window.t('Cuenta Nebula');
+        if (editBtn) editBtn.style.display = 'inline-block';
+        if (badgeText) badgeText.textContent = 'NEBULA';
+        skinUrl = (authData && authData.skinUrl) || `https://minotar.net/skin/${encodeURIComponent(currentUsername)}`;
+        if (authData && authData.uid && typeof loadNebulaProfileData === 'function') {
+          loadNebulaProfileData();
+        }
+      } else {
+        emailText = window.t('Modo Local / No-Premium');
+        if (editBtn) editBtn.style.display = 'none';
+        if (badgeText) badgeText.textContent = 'OFFLINE';
+        skinUrl = (authData && authData.skinUrl) || `https://minotar.net/skin/${encodeURIComponent(currentUsername)}`;
+      }
+
+      if (emailEl) emailEl.textContent = emailText;
+      if (copyInput) copyInput.value = skinUrl;
+      const headEl = document.getElementById('profile-avatar-head');
+      if (headEl) headEl.src = `https://minotar.net/avatar/${encodeURIComponent(currentUsername)}/48`;
+
+      const modelType = document.getElementById('skin-model-select') ? document.getElementById('skin-model-select').value : 'default';
+      if (typeof initSkinViewer === 'function') {
+        initSkinViewer(skinUrl, modelType);
+      }
+      if (typeof loadSkinHistory === 'function') {
+        loadSkinHistory();
+      }
+      if (typeof initCapeGallery === 'function') {
+        initCapeGallery();
+      }
+    }
+
+async function loadNebulaProfileData() {
       if (!authData || !authData.uid) return;
       
       document.getElementById('profile-display-username').textContent = authData.username || 'Cargando...';
@@ -10316,7 +10380,7 @@ function svRenderList() {
       }
     }
 
-    function loadSkinImageBypassCors(url, callback) {
+    function loadSkinImageBypassCors(url, callback, redirectCount = 0) {
       if (!url) {
         callback(null);
         return;
@@ -10342,6 +10406,13 @@ function svRenderList() {
         };
 
         client.get(options, (res) => {
+          if (res.statusCode >= 300 && res.statusCode < 400 && res.headers.location && redirectCount < 4) {
+            let redirectUrl = res.headers.location;
+            if (!redirectUrl.startsWith('http')) {
+              redirectUrl = new URL(redirectUrl, url).toString();
+            }
+            return loadSkinImageBypassCors(redirectUrl, callback, redirectCount + 1);
+          }
           if (res.statusCode !== 200) {
             console.error("[NebulaSocial] Error al descargar skin bypass CORS:", res.statusCode, url);
             callback(url);
@@ -11313,7 +11384,7 @@ function svRenderList() {
             const actualId = installedMeta.find(v => v.id.toLowerCase() === 'cmclient' || v.id.toLowerCase().includes('cmpack'))?.id || 'cmpack_1.8.8';
             btnHtml = `
               <button class="client-install-btn" style="background: linear-gradient(135deg, #10b98166, #04785722); border: 0.5px solid rgba(16,185,129,0.4); color: #10b981; font-weight:700;" onclick="playPvpClient('${actualId}')">
-                ${window.t('${window.t('▶ Jugar CM Pack')}')}
+                ${window.t('▶ Jugar CM Pack')}
               </button>
             `;
           } else if (c.isJar) {
