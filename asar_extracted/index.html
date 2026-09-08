@@ -6095,14 +6095,22 @@ async function vbRenderList() {
     return;
   }
 
-  // Si se activó "Ver solo instaladas", mostrar todas las 45 versiones instaladas de una vez
+  // Si se activó "Ver solo instaladas", mostrar sólo las instaladas de la sección seleccionada
   if (vbShowOnlyInstalled) {
-    let matches = installedMeta;
+    let matches = installedMeta.filter(m => {
+      if (modifier === 'vanilla') {
+        const t = m.type || 'release';
+        return (t === 'release' || t === 'snapshot' || t === 'vanilla') && t !== 'forge' && t !== 'fabric' && t !== 'optifine' && t !== 'neoforge' && t !== 'quilt' && t !== 'pvp';
+      }
+      if (modifier === 'fabric') return m.type === 'fabric' || m.type === 'sodium';
+      if (modifier === 'pvp') return m.type === 'pvp' || m.type === 'custom';
+      return m.type === modifier;
+    });
     if (search) {
-      matches = installedMeta.filter(m => m.id.toLowerCase().includes(search) || (m.displayName && m.displayName.toLowerCase().includes(search)));
+      matches = matches.filter(m => m.id.toLowerCase().includes(search) || (m.displayName && m.displayName.toLowerCase().includes(search)));
     }
     if (matches.length === 0) {
-      list.innerHTML = '<div style="color:var(--text-dim);font-size:.72rem;text-align:center;padding:20px 8px;">No hay versiones instaladas con esa búsqueda.</div>';
+      list.innerHTML = '<div style="color:var(--text-dim);font-size:.72rem;text-align:center;padding:20px 8px;">No hay versiones instaladas con esa búsqueda en esta sección.</div>';
       return;
     }
     list.innerHTML = matches.map(v => {
@@ -6133,25 +6141,22 @@ async function vbRenderList() {
   let itemsHtml = '';
 
   if (modifier === 'vanilla') {
-    // 1. TODAS LAS VERSIONES INSTALADAS (Vanilla, Forge, Fabric, OptiFine, PvP)
-    const localFiltered = installedMeta.filter(m => !search || m.id.toLowerCase().includes(search) || (m.displayName && m.displayName.toLowerCase().includes(search)));
+    // 1. SOLO VERSIONES VANILLA / OFICIALES INSTALADAS
+    const localInstalled = installedMeta.filter(m => {
+      const t = m.type || 'release';
+      return (t === 'release' || t === 'snapshot' || t === 'vanilla') && t !== 'forge' && t !== 'fabric' && t !== 'optifine' && t !== 'neoforge' && t !== 'quilt' && t !== 'pvp';
+    });
+    const localFiltered = localInstalled.filter(m => !search || m.id.toLowerCase().includes(search) || (m.displayName && m.displayName.toLowerCase().includes(search)));
 
     if (localFiltered.length > 0) {
       itemsHtml += `<div style="font-size:0.65rem;font-weight:700;color:#4ade80;padding:6px 6px 4px;letter-spacing:0.5px;display:flex;justify-content:space-between;">
-        <span>⭐ VERSIONES INSTALADAS (${localFiltered.length})</span>
+        <span>⭐ VANILLA INSTALADAS (${localFiltered.length})</span>
       </div>`;
       localFiltered.forEach(v => {
         const safeId = v.id.replace(/[^a-zA-Z0-9-_]/g, '_');
-        const badgeMap = {
-          forge: '<span class="vb-badge vb-badge-forge" style="background:rgba(249,115,22,0.15);color:#fb923c;">FORGE</span>',
-          fabric: '<span class="vb-badge vb-badge-fabric" style="background:rgba(59,130,246,0.15);color:#60a5fa;">FABRIC</span>',
-          optifine: '<span class="vb-badge vb-badge-opti" style="background:rgba(14,165,233,0.15);color:#38bdf8;">OPTIFINE</span>',
-          neoforge: '<span class="vb-badge vb-badge-neoforge" style="background:rgba(34,197,94,0.15);color:#4ade80;">NEOFORGE</span>',
-          quilt: '<span class="vb-badge vb-badge-quilt" style="background:rgba(236,72,153,0.15);color:#f472b6;">QUILT</span>',
-          pvp: '<span class="vb-badge vb-badge-opti" style="background:rgba(168,85,247,0.2);color:#c084fc;">PVP</span>',
-          release: '<span class="vb-badge vb-badge-installed" style="background:rgba(74,222,128,0.15);color:#4ade80;">OFICIAL</span>'
-        };
-        const badgeHtml = badgeMap[v.type] || '';
+        const badgeHtml = v.type === 'snapshot'
+          ? '<span class="vb-badge vb-badge-snap">SNAP</span>'
+          : '<span class="vb-badge vb-badge-installed" style="background:rgba(74,222,128,0.15);color:#4ade80;">OFICIAL</span>';
         itemsHtml += `<div class="vb-item installed" id="vbi-${safeId}" onclick="vbSelectVersion('${v.id}')">
           <span class="vb-item-name">${v.displayName || v.id}</span>
           <span class="vb-item-badges">${badgeHtml}<span class="vb-badge vb-badge-installed">✓</span></span>
@@ -6162,7 +6167,7 @@ async function vbRenderList() {
 
     // 2. VERSIONES OFICIALES DISPONIBLES EN MOJANG
     const officialNotInstalled = (allVer || []).filter(v => {
-      if (installed.has(v.id)) return false; // Ya listada arriba
+      if (installed.has(v.id) || localInstalled.some(m => m.id === v.id)) return false; // Ya listada arriba
       if (!vbShowSnapshots && v.type !== 'release') return false;
       if (search && !v.id.toLowerCase().includes(search)) return false;
       return true;
@@ -6183,7 +6188,33 @@ async function vbRenderList() {
       });
     }
 
-    list.innerHTML = itemsHtml || '<div style="color:var(--text-dim);font-size:.72rem;text-align:center;padding:20px 8px;">No hay versiones disponibles.</div>';
+    list.innerHTML = itemsHtml || '<div style="color:var(--text-dim);font-size:.72rem;text-align:center;padding:20px 8px;">No hay versiones vanilla disponibles.</div>';
+    return;
+  }
+
+  // VISTA DE CLIENTES PVP
+  if (modifier === 'pvp') {
+    const pvpMatches = installedMeta.filter(m => m.type === 'pvp' || m.type === 'custom');
+    const pvpFiltered = pvpMatches.filter(m => !search || m.id.toLowerCase().includes(search) || (m.displayName && m.displayName.toLowerCase().includes(search)));
+
+    if (pvpFiltered.length > 0) {
+      itemsHtml += `<div style="font-size:0.65rem;font-weight:700;color:#c084fc;padding:6px 6px 4px;letter-spacing:0.5px;display:flex;justify-content:space-between;">
+        <span>⭐ CLIENTES PVP INSTALADOS (${pvpFiltered.length})</span>
+      </div>`;
+      pvpFiltered.forEach(v => {
+        const safeId = v.id.replace(/[^a-zA-Z0-9-_]/g, '_');
+        itemsHtml += `<div class="vb-item installed" id="vbi-${safeId}" onclick="vbSelectVersion('${v.id}')">
+          <span class="vb-item-name">${v.displayName || v.id}</span>
+          <span class="vb-item-badges">
+            <span class="vb-badge vb-badge-opti" style="background:rgba(168,85,247,0.2);color:#c084fc;">PVP</span>
+            <span class="vb-badge vb-badge-installed">✓</span>
+          </span>
+          <button class="vb-action-btn vb-play-btn" onclick="event.stopPropagation();vbPlay('${v.id}')">${typeof window.t === 'function' ? window.t('▶ Jugar') : '▶ Jugar'}</button>
+        </div>`;
+      });
+    }
+
+    list.innerHTML = itemsHtml || '<div style="color:var(--text-dim);font-size:.72rem;text-align:center;padding:20px 8px;">No hay clientes PVP instalados.<br><span style="font-size:.65rem;">Puedes instalarlos en la pestaña Clientes PVP.</span></div>';
     return;
   }
 
@@ -6252,12 +6283,16 @@ async function vbRenderList() {
 
 function vbIsInstalled(mcId, modifier) {
   const mod = modifier || currentPlayModifier;
-  if (!mod || mod === 'vanilla') return installed.has(mcId);
+  if (!mod || mod === 'vanilla') return installedMeta.some(m => {
+    const t = m.type || 'release';
+    return (t === 'release' || t === 'snapshot' || t === 'vanilla') && t !== 'forge' && t !== 'fabric' && t !== 'optifine' && t !== 'neoforge' && t !== 'quilt' && t !== 'pvp' && (m.baseVersion === mcId || m.id === mcId);
+  });
   if (mod === 'optifine') return installedMeta.some(m => m.type === 'optifine' && (m.baseVersion === mcId || m.id === mcId));
   if (mod === 'forge')    return installedMeta.some(m => m.type === 'forge'    && (m.baseVersion === mcId || m.id === mcId));
   if (mod === 'fabric')   return installedMeta.some(m => (m.type === 'fabric' || m.type === 'sodium') && (m.baseVersion === mcId || m.id === mcId));
   if (mod === 'neoforge') return installedMeta.some(m => m.type === 'neoforge' && (m.baseVersion === mcId || m.id === mcId));
   if (mod === 'quilt')    return installedMeta.some(m => m.type === 'quilt'    && (m.baseVersion === mcId || m.id === mcId));
+  if (mod === 'pvp')      return installedMeta.some(m => (m.type === 'pvp' || m.type === 'custom') && (m.baseVersion === mcId || m.id === mcId));
   return false;
 }
 
@@ -6292,17 +6327,32 @@ function vbSetHiddenSelect(versionId, modifier) {
   const mod = modifier || currentPlayModifier;
   let targetId = versionId;
 
-  // Si versionId ya es el ID exacto instalado, usarlo directamente
   const exact = installedMeta.find(m => m.id === versionId);
-  if (exact) {
-    targetId = exact.id;
-  } else if (mod && mod !== 'vanilla') {
-    const match = installedMeta.find(m => {
-      const typeMatch = mod === 'fabric' ? (m.type === 'fabric' || m.type === 'sodium') : m.type === mod;
-      return typeMatch && (m.baseVersion === versionId || m.id === versionId);
-    });
-    if (match) targetId = match.id;
+
+  if (mod && mod !== 'vanilla') {
+    const exactMatchesMod = exact && (
+      (mod === 'fabric' ? (exact.type === 'fabric' || exact.type === 'sodium') : exact.type === mod) ||
+      (mod === 'pvp' && (exact.type === 'pvp' || exact.type === 'custom'))
+    );
+
+    if (exactMatchesMod) {
+      targetId = exact.id;
+    } else {
+      const match = installedMeta.find(m => {
+        const typeMatch = mod === 'fabric' ? (m.type === 'fabric' || m.type === 'sodium') : (mod === 'pvp' ? (m.type === 'pvp' || m.type === 'custom') : m.type === mod);
+        return typeMatch && (m.baseVersion === versionId || m.id === versionId);
+      });
+      if (match) {
+        targetId = match.id;
+      } else if (exact) {
+        targetId = exact.id;
+      }
+    }
+  } else {
+    if (exact) targetId = exact.id;
   }
+
+  const chosenMeta = installedMeta.find(m => m.id === targetId) || exact;
 
   const sel = document.getElementById('versionSelect');
   if (sel) {
@@ -6311,7 +6361,7 @@ function vbSetHiddenSelect(versionId, modifier) {
     if (!found) {
       const opt = document.createElement('option');
       opt.value = targetId;
-      opt.textContent = exact?.displayName || targetId;
+      opt.textContent = chosenMeta?.displayName || targetId;
       sel.appendChild(opt);
     }
     sel.value = targetId;
@@ -6319,17 +6369,17 @@ function vbSetHiddenSelect(versionId, modifier) {
 
   const modSel = document.getElementById('modSelect');
   if (modSel) {
-    if (exact && exact.type !== 'release') {
+    if (chosenMeta && chosenMeta.type !== 'release' && chosenMeta.type !== 'snapshot') {
       let optFound = false;
-      for (const opt of modSel.options) { if (opt.value === exact.id) { optFound = true; break; } }
+      for (const opt of modSel.options) { if (opt.value === chosenMeta.id) { optFound = true; break; } }
       if (!optFound) {
         const opt = document.createElement('option');
-        opt.value = exact.id;
-        opt.textContent = exact.displayName || exact.id;
+        opt.value = chosenMeta.id;
+        opt.textContent = chosenMeta.displayName || chosenMeta.id;
         modSel.appendChild(opt);
       }
-      modSel.value = exact.id;
-    } else if (mod === 'vanilla') {
+      modSel.value = chosenMeta.id;
+    } else {
       modSel.value = '';
     }
   }
@@ -12038,11 +12088,17 @@ async function loadNebulaProfileData() {
         pvpBtn.classList.remove('active');
         modGrid.style.display = 'grid';
         pvpGrid.style.display = 'none';
+        if (currentPlayModifier === 'pvp') {
+          setPlayModifier('vanilla');
+        } else {
+          setPlayModifier(currentPlayModifier);
+        }
       } else if (tab === 'pvp') {
         pvpBtn.classList.add('active');
         modBtn.classList.remove('active');
         modGrid.style.display = 'none';
         pvpGrid.style.display = 'grid';
+        setPlayModifier('pvp');
         loadPvpClients();
       }
     }
