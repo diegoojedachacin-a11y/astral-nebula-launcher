@@ -406,6 +406,20 @@ body{
   100% { background-position: 0% 20%; }
 }
 
+[data-theme="rtx"]{
+  --orb1:#2a1008;--orb2:#3b0720;--orb3:#5c2d16;--orb4:#080302;
+  --accent:#fb7185;--accent2:#f59e0b;--accent3:#fed7aa;
+  --accent-glow:rgba(251,113,133,0.35);
+  --glass:rgba(16, 10, 18, 0.45);--glass-light:rgba(251,113,133,0.08);--glass-mid:rgba(245,158,11,0.04);
+  --border:rgba(251,113,133,0.20);--border-glow:rgba(251,113,133,0.45);
+}
+[data-theme="amethyst_void"]{
+  --orb1:#180b2a;--orb2:#240e3f;--orb3:#3b1866;--orb4:#07020d;
+  --accent:#c084fc;--accent2:#a855f7;--accent3:#e9d5ff;
+  --accent-glow:rgba(192,132,252,0.35);
+  --glass:rgba(14, 8, 24, 0.45);--glass-light:rgba(192,132,252,0.08);--glass-mid:rgba(168,85,247,0.04);
+  --border:rgba(192,132,252,0.20);--border-glow:rgba(192,132,252,0.45);
+}
 [data-theme="vangogh"]{
   --orb1:#1e1b4b;--orb2:#172554;--orb3:#1e3a8a;--orb4:#030712;
   --accent:#fef08a;--accent2:#facc15;--accent3:#38bdf8;
@@ -1385,6 +1399,12 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;heigh
 .ts-deepocean{background:linear-gradient(135deg,#082f49,#0e7490,#2dd4bf);box-shadow:0 0 14px rgba(45,212,191,0.45);}
 .ts-pixel8bit{background:linear-gradient(135deg,#064e3b,#22c55e,#facc15);box-shadow:0 0 14px rgba(34,197,94,0.45);}
 .ts-sakura{background:linear-gradient(135deg,#500724,#db2777,#f472b6);box-shadow:0 0 14px rgba(244,114,182,0.45);}
+.ts-rtx{background:linear-gradient(135deg,#9f1239,#ea580c,#f59e0b);box-shadow:0 0 14px rgba(251,113,133,0.45);}
+.ts-amethyst_void{background:linear-gradient(135deg,#3b0764,#6b21a8,#a855f7);box-shadow:0 0 14px rgba(168,85,247,0.45);}
+.ts-vangogh{background:linear-gradient(135deg,#1e3a8a,#0284c7,#facc15);box-shadow:0 0 14px rgba(250,204,21,0.45);}
+.ts-nebula_live{background:radial-gradient(circle,#7c3aed,#1e1b4b);box-shadow:0 0 14px rgba(124,58,237,0.45);}
+.ts-custom{background:linear-gradient(135deg,#1e1b4b,#312e81,#4f46e5);box-shadow:0 0 14px rgba(99,102,241,0.45);border:1px dashed rgba(255,255,255,0.35)!important;}
+
 .theme-label{font-size:.6rem;text-align:center;margin-top:4px;color:var(--text-dim);}
 
 /* ═══════ SCREENSHOTS ═══════ */
@@ -4516,16 +4536,20 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;heigh
               </div>
             </div>
 
-            <!-- 2. TEMAS ESPECIALES Y PERSONALIZADO -->
+            <!-- 2. TEMAS ESPECIALES & WALLPAPERS HD -->
             <div class="settings-card">
               <h3>🌟 TEMAS ESPECIALES</h3>
               <div class="theme-grid">
-                <div class="theme-swatch ts-vangogh" onclick="setTheme('vangogh')" title="Van Gogh (Noche Estrellada)"></div>
-                <div class="theme-swatch ts-sakura" onclick="setTheme('sakura')" title="Sakura (Cerezo en Flor)" style="display:flex;align-items:center;justify-content:center;font-size:1.25rem;cursor:pointer;">🌸</div>
-                <div class="theme-swatch ts-cyberpunk" onclick="setTheme('cyberpunk')" title="Cyberpunk (Synthwave)" style="display:flex;align-items:center;justify-content:center;font-size:1.25rem;cursor:pointer;">🌆</div>
+                <div class="theme-swatch ts-rtx" onclick="setTheme('rtx')" title="Minecraft RTX (Atardecer Shaders 4K)" style="display:flex;align-items:center;justify-content:center;font-size:1.25rem;cursor:pointer;">🌅</div>
+                <div class="theme-swatch ts-amethyst_void" onclick="setTheme('amethyst_void')" title="Amethyst Void (Islas Cósmicas 4K)" style="display:flex;align-items:center;justify-content:center;font-size:1.25rem;cursor:pointer;">🔮</div>
+                <div class="theme-swatch ts-vangogh" onclick="setTheme('vangogh')" title="Van Gogh (Noche Estrellada)" style="display:flex;align-items:center;justify-content:center;font-size:1.25rem;cursor:pointer;">🎨</div>
+                <div class="theme-swatch ts-nebula_live" onclick="setTheme('nebula')" title="Nebulosa Viva (Animada Dinámica)" style="display:flex;align-items:center;justify-content:center;font-size:1.25rem;cursor:pointer;">🌌</div>
+                <div class="theme-swatch ts-sakura" onclick="setTheme('sakura')" title="Sakura (Cerezo en Flor - Pétalos)" style="display:flex;align-items:center;justify-content:center;font-size:1.25rem;cursor:pointer;">🌸</div>
+                <div class="theme-swatch ts-cyberpunk" onclick="setTheme('cyberpunk')" title="Cyberpunk (Synthwave Neon)" style="display:flex;align-items:center;justify-content:center;font-size:1.25rem;cursor:pointer;">🏙️</div>
                 <div class="theme-swatch ts-deepocean" onclick="setTheme('deepocean')" title="Deep Ocean (Abismo Marino)" style="display:flex;align-items:center;justify-content:center;font-size:1.25rem;cursor:pointer;">🌊</div>
                 <div class="theme-swatch ts-pixel8bit" onclick="setTheme('pixel8bit')" title="Retro 8-Bit (Arcade Pixel)" style="display:flex;align-items:center;justify-content:center;font-size:1.25rem;cursor:pointer;">👾</div>
-                <div class="theme-swatch ts-custom" onclick="setTheme('custom')" title="Personalizado (Tus colores e imagen)">✨</div>
+                <div class="theme-swatch ts-supernova" onclick="setTheme('supernova')" title="Supernova (Fuego y Llamas)" style="display:flex;align-items:center;justify-content:center;font-size:1.25rem;cursor:pointer;">🔥</div>
+                <div class="theme-swatch ts-custom" onclick="setTheme('custom')" title="Personalizado (Tus colores e imagen)" style="display:flex;align-items:center;justify-content:center;font-size:1.25rem;cursor:pointer;">✨</div>
               </div>
             </div>
 
@@ -5298,6 +5322,40 @@ function setTheme(t) {
       const bgEl = document.getElementById('bg');
       if (bgEl) bgEl.style.removeProperty(v);
     });
+  }
+
+  // Sincronizar fondos para temas especiales
+  if (t === 'rtx') {
+    if (typeof applyCustomBgMediaToDOM === 'function') {
+      applyCustomBgMediaToDOM('assets/wallpapers/cherry_sunset.jpg');
+      localStorage.setItem('nebula_custom_bg_path', 'assets/wallpapers/cherry_sunset.jpg');
+      if (typeof settings !== 'undefined' && settings) {
+        if (!settings.customTheme) settings.customTheme = {};
+        settings.customTheme.bgImage = 'assets/wallpapers/cherry_sunset.jpg';
+      }
+    }
+  } else if (t === 'amethyst_void') {
+    if (typeof applyCustomBgMediaToDOM === 'function') {
+      applyCustomBgMediaToDOM('assets/wallpapers/cosmic_amethyst.jpg');
+      localStorage.setItem('nebula_custom_bg_path', 'assets/wallpapers/cosmic_amethyst.jpg');
+      if (typeof settings !== 'undefined' && settings) {
+        if (!settings.customTheme) settings.customTheme = {};
+        settings.customTheme.bgImage = 'assets/wallpapers/cosmic_amethyst.jpg';
+      }
+    }
+  } else if (t === 'vangogh') {
+    if (typeof applyCustomBgMediaToDOM === 'function') {
+      applyCustomBgMediaToDOM('assets/starry_night.png');
+      localStorage.setItem('nebula_custom_bg_path', 'assets/starry_night.png');
+      if (typeof settings !== 'undefined' && settings) {
+        if (!settings.customTheme) settings.customTheme = {};
+        settings.customTheme.bgImage = 'assets/starry_night.png';
+      }
+    }
+  } else if (t === 'nebula') {
+    if (typeof clearCustomBgImage === 'function') {
+      clearCustomBgImage();
+    }
   }
 
   document.documentElement.setAttribute('data-theme', t);
@@ -12299,7 +12357,25 @@ async function loadNebulaProfileData() {
               ],
               stars: ['#ffffff', '#fb923c', '#fdba74', '#fef08a', '#facc15']
             };
-                    case 'cyberpunk':
+                    case 'rtx':
+            return {
+              shooting: [
+                { head: '#ffffff', mid: '#fb7185', tail: 'rgba(251, 113, 133, 0)' },
+                { head: '#ffffff', mid: '#f59e0b', tail: 'rgba(245, 158, 11, 0)' },
+                { head: '#ffffff', mid: '#fed7aa', tail: 'rgba(254, 215, 170, 0)' }
+              ],
+              stars: ['#ffffff', '#fb7185', '#f59e0b', '#fed7aa', '#fef08a']
+            };
+          case 'amethyst_void':
+            return {
+              shooting: [
+                { head: '#ffffff', mid: '#c084fc', tail: 'rgba(192, 132, 252, 0)' },
+                { head: '#ffffff', mid: '#a855f7', tail: 'rgba(168, 85, 247, 0)' },
+                { head: '#ffffff', mid: '#e9d5ff', tail: 'rgba(233, 213, 255, 0)' }
+              ],
+              stars: ['#ffffff', '#c084fc', '#a855f7', '#e9d5ff', '#38bdf8']
+            };
+          case 'cyberpunk':
             return {
               shooting: [
                 { head: '#ffffff', mid: '#f43f5e', tail: 'rgba(244, 63, 94, 0)' },
