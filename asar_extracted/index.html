@@ -4956,6 +4956,16 @@ box-shadow:0 0 14px rgba(99,102,241,0.45);border:1px dashed rgba(255,255,255,0.3
 <script>
 const { ipcRenderer: ipc } = require('electron');
 
+// Safe early definition of window.t to prevent 'TypeError: window.t is not a function' before i18n dictionary loads
+window.t = function(key, fallback) {
+  if (typeof LAUNCHER_ALL_PHRASES !== 'undefined') {
+    const tr = LAUNCHER_ALL_PHRASES[key] || (typeof LAUNCHER_ALL_PLACEHOLDERS !== 'undefined' ? LAUNCHER_ALL_PLACEHOLDERS[key] : null);
+    if (tr && window.currentLauncherLang && tr[window.currentLauncherLang]) return tr[window.currentLauncherLang];
+  }
+  return fallback || key;
+};
+window.i18n = window.t;
+
 // ═══════ SISTEMA GLOBAL DE FONDOS Y TEMAS ESPECIALES ═══════
 function applyCustomBgMediaToDOM(path) {
   const imgEl = document.getElementById('custom-bg-img');
@@ -6113,7 +6123,7 @@ async function vbRenderList() {
           ${badgeHtml}
           <span class="vb-badge vb-badge-installed">✓</span>
         </span>
-        <button class="vb-action-btn vb-play-btn" onclick="event.stopPropagation();vbPlay('${v.id}')">${window.t('▶ Jugar')}</button>
+        <button class="vb-action-btn vb-play-btn" onclick="event.stopPropagation();vbPlay('${v.id}')">${typeof window.t === 'function' ? window.t('▶ Jugar') : '▶ Jugar'}</button>
       </div>`;
     }).join('');
     return;
@@ -6123,30 +6133,35 @@ async function vbRenderList() {
   let itemsHtml = '';
 
   if (modifier === 'vanilla') {
-    // 1. VERSIONES OFICIALES Y CLIENTES PVP INSTALADOS
-    const localInstalled = installedMeta.filter(m => m.type === 'release' || m.type === 'pvp');
-    const localFiltered = localInstalled.filter(m => !search || m.id.toLowerCase().includes(search) || (m.displayName && m.displayName.toLowerCase().includes(search)));
+    // 1. TODAS LAS VERSIONES INSTALADAS (Vanilla, Forge, Fabric, OptiFine, PvP)
+    const localFiltered = installedMeta.filter(m => !search || m.id.toLowerCase().includes(search) || (m.displayName && m.displayName.toLowerCase().includes(search)));
 
     if (localFiltered.length > 0) {
       itemsHtml += `<div style="font-size:0.65rem;font-weight:700;color:#4ade80;padding:6px 6px 4px;letter-spacing:0.5px;display:flex;justify-content:space-between;">
-        <span>⭐ INSTALADAS LOCALMENTE (${localFiltered.length})</span>
+        <span>⭐ VERSIONES INSTALADAS (${localFiltered.length})</span>
       </div>`;
       localFiltered.forEach(v => {
         const safeId = v.id.replace(/[^a-zA-Z0-9-_]/g, '_');
-        const isPvp = v.type === 'pvp';
-        const badgeHtml = isPvp 
-          ? '<span class="vb-badge vb-badge-opti" style="background:rgba(168,85,247,0.2);color:#c084fc;">PVP</span>'
-          : '<span class="vb-badge vb-badge-installed" style="background:rgba(74,222,128,0.15);color:#4ade80;">OFICIAL</span>';
+        const badgeMap = {
+          forge: '<span class="vb-badge vb-badge-forge" style="background:rgba(249,115,22,0.15);color:#fb923c;">FORGE</span>',
+          fabric: '<span class="vb-badge vb-badge-fabric" style="background:rgba(59,130,246,0.15);color:#60a5fa;">FABRIC</span>',
+          optifine: '<span class="vb-badge vb-badge-opti" style="background:rgba(14,165,233,0.15);color:#38bdf8;">OPTIFINE</span>',
+          neoforge: '<span class="vb-badge vb-badge-neoforge" style="background:rgba(34,197,94,0.15);color:#4ade80;">NEOFORGE</span>',
+          quilt: '<span class="vb-badge vb-badge-quilt" style="background:rgba(236,72,153,0.15);color:#f472b6;">QUILT</span>',
+          pvp: '<span class="vb-badge vb-badge-opti" style="background:rgba(168,85,247,0.2);color:#c084fc;">PVP</span>',
+          release: '<span class="vb-badge vb-badge-installed" style="background:rgba(74,222,128,0.15);color:#4ade80;">OFICIAL</span>'
+        };
+        const badgeHtml = badgeMap[v.type] || '';
         itemsHtml += `<div class="vb-item installed" id="vbi-${safeId}" onclick="vbSelectVersion('${v.id}')">
           <span class="vb-item-name">${v.displayName || v.id}</span>
           <span class="vb-item-badges">${badgeHtml}<span class="vb-badge vb-badge-installed">✓</span></span>
-          <button class="vb-action-btn vb-play-btn" onclick="event.stopPropagation();vbPlay('${v.id}')">${window.t('▶ Jugar')}</button>
+          <button class="vb-action-btn vb-play-btn" onclick="event.stopPropagation();vbPlay('${v.id}')">${typeof window.t === 'function' ? window.t('▶ Jugar') : '▶ Jugar'}</button>
         </div>`;
       });
     }
 
     // 2. VERSIONES OFICIALES DISPONIBLES EN MOJANG
-    const officialNotInstalled = allVer.filter(v => {
+    const officialNotInstalled = (allVer || []).filter(v => {
       if (installed.has(v.id)) return false; // Ya listada arriba
       if (!vbShowSnapshots && v.type !== 'release') return false;
       if (search && !v.id.toLowerCase().includes(search)) return false;
@@ -6168,7 +6183,7 @@ async function vbRenderList() {
       });
     }
 
-    list.innerHTML = itemsHtml || '<div style="color:var(--text-dim);font-size:.72rem;text-align:center;padding:20px 8px;">No hay versiones oficiales disponibles.</div>';
+    list.innerHTML = itemsHtml || '<div style="color:var(--text-dim);font-size:.72rem;text-align:center;padding:20px 8px;">No hay versiones disponibles.</div>';
     return;
   }
 
@@ -6196,7 +6211,7 @@ async function vbRenderList() {
           <span class="vb-badge vb-badge-${modifier}">${loaderName.toUpperCase()}</span>
           <span class="vb-badge vb-badge-installed">✓</span>
         </span>
-        <button class="vb-action-btn vb-play-btn" onclick="event.stopPropagation();vbPlay('${v.id}')">${window.t('▶ Jugar')}</button>
+        <button class="vb-action-btn vb-play-btn" onclick="event.stopPropagation();vbPlay('${v.id}')">${typeof window.t === 'function' ? window.t('▶ Jugar') : '▶ Jugar'}</button>
       </div>`;
     });
   }
@@ -6225,7 +6240,7 @@ async function vbRenderList() {
           ${hasAnyBuild ? '<span class="vb-badge vb-badge-installed">✓</span>' : ''}
         </span>
         ${hasAnyBuild 
-          ? `<button class="vb-action-btn vb-play-btn" onclick="event.stopPropagation();vbPlay('${mcVer}')">${window.t('▶ Jugar')}</button>`
+          ? `<button class="vb-action-btn vb-play-btn" onclick="event.stopPropagation();vbPlay('${mcVer}')">${typeof window.t === 'function' ? window.t('▶ Jugar') : '▶ Jugar'}</button>`
           : `<button class="vb-action-btn vb-install-btn" onclick="event.stopPropagation();vbInstall('${mcVer}')">⬇</button>`
         }
       </div>`;
