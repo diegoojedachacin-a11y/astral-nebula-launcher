@@ -2361,6 +2361,278 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;heigh
       box-shadow: 0 2px 12px rgba(139, 92, 246, 0.45) !important;
     }
 
+  
+  /* ═══════════════════════════════════════════════════════════════
+     COSMIC MINIMALIST 2.0 & MICRO-ANIMATIONS (NEBULA LAUNCHER)
+     ═══════════════════════════════════════════════════════════════ */
+
+  /* Tab Entrance Transition */
+  @keyframes tabContentEnter {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .tab-panel.active {
+    animation: tabContentEnter 0.22s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  }
+
+  /* User Pill Refinement */
+  .user-pill {
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+    padding: 10px 14px !important;
+    border-radius: 16px !important;
+    background: rgba(255, 255, 255, 0.04) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    margin-bottom: 22px !important;
+    backdrop-filter: blur(14px) !important;
+    -webkit-backdrop-filter: blur(14px) !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.12) !important;
+    transition: all 0.25s ease !important;
+  }
+  .user-pill:hover {
+    background: rgba(255, 255, 255, 0.07) !important;
+    border-color: rgba(255, 255, 255, 0.16) !important;
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.18) !important;
+  }
+
+  /* Navigation Items & Active Glow Pill */
+  .nav-item {
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+    padding: 10px 14px !important;
+    border-radius: 14px !important;
+    cursor: pointer !important;
+    font-size: 0.8rem !important;
+    font-weight: 600 !important;
+    color: var(--text-dim) !important;
+    transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    border: 1px solid transparent !important;
+    background: transparent !important;
+    outline: none !important;
+    -webkit-app-region: no-drag !important;
+    margin-bottom: 3px !important;
+    position: relative !important;
+  }
+  .nav-item:hover {
+    color: #ffffff !important;
+    background: rgba(255, 255, 255, 0.05) !important;
+    border-color: rgba(255, 255, 255, 0.06) !important;
+    transform: translateX(3px) !important;
+  }
+  .nav-item.active {
+    color: #ffffff !important;
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(99, 102, 241, 0.12)) !important;
+    border-color: rgba(139, 92, 246, 0.38) !important;
+    box-shadow: 0 4px 18px rgba(139, 92, 246, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.15) !important;
+    font-weight: 700 !important;
+  }
+  .nav-item.active::before {
+    content: '' !important;
+    position: absolute !important;
+    left: -4px !important;
+    top: 25% !important;
+    height: 50% !important;
+    width: 3.5px !important;
+    border-radius: 4px !important;
+    background: linear-gradient(to bottom, #8b5cf6, #38bdf8) !important;
+    box-shadow: 0 0 10px #8b5cf6 !important;
+  }
+
+  /* Minimalist Logout Button */
+  #btn-sidebar-logout {
+    background: rgba(239, 68, 68, 0.07) !important;
+    border: 1px solid rgba(239, 68, 68, 0.22) !important;
+    color: rgba(255, 255, 255, 0.75) !important;
+    border-radius: 12px !important;
+    padding: 9px 14px !important;
+    font-weight: 600 !important;
+    font-size: 0.78rem !important;
+    transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    cursor: pointer !important;
+  }
+  #btn-sidebar-logout:hover {
+    background: rgba(239, 68, 68, 0.18) !important;
+    border-color: rgba(239, 68, 68, 0.55) !important;
+    color: #ffffff !important;
+    box-shadow: 0 4px 18px rgba(239, 68, 68, 0.3) !important;
+    transform: translateY(-1.5px) !important;
+  }
+
+  /* Hyper-Drive Launch Button */
+  @keyframes cosmicGlowShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  #launchBtn {
+    padding: 17px 24px !important;
+    font-size: 0.88rem !important;
+    letter-spacing: 0.14em !important;
+    font-weight: 800 !important;
+    border-radius: 18px !important;
+    background: linear-gradient(135deg, #8b5cf6 0%, #6366f1 50%, #38bdf8 100%) !important;
+    background-size: 200% 200% !important;
+    animation: cosmicGlowShift 8s ease infinite !important;
+    border: 1px solid rgba(255, 255, 255, 0.35) !important;
+    color: #ffffff !important;
+    cursor: pointer !important;
+    transition: all 0.26s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    width: 100% !important;
+    -webkit-app-region: no-drag !important;
+    position: relative !important;
+    overflow: hidden !important;
+    box-shadow: 0 10px 30px rgba(139, 92, 246, 0.38), 0 0 45px rgba(99, 102, 241, 0.22), inset 0 1px 1px rgba(255, 255, 255, 0.5) !important;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.35) !important;
+  }
+  #launchBtn::before {
+    content: '' !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: -120% !important;
+    width: 60% !important;
+    height: 100% !important;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35), transparent) !important;
+    transform: skewX(-20deg) !important;
+    transition: left 0.75s ease !important;
+  }
+  #launchBtn:hover::before {
+    left: 180% !important;
+  }
+  #launchBtn:hover {
+    transform: translateY(-2.5px) scale(1.01) !important;
+    box-shadow: 0 14px 45px rgba(139, 92, 246, 0.52), 0 0 60px rgba(56, 189, 248, 0.38), inset 0 1px 1px rgba(255, 255, 255, 0.6) !important;
+    border-color: rgba(255, 255, 255, 0.55) !important;
+  }
+  #launchBtn:active {
+    transform: translateY(0) scale(0.985) !important;
+    box-shadow: 0 4px 18px rgba(139, 92, 246, 0.3) !important;
+  }
+
+  /* Quick Access Chips */
+  .btn-quick-dir {
+    padding: 8px 6px !important;
+    font-size: 0.67rem !important;
+    font-weight: 600 !important;
+    border-radius: 10px !important;
+    background: rgba(255, 255, 255, 0.04) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    color: var(--text-dim) !important;
+    cursor: pointer !important;
+    transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    text-align: center !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 5px !important;
+    backdrop-filter: blur(8px) !important;
+  }
+  .btn-quick-dir:hover {
+    background: rgba(255, 255, 255, 0.09) !important;
+    border-color: rgba(168, 85, 247, 0.35) !important;
+    color: #ffffff !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25) !important;
+  }
+  .btn-quick-dir:active {
+    transform: translateY(0) !important;
+  }
+
+  /* RAM Preset Chips */
+  .btn-ram-preset {
+    flex: 1 !important;
+    min-width: 48px !important;
+    padding: 6px 8px !important;
+    border-radius: 10px !important;
+    font-size: 0.7rem !important;
+    font-weight: 700 !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    background: rgba(255, 255, 255, 0.035) !important;
+    color: var(--text-dim) !important;
+    cursor: pointer !important;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    text-align: center !important;
+  }
+  .btn-ram-preset:hover {
+    color: #fff !important;
+    background: rgba(255, 255, 255, 0.08) !important;
+    border-color: rgba(168, 85, 247, 0.3) !important;
+    transform: translateY(-1.5px) !important;
+  }
+  .btn-ram-preset.active {
+    background: linear-gradient(135deg, rgba(168, 85, 247, 0.35), rgba(99, 102, 241, 0.35)) !important;
+    border-color: #a855f7 !important;
+    color: #fff !important;
+    box-shadow: 0 2px 12px rgba(168, 85, 247, 0.4) !important;
+  }
+
+  /* Modern Glass Cards */
+  .client-card, .play-mod-card, .settings-card, .launch-card {
+    border-radius: 18px !important;
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  }
+  .client-card:hover, .play-mod-card:hover {
+    transform: translateY(-3px) !important;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4), 0 0 24px rgba(168, 85, 247, 0.2) !important;
+    border-color: rgba(168, 85, 247, 0.35) !important;
+  }
+
+  /* Version Items List Hover */
+  .vb-item {
+    border-radius: 12px !important;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    margin-bottom: 3px !important;
+  }
+  .vb-item:hover {
+    background: rgba(255, 255, 255, 0.07) !important;
+    border-color: rgba(168, 85, 247, 0.25) !important;
+    transform: translateX(2px) !important;
+  }
+
+  /* Modern Micro-Action Remove Buttons */
+  .btn-danger.btn-sm {
+    background: rgba(239, 68, 68, 0.12) !important;
+    border: 1px solid rgba(239, 68, 68, 0.28) !important;
+    color: #fca5a5 !important;
+    border-radius: 8px !important;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    cursor: pointer !important;
+  }
+  .btn-danger.btn-sm:hover {
+    background: rgba(239, 68, 68, 0.28) !important;
+    border-color: #ef4444 !important;
+    color: #ffffff !important;
+    box-shadow: 0 2px 10px rgba(239, 68, 68, 0.35) !important;
+    transform: translateY(-1px) !important;
+  }
+
+  /* Console Terminal Polish */
+  #log-box {
+    border-radius: 14px !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    background: rgba(0, 0, 0, 0.45) !important;
+    backdrop-filter: blur(14px) !important;
+    padding: 16px !important;
+    box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.4) !important;
+  }
+  .log-entry {
+    font-family: 'JetBrains Mono', 'Cascadia Code', Consolas, monospace !important;
+    font-size: 0.73rem !important;
+    line-height: 1.6 !important;
+  }
+
   </style>
 </head>
 <body>
@@ -2373,7 +2645,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;heigh
   <div class="orb" id="o4"></div>
   <div class="stars"></div>
 </div>
-<canvas id="vanGoghCanvas" style="position:fixed;inset:0;z-index:7050;pointer-events:none;width:100%;height:100%;"></canvas>
+<canvas id="vanGoghCanvas" style="position:fixed;inset:0;z-index:0;pointer-events:none;width:100%;height:100%;opacity:0.75;"></canvas>
 <div id="drag-bar"></div>
 <div id="traffic">
   <button class="light close"    onclick="ipc.send('window-close')"></button>
@@ -2534,7 +2806,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;heigh
 <div id="main-launcher">
   <div class="launcher-shell">
     
-    <div class="sidebar">
+    <div class="sidebar" style="position:relative;z-index:10;">
       <div class="user-pill tilt-card">
         <div class="user-avatar" id="user-avatar">👤</div>
         <div style="flex:1;overflow:hidden;">
