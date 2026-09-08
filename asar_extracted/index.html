@@ -2633,6 +2633,445 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;heigh
     line-height: 1.6 !important;
   }
 
+  
+  /* ═══════════════════════════════════════════════════════════════
+     COSMIC MINIMALIST 3.0: BATTLY, BADLION, DAWN, LUNAR & MODRINTH
+     ═══════════════════════════════════════════════════════════════ */
+
+  /* Global Ultra-Sleek Scrollbars */
+  ::-webkit-scrollbar {
+    width: 5px !important;
+    height: 5px !important;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent !important;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.12) !important;
+    border-radius: 999px !important;
+    transition: background 0.2s ease !important;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(168, 85, 247, 0.45) !important;
+  }
+
+  /* Engine Status HUD Pill (Lunar / Badlion Style) */
+  .play-header-hud {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    margin-bottom: 20px !important;
+    -webkit-app-region: no-drag !important;
+  }
+  .engine-status-pill {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    padding: 6px 14px !important;
+    border-radius: 999px !important;
+    background: rgba(16, 185, 129, 0.09) !important;
+    border: 1px solid rgba(16, 185, 129, 0.3) !important;
+    backdrop-filter: blur(14px) !important;
+    -webkit-backdrop-filter: blur(14px) !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
+    font-size: 0.72rem !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.05em !important;
+    color: #34d399 !important;
+    text-transform: uppercase !important;
+    transition: all 0.25s ease !important;
+  }
+  .engine-status-dot {
+    width: 8px !important;
+    height: 8px !important;
+    border-radius: 50% !important;
+    background: #10b981 !important;
+    box-shadow: 0 0 10px #10b981 !important;
+    animation: enginePulse 2.2s infinite ease-in-out !important;
+  }
+  @keyframes enginePulse {
+    0%, 100% { transform: scale(1); opacity: 0.85; box-shadow: 0 0 8px #10b981; }
+    50% { transform: scale(1.25); opacity: 1; box-shadow: 0 0 14px #34d399; }
+  }
+
+  /* User Capsule & Avatar Status Indicator (Battly Style) */
+  .user-avatar-wrap {
+    position: relative !important;
+    display: inline-block !important;
+    flex-shrink: 0 !important;
+  }
+  .user-status-dot {
+    position: absolute !important;
+    bottom: -1px !important;
+    right: -1px !important;
+    width: 10px !important;
+    height: 10px !important;
+    border-radius: 50% !important;
+    background: #10b981 !important;
+    border: 2px solid #0e121d !important;
+    box-shadow: 0 0 8px #10b981 !important;
+    animation: enginePulse 2.2s infinite ease-in-out !important;
+  }
+  .user-type-badge {
+    font-size: 0.65rem !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.05em !important;
+    text-transform: uppercase !important;
+    color: var(--accent) !important;
+    display: inline-block !important;
+  }
+
+  /* Segmented Mode Tabs (Feather Style) */
+  .modifier-header-tabs {
+    display: flex !important;
+    background: rgba(0, 0, 0, 0.4) !important;
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border-radius: 14px !important;
+    padding: 4px !important;
+    width: fit-content !important;
+    gap: 4px !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.06) !important;
+  }
+  .modifier-header-tab {
+    padding: 8px 18px !important;
+    border-radius: 10px !important;
+    font-size: 0.78rem !important;
+    font-weight: 600 !important;
+    color: var(--text-dim) !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    border: 1px solid transparent !important;
+    background: transparent !important;
+    outline: none !important;
+    cursor: pointer !important;
+    transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  }
+  .modifier-header-tab:hover {
+    color: #ffffff !important;
+    background: rgba(255, 255, 255, 0.05) !important;
+  }
+  .modifier-header-tab.active {
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.3), rgba(99, 102, 241, 0.22)) !important;
+    border: 1px solid rgba(139, 92, 246, 0.48) !important;
+    color: #ffffff !important;
+    font-weight: 700 !important;
+    box-shadow: 0 2px 14px rgba(139, 92, 246, 0.32), inset 0 1px 0 rgba(255, 255, 255, 0.18) !important;
+  }
+
+  /* Modifier & Loader Cards (Modrinth + Dawn Aesthetics) */
+  .play-mod-card {
+    padding: 16px 18px !important;
+    border-radius: 18px !important;
+    background: rgba(14, 18, 28, 0.55) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    cursor: pointer !important;
+    transition: all 0.24s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 10px !important;
+    position: relative !important;
+    overflow: hidden !important;
+    backdrop-filter: blur(18px) saturate(140%) !important;
+    -webkit-backdrop-filter: blur(18px) saturate(140%) !important;
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.07) !important;
+  }
+  .play-mod-card:hover {
+    transform: translateY(-3px) scale(1.008) !important;
+    border-color: rgba(255, 255, 255, 0.22) !important;
+    background: rgba(20, 26, 42, 0.65) !important;
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.12) !important;
+  }
+  .play-mod-card-icon {
+    width: 38px !important;
+    height: 38px !important;
+    border-radius: 11px !important;
+    background: rgba(255, 255, 255, 0.04) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    transition: transform 0.22s ease !important;
+    flex-shrink: 0 !important;
+  }
+  .play-mod-card:hover .play-mod-card-icon {
+    transform: scale(1.06) !important;
+  }
+  .play-mod-card-title {
+    font-size: 0.9rem !important;
+    font-weight: 700 !important;
+    color: #ffffff !important;
+    letter-spacing: -0.01em !important;
+  }
+  .play-mod-card-desc {
+    font-size: 0.72rem !important;
+    color: rgba(255, 255, 255, 0.62) !important;
+    line-height: 1.45 !important;
+  }
+
+  /* Micro-Badge '✓' on Active Card */
+  @keyframes activeBadgeSpring {
+    0% { transform: scale(0.4); opacity: 0; }
+    70% { transform: scale(1.15); }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  .play-mod-card.active::after {
+    content: '✓' !important;
+    position: absolute !important;
+    top: 12px !important;
+    right: 14px !important;
+    width: 22px !important;
+    height: 22px !important;
+    border-radius: 50% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 0.72rem !important;
+    font-weight: 800 !important;
+    animation: activeBadgeSpring 0.28s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+  }
+
+  /* Unique Loader Brand Auras */
+  #play-mod-card-vanilla.active {
+    border-color: rgba(255, 255, 255, 0.6) !important;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.03)) !important;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4), 0 0 25px rgba(255, 255, 255, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.35) !important;
+  }
+  #play-mod-card-vanilla.active::after {
+    background: #ffffff !important;
+    color: #0f172a !important;
+    box-shadow: 0 0 12px rgba(255, 255, 255, 0.8) !important;
+  }
+
+  #play-mod-card-fabric.active {
+    border-color: #38bdf8 !important;
+    background: linear-gradient(135deg, rgba(56, 189, 248, 0.16), rgba(14, 165, 233, 0.04)) !important;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4), 0 0 28px rgba(56, 189, 248, 0.32), inset 0 1px 0 rgba(56, 189, 248, 0.45) !important;
+  }
+  #play-mod-card-fabric.active::after {
+    background: #38bdf8 !important;
+    color: #03213a !important;
+    box-shadow: 0 0 14px #38bdf8 !important;
+  }
+
+  #play-mod-card-forge.active {
+    border-color: #fb923c !important;
+    background: linear-gradient(135deg, rgba(251, 146, 60, 0.16), rgba(234, 88, 12, 0.04)) !important;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4), 0 0 28px rgba(251, 146, 60, 0.32), inset 0 1px 0 rgba(251, 146, 60, 0.45) !important;
+  }
+  #play-mod-card-forge.active::after {
+    background: #fb923c !important;
+    color: #3a1503 !important;
+    box-shadow: 0 0 14px #fb923c !important;
+  }
+
+  #play-mod-card-neoforge.active {
+    border-color: #f97316 !important;
+    background: linear-gradient(135deg, rgba(249, 115, 22, 0.16), rgba(220, 38, 38, 0.04)) !important;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4), 0 0 28px rgba(249, 115, 22, 0.32), inset 0 1px 0 rgba(249, 115, 22, 0.45) !important;
+  }
+  #play-mod-card-neoforge.active::after {
+    background: #f97316 !important;
+    color: #3c0c00 !important;
+    box-shadow: 0 0 14px #f97316 !important;
+  }
+
+  #play-mod-card-quilt.active {
+    border-color: #c084fc !important;
+    background: linear-gradient(135deg, rgba(192, 132, 252, 0.16), rgba(147, 51, 234, 0.04)) !important;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4), 0 0 28px rgba(192, 132, 252, 0.32), inset 0 1px 0 rgba(192, 132, 252, 0.45) !important;
+  }
+  #play-mod-card-quilt.active::after {
+    background: #c084fc !important;
+    color: #2e0854 !important;
+    box-shadow: 0 0 14px #c084fc !important;
+  }
+
+  #play-mod-card-optifine.active {
+    border-color: #34d399 !important;
+    background: linear-gradient(135deg, rgba(52, 211, 153, 0.16), rgba(5, 150, 105, 0.04)) !important;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4), 0 0 28px rgba(52, 211, 153, 0.32), inset 0 1px 0 rgba(52, 211, 153, 0.45) !important;
+  }
+  #play-mod-card-optifine.active::after {
+    background: #34d399 !important;
+    color: #022c1b !important;
+    box-shadow: 0 0 14px #34d399 !important;
+  }
+
+  #play-mod-card-modpacks.active {
+    border-color: #10b981 !important;
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.16), rgba(4, 120, 87, 0.04)) !important;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4), 0 0 28px rgba(16, 185, 129, 0.32), inset 0 1px 0 rgba(16, 185, 129, 0.45) !important;
+  }
+  #play-mod-card-modpacks.active::after {
+    background: #10b981 !important;
+    color: #022718 !important;
+    box-shadow: 0 0 14px #10b981 !important;
+  }
+
+  /* Form Inputs & Selects (Obsidian Glass) */
+  .inp, select.inp {
+    background: rgba(14, 18, 28, 0.75) !important;
+    border: 1px solid rgba(255, 255, 255, 0.09) !important;
+    border-radius: 12px !important;
+    color: #ffffff !important;
+    font-size: 0.82rem !important;
+    padding: 10px 14px !important;
+    transition: all 0.22s ease !important;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.35) !important;
+  }
+  .inp:focus, select.inp:focus {
+    border-color: #8b5cf6 !important;
+    background: rgba(20, 24, 38, 0.9) !important;
+    box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.25), inset 0 1px 3px rgba(0, 0, 0, 0.45) !important;
+    outline: none !important;
+  }
+
+  /* Modern Elastic Switches (Feather Style) */
+  .switch {
+    position: relative !important;
+    display: inline-block !important;
+    width: 44px !important;
+    height: 24px !important;
+  }
+  .switch input {
+    opacity: 0 !important;
+    width: 0 !important;
+    height: 0 !important;
+  }
+  .slider {
+    position: absolute !important;
+    cursor: pointer !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    background-color: rgba(255, 255, 255, 0.12) !important;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+    border-radius: 999px !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  }
+  .slider::before {
+    position: absolute !important;
+    content: "" !important;
+    height: 16px !important;
+    width: 16px !important;
+    left: 3px !important;
+    bottom: 3px !important;
+    background-color: #ffffff !important;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+    border-radius: 50% !important;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4) !important;
+  }
+  .switch input:checked + .slider {
+    background: linear-gradient(135deg, #8b5cf6, #6366f1) !important;
+    border-color: rgba(139, 92, 246, 0.6) !important;
+    box-shadow: 0 0 12px rgba(139, 92, 246, 0.4) !important;
+  }
+  .switch input:checked + .slider::before {
+    transform: translateX(19px) !important;
+    background-color: #ffffff !important;
+  }
+
+  /* Server Cards (Badlion Style) */
+  .sv-server-card {
+    background: rgba(14, 18, 28, 0.55) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border-radius: 16px !important;
+    padding: 16px 20px !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 16px !important;
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    margin-bottom: 10px !important;
+  }
+  .sv-server-card:hover {
+    transform: translateY(-2.5px) !important;
+    border-color: rgba(168, 85, 247, 0.35) !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), 0 0 20px rgba(168, 85, 247, 0.2) !important;
+  }
+  .sv-server-icon {
+    width: 44px !important;
+    height: 44px !important;
+    border-radius: 12px !important;
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.35), rgba(99, 102, 241, 0.25)) !important;
+    border: 1px solid rgba(139, 92, 246, 0.4) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 1.3rem !important;
+    flex-shrink: 0 !important;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3) !important;
+  }
+  .sv-ip-chip {
+    font-size: 0.72rem !important;
+    color: rgba(255, 255, 255, 0.75) !important;
+    font-family: 'JetBrains Mono', monospace !important;
+    background: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    padding: 3px 8px !important;
+    border-radius: 8px !important;
+    cursor: pointer !important;
+    transition: all 0.2s ease !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 4px !important;
+  }
+  .sv-ip-chip:hover {
+    background: rgba(255, 255, 255, 0.1) !important;
+    border-color: rgba(255, 255, 255, 0.25) !important;
+    color: #ffffff !important;
+  }
+  .sv-badge-mc {
+    font-size: 0.65rem !important;
+    background: rgba(168, 85, 247, 0.16) !important;
+    color: #c084fc !important;
+    border: 1px solid rgba(168, 85, 247, 0.3) !important;
+    padding: 2px 8px !important;
+    border-radius: 20px !important;
+    font-weight: 700 !important;
+  }
+  .sv-badge-ping {
+    font-size: 0.65rem !important;
+    background: rgba(255, 255, 255, 0.05) !important;
+    color: var(--text-dim) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    padding: 2px 8px !important;
+    border-radius: 20px !important;
+    font-weight: 700 !important;
+  }
+
+  /* Modals Refinement (Badlion & Feather Style) */
+  .modal-overlay {
+    position: fixed !important;
+    inset: 0 !important;
+    background: rgba(6, 8, 14, 0.8) !important;
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+    z-index: 9999 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+  .modal-content {
+    background: rgba(14, 18, 28, 0.95) !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    border-radius: 24px !important;
+    padding: 32px !important;
+    box-shadow: 0 32px 80px rgba(0, 0, 0, 0.9), 0 0 40px rgba(139, 92, 246, 0.15) !important;
+    animation: modalPop 0.24s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  }
+  @keyframes modalPop {
+    from { opacity: 0; transform: scale(0.95) translateY(6px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+  }
+
   </style>
 </head>
 <body>
@@ -2808,10 +3247,13 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;heigh
     
     <div class="sidebar" style="position:relative;z-index:10;">
       <div class="user-pill tilt-card">
-        <div class="user-avatar" id="user-avatar">👤</div>
-        <div style="flex:1;overflow:hidden;">
-          <div class="user-name" id="username-display">Usuario</div>
-          <div class="user-type" id="user-type">Offline</div>
+        <div class="user-avatar-wrap">
+          <div class="user-avatar" id="user-avatar">👤</div>
+          <span class="user-status-dot" id="user-status-dot" title="En línea"></span>
+        </div>
+        <div style="flex:1;overflow:hidden;min-width:0;">
+          <div class="user-name" id="username-display" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Usuario</div>
+          <div class="user-type-badge" id="user-type">Offline</div>
         </div>
         <!-- MINI QUICK LANGUAGE SELECTOR -->
         <div class="sidebar-lang-pill" style="display:flex; align-items:center; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1); border-radius:12px; padding:2px 4px; gap:2px;">
@@ -3172,8 +3614,16 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;heigh
       </div>
 
       <div class="tab-panel active" id="tab-play">
-        <h1 class="panel-title" id="play-title">Iniciar Minecraft</h1>
-        <p class="panel-sub" id="play-subtitle">Minecraft cargado y listo.</p>
+        <div class="play-header-hud">
+          <div>
+            <h1 class="panel-title" id="play-title" style="margin:0 0 4px 0;">Iniciar Minecraft</h1>
+            <p class="panel-sub" id="play-subtitle" style="margin:0;">Minecraft cargado y listo.</p>
+          </div>
+          <div class="engine-status-pill" id="engine-status-pill" title="Estado de la instancia">
+            <span class="engine-status-dot" id="engine-status-dot"></span>
+            <span class="engine-status-text" id="engine-status-text">Motor Listo</span>
+          </div>
+        </div>
 
         <div class="play-layout">
           <div class="play-left">
@@ -4427,22 +4877,35 @@ function setLaunchState(state, displayName) {
     currentLaunchName = 'Minecraft';
   }
 
+  const statusPill = document.getElementById('engine-status-pill');
+  const statusText = document.getElementById('engine-status-text');
+  const statusDot  = document.getElementById('engine-status-dot');
+
   if (state === 'idle') {
     if (playTitle) playTitle.textContent = 'Iniciar Minecraft';
     if (playSubtitle) playSubtitle.textContent = 'Minecraft cargado y listo.';
     if (steveContainer) steveContainer.style.display = 'none';
     if (steveProgressWrap) steveProgressWrap.style.display = 'none';
     currentLaunchName = '';
+    if (statusText) statusText.textContent = window.t('Motor Listo');
+    if (statusDot) { statusDot.style.background = '#10b981'; statusDot.style.boxShadow = '0 0 10px #10b981'; }
+    if (statusPill) { statusPill.style.background = 'rgba(16, 185, 129, 0.09)'; statusPill.style.borderColor = 'rgba(16, 185, 129, 0.3)'; statusPill.style.color = '#34d399'; }
   } else if (state === 'loading') {
     if (playTitle) playTitle.textContent = `Iniciando ${currentLaunchName}`;
     if (playSubtitle) playSubtitle.textContent = 'Preparando juego...';
     if (steveContainer) steveContainer.style.display = 'flex';
     if (steveLabel) steveLabel.textContent = 'Cargando...';
     if (steveProgressWrap) steveProgressWrap.style.display = 'block';
+    if (statusText) statusText.textContent = window.t('Lanzando...');
+    if (statusDot) { statusDot.style.background = '#fbbf24'; statusDot.style.boxShadow = '0 0 10px #fbbf24'; }
+    if (statusPill) { statusPill.style.background = 'rgba(251, 191, 36, 0.12)'; statusPill.style.borderColor = 'rgba(251, 191, 36, 0.35)'; statusPill.style.color = '#fbbf24'; }
   } else if (state === 'playing') {
     if (playTitle) playTitle.textContent = `Jugando ${currentLaunchName}`;
     if (playSubtitle) playSubtitle.textContent = 'El juego está en ejecución.';
     if (steveContainer) steveContainer.style.display = 'flex';
+    if (statusText) statusText.textContent = window.t('En Ejecución');
+    if (statusDot) { statusDot.style.background = '#38bdf8'; statusDot.style.boxShadow = '0 0 10px #38bdf8'; }
+    if (statusPill) { statusPill.style.background = 'rgba(56, 189, 248, 0.12)'; statusPill.style.borderColor = 'rgba(56, 189, 248, 0.35)'; statusPill.style.color = '#38bdf8'; }
     if (steveLabel) steveLabel.textContent = 'Jugando...';
     if (steveProgressWrap) steveProgressWrap.style.display = 'none';
   }
@@ -9035,7 +9498,25 @@ function updateMyStatus(status, activity) {
       svRenderList();
     }
 
-    function svRenderList() {
+    function copyServerIp(ip, el) {
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(ip).then(() => {
+      if (el) {
+        const orig = el.innerHTML;
+        el.innerHTML = `${window.t('IP Copiada!')} ✓`;
+        el.style.borderColor = '#10b981';
+        el.style.color = '#34d399';
+        setTimeout(() => {
+          el.innerHTML = orig;
+          el.style.borderColor = '';
+          el.style.color = '';
+        }, 1800);
+      }
+    }).catch(() => {});
+  }
+}
+
+function svRenderList() {
       const container = document.getElementById('sv-list-container');
       if (!container) return;
       const servers = svLoadAll();
@@ -9049,22 +9530,22 @@ function updateMyStatus(status, activity) {
         return;
       }
       container.innerHTML = servers.map((sv, idx) => `
-        <div style="background:var(--bg-card);border:.5px solid var(--border);border-radius:14px;padding:18px 20px;display:flex;align-items:center;gap:16px;-webkit-app-region:no-drag;">
-          <div style="width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent-p));display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0;">🌐</div>
+        <div class="sv-server-card" style="-webkit-app-region:no-drag;">
+          <div class="sv-server-icon">🌐</div>
           <div style="flex:1;min-width:0;">
-            <div style="font-weight:700;font-size:.88rem;margin-bottom:3px;">${sv.name}</div>
-            <div style="display:flex;align-items:center;gap:8px;">
-              <span style="font-size:.7rem;color:var(--text-dim);font-family:monospace;">${sv.ip}</span>
-              <span style="font-size:.65rem;background:rgba(168,85,247,0.15);color:#c084fc;padding:2px 7px;border-radius:20px;font-weight:700;">MC ${sv.version}</span>
-              <span id="sv-ping-${idx}" style="font-size:.65rem;background:rgba(255,255,255,0.05);color:var(--text-dim);padding:2px 7px;border-radius:20px;font-weight:700;">📶 RTT...</span>
+            <div style="font-weight:700;font-size:.9rem;color:#ffffff;margin-bottom:4px;letter-spacing:-0.01em;">${sv.name}</div>
+            <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+              <span class="sv-ip-chip" onclick="copyServerIp('${sv.ip}', this)" title="${window.t('Haz clic para copiar')}">${sv.ip} <span style="font-size:0.65rem;opacity:0.6;">📋</span></span>
+              <span class="sv-badge-mc">MC ${sv.version}</span>
+              <span id="sv-ping-${idx}" class="sv-badge-ping">📶 RTT...</span>
             </div>
           </div>
           <div style="display:flex;gap:8px;flex-shrink:0;">
             <button class="btn btn-primary" onclick="svPlay(${idx})" style="gap:6px;display:flex;align-items:center;padding:8px 16px;font-size:.78rem;">
               <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
-              Jugar
+              ${window.t('Jugar')}
             </button>
-            <button class="btn btn-ghost" onclick="svDelete(${idx})" style="padding:8px 12px;font-size:.78rem;" title="Eliminar">
+            <button class="btn btn-ghost" onclick="svDelete(${idx})" style="padding:8px 12px;font-size:.78rem;" title="${window.t('Eliminar')}">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="3,6 5,6 21,6"/><path d="M19,6l-1,14H6L5,6"/><path d="M10,11v6"/><path d="M14,11v6"/><path d="M9,6V4h6v2"/></svg>
             </button>
           </div>
@@ -12547,7 +13028,7 @@ function updateMyStatus(status, activity) {
        MOTOR MULTILINGÜE INTEGRAL DE NEBULA LAUNCHER (ES / EN / PT)
        ═══════════════════════════════════════════════════════════════ -->
   <script>
-    const LAUNCHER_ALL_PHRASES = {"Jugar": {"en": "Play", "pt": "Jogar"}, "Modificadores & Mods": {"en": "Modifiers & Mods", "pt": "Modificadores & Mods"}, "Modpacks": {"en": "Modpacks", "pt": "Modpacks"}, "Texturas & Shaders": {"en": "Textures & Shaders", "pt": "Texturas & Shaders"}, "🎨 Texturas & Shaders": {"en": "🎨 Texturas & Shaders", "pt": "🎨 Texturas & Shaders"}, "Versiones": {"en": "Versions", "pt": "Versões"}, "Consola": {"en": "Console", "pt": "Console"}, "Social & Amigos": {"en": "Friends & Social", "pt": "Amigos & Social"}, "👥 Red Social & Amigos": {"en": "👥 Social Network & Friends", "pt": "👥 Rede Social & Amigos"}, "Mi Perfil": {"en": "My Profile", "pt": "Meu Perfil"}, "Mi Perfil Nebula": {"en": "My Nebula Profile", "pt": "Meu Perfil Nebula"}, "Configuración": {"en": "Settings", "pt": "Configurações"}, "Servidores": {"en": "Servers", "pt": "Servidores"}, "Mis Servidores": {"en": "My Servers", "pt": "Meus Servidores"}, "Actualizaciones": {"en": "Updates", "pt": "Atualizações"}, "Novedades & Actualizaciones": {"en": "What's New & Updates", "pt": "Novidades & Atualizações"}, "Minecraft cargado y listo.": {"en": "Minecraft loaded and ready.", "pt": "Minecraft carregado e pronto."}, "Instala OptiFine, Forge y gestiona tus mods.": {"en": "Install OptiFine, Forge and manage your mods.", "pt": "Instale OptiFine, Forge e gerencie seus mods."}, "Busca e instala modpacks de CurseForge y Modrinth o gestiona tus instancias locales.": {"en": "Search and install modpacks from CurseForge and Modrinth or manage local instances.", "pt": "Pesquise e instale modpacks do CurseForge e Modrinth ou gerencie instâncias locais."}, "Descarga Resource Packs y Shaders en 1-clic directamente a tu juego.": {"en": "Download Resource Packs and Shaders with 1-click directly into your game.", "pt": "Baixe Resource Packs e Shaders com 1 clique diretamente para o jogo."}, "Todas las versiones disponibles e instaladas.": {"en": "All available and installed versions.", "pt": "Todas as versões disponíveis e instaladas."}, "Registro de eventos en tiempo real de Minecraft y el Launcher.": {"en": "Real-time event logging from Minecraft and the Launcher.", "pt": "Registro de eventos em tempo real do Minecraft e do Launcher."}, "Conéctate y chatea con otros jugadores en tiempo real.": {"en": "Connect and chat with other players in real time.", "pt": "Conecte-se e converse com outros jogadores em tempo real."}, "Personaliza tu aspecto y gestiona tu skin en el juego.": {"en": "Customize your appearance and manage your in-game skin.", "pt": "Personalize sua aparência e gerencie sua skin no jogo."}, "Ajusta el launcher a tu gusto.": {"en": "Customize the launcher to your preference.", "pt": "Ajuste o launcher ao seu gosto."}, "Agrega tus servidores favoritos y únete directamente desde el launcher.": {"en": "Add your favorite servers and join directly from the launcher.", "pt": "Adicione seus servidores favoritos e entre diretamente pelo launcher."}, "Conoce todas las mejoras, optimizaciones y novedades añadidas a Nebula Launcher.": {"en": "Explore all improvements, optimizations, and new features added to Nebula Launcher.", "pt": "Conheça todas as melhorias, otimizações e novidades adicionadas ao Nebula Launcher."}, "Iniciar Minecraft": {"en": "Launch Minecraft", "pt": "Iniciar Minecraft"}, "VERSIÓN": {"en": "VERSION", "pt": "VERSÃO"}, "Versión del Loader": {"en": "Loader Version", "pt": "Versão do Loader"}, "MEMORIA RAM": {"en": "RAM MEMORY", "pt": "MEMÓRIA RAM"}, "ASIGNADA": {"en": "ALLOCATED", "pt": "ALOCADA"}, "EXPLORADOR": {"en": "EXPLORER", "pt": "EXPLORADOR"}, "📂 ACCESOS RÁPIDOS": {"en": "📂 QUICK ACCESS", "pt": "📂 ACESSOS RÁPIDOS"}, "📦 Mods": {"en": "📦 Mods", "pt": "📦 Mods"}, "🌅 Shaders": {"en": "🌅 Shaders", "pt": "🌅 Shaders"}, "🎨 Texturas": {"en": "🎨 Textures", "pt": "🎨 Texturas"}, "🌍 Mundos": {"en": "🌍 Worlds", "pt": "🌍 Mundos"}, "📸 Fotos F2": {"en": "📸 Screenshots", "pt": "📸 Capturas F2"}, "📁 .minecraft": {"en": "📁 .minecraft", "pt": "📁 .minecraft"}, "⚔️ Clientes PVP": {"en": "⚔️ PVP Clients", "pt": "⚔️ Clientes PVP"}, "🛠️ Modificadores & Lanzadores": {"en": "🛠️ Modifiers & Launchers", "pt": "🛠️ Modificadores & Launchers"}, "🧹 Limpiar": {"en": "🧹 Clean", "pt": "🧹 Limpar"}, "⚡ INICIAR SALTO": {"en": "⚡ LAUNCH MINECRAFT", "pt": "⚡ JOGAR MINECRAFT"}, "🎮 EN JUEGO...": {"en": "🎮 IN GAME...", "pt": "🎮 EM JOGO..."}, "⏳ DESCARGANDO...": {"en": "⏳ DOWNLOADING...", "pt": "⏳ BAIXANDO..."}, "Vanilla (Original)": {"en": "Vanilla (Original)", "pt": "Vanilla (Original)"}, "Vanilla (sin mods)": {"en": "Vanilla (no mods)", "pt": "Vanilla (sem mods)"}, "Carga el juego oficial por defecto sin ninguna modificación o mod.": {"en": "Loads the official game by default with no modifications or mods.", "pt": "Carrega o jogo oficial padrão sem nenhuma modificação ou mod."}, "Lanzador clásico para instalar mods locales descargados.": {"en": "Classic launcher to install downloaded local mods.", "pt": "Launcher clássico para instalar mods locais baixados."}, "Motor alternativo moderno optimizado para mods ligeros y rendimiento.": {"en": "Modern alternative engine optimized for lightweight mods and performance.", "pt": "Motor alternativo moderno otimizado para mods leves e desempenho."}, "Fork moderno y optimizado de Forge para versiones recientes.": {"en": "Modern optimized fork of Forge for recent versions.", "pt": "Fork moderno e otimizado do Forge para versões recentes."}, "Loader rápido de nueva generación, compatible con mods de Fabric.": {"en": "Fast next-generation loader, compatible with Fabric mods.", "pt": "Loader rápido de nova geração, compatível com mods do Fabric."}, "Optimizador gráfico clásico para shaders, texturas HD y zoom.": {"en": "Classic graphics optimizer for shaders, HD textures, and zoom.", "pt": "Otimizador gráfico clássico para shaders, texturas HD e zoom."}, "Carga una instancia instalada de Modrinth o CurseForge.": {"en": "Loads an installed instance from Modrinth or CurseForge.", "pt": "Carrega uma instância instalada do Modrinth ou CurseForge."}, "⬇ Instalar": {"en": "⬇ Install", "pt": "⬇ Instalar"}, "Ninguno": {"en": "None", "pt": "Nenhum"}, "Cargando...": {"en": "Loading...", "pt": "Carregando..."}, "Usuario": {"en": "User", "pt": "Usuário"}, "Offline": {"en": "Offline", "pt": "Offline"}, "PREMIUM": {"en": "PREMIUM", "pt": "PREMIUM"}, "Cuenta oficial de Microsoft con acceso completo a todos los servidores multijugador.": {"en": "Official Microsoft account with full access to all multiplayer servers.", "pt": "Conta oficial da Microsoft com acesso completo a todos os servidores multiplayer."}, "MICROSOFT / MOJANG": {"en": "MICROSOFT / MOJANG", "pt": "MICROSOFT / MOJANG"}, "CUENTA NEBULA": {"en": "NEBULA ACCOUNT", "pt": "CONTA NEBULA"}, "Inicia sesión o regístrate en Nebula para tener tu perfil y tu propia skin en el juego.": {"en": "Sign in or register with Nebula to get your profile and custom in-game skin.", "pt": "Entre ou registre-se na Nebula para ter seu perfil e sua própria skin no jogo."}, "NEBULA ACCOUNT": {"en": "NEBULA ACCOUNT", "pt": "CONTA NEBULA"}, "(SOPORTE PARA SKIN)": {"en": "(SKIN SUPPORT)", "pt": "(SUPORTE A SKIN)"}, "OFFLINE": {"en": "OFFLINE", "pt": "OFFLINE"}, "Juega de forma local y anónima con cualquier nickname de forma rápida.": {"en": "Play locally and anonymously with any nickname right away.", "pt": "Jogue localmente e de forma anônima com qualquer apelido rapidamente."}, "OFFLINE (SIN SKIN)": {"en": "OFFLINE (NO SKIN)", "pt": "OFFLINE (SEM SKIN)"}, "← Volver": {"en": "← Back", "pt": "← Voltar"}, "Offline (sin skin)": {"en": "Offline (no skin)", "pt": "Offline (sem skin)"}, "Elige un nombre de usuario único para identificarte en el juego.": {"en": "Choose a unique username to identify yourself in-game.", "pt": "Escolha um nome de usuário único para se identificar no jogo."}, "NOMBRE DE USUARIO": {"en": "USERNAME", "pt": "NOME DE USUÁRIO"}, "➜ Continuar Offline": {"en": "➜ Continue Offline", "pt": "➜ Continuar Offline"}, "Iniciar sesión con Nebula": {"en": "Sign in with Nebula", "pt": "Entrar com a Nebula"}, "Ingresa tus credenciales para acceder a tu perfil y tus skins.": {"en": "Enter your credentials to access your profile and skins.", "pt": "Digite suas credenciais para acessar seu perfil e suas skins."}, "CORREO ELECTRÓNICO": {"en": "EMAIL ADDRESS", "pt": "E-MAIL"}, "CONTRASEÑA": {"en": "PASSWORD", "pt": "SENHA"}, "¿Olvidaste tu contraseña?": {"en": "Forgot your password?", "pt": "Esqueceu sua senha?"}, "➜ Iniciar Sesión": {"en": "➜ Sign In", "pt": "➜ Iniciar Sessão"}, "¿No tienes una cuenta?": {"en": "Don't have an account?", "pt": "Não tem uma conta?"}, "Regístrate aquí": {"en": "Sign up here", "pt": "Registre-se aqui"}, "Restablecer Contraseña": {"en": "Reset Password", "pt": "Redefinir Senha"}, "Ingresa tu correo para recuperar el acceso a tu cuenta.": {"en": "Enter your email to regain access to your account.", "pt": "Digite seu e-mail para recuperar o acesso à sua conta."}, "Enviar enlace de recuperación": {"en": "Send recovery link", "pt": "Enviar link de recuperação"}, "Te enviaremos un enlace para restablecer tu contraseña.": {"en": "We will send you a link to reset your password.", "pt": "Enviaremos um link para redefinir sua senha."}, "Volver": {"en": "Back", "pt": "Voltar"}, "Crear Cuenta Nebula": {"en": "Create Nebula Account", "pt": "Criar Conta Nebula"}, "Regístrate para subir tu propia skin personalizada.": {"en": "Sign up to upload your own custom skin.", "pt": "Registre-se para enviar sua própria skin personalizada."}, "NOMBRE DE JUGADOR (NICKNAME)": {"en": "PLAYER NAME (NICKNAME)", "pt": "NOME DE JOGADOR (APELIDO)"}, "🌌 Crear Cuenta y Continuar": {"en": "🌌 Create Account & Continue", "pt": "🌌 Criar Conta e Continuar"}, "¿Ya tienes cuenta?": {"en": "Already have an account?", "pt": "Já tem uma conta?"}, "Inicia sesión aquí": {"en": "Sign in here", "pt": "Entre aqui"}, "Inicia sesión con tu cuenta de Microsoft para acceder a Minecraft Premium.": {"en": "Sign in with your Microsoft account to access Minecraft Premium.", "pt": "Entre com sua conta da Microsoft para acessar o Minecraft Premium."}, "🪟 Iniciar con Microsoft": {"en": "🪟 Sign in with Microsoft", "pt": "🪟 Entrar com a Microsoft"}, "Mis Mods": {"en": "My Mods", "pt": "Meus Mods"}, "Versiones Instaladas": {"en": "Installed Versions", "pt": "Versões Instaladas"}, "Instalar desde archivo .jar": {"en": "Install from .jar file", "pt": "Instalar a partir de arquivo .jar"}, "Añade y gestiona mods por versión instalada (Fabric / Forge / NeoForge / Quilt).": {"en": "Add and manage mods by installed version (Fabric / Forge / NeoForge / Quilt).", "pt": "Adicione e gerencie mods por versão instalada (Fabric / Forge / NeoForge / Quilt)."}, "Mejora el rendimiento y añade soporte para shaders HD. Compatible con todas las versiones.": {"en": "Improves performance and adds HD shader support. Compatible with all versions.", "pt": "Melhora o desempenho e adiciona suporte a shaders HD. Compatível com todas as versões."}, "⬇ Instalar OptiFine": {"en": "⬇ Install OptiFine", "pt": "⬇ Instalar OptiFine"}, "Sistema de mods para Minecraft con miles de mods disponibles.": {"en": "Minecraft mod system with thousands of available mods.", "pt": "Sistema de mods para Minecraft com milhares de mods disponíveis."}, "🔥 Instalar Forge": {"en": "🔥 Install Forge", "pt": "🔥 Instalar Forge"}, "El loader moderno, rápido y compatible con mods de Fabric. Ideal para nuevas versiones.": {"en": "The modern, fast loader compatible with Fabric mods. Ideal for new versions.", "pt": "O loader moderno, rápido e compatível com mods do Fabric. Ideal para novas versões."}, "Optimización extrema de rendimiento con Sodium, Iris, Lithium y más mods de Fabric.": {"en": "Extreme performance optimization with Sodium, Iris, Lithium, and more Fabric mods.", "pt": "Otimização extrema de desempenho com Sodium, Iris, Lithium e mais mods do Fabric."}, "💎 Instalar Sodium + Fabric": {"en": "💎 Install Sodium + Fabric", "pt": "💎 Instalar Sodium + Fabric"}, "Fork moderno de Forge con mejor rendimiento y soporte activo para Minecraft 1.20.1+.": {"en": "Modern Forge fork with better performance and active support for Minecraft 1.20.1+.", "pt": "Fork moderno do Forge com melhor desempenho e suporte ativo para Minecraft 1.20.1+."}, "🌿 Instalar NeoForge": {"en": "🌿 Install NeoForge", "pt": "🌿 Instalar NeoForge"}, "🔮 Instalar Quilt Loader": {"en": "🔮 Install Quilt Loader", "pt": "🔮 Instalar Quilt Loader"}, "🛠️ Gestionar Mods (Taller Premium)": {"en": "🛠️ Manage Mods (Premium Workshop)", "pt": "🛠️ Gerenciar Mods (Oficina Premium)"}, "📦 Importar Modpack (CurseForge / Modrinth)": {"en": "📦 Import Modpack (CurseForge / Modrinth)", "pt": "📦 Importar Modpack (CurseForge / Modrinth)"}, "No hay Fabric instalado.": {"en": "No Fabric installed.", "pt": "Nenhum Fabric instalado."}, "No hay Forge instalado.": {"en": "No Forge installed.", "pt": "Nenhum Forge instalado."}, "No hay NeoForge instalado.": {"en": "No NeoForge installed.", "pt": "Nenhum NeoForge instalado."}, "No hay Quilt instalado.": {"en": "No Quilt installed.", "pt": "Nenhum Quilt instalado."}, "Selecciona una versión para ver sus mods.": {"en": "Select a version to see its mods.", "pt": "Selecione uma versão para ver seus mods."}, "Selecciona una versión...": {"en": "Select a version...", "pt": "Selecione uma versão..."}, "Selecciona versión...": {"en": "Select version...", "pt": "Selecione a versão..."}, "Versión de Forge": {"en": "Forge Version", "pt": "Versão do Forge"}, "Versión de Minecraft": {"en": "Minecraft Version", "pt": "Versão do Minecraft"}, "Versión de NeoForge": {"en": "NeoForge Version", "pt": "Versão do NeoForge"}, "Versión de OptiFine disponible": {"en": "Available OptiFine Version", "pt": "Versão disponível do OptiFine"}, "Versión objetivo": {"en": "Target Version", "pt": "Versão Alvo"}, "Cargando versiones con Forge...": {"en": "Loading versions with Forge...", "pt": "Carregando versões com Forge..."}, "Cargando versiones con NeoForge...": {"en": "Loading versions with NeoForge...", "pt": "Carregando versões com NeoForge..."}, "Cargando versiones...": {"en": "Loading versions...", "pt": "Carregando versões..."}, "Haz clic para seleccionar": {"en": "Click to select", "pt": "Clique para selecionar"}, "(Forge, Fabric, cualquier versión)": {"en": "(Forge, Fabric, any version)", "pt": "(Forge, Fabric, qualquer versão)"}, "🎒 Mis Modpacks": {"en": "🎒 My Modpacks", "pt": "🎒 Meus Modpacks"}, "🌐 Todos": {"en": "🌐 All", "pt": "🌐 Todos"}, "🛠️ Crear Modpack": {"en": "🛠️ Create Modpack", "pt": "🛠️ Criar Modpack"}, "📦 Importar Local (.zip/.mrpack)": {"en": "📦 Import Local (.zip/.mrpack)", "pt": "📦 Importar Local (.zip/.mrpack)"}, "🔍 Buscar": {"en": "🔍 Search", "pt": "🔍 Pesquisar"}, "🔍 Buscar Modpacks": {"en": "🔍 Search Modpacks", "pt": "🔍 Pesquisar Modpacks"}, "Categorías": {"en": "Categories", "pt": "Categorias"}, "Aventura": {"en": "Adventure", "pt": "Aventura"}, "Combate": {"en": "Combat", "pt": "Combate"}, "Magia": {"en": "Magic", "pt": "Magia"}, "Misiones": {"en": "Quests", "pt": "Missões"}, "Multijugador": {"en": "Multiplayer", "pt": "Multijogador"}, "Optimización": {"en": "Optimization", "pt": "Otimização"}, "Tecnología": {"en": "Technology", "pt": "Tecnologia"}, "Ligero": {"en": "Lightweight", "pt": "Leve"}, "Loader": {"en": "Loader", "pt": "Loader"}, "Versión MC": {"en": "MC Version", "pt": "Versão MC"}, "⭐ Relevancia": {"en": "⭐ Relevance", "pt": "⭐ Relevância"}, "📅 Actualizado": {"en": "📅 Updated", "pt": "📅 Atualizado"}, "📥 Descargas": {"en": "📥 Downloads", "pt": "📥 Downloads"}, "Usa la barra superior para buscar modpacks en CurseForge o Modrinth.": {"en": "Use the search bar above to browse modpacks on CurseForge or Modrinth.", "pt": "Use a barra superior para pesquisar modpacks no CurseForge ou Modrinth."}, "Elegir destino de instalación": {"en": "Choose installation destination", "pt": "Escolher destino da instalação"}, "Versión o Modpack de Destino:": {"en": "Target Version or Modpack:", "pt": "Versão ou Modpack de Destino:"}, "Nombre del Modpack": {"en": "Modpack Name", "pt": "Nome do Modpack"}, "Mod Loader": {"en": "Mod Loader", "pt": "Mod Loader"}, "Seleccionar Versión a Instalar": {"en": "Select Version to Install", "pt": "Selecionar Versão a Instalar"}, "Elige la versión del modpack que deseas descargar:": {"en": "Choose the modpack version you wish to download:", "pt": "Escolha a versão do modpack que deseja baixar:"}, "⬇️ Instalar ahora": {"en": "⬇️ Install now", "pt": "⬇️ Instalar agora"}, "✕ Cerrar": {"en": "✕ Close", "pt": "✕ Fechar"}, "Cerrar": {"en": "Close", "pt": "Fechar"}, "Cancelar": {"en": "Cancel", "pt": "Cancelar"}, "Guardar": {"en": "Save", "pt": "Salvar"}, "Instalar en:": {"en": "Install to:", "pt": "Instalar em:"}, "✨ Shaders (Shaderpacks)": {"en": "✨ Shaders (Shaderpacks)", "pt": "✨ Shaders (Shaderpacks)"}, "🎨 Texturas (Resourcepacks)": {"en": "🎨 Textures (Resourcepacks)", "pt": "🎨 Texturas (Resourcepacks)"}, "🌐 .minecraft (Global / Por defecto)": {"en": "🌐 .minecraft (Global / Default)", "pt": "🌐 .minecraft (Global / Padrão)"}, "Todas": {"en": "All", "pt": "Todas"}, "Instaladas": {"en": "Installed", "pt": "Instaladas"}, "Oficiales": {"en": "Official", "pt": "Oficiais"}, "Snapshots": {"en": "Snapshots", "pt": "Snapshots"}, "Otra versión personalizada...": {"en": "Another custom version...", "pt": "Outra versão personalizada..."}, "OUTPUT LOGS": {"en": "OUTPUT LOGS", "pt": "LOGS DE SAÍDA"}, "🗑️ Limpiar Consola": {"en": "🗑️ Clear Console", "pt": "🗑️ Limpar Console"}, "Agregar Amigo": {"en": "Add Friend", "pt": "Adicionar Amigo"}, "Amigo": {"en": "Friend", "pt": "Amigo"}, "Amigo está escribiendo...": {"en": "Friend is typing...", "pt": "Amigo está digitando..."}, "Bandeja de Entrada": {"en": "Inbox", "pt": "Caixa de Entrada"}, "Selecciona a un amigo de la lista izquierda para comenzar a chatear en tiempo real.": {"en": "Select a friend from the left list to start chatting in real time.", "pt": "Selecione um amigo da lista à esquerda para começar a conversar em tempo real."}, "En línea": {"en": "Online", "pt": "Online"}, "Enviar 🚀": {"en": "Send 🚀", "pt": "Enviar 🚀"}, "Iniciar Sesión": {"en": "Sign In", "pt": "Iniciar Sessão"}, "Jugador": {"en": "Player", "pt": "Jogador"}, "Modo: Simulación / Demo": {"en": "Mode: Simulation / Demo", "pt": "Modo: Simulação / Demo"}, "Reenviar correo de verificación": {"en": "Resend verification email", "pt": "Reenviar e-mail de verificação"}, "Regístrate": {"en": "Sign Up", "pt": "Registre-se"}, "Vincular Nickname de Minecraft": {"en": "Link Minecraft Nickname", "pt": "Vincular Apelido de Minecraft"}, "Volver a Iniciar Sesión": {"en": "Back to Sign In", "pt": "Voltar ao Início de Sessão"}, "Ya lo verifiqué": {"en": "I have verified", "pt": "Já verifiquei"}, "¿No tienes una cuenta de Nebula Social?": {"en": "Don't have a Nebula Social account?", "pt": "Não tem uma conta na Nebula Social?"}, "📧 Verificar Correo": {"en": "📧 Verify Email", "pt": "📧 Verificar E-mail"}, "🔑 INICIAR SESIÓN EN NEBULA SOCIAL": {"en": "🔑 SIGN IN TO NEBULA SOCIAL", "pt": "🔑 ENTRAR NA NEBULA SOCIAL"}, "tu correo": {"en": "your email", "pt": "seu e-mail"}, "En el menú principal": {"en": "In main menu", "pt": "No menu principal"}, "INFORMACIÓN DE LA CUENTA": {"en": "ACCOUNT INFORMATION", "pt": "INFORMAÇÕES DA CONTA"}, "NICKNAME (EN JUEGO)": {"en": "NICKNAME (IN-GAME)", "pt": "APELIDO (NO JOGO)"}, "CORREO VINCULADO": {"en": "LINKED EMAIL", "pt": "E-MAIL VINCULADO"}, "URL DE TU SKIN (NO PREMIUM)": {"en": "YOUR SKIN URL (NON-PREMIUM)", "pt": "URL DA SUA SKIN (NÃO-PREMIUM)"}, "TIPO DE MODELO DE SKIN": {"en": "SKIN MODEL TYPE", "pt": "TIPO DE MODELO DE SKIN"}, "Classic (Steve - Brazos de 4px)": {"en": "Classic (Steve - 4px Arms)", "pt": "Clássico (Steve - Braços de 4px)"}, "Slim (Alex - Brazos de 3px)": {"en": "Slim (Alex - 3px Arms)", "pt": "Slim (Alex - Braços de 3px)"}, "SUBIR SKIN PERSONALIZADA": {"en": "UPLOAD CUSTOM SKIN", "pt": "ENVIAR SKIN PERSONALIZADA"}, "Selecciona o arrastra tu archivo .png": {"en": "Select or drag your .png file", "pt": "Selecione ou arraste seu arquivo .png"}, "Máx. 50 KB • Formato PNG": {"en": "Max. 50 KB • PNG Format", "pt": "Máx. 50 KB • Formato PNG"}, "📤 Subir Skin Seleccionada": {"en": "📤 Upload Selected Skin", "pt": "📤 Enviar Skin Selecionada"}, "SUBIR CAPA PERSONALIZADA": {"en": "UPLOAD CUSTOM CAPE", "pt": "ENVIAR CAPA PERSONALIZADA"}, "Selecciona o arrastra tu archivo de capa .png": {"en": "Select or drag your .png cape file", "pt": "Selecione ou arraste seu arquivo de capa .png"}, "Máx. 50 KB • Formato clásico": {"en": "Max. 50 KB • Classic Format", "pt": "Máx. 50 KB • Formato Clássico"}, "📤 Subir Capa": {"en": "📤 Upload Cape", "pt": "📤 Enviar Capa"}, "🗑️ Eliminar Capa": {"en": "🗑️ Remove Cape", "pt": "🗑️ Remover Capa"}, "GALERÍA DE CAPAS OFICIALES": {"en": "OFFICIAL CAPES GALLERY", "pt": "GALERIA DE CAPAS OFICIAIS"}, "Haz clic en cualquier capa de la galería para seleccionarla y previsualizarla, luego pulsa \"Subir Capa\" para aplicarla:": {"en": "Click any cape in the gallery to select and preview it, then click \"Upload Cape\" to apply it:", "pt": "Clique em qualquer capa da galeria para selecioná-la e visualizá-la, depois clique em \"Enviar Capa\" para aplicá-la:"}, "HISTORIAL DE SKINS": {"en": "SKINS HISTORY", "pt": "HISTÓRICO DE SKINS"}, "Sin historial todavía. Sube tu primera skin.": {"en": "No history yet. Upload your first skin.", "pt": "Sem histórico ainda. Envie sua primeira skin."}, "Últ. 10": {"en": "Last 10", "pt": "Últ. 10"}, "↺ Rotar": {"en": "↺ Rotate", "pt": "↺ Girar"}, "⏸️ Animación": {"en": "⏸️ Animation", "pt": "⏸️ Animação"}, "✏️ Cambiar": {"en": "✏️ Change", "pt": "✏️ Alterar"}, "Copiar": {"en": "Copy", "pt": "Copiar"}, "🚪 Cerrar Sesión Nebula": {"en": "🚪 Log Out of Nebula", "pt": "🚪 Sair da Nebula"}, "Cargando previsualización 3D...": {"en": "Loading 3D preview...", "pt": "Carregando visualização 3D..."}, "IDIOMA DE LA INTERFAZ": {"en": "INTERFACE LANGUAGE", "pt": "IDIOMA DA INTERFACE"}, "Selecciona el idioma de Nebula Launcher (Español, English, Português).": {"en": "Choose Nebula Launcher's primary language (Español, English, Português).", "pt": "Escolha o idioma principal do Nebula Launcher (Español, English, Português)."}, "☕ JAVA": {"en": "☕ JAVA", "pt": "☕ JAVA"}, "Ruta personalizada (opcional):": {"en": "Custom path (optional):", "pt": "Caminho personalizado (opcional):"}, "Auto (recomendado)": {"en": "Auto (recommended)", "pt": "Automático (recomendado)"}, "📁 Elegir": {"en": "📁 Browse", "pt": "📁 Escolher"}, "🔄 Reset": {"en": "🔄 Reset", "pt": "🔄 Redefinir"}, "📁 DIRECTORIO": {"en": "📁 DIRECTORY", "pt": "📁 DIRETÓRIO"}, "Carpeta del juego:": {"en": "Game folder:", "pt": "Pasta do jogo:"}, "⚡ RAM POR DEFECTO": {"en": "⚡ DEFAULT RAM", "pt": "⚡ RAM PADRÃO"}, "📦 MÚLTIPLES INSTANCIAS": {"en": "📦 MULTI-INSTANCE", "pt": "📦 MÚLTIPLAS INSTÂNCIAS"}, "Permite abrir más de una instancia de Minecraft al mismo tiempo. Máximo 3 instancias simultáneas.": {"en": "Allows opening more than one Minecraft instance simultaneously. Up to 3 instances at once.", "pt": "Permite abrir mais de uma instância do Minecraft ao mesmo tempo. Máximo de 3 instâncias simultâneas."}, "📌 BANDEJA DEL SISTEMA (AHORRO DE RECURSOS)": {"en": "📌 SYSTEM TRAY (RESOURCE SAVER)", "pt": "📌 BANDEJA DO SISTEMA (ECONOMIA DE RECURSOS)"}, "Minimiza el launcher a la bandeja del reloj para liberar memoria RAM y CPU mientras juegas.": {"en": "Minimizes the launcher to the system tray to free RAM and CPU while playing.", "pt": "Minimiza o launcher para a bandeja do sistema para liberar memória RAM e CPU enquanto joga."}, "Minimizar a la bandeja al iniciar juego (Ahorro de RAM)": {"en": "Minimize to tray on game start (RAM saver)", "pt": "Minimizar para a bandeja ao iniciar o jogo (Economia de RAM)"}, "Ocultar a la bandeja al minimizar ventana": {"en": "Hide to tray when window is minimized", "pt": "Ocultar na bandeja ao minimizar a janela"}, "🖤 TEMAS SÓLIDOS & MINIMALISTAS (CERO DISTRACCIONES)": {"en": "🖤 SOLID & MINIMALIST THEMES (ZERO DISTRACTIONS)", "pt": "🖤 TEMAS SÓLIDOS & MINIMALISTAS (SEM DISTRAÇÕES)"}, "Fondos limpios de un solo color oscuro sin partículas animadas. Máxima claridad y rendimiento.": {"en": "Clean solid dark backgrounds with zero animated particles. Maximum clarity and performance.", "pt": "Fundos limpos de cor única escura sem partículas animadas. Máxima clareza e desempenho."}, "🎨 TEMAS CLÁSICOS": {"en": "🎨 CLASSIC THEMES", "pt": "🎨 TEMAS CLÁSSICOS"}, "🌟 TEMAS ESPECIALES": {"en": "🌟 SPECIAL THEMES", "pt": "🌟 TEMAS ESPECIAIS"}, "✨ TEMA PERSONALIZADO": {"en": "✨ CUSTOM THEME", "pt": "✨ TEMA PERSONALIZADO"}, "Elige tus propios colores para el launcher y sube cualquier imagen de tu computadora para el fondo animado estilo Van Gogh.": {"en": "Choose your own custom launcher colors and upload any image, GIF, or video from your computer.", "pt": "Escolha suas próprias cores para o launcher e envie qualquer imagem, GIF ou vídeo do seu computador."}, "Color Principal (Acento)": {"en": "Primary Color (Accent)", "pt": "Cor Principal (Destaque)"}, "Color Secundario": {"en": "Secondary Color", "pt": "Cor Secundária"}, "Nébula Fondo 1": {"en": "Nebula Background 1", "pt": "Nebula Fundo 1"}, "Nébula Fondo 2": {"en": "Nebula Background 2", "pt": "Nebula Fundo 2"}, "Desenfoque de Cristal (Glass Blur)": {"en": "Glass Blur Effect", "pt": "Desfoque de Vidro (Glass Blur)"}, "Fondo Personalizado (Imágenes, GIFs, Videos)": {"en": "Custom Background (Images, GIFs, Videos)", "pt": "Fundo Personalizado (Imagens, GIFs, Vídeos)"}, "Sin imagen personalizada": {"en": "No custom image", "pt": "Sem imagem personalizada"}, "🖼️ Seleccionar Fondo (Imagen / GIF / Video)": {"en": "🖼️ Select Background (Image / GIF / Video)", "pt": "🖼️ Selecionar Fundo (Imagem / GIF / Vídeo)"}, "🗑️ Quitar Fondo": {"en": "🗑️ Remove Background", "pt": "🗑️ Remover Fundo"}, "Sube tu propia imagen, GIF animado o video y decide qué parte se mostrará con los controles de encuadre, posición y zoom.": {"en": "Upload your own image, animated GIF, or video and adjust how it is displayed with frame, position, and zoom controls.", "pt": "Envie sua própria imagem, GIF animado ou vídeo e ajuste como será exibido com os controles de enquadramento, posição e zoom."}, "POSICIÓN DE ENCUADRE": {"en": "FRAME POSITION", "pt": "POSIÇÃO DE ENQUADRAMENTO"}, "Centro (Predeterminado)": {"en": "Center (Default)", "pt": "Centro (Padrão)"}, "Parte Superior (Arriba)": {"en": "Top", "pt": "Parte Superior (Cima)"}, "Parte Inferior (Abajo)": {"en": "Bottom", "pt": "Parte Inferior (Baixo)"}, "Lado Izquierdo": {"en": "Left Side", "pt": "Lado Esquerdo"}, "Lado Derecho": {"en": "Right Side", "pt": "Lado Direito"}, "Esquina Sup. Izquierda": {"en": "Top Left Corner", "pt": "Canto Sup. Esquerdo"}, "Esquina Sup. Derecha": {"en": "Top Right Corner", "pt": "Canto Sup. Direito"}, "Esquina Inf. Izquierda": {"en": "Bottom Left Corner", "pt": "Canto Inf. Esquerdo"}, "Esquina Inf. Derecha": {"en": "Bottom Right Corner", "pt": "Canto Inf. Direito"}, "MODO DE AJUSTE": {"en": "FIT MODE", "pt": "MODO DE AJUSTE"}, "Rellenar Recortando (Cover)": {"en": "Fill & Crop (Cover)", "pt": "Preencher Recortando (Cover)"}, "Ajustar Completo (Contain)": {"en": "Fit Inside (Contain)", "pt": "Ajustar Completo (Contain)"}, "Estirar Pantalla (Fill)": {"en": "Stretch to Fill (Fill)", "pt": "Esticar na Tela (Fill)"}, "ZOOM DEL FONDO": {"en": "BACKGROUND ZOOM", "pt": "ZOOM DO FUNDO"}, "Activar Tema Personalizado": {"en": "Apply Custom Theme", "pt": "Ativar Tema Personalizado"}, "Opciones JVM": {"en": "JVM Options", "pt": "Opções da JVM"}, "Comando Prepend": {"en": "Prepend Command", "pt": "Comando Prepend"}, "Configura wrappers personalizados o argumentos de la máquina virtual (JVM) para la ejecución del juego.": {"en": "Configure custom wrappers or Java Virtual Machine (JVM) arguments for game launch.", "pt": "Configure wrappers personalizados ou argumentos da máquina virtual Java (JVM) para a execução do jogo."}, "Global": {"en": "Global", "pt": "Global"}, "Local": {"en": "Local", "pt": "Local"}, "Por defecto": {"en": "Default", "pt": "Padrão"}, "💰 APOYA EL PROYECTO": {"en": "💰 SUPPORT THE PROJECT", "pt": "💰 APOIE O PROJETO"}, "Nebula Launcher es gratis. Si te gusta puedes apoyar el desarrollo con una donación o activando los anuncios en la barra lateral.": {"en": "Nebula Launcher is free. If you enjoy it, you can support development with a donation or by enabling sidebar ads.", "pt": "O Nebula Launcher é gratuito. Se você gostar, pode apoiar o desenvolvimento com uma doação ou ativando os anúncios na barra lateral."}, "⚖️ DESCARGO DE RESPONSABILIDAD": {"en": "⚖️ DISCLAIMER", "pt": "⚖️ ISENÇÃO DE RESPONSABILIDADE"}, "Este launcher es un cliente alternativo no oficial y no está afiliado ni respaldado por Mojang Studios ni Microsoft Corporation.": {"en": "This launcher is an unofficial alternative client and is not affiliated with or endorsed by Mojang Studios or Microsoft Corporation.", "pt": "Este launcher é um cliente alternativo não oficial e não é afiliado ou endossado pela Mojang Studios ou Microsoft Corporation."}, "Descargo de responsabilidad:": {"en": "Disclaimer:", "pt": "Isenção de responsabilidade:"}, "💾 Guardar Configuración": {"en": "💾 Save Settings", "pt": "💾 Salvar Configurações"}, "Agregar Servidor": {"en": "Add Server", "pt": "Adicionar Servidor"}, "Configura la conexión e inicia el juego directamente.": {"en": "Configure the connection and launch into the game directly.", "pt": "Configure a conexão e entre no jogo diretamente."}, "NOMBRE DEL SERVIDOR": {"en": "SERVER NAME", "pt": "NOME DO SERVIDOR"}, "IP DEL SERVIDOR": {"en": "SERVER IP", "pt": "IP DO SERVIDOR"}, "VERSIÓN DE MINECRAFT": {"en": "MINECRAFT VERSION", "pt": "VERSÃO DO MINECRAFT"}, "ESTADO DEL LAUNCHER": {"en": "LAUNCHER STATUS", "pt": "STATUS DO LAUNCHER"}, "Sistema al día con la versión oficial de GitHub.": {"en": "System up to date with official GitHub release.", "pt": "Sistema atualizado com a versão oficial do GitHub."}, "🟢 Actualizado": {"en": "🟢 Up to Date", "pt": "🟢 Atualizado"}, "Versión Activa": {"en": "Active Version", "pt": "Versão Ativa"}, "🔍 Buscar Actualizaciones": {"en": "🔍 Check for Updates", "pt": "🔍 Verificar Atualizações"}, "⬇️ Descargar Actualización": {"en": "⬇️ Download Update", "pt": "⬇️ Baixar Atualização"}, "🔄 Reiniciar Launcher": {"en": "🔄 Restart Launcher", "pt": "🔄 Reiniciar Launcher"}, "📰 REGISTRO DE CAMBIOS Y NOVEDADES": {"en": "📰 CHANGELOG & RELEASE NOTES", "pt": "📰 REGISTRO DE ALTERAÇÕES & NOVIDADES"}, "Ver en GitHub Releases ↗": {"en": "View on GitHub Releases ↗", "pt": "Ver no GitHub Releases ↗"}, "Descargando Archivos": {"en": "Downloading Files", "pt": "Baixando Arquivos"}, "Descargando parche": {"en": "Downloading patch", "pt": "Baixando patch"}, "Descargando...": {"en": "Downloading...", "pt": "Baixando..."}, "Actualización Disponible": {"en": "Update Available", "pt": "Atualização Disponível"}, "Actualizar Ahora": {"en": "Update Now", "pt": "Atualizar Agora"}, "Omitir": {"en": "Skip", "pt": "Ignorar"}, "Cambios y Mejoras:": {"en": "Changes & Improvements:", "pt": "Alterações & Melhorias:"}, "Verificando...": {"en": "Checking...", "pt": "Verificando..."}, "Núcleo": {"en": "Core", "pt": "Núcleo"}, "Rendimiento": {"en": "Performance", "pt": "Desempenho"}, "Ergonomía": {"en": "Ergonomics", "pt": "Ergonomia"}, "Idiomas": {"en": "Languages", "pt": "Idiomas"}, "Java": {"en": "Java", "pt": "Java"}, "Skins": {"en": "Skins", "pt": "Skins"}, "Social": {"en": "Social", "pt": "Social"}, "Temas": {"en": "Themes", "pt": "Temas"}, "Tus mundos y partidas guardadas se mantendrán a salvo.": {"en": "Your worlds and saved games will stay safe.", "pt": "Seus mundos e jogos salvos permanecerão seguros."}, "🔄 Cambiar Versión de Modpack (con respaldo de datos):": {"en": "🔄 Switch Modpack Version (with data backup):", "pt": "🔄 Mudar Versão do Modpack (com backup de dados):"}, "🛠️ Cambiar Versión de Loader:": {"en": "🛠️ Change Loader Version:", "pt": "🛠️ Mudar Versão do Loader:"}, "💾 Guardar Versión de Loader": {"en": "💾 Save Loader Version", "pt": "💾 Salvar Versão do Loader"}, "📂 Mods Instalados": {"en": "📂 Installed Mods", "pt": "📂 Mods Instalados"}, "🛠️ Crear Modpack Personalizado": {"en": "🛠️ Create Custom Modpack", "pt": "🛠️ Criar Modpack Personalizado"}, "Gestor de Mods": {"en": "Mod Manager", "pt": "Gerenciador de Mods"}, "Buscar mod en Modrinth": {"en": "Search mod on Modrinth", "pt": "Pesquisar mod no Modrinth"}, "Descripción": {"en": "Description", "pt": "Descrição"}, "Cambiar Icono": {"en": "Change Icon", "pt": "Mudar Ícone"}, "NUEVO": {"en": "NEW", "pt": "NOVO"}, "❤️ Favoritos": {"en": "❤️ Favorites", "pt": "❤️ Favoritos"}, "🚪 Cerrar Sesión": {"en": "🚪 Log Out", "pt": "🚪 Encerrar Sessão"}, "Cerrar Sesión": {"en": "Log Out", "pt": "Encerrar Sessão"}, "▶ Jugar": {"en": "▶ Play", "pt": "▶ Jogar"}, "Quitar": {"en": "Remove", "pt": "Remover"}, "Instalado": {"en": "Installed", "pt": "Instalado"}, "Próximamente": {"en": "Coming Soon", "pt": "Em Breve"}, "🪐 Próximamente": {"en": "🪐 Coming Soon", "pt": "🪐 Em Breve"}, "▶ Jugar CM Pack": {"en": "▶ Play CM Pack", "pt": "▶ Jogar CM Pack"}, "Instalable": {"en": "Installable", "pt": "Instalável"}, "No hay clientes PVP disponibles.": {"en": "No PVP clients available.", "pt": "Nenhum cliente PVP disponível."}, "Selecciona versión de Minecraft...": {"en": "Select Minecraft version...", "pt": "Selecione a versão do Minecraft..."}, "No hay servidores guardados": {"en": "No saved servers", "pt": "Nenhum servidor salvo"}, "Haz clic en \"Agregar Servidor\" para añadir el primero.": {"en": "Click on \"Add Server\" to add the first one.", "pt": "Clique em \"Adicionar Servidor\" para adicionar o primeiro."}, "+ Agregar Servidor": {"en": "+ Add Server", "pt": "+ Adicionar Servidor"}, "Eliminar": {"en": "Delete", "pt": "Excluir"}, "Recomendado:": {"en": "Recommended:", "pt": "Recomendado:"}, "(Recomendado: 4 GB)": {"en": "(Recommended: 4 GB)", "pt": "(Recomendado: 4 GB)"}, "(Recomendado: 6 GB)": {"en": "(Recommended: 6 GB)", "pt": "(Recomendado: 6 GB)"}, "(Recomendado: 8 GB)": {"en": "(Recommended: 8 GB)", "pt": "(Recomendado: 8 GB)"}, "(Recomendado: 12 GB)": {"en": "(Recommended: 12 GB)", "pt": "(Recomendado: 12 GB)"}, "(Recomendado: 16 GB)": {"en": "(Recommended: 16 GB)", "pt": "(Recomendado: 16 GB)"}, "versiones": {"en": "versions", "pt": "versões"}, "No hay modpacks instalados.": {"en": "No modpacks installed.", "pt": "Nenhum modpack instalado."}, "No hay versiones disponibles.": {"en": "No versions available.", "pt": "Nenhuma versão disponível."}, "Ninguno (Vanilla / Modificadores)": {"en": "None (Vanilla / Modifiers)", "pt": "Nenhum (Vanilla / Modificadores)"}, "No hay builds de Forge para esta versión": {"en": "No Forge builds for this version", "pt": "Nenhuma versão do Forge para esta versão"}, "No hay builds de NeoForge para esta versión": {"en": "No NeoForge builds for this version", "pt": "Nenhuma versão do NeoForge para esta versão"}, "Fabric no disponible para esta versión": {"en": "Fabric not available for this version", "pt": "Fabric não disponível para esta versão"}, "Quilt no disponible para esta versión": {"en": "Quilt not available for this version", "pt": "Quilt não disponível para esta versão"}, "El mejor cliente PVP optimizado con mods integrados, HUD personalizable y rendimiento máximo en FPS para 1.8.8.": {"en": "The best PVP client optimized with built-in mods, customizable HUD, and maximum FPS for 1.8.8.", "pt": "O melhor cliente PVP otimizado com mods integrados, HUD personalizável e desempenho máximo em FPS para 1.8.8."}, "Cliente PVP propio de Nebula Launcher con optimizaciones exclusivas, HUD modular y cosméticos sincronizados. En desarrollo.": {"en": "Nebula Launcher's native PVP client with exclusive optimizations, modular HUD, and synchronized cosmetics. In development.", "pt": "Cliente PVP próprio do Nebula Launcher com otimizações exclusivas, HUD modular e cosméticos sincronizados. Em desenvolvimento."}};
+    const LAUNCHER_ALL_PHRASES = {"Motor Listo": {"en": "Engine Ready", "pt": "Motor Pronto"}, "Motor de Juego Listo": {"en": "Game Engine Ready", "pt": "Motor de Jogo Pronto"}, "Lanzando...": {"en": "Launching...", "pt": "Iniciando..."}, "En Ejecución": {"en": "Running", "pt": "Em Execução"}, "Haz clic para copiar": {"en": "Click to copy", "pt": "Clique para copiar"}, "IP Copiada!": {"en": "IP Copied!", "pt": "IP Copiado!"}, "Offline": {"en": "Offline", "pt": "Offline"}, "En línea": {"en": "Online", "pt": "Online"}, "Jugar": {"en": "Play", "pt": "Jogar"}, "Modificadores & Mods": {"en": "Modifiers & Mods", "pt": "Modificadores & Mods"}, "Modpacks": {"en": "Modpacks", "pt": "Modpacks"}, "Texturas & Shaders": {"en": "Textures & Shaders", "pt": "Texturas & Shaders"}, "🎨 Texturas & Shaders": {"en": "🎨 Texturas & Shaders", "pt": "🎨 Texturas & Shaders"}, "Versiones": {"en": "Versions", "pt": "Versões"}, "Consola": {"en": "Console", "pt": "Console"}, "Social & Amigos": {"en": "Friends & Social", "pt": "Amigos & Social"}, "👥 Red Social & Amigos": {"en": "👥 Social Network & Friends", "pt": "👥 Rede Social & Amigos"}, "Mi Perfil": {"en": "My Profile", "pt": "Meu Perfil"}, "Mi Perfil Nebula": {"en": "My Nebula Profile", "pt": "Meu Perfil Nebula"}, "Configuración": {"en": "Settings", "pt": "Configurações"}, "Servidores": {"en": "Servers", "pt": "Servidores"}, "Mis Servidores": {"en": "My Servers", "pt": "Meus Servidores"}, "Actualizaciones": {"en": "Updates", "pt": "Atualizações"}, "Novedades & Actualizaciones": {"en": "What's New & Updates", "pt": "Novidades & Atualizações"}, "Minecraft cargado y listo.": {"en": "Minecraft loaded and ready.", "pt": "Minecraft carregado e pronto."}, "Instala OptiFine, Forge y gestiona tus mods.": {"en": "Install OptiFine, Forge and manage your mods.", "pt": "Instale OptiFine, Forge e gerencie seus mods."}, "Busca e instala modpacks de CurseForge y Modrinth o gestiona tus instancias locales.": {"en": "Search and install modpacks from CurseForge and Modrinth or manage local instances.", "pt": "Pesquise e instale modpacks do CurseForge e Modrinth ou gerencie instâncias locais."}, "Descarga Resource Packs y Shaders en 1-clic directamente a tu juego.": {"en": "Download Resource Packs and Shaders with 1-click directly into your game.", "pt": "Baixe Resource Packs e Shaders com 1 clique diretamente para o jogo."}, "Todas las versiones disponibles e instaladas.": {"en": "All available and installed versions.", "pt": "Todas as versões disponíveis e instaladas."}, "Registro de eventos en tiempo real de Minecraft y el Launcher.": {"en": "Real-time event logging from Minecraft and the Launcher.", "pt": "Registro de eventos em tempo real do Minecraft e do Launcher."}, "Conéctate y chatea con otros jugadores en tiempo real.": {"en": "Connect and chat with other players in real time.", "pt": "Conecte-se e converse com outros jogadores em tempo real."}, "Personaliza tu aspecto y gestiona tu skin en el juego.": {"en": "Customize your appearance and manage your in-game skin.", "pt": "Personalize sua aparência e gerencie sua skin no jogo."}, "Ajusta el launcher a tu gusto.": {"en": "Customize the launcher to your preference.", "pt": "Ajuste o launcher ao seu gosto."}, "Agrega tus servidores favoritos y únete directamente desde el launcher.": {"en": "Add your favorite servers and join directly from the launcher.", "pt": "Adicione seus servidores favoritos e entre diretamente pelo launcher."}, "Conoce todas las mejoras, optimizaciones y novedades añadidas a Nebula Launcher.": {"en": "Explore all improvements, optimizations, and new features added to Nebula Launcher.", "pt": "Conheça todas as melhorias, otimizações e novidades adicionadas ao Nebula Launcher."}, "Iniciar Minecraft": {"en": "Launch Minecraft", "pt": "Iniciar Minecraft"}, "VERSIÓN": {"en": "VERSION", "pt": "VERSÃO"}, "Versión del Loader": {"en": "Loader Version", "pt": "Versão do Loader"}, "MEMORIA RAM": {"en": "RAM MEMORY", "pt": "MEMÓRIA RAM"}, "ASIGNADA": {"en": "ALLOCATED", "pt": "ALOCADA"}, "EXPLORADOR": {"en": "EXPLORER", "pt": "EXPLORADOR"}, "📂 ACCESOS RÁPIDOS": {"en": "📂 QUICK ACCESS", "pt": "📂 ACESSOS RÁPIDOS"}, "📦 Mods": {"en": "📦 Mods", "pt": "📦 Mods"}, "🌅 Shaders": {"en": "🌅 Shaders", "pt": "🌅 Shaders"}, "🎨 Texturas": {"en": "🎨 Textures", "pt": "🎨 Texturas"}, "🌍 Mundos": {"en": "🌍 Worlds", "pt": "🌍 Mundos"}, "📸 Fotos F2": {"en": "📸 Screenshots", "pt": "📸 Capturas F2"}, "📁 .minecraft": {"en": "📁 .minecraft", "pt": "📁 .minecraft"}, "⚔️ Clientes PVP": {"en": "⚔️ PVP Clients", "pt": "⚔️ Clientes PVP"}, "🛠️ Modificadores & Lanzadores": {"en": "🛠️ Modifiers & Launchers", "pt": "🛠️ Modificadores & Launchers"}, "🧹 Limpiar": {"en": "🧹 Clean", "pt": "🧹 Limpar"}, "⚡ INICIAR SALTO": {"en": "⚡ LAUNCH MINECRAFT", "pt": "⚡ JOGAR MINECRAFT"}, "🎮 EN JUEGO...": {"en": "🎮 IN GAME...", "pt": "🎮 EM JOGO..."}, "⏳ DESCARGANDO...": {"en": "⏳ DOWNLOADING...", "pt": "⏳ BAIXANDO..."}, "Vanilla (Original)": {"en": "Vanilla (Original)", "pt": "Vanilla (Original)"}, "Vanilla (sin mods)": {"en": "Vanilla (no mods)", "pt": "Vanilla (sem mods)"}, "Carga el juego oficial por defecto sin ninguna modificación o mod.": {"en": "Loads the official game by default with no modifications or mods.", "pt": "Carrega o jogo oficial padrão sem nenhuma modificação ou mod."}, "Lanzador clásico para instalar mods locales descargados.": {"en": "Classic launcher to install downloaded local mods.", "pt": "Launcher clássico para instalar mods locais baixados."}, "Motor alternativo moderno optimizado para mods ligeros y rendimiento.": {"en": "Modern alternative engine optimized for lightweight mods and performance.", "pt": "Motor alternativo moderno otimizado para mods leves e desempenho."}, "Fork moderno y optimizado de Forge para versiones recientes.": {"en": "Modern optimized fork of Forge for recent versions.", "pt": "Fork moderno e otimizado do Forge para versões recentes."}, "Loader rápido de nueva generación, compatible con mods de Fabric.": {"en": "Fast next-generation loader, compatible with Fabric mods.", "pt": "Loader rápido de nova geração, compatível com mods do Fabric."}, "Optimizador gráfico clásico para shaders, texturas HD y zoom.": {"en": "Classic graphics optimizer for shaders, HD textures, and zoom.", "pt": "Otimizador gráfico clássico para shaders, texturas HD e zoom."}, "Carga una instancia instalada de Modrinth o CurseForge.": {"en": "Loads an installed instance from Modrinth or CurseForge.", "pt": "Carrega uma instância instalada do Modrinth ou CurseForge."}, "⬇ Instalar": {"en": "⬇ Install", "pt": "⬇ Instalar"}, "Ninguno": {"en": "None", "pt": "Nenhum"}, "Cargando...": {"en": "Loading...", "pt": "Carregando..."}, "Usuario": {"en": "User", "pt": "Usuário"}, "Offline": {"en": "Offline", "pt": "Offline"}, "PREMIUM": {"en": "PREMIUM", "pt": "PREMIUM"}, "Cuenta oficial de Microsoft con acceso completo a todos los servidores multijugador.": {"en": "Official Microsoft account with full access to all multiplayer servers.", "pt": "Conta oficial da Microsoft com acesso completo a todos os servidores multiplayer."}, "MICROSOFT / MOJANG": {"en": "MICROSOFT / MOJANG", "pt": "MICROSOFT / MOJANG"}, "CUENTA NEBULA": {"en": "NEBULA ACCOUNT", "pt": "CONTA NEBULA"}, "Inicia sesión o regístrate en Nebula para tener tu perfil y tu propia skin en el juego.": {"en": "Sign in or register with Nebula to get your profile and custom in-game skin.", "pt": "Entre ou registre-se na Nebula para ter seu perfil e sua própria skin no jogo."}, "NEBULA ACCOUNT": {"en": "NEBULA ACCOUNT", "pt": "CONTA NEBULA"}, "(SOPORTE PARA SKIN)": {"en": "(SKIN SUPPORT)", "pt": "(SUPORTE A SKIN)"}, "OFFLINE": {"en": "OFFLINE", "pt": "OFFLINE"}, "Juega de forma local y anónima con cualquier nickname de forma rápida.": {"en": "Play locally and anonymously with any nickname right away.", "pt": "Jogue localmente e de forma anônima com qualquer apelido rapidamente."}, "OFFLINE (SIN SKIN)": {"en": "OFFLINE (NO SKIN)", "pt": "OFFLINE (SEM SKIN)"}, "← Volver": {"en": "← Back", "pt": "← Voltar"}, "Offline (sin skin)": {"en": "Offline (no skin)", "pt": "Offline (sem skin)"}, "Elige un nombre de usuario único para identificarte en el juego.": {"en": "Choose a unique username to identify yourself in-game.", "pt": "Escolha um nome de usuário único para se identificar no jogo."}, "NOMBRE DE USUARIO": {"en": "USERNAME", "pt": "NOME DE USUÁRIO"}, "➜ Continuar Offline": {"en": "➜ Continue Offline", "pt": "➜ Continuar Offline"}, "Iniciar sesión con Nebula": {"en": "Sign in with Nebula", "pt": "Entrar com a Nebula"}, "Ingresa tus credenciales para acceder a tu perfil y tus skins.": {"en": "Enter your credentials to access your profile and skins.", "pt": "Digite suas credenciais para acessar seu perfil e suas skins."}, "CORREO ELECTRÓNICO": {"en": "EMAIL ADDRESS", "pt": "E-MAIL"}, "CONTRASEÑA": {"en": "PASSWORD", "pt": "SENHA"}, "¿Olvidaste tu contraseña?": {"en": "Forgot your password?", "pt": "Esqueceu sua senha?"}, "➜ Iniciar Sesión": {"en": "➜ Sign In", "pt": "➜ Iniciar Sessão"}, "¿No tienes una cuenta?": {"en": "Don't have an account?", "pt": "Não tem uma conta?"}, "Regístrate aquí": {"en": "Sign up here", "pt": "Registre-se aqui"}, "Restablecer Contraseña": {"en": "Reset Password", "pt": "Redefinir Senha"}, "Ingresa tu correo para recuperar el acceso a tu cuenta.": {"en": "Enter your email to regain access to your account.", "pt": "Digite seu e-mail para recuperar o acesso à sua conta."}, "Enviar enlace de recuperación": {"en": "Send recovery link", "pt": "Enviar link de recuperação"}, "Te enviaremos un enlace para restablecer tu contraseña.": {"en": "We will send you a link to reset your password.", "pt": "Enviaremos um link para redefinir sua senha."}, "Volver": {"en": "Back", "pt": "Voltar"}, "Crear Cuenta Nebula": {"en": "Create Nebula Account", "pt": "Criar Conta Nebula"}, "Regístrate para subir tu propia skin personalizada.": {"en": "Sign up to upload your own custom skin.", "pt": "Registre-se para enviar sua própria skin personalizada."}, "NOMBRE DE JUGADOR (NICKNAME)": {"en": "PLAYER NAME (NICKNAME)", "pt": "NOME DE JOGADOR (APELIDO)"}, "🌌 Crear Cuenta y Continuar": {"en": "🌌 Create Account & Continue", "pt": "🌌 Criar Conta e Continuar"}, "¿Ya tienes cuenta?": {"en": "Already have an account?", "pt": "Já tem uma conta?"}, "Inicia sesión aquí": {"en": "Sign in here", "pt": "Entre aqui"}, "Inicia sesión con tu cuenta de Microsoft para acceder a Minecraft Premium.": {"en": "Sign in with your Microsoft account to access Minecraft Premium.", "pt": "Entre com sua conta da Microsoft para acessar o Minecraft Premium."}, "🪟 Iniciar con Microsoft": {"en": "🪟 Sign in with Microsoft", "pt": "🪟 Entrar com a Microsoft"}, "Mis Mods": {"en": "My Mods", "pt": "Meus Mods"}, "Versiones Instaladas": {"en": "Installed Versions", "pt": "Versões Instaladas"}, "Instalar desde archivo .jar": {"en": "Install from .jar file", "pt": "Instalar a partir de arquivo .jar"}, "Añade y gestiona mods por versión instalada (Fabric / Forge / NeoForge / Quilt).": {"en": "Add and manage mods by installed version (Fabric / Forge / NeoForge / Quilt).", "pt": "Adicione e gerencie mods por versão instalada (Fabric / Forge / NeoForge / Quilt)."}, "Mejora el rendimiento y añade soporte para shaders HD. Compatible con todas las versiones.": {"en": "Improves performance and adds HD shader support. Compatible with all versions.", "pt": "Melhora o desempenho e adiciona suporte a shaders HD. Compatível com todas as versões."}, "⬇ Instalar OptiFine": {"en": "⬇ Install OptiFine", "pt": "⬇ Instalar OptiFine"}, "Sistema de mods para Minecraft con miles de mods disponibles.": {"en": "Minecraft mod system with thousands of available mods.", "pt": "Sistema de mods para Minecraft com milhares de mods disponíveis."}, "🔥 Instalar Forge": {"en": "🔥 Install Forge", "pt": "🔥 Instalar Forge"}, "El loader moderno, rápido y compatible con mods de Fabric. Ideal para nuevas versiones.": {"en": "The modern, fast loader compatible with Fabric mods. Ideal for new versions.", "pt": "O loader moderno, rápido e compatível com mods do Fabric. Ideal para novas versões."}, "Optimización extrema de rendimiento con Sodium, Iris, Lithium y más mods de Fabric.": {"en": "Extreme performance optimization with Sodium, Iris, Lithium, and more Fabric mods.", "pt": "Otimização extrema de desempenho com Sodium, Iris, Lithium e mais mods do Fabric."}, "💎 Instalar Sodium + Fabric": {"en": "💎 Install Sodium + Fabric", "pt": "💎 Instalar Sodium + Fabric"}, "Fork moderno de Forge con mejor rendimiento y soporte activo para Minecraft 1.20.1+.": {"en": "Modern Forge fork with better performance and active support for Minecraft 1.20.1+.", "pt": "Fork moderno do Forge com melhor desempenho e suporte ativo para Minecraft 1.20.1+."}, "🌿 Instalar NeoForge": {"en": "🌿 Install NeoForge", "pt": "🌿 Instalar NeoForge"}, "🔮 Instalar Quilt Loader": {"en": "🔮 Install Quilt Loader", "pt": "🔮 Instalar Quilt Loader"}, "🛠️ Gestionar Mods (Taller Premium)": {"en": "🛠️ Manage Mods (Premium Workshop)", "pt": "🛠️ Gerenciar Mods (Oficina Premium)"}, "📦 Importar Modpack (CurseForge / Modrinth)": {"en": "📦 Import Modpack (CurseForge / Modrinth)", "pt": "📦 Importar Modpack (CurseForge / Modrinth)"}, "No hay Fabric instalado.": {"en": "No Fabric installed.", "pt": "Nenhum Fabric instalado."}, "No hay Forge instalado.": {"en": "No Forge installed.", "pt": "Nenhum Forge instalado."}, "No hay NeoForge instalado.": {"en": "No NeoForge installed.", "pt": "Nenhum NeoForge instalado."}, "No hay Quilt instalado.": {"en": "No Quilt installed.", "pt": "Nenhum Quilt instalado."}, "Selecciona una versión para ver sus mods.": {"en": "Select a version to see its mods.", "pt": "Selecione uma versão para ver seus mods."}, "Selecciona una versión...": {"en": "Select a version...", "pt": "Selecione uma versão..."}, "Selecciona versión...": {"en": "Select version...", "pt": "Selecione a versão..."}, "Versión de Forge": {"en": "Forge Version", "pt": "Versão do Forge"}, "Versión de Minecraft": {"en": "Minecraft Version", "pt": "Versão do Minecraft"}, "Versión de NeoForge": {"en": "NeoForge Version", "pt": "Versão do NeoForge"}, "Versión de OptiFine disponible": {"en": "Available OptiFine Version", "pt": "Versão disponível do OptiFine"}, "Versión objetivo": {"en": "Target Version", "pt": "Versão Alvo"}, "Cargando versiones con Forge...": {"en": "Loading versions with Forge...", "pt": "Carregando versões com Forge..."}, "Cargando versiones con NeoForge...": {"en": "Loading versions with NeoForge...", "pt": "Carregando versões com NeoForge..."}, "Cargando versiones...": {"en": "Loading versions...", "pt": "Carregando versões..."}, "Haz clic para seleccionar": {"en": "Click to select", "pt": "Clique para selecionar"}, "(Forge, Fabric, cualquier versión)": {"en": "(Forge, Fabric, any version)", "pt": "(Forge, Fabric, qualquer versão)"}, "🎒 Mis Modpacks": {"en": "🎒 My Modpacks", "pt": "🎒 Meus Modpacks"}, "🌐 Todos": {"en": "🌐 All", "pt": "🌐 Todos"}, "🛠️ Crear Modpack": {"en": "🛠️ Create Modpack", "pt": "🛠️ Criar Modpack"}, "📦 Importar Local (.zip/.mrpack)": {"en": "📦 Import Local (.zip/.mrpack)", "pt": "📦 Importar Local (.zip/.mrpack)"}, "🔍 Buscar": {"en": "🔍 Search", "pt": "🔍 Pesquisar"}, "🔍 Buscar Modpacks": {"en": "🔍 Search Modpacks", "pt": "🔍 Pesquisar Modpacks"}, "Categorías": {"en": "Categories", "pt": "Categorias"}, "Aventura": {"en": "Adventure", "pt": "Aventura"}, "Combate": {"en": "Combat", "pt": "Combate"}, "Magia": {"en": "Magic", "pt": "Magia"}, "Misiones": {"en": "Quests", "pt": "Missões"}, "Multijugador": {"en": "Multiplayer", "pt": "Multijogador"}, "Optimización": {"en": "Optimization", "pt": "Otimização"}, "Tecnología": {"en": "Technology", "pt": "Tecnologia"}, "Ligero": {"en": "Lightweight", "pt": "Leve"}, "Loader": {"en": "Loader", "pt": "Loader"}, "Versión MC": {"en": "MC Version", "pt": "Versão MC"}, "⭐ Relevancia": {"en": "⭐ Relevance", "pt": "⭐ Relevância"}, "📅 Actualizado": {"en": "📅 Updated", "pt": "📅 Atualizado"}, "📥 Descargas": {"en": "📥 Downloads", "pt": "📥 Downloads"}, "Usa la barra superior para buscar modpacks en CurseForge o Modrinth.": {"en": "Use the search bar above to browse modpacks on CurseForge or Modrinth.", "pt": "Use a barra superior para pesquisar modpacks no CurseForge ou Modrinth."}, "Elegir destino de instalación": {"en": "Choose installation destination", "pt": "Escolher destino da instalação"}, "Versión o Modpack de Destino:": {"en": "Target Version or Modpack:", "pt": "Versão ou Modpack de Destino:"}, "Nombre del Modpack": {"en": "Modpack Name", "pt": "Nome do Modpack"}, "Mod Loader": {"en": "Mod Loader", "pt": "Mod Loader"}, "Seleccionar Versión a Instalar": {"en": "Select Version to Install", "pt": "Selecionar Versão a Instalar"}, "Elige la versión del modpack que deseas descargar:": {"en": "Choose the modpack version you wish to download:", "pt": "Escolha a versão do modpack que deseja baixar:"}, "⬇️ Instalar ahora": {"en": "⬇️ Install now", "pt": "⬇️ Instalar agora"}, "✕ Cerrar": {"en": "✕ Close", "pt": "✕ Fechar"}, "Cerrar": {"en": "Close", "pt": "Fechar"}, "Cancelar": {"en": "Cancel", "pt": "Cancelar"}, "Guardar": {"en": "Save", "pt": "Salvar"}, "Instalar en:": {"en": "Install to:", "pt": "Instalar em:"}, "✨ Shaders (Shaderpacks)": {"en": "✨ Shaders (Shaderpacks)", "pt": "✨ Shaders (Shaderpacks)"}, "🎨 Texturas (Resourcepacks)": {"en": "🎨 Textures (Resourcepacks)", "pt": "🎨 Texturas (Resourcepacks)"}, "🌐 .minecraft (Global / Por defecto)": {"en": "🌐 .minecraft (Global / Default)", "pt": "🌐 .minecraft (Global / Padrão)"}, "Todas": {"en": "All", "pt": "Todas"}, "Instaladas": {"en": "Installed", "pt": "Instaladas"}, "Oficiales": {"en": "Official", "pt": "Oficiais"}, "Snapshots": {"en": "Snapshots", "pt": "Snapshots"}, "Otra versión personalizada...": {"en": "Another custom version...", "pt": "Outra versão personalizada..."}, "OUTPUT LOGS": {"en": "OUTPUT LOGS", "pt": "LOGS DE SAÍDA"}, "🗑️ Limpiar Consola": {"en": "🗑️ Clear Console", "pt": "🗑️ Limpar Console"}, "Agregar Amigo": {"en": "Add Friend", "pt": "Adicionar Amigo"}, "Amigo": {"en": "Friend", "pt": "Amigo"}, "Amigo está escribiendo...": {"en": "Friend is typing...", "pt": "Amigo está digitando..."}, "Bandeja de Entrada": {"en": "Inbox", "pt": "Caixa de Entrada"}, "Selecciona a un amigo de la lista izquierda para comenzar a chatear en tiempo real.": {"en": "Select a friend from the left list to start chatting in real time.", "pt": "Selecione um amigo da lista à esquerda para começar a conversar em tempo real."}, "En línea": {"en": "Online", "pt": "Online"}, "Enviar 🚀": {"en": "Send 🚀", "pt": "Enviar 🚀"}, "Iniciar Sesión": {"en": "Sign In", "pt": "Iniciar Sessão"}, "Jugador": {"en": "Player", "pt": "Jogador"}, "Modo: Simulación / Demo": {"en": "Mode: Simulation / Demo", "pt": "Modo: Simulação / Demo"}, "Reenviar correo de verificación": {"en": "Resend verification email", "pt": "Reenviar e-mail de verificação"}, "Regístrate": {"en": "Sign Up", "pt": "Registre-se"}, "Vincular Nickname de Minecraft": {"en": "Link Minecraft Nickname", "pt": "Vincular Apelido de Minecraft"}, "Volver a Iniciar Sesión": {"en": "Back to Sign In", "pt": "Voltar ao Início de Sessão"}, "Ya lo verifiqué": {"en": "I have verified", "pt": "Já verifiquei"}, "¿No tienes una cuenta de Nebula Social?": {"en": "Don't have a Nebula Social account?", "pt": "Não tem uma conta na Nebula Social?"}, "📧 Verificar Correo": {"en": "📧 Verify Email", "pt": "📧 Verificar E-mail"}, "🔑 INICIAR SESIÓN EN NEBULA SOCIAL": {"en": "🔑 SIGN IN TO NEBULA SOCIAL", "pt": "🔑 ENTRAR NA NEBULA SOCIAL"}, "tu correo": {"en": "your email", "pt": "seu e-mail"}, "En el menú principal": {"en": "In main menu", "pt": "No menu principal"}, "INFORMACIÓN DE LA CUENTA": {"en": "ACCOUNT INFORMATION", "pt": "INFORMAÇÕES DA CONTA"}, "NICKNAME (EN JUEGO)": {"en": "NICKNAME (IN-GAME)", "pt": "APELIDO (NO JOGO)"}, "CORREO VINCULADO": {"en": "LINKED EMAIL", "pt": "E-MAIL VINCULADO"}, "URL DE TU SKIN (NO PREMIUM)": {"en": "YOUR SKIN URL (NON-PREMIUM)", "pt": "URL DA SUA SKIN (NÃO-PREMIUM)"}, "TIPO DE MODELO DE SKIN": {"en": "SKIN MODEL TYPE", "pt": "TIPO DE MODELO DE SKIN"}, "Classic (Steve - Brazos de 4px)": {"en": "Classic (Steve - 4px Arms)", "pt": "Clássico (Steve - Braços de 4px)"}, "Slim (Alex - Brazos de 3px)": {"en": "Slim (Alex - 3px Arms)", "pt": "Slim (Alex - Braços de 3px)"}, "SUBIR SKIN PERSONALIZADA": {"en": "UPLOAD CUSTOM SKIN", "pt": "ENVIAR SKIN PERSONALIZADA"}, "Selecciona o arrastra tu archivo .png": {"en": "Select or drag your .png file", "pt": "Selecione ou arraste seu arquivo .png"}, "Máx. 50 KB • Formato PNG": {"en": "Max. 50 KB • PNG Format", "pt": "Máx. 50 KB • Formato PNG"}, "📤 Subir Skin Seleccionada": {"en": "📤 Upload Selected Skin", "pt": "📤 Enviar Skin Selecionada"}, "SUBIR CAPA PERSONALIZADA": {"en": "UPLOAD CUSTOM CAPE", "pt": "ENVIAR CAPA PERSONALIZADA"}, "Selecciona o arrastra tu archivo de capa .png": {"en": "Select or drag your .png cape file", "pt": "Selecione ou arraste seu arquivo de capa .png"}, "Máx. 50 KB • Formato clásico": {"en": "Max. 50 KB • Classic Format", "pt": "Máx. 50 KB • Formato Clássico"}, "📤 Subir Capa": {"en": "📤 Upload Cape", "pt": "📤 Enviar Capa"}, "🗑️ Eliminar Capa": {"en": "🗑️ Remove Cape", "pt": "🗑️ Remover Capa"}, "GALERÍA DE CAPAS OFICIALES": {"en": "OFFICIAL CAPES GALLERY", "pt": "GALERIA DE CAPAS OFICIAIS"}, "Haz clic en cualquier capa de la galería para seleccionarla y previsualizarla, luego pulsa \"Subir Capa\" para aplicarla:": {"en": "Click any cape in the gallery to select and preview it, then click \"Upload Cape\" to apply it:", "pt": "Clique em qualquer capa da galeria para selecioná-la e visualizá-la, depois clique em \"Enviar Capa\" para aplicá-la:"}, "HISTORIAL DE SKINS": {"en": "SKINS HISTORY", "pt": "HISTÓRICO DE SKINS"}, "Sin historial todavía. Sube tu primera skin.": {"en": "No history yet. Upload your first skin.", "pt": "Sem histórico ainda. Envie sua primeira skin."}, "Últ. 10": {"en": "Last 10", "pt": "Últ. 10"}, "↺ Rotar": {"en": "↺ Rotate", "pt": "↺ Girar"}, "⏸️ Animación": {"en": "⏸️ Animation", "pt": "⏸️ Animação"}, "✏️ Cambiar": {"en": "✏️ Change", "pt": "✏️ Alterar"}, "Copiar": {"en": "Copy", "pt": "Copiar"}, "🚪 Cerrar Sesión Nebula": {"en": "🚪 Log Out of Nebula", "pt": "🚪 Sair da Nebula"}, "Cargando previsualización 3D...": {"en": "Loading 3D preview...", "pt": "Carregando visualização 3D..."}, "IDIOMA DE LA INTERFAZ": {"en": "INTERFACE LANGUAGE", "pt": "IDIOMA DA INTERFACE"}, "Selecciona el idioma de Nebula Launcher (Español, English, Português).": {"en": "Choose Nebula Launcher's primary language (Español, English, Português).", "pt": "Escolha o idioma principal do Nebula Launcher (Español, English, Português)."}, "☕ JAVA": {"en": "☕ JAVA", "pt": "☕ JAVA"}, "Ruta personalizada (opcional):": {"en": "Custom path (optional):", "pt": "Caminho personalizado (opcional):"}, "Auto (recomendado)": {"en": "Auto (recommended)", "pt": "Automático (recomendado)"}, "📁 Elegir": {"en": "📁 Browse", "pt": "📁 Escolher"}, "🔄 Reset": {"en": "🔄 Reset", "pt": "🔄 Redefinir"}, "📁 DIRECTORIO": {"en": "📁 DIRECTORY", "pt": "📁 DIRETÓRIO"}, "Carpeta del juego:": {"en": "Game folder:", "pt": "Pasta do jogo:"}, "⚡ RAM POR DEFECTO": {"en": "⚡ DEFAULT RAM", "pt": "⚡ RAM PADRÃO"}, "📦 MÚLTIPLES INSTANCIAS": {"en": "📦 MULTI-INSTANCE", "pt": "📦 MÚLTIPLAS INSTÂNCIAS"}, "Permite abrir más de una instancia de Minecraft al mismo tiempo. Máximo 3 instancias simultáneas.": {"en": "Allows opening more than one Minecraft instance simultaneously. Up to 3 instances at once.", "pt": "Permite abrir mais de uma instância do Minecraft ao mesmo tempo. Máximo de 3 instâncias simultâneas."}, "📌 BANDEJA DEL SISTEMA (AHORRO DE RECURSOS)": {"en": "📌 SYSTEM TRAY (RESOURCE SAVER)", "pt": "📌 BANDEJA DO SISTEMA (ECONOMIA DE RECURSOS)"}, "Minimiza el launcher a la bandeja del reloj para liberar memoria RAM y CPU mientras juegas.": {"en": "Minimizes the launcher to the system tray to free RAM and CPU while playing.", "pt": "Minimiza o launcher para a bandeja do sistema para liberar memória RAM e CPU enquanto joga."}, "Minimizar a la bandeja al iniciar juego (Ahorro de RAM)": {"en": "Minimize to tray on game start (RAM saver)", "pt": "Minimizar para a bandeja ao iniciar o jogo (Economia de RAM)"}, "Ocultar a la bandeja al minimizar ventana": {"en": "Hide to tray when window is minimized", "pt": "Ocultar na bandeja ao minimizar a janela"}, "🖤 TEMAS SÓLIDOS & MINIMALISTAS (CERO DISTRACCIONES)": {"en": "🖤 SOLID & MINIMALIST THEMES (ZERO DISTRACTIONS)", "pt": "🖤 TEMAS SÓLIDOS & MINIMALISTAS (SEM DISTRAÇÕES)"}, "Fondos limpios de un solo color oscuro sin partículas animadas. Máxima claridad y rendimiento.": {"en": "Clean solid dark backgrounds with zero animated particles. Maximum clarity and performance.", "pt": "Fundos limpos de cor única escura sem partículas animadas. Máxima clareza e desempenho."}, "🎨 TEMAS CLÁSICOS": {"en": "🎨 CLASSIC THEMES", "pt": "🎨 TEMAS CLÁSSICOS"}, "🌟 TEMAS ESPECIALES": {"en": "🌟 SPECIAL THEMES", "pt": "🌟 TEMAS ESPECIAIS"}, "✨ TEMA PERSONALIZADO": {"en": "✨ CUSTOM THEME", "pt": "✨ TEMA PERSONALIZADO"}, "Elige tus propios colores para el launcher y sube cualquier imagen de tu computadora para el fondo animado estilo Van Gogh.": {"en": "Choose your own custom launcher colors and upload any image, GIF, or video from your computer.", "pt": "Escolha suas próprias cores para o launcher e envie qualquer imagem, GIF ou vídeo do seu computador."}, "Color Principal (Acento)": {"en": "Primary Color (Accent)", "pt": "Cor Principal (Destaque)"}, "Color Secundario": {"en": "Secondary Color", "pt": "Cor Secundária"}, "Nébula Fondo 1": {"en": "Nebula Background 1", "pt": "Nebula Fundo 1"}, "Nébula Fondo 2": {"en": "Nebula Background 2", "pt": "Nebula Fundo 2"}, "Desenfoque de Cristal (Glass Blur)": {"en": "Glass Blur Effect", "pt": "Desfoque de Vidro (Glass Blur)"}, "Fondo Personalizado (Imágenes, GIFs, Videos)": {"en": "Custom Background (Images, GIFs, Videos)", "pt": "Fundo Personalizado (Imagens, GIFs, Vídeos)"}, "Sin imagen personalizada": {"en": "No custom image", "pt": "Sem imagem personalizada"}, "🖼️ Seleccionar Fondo (Imagen / GIF / Video)": {"en": "🖼️ Select Background (Image / GIF / Video)", "pt": "🖼️ Selecionar Fundo (Imagem / GIF / Vídeo)"}, "🗑️ Quitar Fondo": {"en": "🗑️ Remove Background", "pt": "🗑️ Remover Fundo"}, "Sube tu propia imagen, GIF animado o video y decide qué parte se mostrará con los controles de encuadre, posición y zoom.": {"en": "Upload your own image, animated GIF, or video and adjust how it is displayed with frame, position, and zoom controls.", "pt": "Envie sua própria imagem, GIF animado ou vídeo e ajuste como será exibido com os controles de enquadramento, posição e zoom."}, "POSICIÓN DE ENCUADRE": {"en": "FRAME POSITION", "pt": "POSIÇÃO DE ENQUADRAMENTO"}, "Centro (Predeterminado)": {"en": "Center (Default)", "pt": "Centro (Padrão)"}, "Parte Superior (Arriba)": {"en": "Top", "pt": "Parte Superior (Cima)"}, "Parte Inferior (Abajo)": {"en": "Bottom", "pt": "Parte Inferior (Baixo)"}, "Lado Izquierdo": {"en": "Left Side", "pt": "Lado Esquerdo"}, "Lado Derecho": {"en": "Right Side", "pt": "Lado Direito"}, "Esquina Sup. Izquierda": {"en": "Top Left Corner", "pt": "Canto Sup. Esquerdo"}, "Esquina Sup. Derecha": {"en": "Top Right Corner", "pt": "Canto Sup. Direito"}, "Esquina Inf. Izquierda": {"en": "Bottom Left Corner", "pt": "Canto Inf. Esquerdo"}, "Esquina Inf. Derecha": {"en": "Bottom Right Corner", "pt": "Canto Inf. Direito"}, "MODO DE AJUSTE": {"en": "FIT MODE", "pt": "MODO DE AJUSTE"}, "Rellenar Recortando (Cover)": {"en": "Fill & Crop (Cover)", "pt": "Preencher Recortando (Cover)"}, "Ajustar Completo (Contain)": {"en": "Fit Inside (Contain)", "pt": "Ajustar Completo (Contain)"}, "Estirar Pantalla (Fill)": {"en": "Stretch to Fill (Fill)", "pt": "Esticar na Tela (Fill)"}, "ZOOM DEL FONDO": {"en": "BACKGROUND ZOOM", "pt": "ZOOM DO FUNDO"}, "Activar Tema Personalizado": {"en": "Apply Custom Theme", "pt": "Ativar Tema Personalizado"}, "Opciones JVM": {"en": "JVM Options", "pt": "Opções da JVM"}, "Comando Prepend": {"en": "Prepend Command", "pt": "Comando Prepend"}, "Configura wrappers personalizados o argumentos de la máquina virtual (JVM) para la ejecución del juego.": {"en": "Configure custom wrappers or Java Virtual Machine (JVM) arguments for game launch.", "pt": "Configure wrappers personalizados ou argumentos da máquina virtual Java (JVM) para a execução do jogo."}, "Global": {"en": "Global", "pt": "Global"}, "Local": {"en": "Local", "pt": "Local"}, "Por defecto": {"en": "Default", "pt": "Padrão"}, "💰 APOYA EL PROYECTO": {"en": "💰 SUPPORT THE PROJECT", "pt": "💰 APOIE O PROJETO"}, "Nebula Launcher es gratis. Si te gusta puedes apoyar el desarrollo con una donación o activando los anuncios en la barra lateral.": {"en": "Nebula Launcher is free. If you enjoy it, you can support development with a donation or by enabling sidebar ads.", "pt": "O Nebula Launcher é gratuito. Se você gostar, pode apoiar o desenvolvimento com uma doação ou ativando os anúncios na barra lateral."}, "⚖️ DESCARGO DE RESPONSABILIDAD": {"en": "⚖️ DISCLAIMER", "pt": "⚖️ ISENÇÃO DE RESPONSABILIDADE"}, "Este launcher es un cliente alternativo no oficial y no está afiliado ni respaldado por Mojang Studios ni Microsoft Corporation.": {"en": "This launcher is an unofficial alternative client and is not affiliated with or endorsed by Mojang Studios or Microsoft Corporation.", "pt": "Este launcher é um cliente alternativo não oficial e não é afiliado ou endossado pela Mojang Studios ou Microsoft Corporation."}, "Descargo de responsabilidad:": {"en": "Disclaimer:", "pt": "Isenção de responsabilidade:"}, "💾 Guardar Configuración": {"en": "💾 Save Settings", "pt": "💾 Salvar Configurações"}, "Agregar Servidor": {"en": "Add Server", "pt": "Adicionar Servidor"}, "Configura la conexión e inicia el juego directamente.": {"en": "Configure the connection and launch into the game directly.", "pt": "Configure a conexão e entre no jogo diretamente."}, "NOMBRE DEL SERVIDOR": {"en": "SERVER NAME", "pt": "NOME DO SERVIDOR"}, "IP DEL SERVIDOR": {"en": "SERVER IP", "pt": "IP DO SERVIDOR"}, "VERSIÓN DE MINECRAFT": {"en": "MINECRAFT VERSION", "pt": "VERSÃO DO MINECRAFT"}, "ESTADO DEL LAUNCHER": {"en": "LAUNCHER STATUS", "pt": "STATUS DO LAUNCHER"}, "Sistema al día con la versión oficial de GitHub.": {"en": "System up to date with official GitHub release.", "pt": "Sistema atualizado com a versão oficial do GitHub."}, "🟢 Actualizado": {"en": "🟢 Up to Date", "pt": "🟢 Atualizado"}, "Versión Activa": {"en": "Active Version", "pt": "Versão Ativa"}, "🔍 Buscar Actualizaciones": {"en": "🔍 Check for Updates", "pt": "🔍 Verificar Atualizações"}, "⬇️ Descargar Actualización": {"en": "⬇️ Download Update", "pt": "⬇️ Baixar Atualização"}, "🔄 Reiniciar Launcher": {"en": "🔄 Restart Launcher", "pt": "🔄 Reiniciar Launcher"}, "📰 REGISTRO DE CAMBIOS Y NOVEDADES": {"en": "📰 CHANGELOG & RELEASE NOTES", "pt": "📰 REGISTRO DE ALTERAÇÕES & NOVIDADES"}, "Ver en GitHub Releases ↗": {"en": "View on GitHub Releases ↗", "pt": "Ver no GitHub Releases ↗"}, "Descargando Archivos": {"en": "Downloading Files", "pt": "Baixando Arquivos"}, "Descargando parche": {"en": "Downloading patch", "pt": "Baixando patch"}, "Descargando...": {"en": "Downloading...", "pt": "Baixando..."}, "Actualización Disponible": {"en": "Update Available", "pt": "Atualização Disponível"}, "Actualizar Ahora": {"en": "Update Now", "pt": "Atualizar Agora"}, "Omitir": {"en": "Skip", "pt": "Ignorar"}, "Cambios y Mejoras:": {"en": "Changes & Improvements:", "pt": "Alterações & Melhorias:"}, "Verificando...": {"en": "Checking...", "pt": "Verificando..."}, "Núcleo": {"en": "Core", "pt": "Núcleo"}, "Rendimiento": {"en": "Performance", "pt": "Desempenho"}, "Ergonomía": {"en": "Ergonomics", "pt": "Ergonomia"}, "Idiomas": {"en": "Languages", "pt": "Idiomas"}, "Java": {"en": "Java", "pt": "Java"}, "Skins": {"en": "Skins", "pt": "Skins"}, "Social": {"en": "Social", "pt": "Social"}, "Temas": {"en": "Themes", "pt": "Temas"}, "Tus mundos y partidas guardadas se mantendrán a salvo.": {"en": "Your worlds and saved games will stay safe.", "pt": "Seus mundos e jogos salvos permanecerão seguros."}, "🔄 Cambiar Versión de Modpack (con respaldo de datos):": {"en": "🔄 Switch Modpack Version (with data backup):", "pt": "🔄 Mudar Versão do Modpack (com backup de dados):"}, "🛠️ Cambiar Versión de Loader:": {"en": "🛠️ Change Loader Version:", "pt": "🛠️ Mudar Versão do Loader:"}, "💾 Guardar Versión de Loader": {"en": "💾 Save Loader Version", "pt": "💾 Salvar Versão do Loader"}, "📂 Mods Instalados": {"en": "📂 Installed Mods", "pt": "📂 Mods Instalados"}, "🛠️ Crear Modpack Personalizado": {"en": "🛠️ Create Custom Modpack", "pt": "🛠️ Criar Modpack Personalizado"}, "Gestor de Mods": {"en": "Mod Manager", "pt": "Gerenciador de Mods"}, "Buscar mod en Modrinth": {"en": "Search mod on Modrinth", "pt": "Pesquisar mod no Modrinth"}, "Descripción": {"en": "Description", "pt": "Descrição"}, "Cambiar Icono": {"en": "Change Icon", "pt": "Mudar Ícone"}, "NUEVO": {"en": "NEW", "pt": "NOVO"}, "❤️ Favoritos": {"en": "❤️ Favorites", "pt": "❤️ Favoritos"}, "🚪 Cerrar Sesión": {"en": "🚪 Log Out", "pt": "🚪 Encerrar Sessão"}, "Cerrar Sesión": {"en": "Log Out", "pt": "Encerrar Sessão"}, "▶ Jugar": {"en": "▶ Play", "pt": "▶ Jogar"}, "Quitar": {"en": "Remove", "pt": "Remover"}, "Instalado": {"en": "Installed", "pt": "Instalado"}, "Próximamente": {"en": "Coming Soon", "pt": "Em Breve"}, "🪐 Próximamente": {"en": "🪐 Coming Soon", "pt": "🪐 Em Breve"}, "▶ Jugar CM Pack": {"en": "▶ Play CM Pack", "pt": "▶ Jogar CM Pack"}, "Instalable": {"en": "Installable", "pt": "Instalável"}, "No hay clientes PVP disponibles.": {"en": "No PVP clients available.", "pt": "Nenhum cliente PVP disponível."}, "Selecciona versión de Minecraft...": {"en": "Select Minecraft version...", "pt": "Selecione a versão do Minecraft..."}, "No hay servidores guardados": {"en": "No saved servers", "pt": "Nenhum servidor salvo"}, "Haz clic en \"Agregar Servidor\" para añadir el primero.": {"en": "Click on \"Add Server\" to add the first one.", "pt": "Clique em \"Adicionar Servidor\" para adicionar o primeiro."}, "+ Agregar Servidor": {"en": "+ Add Server", "pt": "+ Adicionar Servidor"}, "Eliminar": {"en": "Delete", "pt": "Excluir"}, "Recomendado:": {"en": "Recommended:", "pt": "Recomendado:"}, "(Recomendado: 4 GB)": {"en": "(Recommended: 4 GB)", "pt": "(Recomendado: 4 GB)"}, "(Recomendado: 6 GB)": {"en": "(Recommended: 6 GB)", "pt": "(Recomendado: 6 GB)"}, "(Recomendado: 8 GB)": {"en": "(Recommended: 8 GB)", "pt": "(Recomendado: 8 GB)"}, "(Recomendado: 12 GB)": {"en": "(Recommended: 12 GB)", "pt": "(Recomendado: 12 GB)"}, "(Recomendado: 16 GB)": {"en": "(Recommended: 16 GB)", "pt": "(Recomendado: 16 GB)"}, "versiones": {"en": "versions", "pt": "versões"}, "No hay modpacks instalados.": {"en": "No modpacks installed.", "pt": "Nenhum modpack instalado."}, "No hay versiones disponibles.": {"en": "No versions available.", "pt": "Nenhuma versão disponível."}, "Ninguno (Vanilla / Modificadores)": {"en": "None (Vanilla / Modifiers)", "pt": "Nenhum (Vanilla / Modificadores)"}, "No hay builds de Forge para esta versión": {"en": "No Forge builds for this version", "pt": "Nenhuma versão do Forge para esta versão"}, "No hay builds de NeoForge para esta versión": {"en": "No NeoForge builds for this version", "pt": "Nenhuma versão do NeoForge para esta versão"}, "Fabric no disponible para esta versión": {"en": "Fabric not available for this version", "pt": "Fabric não disponível para esta versão"}, "Quilt no disponible para esta versión": {"en": "Quilt not available for this version", "pt": "Quilt não disponível para esta versão"}, "El mejor cliente PVP optimizado con mods integrados, HUD personalizable y rendimiento máximo en FPS para 1.8.8.": {"en": "The best PVP client optimized with built-in mods, customizable HUD, and maximum FPS for 1.8.8.", "pt": "O melhor cliente PVP otimizado com mods integrados, HUD personalizável e desempenho máximo em FPS para 1.8.8."}, "Cliente PVP propio de Nebula Launcher con optimizaciones exclusivas, HUD modular y cosméticos sincronizados. En desarrollo.": {"en": "Nebula Launcher's native PVP client with exclusive optimizations, modular HUD, and synchronized cosmetics. In development.", "pt": "Cliente PVP próprio do Nebula Launcher com otimizações exclusivas, HUD modular e cosméticos sincronizados. Em desenvolvimento."}};
     const LAUNCHER_ALL_PLACEHOLDERS = {"🔍 Buscar versión...": {"en": "🔍 Search version...", "pt": "🔍 Buscar versão..."}, "Tu nickname": {"en": "Your nickname", "pt": "Seu apelido"}, "ejemplo@correo.com": {"en": "example@email.com", "pt": "exemplo@email.com"}, "••••••••": {"en": "••••••••", "pt": "••••••••"}, "Tu nickname (para el juego)": {"en": "Your nickname (in-game)", "pt": "Seu apelido (no jogo)"}, "Mínimo 6 caracteres": {"en": "Minimum 6 characters", "pt": "Mínimo 6 caracteres"}, "Ej: Sodium, Iris, JEI, Optifine...": {"en": "E.g., Sodium, Iris, JEI, OptiFine...", "pt": "Ex: Sodium, Iris, JEI, OptiFine..."}, "Buscar modpacks en Modrinth y CurseForge...": {"en": "Search modpacks on Modrinth and CurseForge...", "pt": "Pesquisar modpacks no Modrinth e CurseForge..."}, "Buscar textura o shader...": {"en": "Search texture or shader...", "pt": "Pesquisar textura ou shader..."}, "Escribe un mensaje...": {"en": "Type a message...", "pt": "Digite uma mensagem..."}, "Nombre de usuario...": {"en": "Username...", "pt": "Nome de usuário..."}, "Nuevo nickname": {"en": "New nickname", "pt": "Novo apelido"}, "Sin skin activa": {"en": "No active skin", "pt": "Sem skin ativa"}, "Mi Servidor de Minecraft": {"en": "My Minecraft Server", "pt": "Meu Servidor de Minecraft"}, "play.ejemplo.com o 192.168.1.1:25565": {"en": "play.example.com or 192.168.1.1:25565", "pt": "play.exemplo.com ou 192.168.1.1:25565"}, "Ej: -XX:+UseZGC -XX:+ZGenerational...": {"en": "E.g.: -XX:+UseZGC -XX:+ZGenerational...", "pt": "Ex: -XX:+UseZGC -XX:+ZGenerational..."}, "Ej: gamemoderun, optirun -b primus...": {"en": "E.g.: gamemoderun, optirun -b primus...", "pt": "Ex: gamemoderun, optirun -b primus..."}};
 
     // Construir índices bidireccionales canónicos
