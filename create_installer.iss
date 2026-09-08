@@ -1,6 +1,6 @@
 ; Script de Instalación de Inno Setup para Nebula Launcher v4.1.2 (Multilenguaje)
 #define MyAppName "Nebula Launcher"
-#define MyAppVersion "4.3.0"
+#define MyAppVersion "4.3.1"
 #define MyAppPublisher "Nebula Studios"
 #define MyAppURL "https://nebuladevstudios.com"
 #define MyAppExeName "Nebula Launcher.exe"
@@ -16,7 +16,7 @@ AppSupportURL={#MyAppURL}
 AppUpdatesURL={#MyAppURL}
 DefaultDirName={localappdata}\Programs\{#MyAppName}
 DisableProgramGroupPage=yes
-OutputBaseFilename=Nebula.Launcher.Setup.4.3.0
+OutputBaseFilename=Nebula.Launcher.Setup.4.3.1
 OutputDir=C:\Users\renee\Documents\Web
 Compression=lzma
 SolidCompression=yes
