@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/x-icon" href="../icon.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Solución a los Errores Más Frecuentes de Minecraft: Exit Code 1, Crashes y Java | Nebula</title>
+  <meta name="description" content="Guía completa para solucionar errores de Minecraft: Código de salida 1, OutOfMemoryError, fallos al iniciar mods, incompatibilidad de Java y crash reports paso a paso." />
+  
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6612759594307142" crossorigin="anonymous"></script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-dark: #05030d;
+      --bg-card: rgba(14, 10, 32, 0.7);
+      --accent-purple: #c084fc;
+      --accent-cyan: #38bdf8;
+      --accent-red: #f87171;
+      --border-glass: rgba(255, 255, 255, 0.1);
+      --border-glow: rgba(192, 132, 252, 0.4);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+      --font-heading: 'Outfit', sans-serif;
+      --font-body: 'Inter', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: radial-gradient(circle at 50% -10%, #1c0e3d 0%, #080415 50%, var(--bg-dark) 100%);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      min-height: 100vh;
+      line-height: 1.75;
+      overflow-x: hidden;
+    }
+
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(5, 3, 13, 0.85);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border-glass);
+      padding: 1rem 6%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      text-decoration: none;
+      color: var(--text-main);
+    }
+    .brand-logo-img { width: 36px; height: 36px; border-radius: 10px; }
+    .brand-name {
+      font-family: var(--font-heading);
+      font-weight: 800;
+      font-size: 1.2rem;
+    }
+    .nav-links { display: flex; gap: 1.8rem; list-style: none; }
+    .nav-link {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-link:hover { color: var(--text-main); }
+    .nav-btn {
+      background: linear-gradient(135deg, #8b5cf6, #6366f1);
+      color: #fff;
+      padding: 0.5rem 1.2rem;
+      border-radius: 10px;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .article-container {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 3.5rem 1.5rem 5rem;
+    }
+
+    .breadcrumbs {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+      font-size: 0.88rem;
+      color: var(--text-dim);
+      margin-bottom: 1.5rem;
+    }
+    .breadcrumbs a { color: var(--accent-cyan); text-decoration: none; }
+
+    .badge {
+      display: inline-block;
+      padding: 0.35rem 0.9rem;
+      border-radius: 9999px;
+      background: rgba(248, 113, 113, 0.12);
+      border: 1px solid rgba(248, 113, 113, 0.35);
+      color: var(--accent-red);
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 1rem;
+    }
+    h1 {
+      font-family: var(--font-heading);
+      font-size: clamp(2rem, 4.5vw, 2.9rem);
+      font-weight: 800;
+      line-height: 1.25;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, #fff 40%, var(--accent-purple) 80%, var(--accent-cyan) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .article-meta {
+      display: flex;
+      gap: 1.5rem;
+      color: var(--text-dim);
+      font-size: 0.9rem;
+      border-bottom: 1px solid var(--border-glass);
+      padding-bottom: 1.5rem;
+    }
+
+    .article-body {
+      background: var(--bg-card);
+      border: 1px solid var(--border-glass);
+      border-radius: 24px;
+      padding: 3rem;
+      backdrop-filter: blur(20px);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+    }
+    .article-body h2 {
+      font-family: var(--font-heading);
+      font-size: 1.65rem;
+      color: #fff;
+      margin: 2.2rem 0 1rem;
+    }
+    .article-body h3 {
+      font-family: var(--font-heading);
+      font-size: 1.3rem;
+      color: var(--accent-purple);
+      margin: 1.5rem 0 0.8rem;
+    }
+    .article-body p {
+      color: var(--text-muted);
+      margin-bottom: 1.25rem;
+      font-size: 1.05rem;
+    }
+    .article-body ul, .article-body ol {
+      margin-left: 1.5rem;
+      margin-bottom: 1.5rem;
+      color: var(--text-muted);
+    }
+    .article-body li { margin-bottom: 0.5rem; }
+    .article-body strong { color: #fff; }
+
+    pre {
+      background: rgba(0, 0, 0, 0.5);
+      border: 1px solid var(--border-glass);
+      border-radius: 12px;
+      padding: 1.25rem;
+      overflow-x: auto;
+      font-family: var(--font-mono);
+      font-size: 0.9rem;
+      color: var(--accent-cyan);
+      margin: 1.5rem 0;
+    }
+
+    .error-card {
+      background: rgba(248, 113, 113, 0.06);
+      border: 1px solid rgba(248, 113, 113, 0.25);
+      border-radius: 16px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .error-card h4 {
+      font-family: var(--font-heading);
+      color: #fca5a5;
+      font-size: 1.15rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .cta-card {
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(56, 189, 248, 0.2));
+      border: 1px solid var(--border-glow);
+      border-radius: 20px;
+      padding: 2rem;
+      text-align: center;
+      margin-top: 3rem;
+    }
+    .cta-card h3 { font-family: var(--font-heading); font-size: 1.5rem; color: #fff; margin-bottom: 0.5rem; }
+
+    footer {
+      border-top: 1px solid var(--border-glass);
+      padding: 3.5rem 6% 2rem;
+      background: rgba(5, 3, 13, 0.95);
+      color: var(--text-dim);
+      font-size: 0.9rem;
+      margin-top: 5rem;
+    }
+    .footer-grid { display: grid; grid-template-columns: 2fr repeat(3, 1fr); gap: 2.5rem; margin-bottom: 2.5rem; }
+    .footer-col h4 { font-family: var(--font-heading); color: #fff; font-size: 1rem; margin-bottom: 1rem; }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 0.6rem; }
+    .footer-col a { color: var(--text-muted); text-decoration: none; }
+    .footer-col a:hover { color: var(--accent-cyan); }
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      padding-top: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .article-body { padding: 1.75rem 1.25rem; }
+      .footer-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <a href="../index.html" class="brand">
+      <img src="../icon.ico" class="brand-logo-img" alt="Nebula Dev Studios" />
+      <span class="brand-name">NEBULA DEV STUDIOS</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html" class="nav-link">Inicio</a></li>
+      <li><a href="../guias.html" class="nav-link">Guías & Artículos</a></li>
+      <li><a href="../about.html" class="nav-link">Acerca de</a></li>
+      <li><a href="../contact.html" class="nav-link">Contacto</a></li>
+    </ul>
+    <a href="../index.html#descargar" class="nav-btn">Descargar Launcher</a>
+  </nav>
+
+  <div class="article-container">
+    <div class="breadcrumbs">
+      <a href="../index.html">Inicio</a> &gt; <a href="../guias.html">Guías</a> &gt; <span>Solución de Errores</span>
+    </div>
+
+    <div class="article-header">
+      <div class="badge">🛠️ Soporte Técnico</div>
+      <h1>Solución a los Errores Más Frecuentes de Minecraft: Código de Salida 1, Crashes y Java</h1>
+      <div class="article-meta">
+        <span>📅 Actualizado: Septiembre 2026</span>
+        <span>⏱️ 9 min de lectura</span>
+        <span>✍️ Equipo Técnico de Nebula</span>
+      </div>
+    </div>
+
+    <article class="article-body">
+      <p>
+        Pocos momentos son tan frustrantes para un jugador de Minecraft como pulsar el botón "Jugar" y ver cómo la ventana se cierra inesperadamente mostrando un escueto mensaje: <strong>"Se produjo un error y el juego ha crasheado. Código de salida: 1"</strong>.
+      </p>
+      <p>
+        El código de salida 1 (Exit Code 1) es un error genérico que simplemente indica que el proceso de Java terminó de forma anómala. En este artículo te enseñaremos a identificar la causa exacta del fallo y a solucionarlo en menos de 5 minutos.
+      </p>
+
+      <h2>1. Cómo leer el archivo de Crash Report</h2>
+      <p>
+        En lugar de adivinar qué mod o ajuste está fallando, la clave está en consultar el registro generado por el juego en tu carpeta de Minecraft:
+      </p>
+      <pre><code>.minecraft/crash-reports/crash-YYYY-MM-DD_HH.MM.SS-client.txt</code></pre>
+      <p>
+        Abre ese archivo de texto con el Bloc de notas y busca las primeras 15 líneas. Casi siempre verás una línea que comienza por <code>Caused by:</code>. Ahí se especifica exactamente el mod o la librería responsable del fallo.
+      </p>
+
+      <h2>2. Los Tres Errores Más Comunes y Cómo Repararlos</h2>
+
+      <div class="error-card">
+        <h4>🚨 Error 1: java.lang.OutOfMemoryError (Falta de Memoria RAM)</h4>
+        <p>
+          <strong>Causa:</strong> El modpack o los shaders intentaron cargar más texturas y modelos 3D de los permitidos por el límite de memoria asignado a Java.
+        </p>
+        <p>
+          <strong>Solución:</strong> Ve a los ajustes de tu lanzador y aumenta la memoria RAM asignada a la instancia. Para modpacks medianos pon al menos <strong>6 GB (6144 MB)</strong>. Recuerda nunca asignar más del 70% de la RAM total física de tu ordenador para evitar congelar Windows.
+        </p>
+      </div>
+
+      <div class="error-card">
+        <h4>🚨 Error 2: UnsupportedClassVersionError (Versión Incorrecta de Java)</h4>
+        <p>
+          <strong>Causa:</strong> Intentar ejecutar una versión moderna de Minecraft (como la 1.20.5 o 1.21) usando una instalación antigua de Java 8 o Java 17.
+        </p>
+        <p>
+          <strong>Solución:</strong> Minecraft 1.20.5 en adelante requiere obligatoriamente <strong>Java 21 (JDK 21)</strong>. En Nebula Launcher, el sistema detecta la versión del juego y descarga automáticamente el binario oficial de Java 21 adecuado para tu arquitectura (x64 o ARM).
+        </p>
+      </div>
+
+      <div class="error-card">
+        <h4>🚨 Error 3: Incompatibilidad entre Mods (DuplicateModsFoundException o IncompatibleModException)</h4>
+        <p>
+          <strong>Causa:</strong> Tienes dos versiones del mismo mod en la carpeta <code>mods/</code> (por ejemplo, <code>sodium-0.5.8.jar</code> y <code>sodium-0.5.11.jar</code>), o un mod incompatible con tu cargador (un mod de Forge dentro de una instancia de Fabric).
+        </p>
+        <p>
+          <strong>Solución:</strong> Revisa tu carpeta <code>mods/</code> y elimina versiones duplicadas. Asegúrate de que todos los archivos descargados especifiquen exactamente el loader que estás usando.
+        </p>
+      </div>
+
+      <h2>3. Problemas con la Tarjeta Gráfica y Pantalla Negra</h2>
+      <p>
+        Si el juego se cierra justo antes de mostrar el menú principal o la pantalla se queda completamente en blanco o negro con el error <code>GLFW error 65542: WGL: The driver does not appear to support OpenGL</code>:
+      </p>
+      <ol>
+        <li><strong>Laptops con doble tarjeta (Integrada + Dedicada):</strong> Windows a veces intenta abrir Minecraft con los gráficos integrados de Intel o AMD en lugar de la GPU NVIDIA GeForce. Ve a <em>Configuración de Windows &rarr; Pantalla &rarr; Gráficos</em>, añade el ejecutable <code>javaw.exe</code> y selecciona <strong>"Alto rendimiento (GPU dedicada)"</strong>.</li>
+        <li><strong>Actualiza tus controladores gráficos:</strong> Descarga la versión más reciente de los controladores desde la web oficial de NVIDIA, AMD o Intel. Los drivers genéricos que instala Windows Update carecen frecuentemente de soporte completo para OpenGL 4.5.</li>
+      </ol>
+
+      <div class="cta-card">
+        <h3>¿Cansado de lidiar con logs y errores de consola?</h3>
+        <p style="color: var(--text-muted); margin-bottom: 1.2rem;">
+          Nebula Launcher cuenta con un analizador de crashes inteligente integrado que traduce el reporte de error a lenguaje comprensible y te dice qué mod debes desactivar.
+        </p>
+        <a href="../index.html#descargar" class="nav-btn" style="padding: 0.75rem 1.8rem; font-size: 1rem;">
+          Descargar Nebula Launcher Gratis &rarr;
+        </a>
+      </div>
+
+    </article>
+  </div>
+
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h4>NEBULA DEV STUDIOS</h4>
+        <p style="font-size: 0.9rem; color: var(--text-dim); margin-top: 0.5rem;">
+          Portal oficial de guías, herramientas y lanzador de alto rendimiento para Minecraft.
+        </p>
+      </div>
+      <div class="footer-col">
+        <h4>Navegación</h4>
+        <ul>
+          <li><a href="../index.html">Inicio</a></li>
+          <li><a href="../guias.html">Guías & Tutoriales</a></li>
+          <li><a href="../about.html">Acerca de</a></li>
+          <li><a href="../contact.html">Contacto</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Otras Guías</h4>
+        <ul>
+          <li><a href="./optimizar-minecraft-pc-bajos-recursos.html">Optimización de FPS</a></li>
+          <li><a href="./como-instalar-modpacks-mods-minecraft.html">Instalar Mods y Modpacks</a></li>
+          <li><a href="./mejores-shaders-para-minecraft.html">Mejores Shaders 2026</a></li>
+          <li><a href="./guia-java-para-minecraft-versiones.html">Guía de Java para Minecraft</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="../privacy.html">Política de Privacidad</a></li>
+          <li><a href="../terms.html">Términos de Servicio</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>&copy; 2026 Nebula Dev Studios. Todos los derechos reservados.</div>
+      <div>Minecraft es marca registrada de Mojang Synergies AB.</div>
+    </div>
+  </footer>
+
+</body>
+</html>

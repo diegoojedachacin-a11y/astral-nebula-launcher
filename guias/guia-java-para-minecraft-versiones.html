@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/x-icon" href="../icon.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Guía de Versiones de Java para Minecraft: Java 8 vs 17 vs 21 | Nebula</title>
+  <meta name="description" content="Descubre qué versión de Java necesita tu versión de Minecraft (Java 8, 17 o 21). Comparativa de JDKs modernos (Temurin, GraalVM) y optimización de la máquina virtual (JVM)." />
+  
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6612759594307142" crossorigin="anonymous"></script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-dark: #05030d;
+      --bg-card: rgba(14, 10, 32, 0.7);
+      --accent-purple: #c084fc;
+      --accent-cyan: #38bdf8;
+      --accent-indigo: #818cf8;
+      --border-glass: rgba(255, 255, 255, 0.1);
+      --border-glow: rgba(192, 132, 252, 0.4);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+      --font-heading: 'Outfit', sans-serif;
+      --font-body: 'Inter', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: radial-gradient(circle at 50% -10%, #1c0e3d 0%, #080415 50%, var(--bg-dark) 100%);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      min-height: 100vh;
+      line-height: 1.75;
+      overflow-x: hidden;
+    }
+
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(5, 3, 13, 0.85);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border-glass);
+      padding: 1rem 6%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      text-decoration: none;
+      color: var(--text-main);
+    }
+    .brand-logo-img { width: 36px; height: 36px; border-radius: 10px; }
+    .brand-name {
+      font-family: var(--font-heading);
+      font-weight: 800;
+      font-size: 1.2rem;
+    }
+    .nav-links { display: flex; gap: 1.8rem; list-style: none; }
+    .nav-link {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-link:hover { color: var(--text-main); }
+    .nav-btn {
+      background: linear-gradient(135deg, #8b5cf6, #6366f1);
+      color: #fff;
+      padding: 0.5rem 1.2rem;
+      border-radius: 10px;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .article-container {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 3.5rem 1.5rem 5rem;
+    }
+
+    .breadcrumbs {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+      font-size: 0.88rem;
+      color: var(--text-dim);
+      margin-bottom: 1.5rem;
+    }
+    .breadcrumbs a { color: var(--accent-cyan); text-decoration: none; }
+
+    .badge {
+      display: inline-block;
+      padding: 0.35rem 0.9rem;
+      border-radius: 9999px;
+      background: rgba(129, 140, 248, 0.12);
+      border: 1px solid rgba(129, 140, 248, 0.35);
+      color: var(--accent-indigo);
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 1rem;
+    }
+    h1 {
+      font-family: var(--font-heading);
+      font-size: clamp(2rem, 4.5vw, 2.9rem);
+      font-weight: 800;
+      line-height: 1.25;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, #fff 40%, var(--accent-purple) 80%, var(--accent-indigo) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .article-meta {
+      display: flex;
+      gap: 1.5rem;
+      color: var(--text-dim);
+      font-size: 0.9rem;
+      border-bottom: 1px solid var(--border-glass);
+      padding-bottom: 1.5rem;
+    }
+
+    .article-body {
+      background: var(--bg-card);
+      border: 1px solid var(--border-glass);
+      border-radius: 24px;
+      padding: 3rem;
+      backdrop-filter: blur(20px);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+    }
+    .article-body h2 {
+      font-family: var(--font-heading);
+      font-size: 1.65rem;
+      color: #fff;
+      margin: 2.2rem 0 1rem;
+    }
+    .article-body h3 {
+      font-family: var(--font-heading);
+      font-size: 1.3rem;
+      color: var(--accent-purple);
+      margin: 1.5rem 0 0.8rem;
+    }
+    .article-body p {
+      color: var(--text-muted);
+      margin-bottom: 1.25rem;
+      font-size: 1.05rem;
+    }
+    .article-body ul, .article-body ol {
+      margin-left: 1.5rem;
+      margin-bottom: 1.5rem;
+      color: var(--text-muted);
+    }
+    .article-body li { margin-bottom: 0.5rem; }
+    .article-body strong { color: #fff; }
+
+    .table-wrap {
+      overflow-x: auto;
+      margin: 2rem 0;
+      border-radius: 14px;
+      border: 1px solid var(--border-glass);
+    }
+    table { width: 100%; border-collapse: collapse; text-align: left; font-size: 0.95rem; }
+    th { background: rgba(192, 132, 252, 0.15); color: #fff; padding: 1rem; font-family: var(--font-heading); }
+    td { padding: 0.9rem 1rem; border-top: 1px solid rgba(255, 255, 255, 0.06); color: var(--text-muted); }
+
+    .cta-card {
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(56, 189, 248, 0.2));
+      border: 1px solid var(--border-glow);
+      border-radius: 20px;
+      padding: 2rem;
+      text-align: center;
+      margin-top: 3rem;
+    }
+    .cta-card h3 { font-family: var(--font-heading); font-size: 1.5rem; color: #fff; margin-bottom: 0.5rem; }
+
+    footer {
+      border-top: 1px solid var(--border-glass);
+      padding: 3.5rem 6% 2rem;
+      background: rgba(5, 3, 13, 0.95);
+      color: var(--text-dim);
+      font-size: 0.9rem;
+      margin-top: 5rem;
+    }
+    .footer-grid { display: grid; grid-template-columns: 2fr repeat(3, 1fr); gap: 2.5rem; margin-bottom: 2.5rem; }
+    .footer-col h4 { font-family: var(--font-heading); color: #fff; font-size: 1rem; margin-bottom: 1rem; }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 0.6rem; }
+    .footer-col a { color: var(--text-muted); text-decoration: none; }
+    .footer-col a:hover { color: var(--accent-cyan); }
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      padding-top: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .article-body { padding: 1.75rem 1.25rem; }
+      .footer-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <a href="../index.html" class="brand">
+      <img src="../icon.ico" class="brand-logo-img" alt="Nebula Dev Studios" />
+      <span class="brand-name">NEBULA DEV STUDIOS</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html" class="nav-link">Inicio</a></li>
+      <li><a href="../guias.html" class="nav-link">Guías & Artículos</a></li>
+      <li><a href="../about.html" class="nav-link">Acerca de</a></li>
+      <li><a href="../contact.html" class="nav-link">Contacto</a></li>
+    </ul>
+    <a href="../index.html#descargar" class="nav-btn">Descargar Launcher</a>
+  </nav>
+
+  <div class="article-container">
+    <div class="breadcrumbs">
+      <a href="../index.html">Inicio</a> &gt; <a href="../guias.html">Guías</a> &gt; <span>Guía de Java para Minecraft</span>
+    </div>
+
+    <div class="article-header">
+      <div class="badge">☕ Entorno de Ejecución</div>
+      <h1>Guía de Versiones de Java para Minecraft: De Java 8 a Java 21 y Rendimiento JVM</h1>
+      <div class="article-meta">
+        <span>📅 Actualizado: Septiembre 2026</span>
+        <span>⏱️ 7 min de lectura</span>
+        <span>✍️ Equipo Técnico de Nebula</span>
+      </div>
+    </div>
+
+    <article class="article-body">
+      <p>
+        Minecraft fue programado íntegramente sobre la plataforma de <strong>Java</strong>. Esto significa que el rendimiento, la estabilidad y la compatibilidad de tus partidas dependen de forma directa de la versión del <strong>Java Runtime Environment (JRE)</strong> instalado en tu sistema operativo.
+      </p>
+      <p>
+        Con la llegada de Minecraft 1.18, 1.20.5 y 1.21, Mojang ha actualizado drásticamente los requisitos mínimos de Java, haciendo que versiones históricas como Java 8 ya no puedan iniciar las versiones modernas. En esta guía detallamos qué versión de Java necesitas para cada versión del juego y cuáles son las distribuciones más rápidas del mercado.
+      </p>
+
+      <h2>1. Matriz de Compatibilidad Oficial de Java</h2>
+      <p>Para evitar fallos de clase no soportada (<em>UnsupportedClassVersionError</em>), consulta esta tabla de versiones oficiales:</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Versión de Minecraft</th>
+              <th>Versión de Java Obligatoria</th>
+              <th>Notas de Compatibilidad</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Minecraft 1.0 a 1.16.4</strong></td>
+              <td><strong>Java 8 (OpenJDK 1.8)</strong></td>
+              <td>La versión clásica para PvP (1.7.10 y 1.8.9) y mods de Forge 1.12.2.</td>
+            </tr>
+            <tr>
+              <td><strong>Minecraft 1.16.5 a 1.17.1</strong></td>
+              <td><strong>Java 16 (OpenJDK 16)</strong></td>
+              <td>Etapa de transición donde Mojang introdujo el nuevo compilador.</td>
+            </tr>
+            <tr>
+              <td><strong>Minecraft 1.18 a 1.20.4</strong></td>
+              <td><strong>Java 17 (OpenJDK 17 LTS)</strong></td>
+              <td>Soporte a largo plazo (LTS) con grandes mejoras de memoria.</td>
+            </tr>
+            <tr>
+              <td><strong>Minecraft 1.20.5, 1.21 y posteriores</strong></td>
+              <td><strong>Java 21 (OpenJDK 21 LTS)</strong></td>
+              <td>Requisito obligatorio moderno con recolección de basura avanzada (ZGC) y Virtual Threads.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>2. ¿Por qué NO deberías usar el instalador clásico de Oracle Java?</h2>
+      <p>
+        Históricamente, los usuarios solían ir a la web de Oracle y descargar el ejecutable tradicional. Sin embargo, Oracle Java contiene licencias restrictivas y no incluye las optimizaciones modernas de compilación Just-In-Time (JIT) que ofrecen las distribuciones de código abierto.
+      </p>
+      <p>Hoy en día, las distribuciones más rápidas y recomendadas para videojuegos son:</p>
+      <ul>
+        <li><strong>Eclipse Adoptium (Temurin):</strong> La distribución comunitaria más sólida, estable y testeada del mundo. Es la opción recomendada por defecto.</li>
+        <li><strong>GraalVM:</strong> Un compilador de Java ultra optimizado desarrollado por Oracle Labs. Puede ofrecer entre un <strong>5% y un 15% más de rendimiento en FPS</strong> en procesadores modernos gracias a su avanzado análisis de escape y vectorización automática de bucles.</li>
+        <li><strong>Microsoft Build of OpenJDK:</strong> Extremadamente optimizado para sistemas Windows y arquitecturas x64 y ARM64.</li>
+      </ul>
+
+      <h2>3. Detección y Descarga Automática de Java en Nebula Launcher</h2>
+      <p>
+        Tener que instalar múltiples versiones de Java en Windows (Java 8 para 1.8.9 y Java 21 para 1.21) solía causar conflictos con las variables de entorno <code>JAVA_HOME</code> y el registro de Windows.
+      </p>
+      <p>
+        <strong>Nebula Launcher resuelve este problema de raíz:</strong>
+      </p>
+      <ul>
+        <li>El launcher incluye un gestor interno multi-instancia de Java totalmente aislado.</li>
+        <li>Cuando inicias una versión 1.8.9, Nebula invoca un runtime aislado de Java 8 sin tocar el sistema.</li>
+        <li>Al cambiar a 1.21, Nebula conmuta automáticamente a Java 21 LTS con arquitectura de 64 bits y flags de memoria G1GC ya afinados.</li>
+      </ul>
+
+      <div class="cta-card">
+        <h3>Olvídate de Configurar Java a Mano</h3>
+        <p style="color: var(--text-muted); margin-bottom: 1.2rem;">
+          Descarga Nebula Launcher y disfruta de Minecraft sin errores de versiones, con Java 21 nativo y rendimiento óptimo desde el primer segundo.
+        </p>
+        <a href="../index.html#descargar" class="nav-btn" style="padding: 0.75rem 1.8rem; font-size: 1rem;">
+          Descargar Nebula Launcher Gratis &rarr;
+        </a>
+      </div>
+
+    </article>
+  </div>
+
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h4>NEBULA DEV STUDIOS</h4>
+        <p style="font-size: 0.9rem; color: var(--text-dim); margin-top: 0.5rem;">
+          Portal oficial de guías, herramientas y lanzador de alto rendimiento para Minecraft.
+        </p>
+      </div>
+      <div class="footer-col">
+        <h4>Navegación</h4>
+        <ul>
+          <li><a href="../index.html">Inicio</a></li>
+          <li><a href="../guias.html">Guías & Tutoriales</a></li>
+          <li><a href="../about.html">Acerca de</a></li>
+          <li><a href="../contact.html">Contacto</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Otras Guías</h4>
+        <ul>
+          <li><a href="./optimizar-minecraft-pc-bajos-recursos.html">Optimización de FPS</a></li>
+          <li><a href="./como-instalar-modpacks-mods-minecraft.html">Instalar Mods y Modpacks</a></li>
+          <li><a href="./solucion-errores-comunes-minecraft.html">Solución de Errores de Minecraft</a></li>
+          <li><a href="./mejores-shaders-para-minecraft.html">Mejores Shaders 2026</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="../privacy.html">Política de Privacidad</a></li>
+          <li><a href="../terms.html">Términos de Servicio</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>&copy; 2026 Nebula Dev Studios. Todos los derechos reservados.</div>
+      <div>Minecraft es marca registrada de Mojang Synergies AB.</div>
+    </div>
+  </footer>
+
+</body>
+</html>

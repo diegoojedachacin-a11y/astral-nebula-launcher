@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/x-icon" href="./icon.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Acerca de Nosotros | Nebula Dev Studios</title>
+  <meta name="description" content="Conoce la historia, misión y equipo de desarrollo detrás de Nebula Launcher y Nebula Dev Studios. Software moderno, abierto y optimizado para la comunidad de Minecraft." />
+  
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6612759594307142" crossorigin="anonymous"></script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-dark: #05030d;
+      --bg-card: rgba(14, 10, 32, 0.7);
+      --bg-card-hover: rgba(24, 16, 52, 0.85);
+      --accent-purple: #c084fc;
+      --accent-purple-glow: rgba(192, 132, 252, 0.35);
+      --accent-cyan: #38bdf8;
+      --accent-indigo: #818cf8;
+      --border-glass: rgba(255, 255, 255, 0.1);
+      --border-glow: rgba(192, 132, 252, 0.4);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+      --font-heading: 'Outfit', sans-serif;
+      --font-body: 'Inter', sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: radial-gradient(circle at 50% -10%, #1c0e3d 0%, #080415 50%, var(--bg-dark) 100%);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      min-height: 100vh;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* Navbar */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(5, 3, 13, 0.8);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border-glass);
+      padding: 1rem 6%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      text-decoration: none;
+      color: var(--text-main);
+    }
+    .brand-logo-img {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, rgba(192, 132, 252, 0.2), rgba(56, 189, 248, 0.2));
+      border: 1px solid var(--border-glass);
+      padding: 3px;
+    }
+    .brand-name {
+      font-family: var(--font-heading);
+      font-weight: 800;
+      font-size: 1.25rem;
+      letter-spacing: 0.04em;
+    }
+    .nav-links {
+      display: flex;
+      gap: 1.8rem;
+      list-style: none;
+    }
+    .nav-link {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: color 0.2s ease;
+    }
+    .nav-link:hover, .nav-link.active {
+      color: var(--text-main);
+    }
+    .nav-btn {
+      background: linear-gradient(135deg, #8b5cf6, #6366f1);
+      color: #fff;
+      padding: 0.55rem 1.25rem;
+      border-radius: 10px;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+      box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .nav-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 22px rgba(139, 92, 246, 0.6);
+    }
+
+    /* Container */
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 3.5rem 1.5rem 5rem;
+    }
+
+    /* Hero */
+    .hero-about {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.4rem 1rem;
+      border-radius: 9999px;
+      background: rgba(192, 132, 252, 0.1);
+      border: 1px solid var(--border-glow);
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--accent-purple);
+      margin-bottom: 1.25rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    h1 {
+      font-family: var(--font-heading);
+      font-size: clamp(2.2rem, 5vw, 3.4rem);
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 1.2rem;
+      background: linear-gradient(135deg, #ffffff 30%, var(--accent-purple) 70%, var(--accent-cyan) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero-sub {
+      color: var(--text-muted);
+      font-size: 1.15rem;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    /* Glass Cards */
+    .glass-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-glass);
+      border-radius: 20px;
+      padding: 2.5rem;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      margin-bottom: 2.5rem;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+    .glass-card:hover {
+      border-color: rgba(192, 132, 252, 0.3);
+      box-shadow: 0 20px 50px rgba(139, 92, 246, 0.15);
+    }
+
+    h2 {
+      font-family: var(--font-heading);
+      font-size: 1.65rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    p {
+      color: var(--text-muted);
+      margin-bottom: 1.2rem;
+      font-size: 1.02rem;
+    }
+    p strong {
+      color: #fff;
+    }
+
+    /* Values Grid */
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+    .value-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: 16px;
+      padding: 1.75rem;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .value-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent-purple);
+    }
+    .value-icon {
+      font-size: 2rem;
+      margin-bottom: 0.75rem;
+    }
+    .value-card h3 {
+      font-family: var(--font-heading);
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 0.5rem;
+    }
+    .value-card p {
+      font-size: 0.92rem;
+      margin-bottom: 0;
+      color: var(--text-muted);
+    }
+
+    /* Stats Banner */
+    .stats-banner {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1.5rem;
+      text-align: center;
+      padding: 2rem;
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(56, 189, 248, 0.1));
+      border: 1px solid var(--border-glass);
+      border-radius: 20px;
+      margin: 3rem 0;
+    }
+    .stat-num {
+      font-family: var(--font-heading);
+      font-size: 2.4rem;
+      font-weight: 800;
+      color: var(--accent-purple);
+      margin-bottom: 0.2rem;
+    }
+    .stat-label {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border-glass);
+      padding: 3.5rem 6% 2rem;
+      background: rgba(5, 3, 13, 0.95);
+      color: var(--text-dim);
+      font-size: 0.9rem;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr repeat(3, 1fr);
+      gap: 2.5rem;
+      margin-bottom: 2.5rem;
+    }
+    .footer-col h4 {
+      font-family: var(--font-heading);
+      color: #fff;
+      font-size: 1rem;
+      margin-bottom: 1rem;
+    }
+    .footer-col ul {
+      list-style: none;
+    }
+    .footer-col li {
+      margin-bottom: 0.6rem;
+    }
+    .footer-col a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-col a:hover {
+      color: var(--accent-cyan);
+    }
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      padding-top: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .container { padding: 2.5rem 1.2rem 4rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <a href="./index.html" class="brand">
+      <img src="./icon.ico" class="brand-logo-img" alt="Nebula Dev Studios" />
+      <span class="brand-name">NEBULA DEV STUDIOS</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="./index.html" class="nav-link">Inicio</a></li>
+      <li><a href="./guias.html" class="nav-link">Guías & Artículos</a></li>
+      <li><a href="./about.html" class="nav-link active">Acerca de</a></li>
+      <li><a href="./contact.html" class="nav-link">Contacto</a></li>
+    </ul>
+    <a href="./index.html#descargar" class="nav-btn">Descargar Launcher</a>
+  </nav>
+
+  <div class="container">
+    <div class="hero-about">
+      <div class="badge">✦ Misión y Filosofía</div>
+      <h1>Acerca de Nebula Dev Studios</h1>
+      <p class="hero-sub">
+        Somos un equipo independiente de desarrolladores y apasionados de Minecraft dedicados a crear herramientas modernas, fluidas y libres para potenciar la experiencia de juego de millones de jugadores.
+      </p>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats-banner">
+      <div>
+        <div class="stat-num">+60 FPS</div>
+        <div class="stat-label">Fluidez de Interfaz Glass Blur</div>
+      </div>
+      <div>
+        <div class="stat-num">1-Clic</div>
+        <div class="stat-label">Instalación de Modpacks & Loaders</div>
+      </div>
+      <div>
+        <div class="stat-num">100%</div>
+        <div class="stat-label">Privacidad & Sin Telemetría Invasiva</div>
+      </div>
+      <div>
+        <div class="stat-num">0€</div>
+        <div class="stat-label">Software Libre para la Comunidad</div>
+      </div>
+    </div>
+
+    <!-- Historia y Origen -->
+    <div class="glass-card">
+      <h2>🪐 Nuestra Historia</h2>
+      <p>
+        <strong>Nebula Dev Studios</strong> nació a principios de 2024 a partir de una necesidad compartida por la comunidad hispanohablante e internacional: los lanzadores de Minecraft existentes se habían vuelto lentos, pesados, sobrecargados de anuncios invasivos o limitados en personalización visual.
+      </p>
+      <p>
+        Decidimos construir <strong>Nebula Launcher</strong> desde cero combinando las tecnologías web más avanzadas (Electron, TypeScript, Node.js y aceleración gráfica por hardware) para ofrecer un entorno visual estéticamente cósmico, con desenfoque de cristal real a 60+ FPS y soporte para fondos dinámicos en video y GIFs en alta definición.
+      </p>
+      <p>
+        Lo que empezó como un proyecto personal entre amigos apasionados del juego se transformó rápidamente en una plataforma completa que hoy en día integra catálogos de mods de <strong>Modrinth y CurseForge</strong>, visores de skins en 3D en tiempo real, gestión automática de memoria RAM y una red social integrada para conectar con amigos de forma segura.
+      </p>
+    </div>
+
+    <!-- Valores y Compromiso -->
+    <div class="glass-card">
+      <h2>✨ Nuestros Pilares Fundamentales</h2>
+      <p>Todo el software y contenido que desarrollamos en Nebula Dev Studios se rige bajo cuatro principios inquebrantables:</p>
+      
+      <div class="grid-3">
+        <div class="value-card">
+          <div class="value-icon">⚡</div>
+          <h3>Rendimiento Extremo</h3>
+          <p>Optimizamos cada línea de código y cada ciclo de la JVM. Nuestro lanzador consume hasta un 65% menos memoria que las soluciones tradicionales.</p>
+        </div>
+
+        <div class="value-card">
+          <div class="value-icon">🛡️</div>
+          <h3>Privacidad Absoluta</h3>
+          <p>No rastreamos tus datos personales ni vendemos información a terceros. Creemos firmemente en el derecho a un software transparente y seguro.</p>
+        </div>
+
+        <div class="value-card">
+          <div class="value-icon">🎨</div>
+          <h3>Diseño y Estética</h3>
+          <p>Creemos que las herramientas técnicas deben ser hermosas. Diseñamos con estética minimalista cósmica, tipografía de alta gama y microinteracciones suaves.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Ecosistema y Colaboración -->
+    <div class="glass-card">
+      <h2>🤝 Compromiso con el Ecosistema Abierto</h2>
+      <p>
+        En Nebula Dev Studios creemos en el ecosistema abierto de Minecraft. Nebula Launcher mantiene interoperabilidad directa con los loaders líderes de la industria: <strong>FabricMC, NeoForged, Forge y Quilt</strong>, así como con los repositorios de mods abiertos de <strong>Modrinth</strong> y las APIs oficiales de Microsoft Mojang.
+      </p>
+      <p>
+        Nuestro código fuente es público en nuestro repositorio de GitHub, invitando a programadores de todo el mundo a inspeccionar el código, reportar mejoras y contribuir activamente al crecimiento del proyecto.
+      </p>
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h4>NEBULA DEV STUDIOS</h4>
+        <p style="font-size: 0.9rem; color: var(--text-dim); margin-top: 0.5rem;">
+          Desarrollando el ecosistema de Minecraft más avanzado, estético y fluido para jugadores y creadores de contenido.
+        </p>
+      </div>
+      <div class="footer-col">
+        <h4>Navegación</h4>
+        <ul>
+          <li><a href="./index.html">Inicio</a></li>
+          <li><a href="./guias.html">Guías & Tutoriales</a></li>
+          <li><a href="./about.html">Acerca de</a></li>
+          <li><a href="./contact.html">Contacto</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Recursos</h4>
+        <ul>
+          <li><a href="./guias/optimizar-minecraft-pc-bajos-recursos.html">Optimización de FPS</a></li>
+          <li><a href="./guias/como-instalar-modpacks-mods-minecraft.html">Instalación de Mods</a></li>
+          <li><a href="./guias/solucion-errores-comunes-minecraft.html">Solución de Errores</a></li>
+          <li><a href="https://github.com/fonduev/astral-nebula-launcher" target="_blank" rel="noopener">Código en GitHub</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="./privacy.html">Política de Privacidad</a></li>
+          <li><a href="./terms.html">Términos de Servicio</a></li>
+          <li><a href="./contact.html">Reportar un Problema</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>&copy; 2026 Nebula Dev Studios. Todos los derechos reservados.</div>
+      <div>Minecraft es una marca registrada de Mojang Synergies AB. Nebula Launcher no está afiliado ni respaldado por Mojang o Microsoft.</div>
+    </div>
+  </footer>
+
+</body>
+</html>

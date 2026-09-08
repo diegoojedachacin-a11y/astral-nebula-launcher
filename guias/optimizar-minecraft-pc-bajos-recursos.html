@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/x-icon" href="../icon.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cómo Optimizar Minecraft en 2026: Guía Definitiva de FPS con Sodium y JVM | Nebula</title>
+  <meta name="description" content="Aprende a duplicar tus FPS y eliminar tirones en Minecraft. Guía completa con el stack moderno de Sodium, Lithium, FerriteCore, argumentos JVM y configuración para PCs de bajos recursos." />
+  
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6612759594307142" crossorigin="anonymous"></script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-dark: #05030d;
+      --bg-card: rgba(14, 10, 32, 0.7);
+      --accent-purple: #c084fc;
+      --accent-cyan: #38bdf8;
+      --accent-emerald: #34d399;
+      --border-glass: rgba(255, 255, 255, 0.1);
+      --border-glow: rgba(192, 132, 252, 0.4);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+      --font-heading: 'Outfit', sans-serif;
+      --font-body: 'Inter', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: radial-gradient(circle at 50% -10%, #1c0e3d 0%, #080415 50%, var(--bg-dark) 100%);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      min-height: 100vh;
+      line-height: 1.75;
+      overflow-x: hidden;
+    }
+
+    /* Navbar */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(5, 3, 13, 0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border-glass);
+      padding: 1rem 6%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      text-decoration: none;
+      color: var(--text-main);
+    }
+    .brand-logo-img {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+    }
+    .brand-name {
+      font-family: var(--font-heading);
+      font-weight: 800;
+      font-size: 1.2rem;
+    }
+    .nav-links {
+      display: flex;
+      gap: 1.8rem;
+      list-style: none;
+    }
+    .nav-link {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-link:hover { color: var(--text-main); }
+    .nav-btn {
+      background: linear-gradient(135deg, #8b5cf6, #6366f1);
+      color: #fff;
+      padding: 0.5rem 1.2rem;
+      border-radius: 10px;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    /* Article Container */
+    .article-container {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 3.5rem 1.5rem 5rem;
+    }
+
+    .breadcrumbs {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+      font-size: 0.88rem;
+      color: var(--text-dim);
+      margin-bottom: 1.5rem;
+    }
+    .breadcrumbs a {
+      color: var(--accent-cyan);
+      text-decoration: none;
+    }
+
+    .article-header {
+      margin-bottom: 2.5rem;
+    }
+    .badge {
+      display: inline-block;
+      padding: 0.35rem 0.9rem;
+      border-radius: 9999px;
+      background: rgba(52, 211, 153, 0.1);
+      border: 1px solid rgba(52, 211, 153, 0.3);
+      color: var(--accent-emerald);
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 1rem;
+    }
+    h1 {
+      font-family: var(--font-heading);
+      font-size: clamp(2rem, 4.5vw, 2.9rem);
+      font-weight: 800;
+      line-height: 1.25;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, #fff 40%, var(--accent-purple) 80%, var(--accent-cyan) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .article-meta {
+      display: flex;
+      gap: 1.5rem;
+      color: var(--text-dim);
+      font-size: 0.9rem;
+      border-bottom: 1px solid var(--border-glass);
+      padding-bottom: 1.5rem;
+    }
+
+    /* Article Body */
+    .article-body {
+      background: var(--bg-card);
+      border: 1px solid var(--border-glass);
+      border-radius: 24px;
+      padding: 3rem;
+      backdrop-filter: blur(20px);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+    }
+    .article-body h2 {
+      font-family: var(--font-heading);
+      font-size: 1.65rem;
+      color: #fff;
+      margin: 2.2rem 0 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .article-body h3 {
+      font-family: var(--font-heading);
+      font-size: 1.3rem;
+      color: var(--accent-purple);
+      margin: 1.5rem 0 0.8rem;
+    }
+    .article-body p {
+      color: var(--text-muted);
+      margin-bottom: 1.25rem;
+      font-size: 1.05rem;
+    }
+    .article-body ul, .article-body ol {
+      margin-left: 1.5rem;
+      margin-bottom: 1.5rem;
+      color: var(--text-muted);
+    }
+    .article-body li {
+      margin-bottom: 0.5rem;
+    }
+    .article-body strong {
+      color: #fff;
+    }
+
+    /* Comparison Table */
+    .table-wrap {
+      overflow-x: auto;
+      margin: 2rem 0;
+      border-radius: 14px;
+      border: 1px solid var(--border-glass);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.95rem;
+    }
+    th {
+      background: rgba(192, 132, 252, 0.15);
+      color: #fff;
+      padding: 1rem;
+      font-family: var(--font-heading);
+      font-weight: 700;
+    }
+    td {
+      padding: 0.9rem 1rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      color: var(--text-muted);
+    }
+    tr:hover td {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    /* Code block */
+    pre {
+      background: rgba(0, 0, 0, 0.5);
+      border: 1px solid var(--border-glass);
+      border-radius: 12px;
+      padding: 1.25rem;
+      overflow-x: auto;
+      font-family: var(--font-mono);
+      font-size: 0.9rem;
+      color: var(--accent-cyan);
+      margin: 1.5rem 0;
+    }
+
+    .alert-box {
+      background: rgba(56, 189, 248, 0.08);
+      border-left: 4px solid var(--accent-cyan);
+      padding: 1.2rem;
+      border-radius: 0 12px 12px 0;
+      margin: 1.8rem 0;
+      color: #e0f2fe;
+    }
+
+    /* CTA Card */
+    .cta-card {
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(56, 189, 248, 0.2));
+      border: 1px solid var(--border-glow);
+      border-radius: 20px;
+      padding: 2rem;
+      text-align: center;
+      margin-top: 3rem;
+    }
+    .cta-card h3 {
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      color: #fff;
+      margin-bottom: 0.5rem;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border-glass);
+      padding: 3.5rem 6% 2rem;
+      background: rgba(5, 3, 13, 0.95);
+      color: var(--text-dim);
+      font-size: 0.9rem;
+      margin-top: 5rem;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr repeat(3, 1fr);
+      gap: 2.5rem;
+      margin-bottom: 2.5rem;
+    }
+    .footer-col h4 {
+      font-family: var(--font-heading);
+      color: #fff;
+      font-size: 1rem;
+      margin-bottom: 1rem;
+    }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 0.6rem; }
+    .footer-col a { color: var(--text-muted); text-decoration: none; }
+    .footer-col a:hover { color: var(--accent-cyan); }
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      padding-top: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .article-body { padding: 1.75rem 1.25rem; }
+      .footer-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <a href="../index.html" class="brand">
+      <img src="../icon.ico" class="brand-logo-img" alt="Nebula Dev Studios" />
+      <span class="brand-name">NEBULA DEV STUDIOS</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html" class="nav-link">Inicio</a></li>
+      <li><a href="../guias.html" class="nav-link">Guías & Artículos</a></li>
+      <li><a href="../about.html" class="nav-link">Acerca de</a></li>
+      <li><a href="../contact.html" class="nav-link">Contacto</a></li>
+    </ul>
+    <a href="../index.html#descargar" class="nav-btn">Descargar Launcher</a>
+  </nav>
+
+  <div class="article-container">
+    <div class="breadcrumbs">
+      <a href="../index.html">Inicio</a> &gt; <a href="../guias.html">Guías</a> &gt; <span>Optimización Minecraft 2026</span>
+    </div>
+
+    <div class="article-header">
+      <div class="badge">⚡ Rendimiento y FPS</div>
+      <h1>Cómo Optimizar Minecraft en 2026: Guía Definitiva con Sodium y Argumentos JVM</h1>
+      <div class="article-meta">
+        <span>📅 Actualizado: Septiembre 2026</span>
+        <span>⏱️ 8 min de lectura</span>
+        <span>✍️ Equipo Técnico de Nebula</span>
+      </div>
+    </div>
+
+    <article class="article-body">
+      <p>
+        Minecraft es uno de los juegos más populares del mundo, pero también uno de los peor optimizados por defecto. Debido a su motor gráfico basado en Java y a la renderización en un solo hilo (single-core), es muy común experimentar <strong>caídas bruscas de fotogramas, micro-tirones (stutters)</strong> y problemas de sobrecalentamiento incluso en computadoras modernas.
+      </p>
+      <p>
+        En esta guía exhaustiva aprenderás paso a paso cómo transformar el rendimiento de tu juego, pasando de 30-50 FPS con tirones a <strong>más de 150-200 FPS estables</strong> utilizando el stack moderno de optimización de código abierto.
+      </p>
+
+      <h2>1. El declive de OptiFine frente al "Modern Performance Stack"</h2>
+      <p>
+        Durante más de una década, <strong>OptiFine</strong> fue la opción predilecta de la comunidad. Sin embargo, en las versiones modernas de Minecraft (1.16 en adelante y especialmente 1.20+), OptiFine es de código cerrado, se actualiza lentamente y genera graves incompatibilidades con la mayoría de mods modernos.
+      </p>
+      <p>
+        Hoy en día, el estándar de la industria es el <strong>Stack de Optimización de Fabric</strong>, encabezado por <strong>Sodium</strong>.
+      </p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Característica</th>
+              <th>Vanilla (Sin Mods)</th>
+              <th>OptiFine</th>
+              <th>Sodium Stack (Recomendado)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>FPS Promedio</strong></td>
+              <td>45 - 60 FPS</td>
+              <td>75 - 90 FPS</td>
+              <td><strong>160 - 240+ FPS</strong></td>
+            </tr>
+            <tr>
+              <td><strong>Carga de Chunks</strong></td>
+              <td>Lenta con congelamientos</td>
+              <td>Moderada</td>
+              <td><strong>Multihilo Instantánea</strong></td>
+            </tr>
+            <tr>
+              <td><strong>Compatibilidad con Shaders</strong></td>
+              <td>No soportado</td>
+              <td>Nativo (antiguo)</td>
+              <td><strong>Iris Shaders (Máximo rendimiento)</strong></td>
+            </tr>
+            <tr>
+              <td><strong>Consumo de RAM</strong></td>
+              <td>Alto (picos de memoria)</td>
+              <td>Medio</td>
+              <td><strong>Optimizado con FerriteCore (-50%)</strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>2. Los 5 Mods Esenciales para Duplicar tus FPS</h2>
+      <p>
+        Si utilizas el cargador <strong>Fabric</strong> (o <strong>NeoForge</strong> con sus respectivos puertos), estos son los cinco mods que debes instalar en tu carpeta <code>mods/</code>:
+      </p>
+      <ul>
+        <li><strong>Sodium:</strong> Reemplaza por completo el motor de renderizado de Minecraft. Utiliza técnicas modernas de OpenGL para reducir drásticamente el uso de la CPU al dibujar bloques y caras invisibles (occlusion culling).</li>
+        <li><strong>Lithium:</strong> Optimiza la física general, la IA de los mobs y la lógica del servidor interno sin alterar el comportamiento vanilla. Reduce el lag interno (MSPT) hasta en un 40%.</li>
+        <li><strong>FerriteCore:</strong> Reduce drásticamente la memoria RAM requerida por el juego comprimiendo el almacenamiento de estados de bloques en memoria. Indispensable si juegas con 4 GB o menos de RAM.</li>
+        <li><strong>ImmediatelyFast:</strong> Acelera el renderizado de entidades, texto, cofres y partículas, eliminando las caídas de FPS que ocurren al entrar en granjas o aldeas densas.</li>
+        <li><strong>Entity Culling:</strong> Evita que la tarjeta gráfica procese mobs y entidades que están detrás de paredes o bajo tierra y que no puedes ver.</li>
+      </ul>
+
+      <div class="alert-box">
+        <strong>💡 Consejo con Nebula Launcher:</strong> En Nebula Launcher no necesitas descargar estos mods a mano. Al crear una instancia de Fabric, puedes activar el preset <em>"Máximo Rendimiento"</em> y el launcher descargará y configurará automáticamente todo este stack en un solo clic.
+      </div>
+
+      <h2>3. Argumentos JVM Avanzados para Eliminar Microtirones</h2>
+      <p>
+        Muchos jugadores sufren tirones periódicos cada 5 a 10 segundos. Esto no ocurre por falta de potencia gráfica, sino por las pausas de recolección de basura del recolector de memoria de Java (Garbage Collector).
+      </p>
+      <p>
+        Para eliminar estas pausas por completo, recomendamos usar los argumentos optimizados del <strong>recolector G1GC</strong> adaptados a Java 17 / Java 21:
+      </p>
+
+      <pre><code>-XX:+UseG1GC -XX:+ParallelRefProcEnabled -XX:MaxGCPauseMillis=20 -XX:+UnlockExperimentalVMOptions -XX:+DisableExplicitGC -XX:+AlwaysPreTouch -XX:G1NewSizePercent=30 -XX:G1MaxNewSizePercent=40 -XX:G1ReservePercent=20 -XX:G1HeapWastePercent=5 -XX:G1MixedGCCountTarget=4 -XX:InitiatingHeapOccupancyPercent=15 -XX:G1MixedGCLiveThresholdPercent=90 -XX:G1RSetUpdatingPauseTimePercent=5 -XX:SurvivorRatio=32 -XX:+PerfDisableSharedMem -XX:MaxTenuringThreshold=1</code></pre>
+
+      <p>
+        <strong>¿Cuánta RAM asignar?</strong>  
+        Un error común es asignar 8 GB o 12 GB a Minecraft vanilla pensando que irá más rápido. ¡Esto empeora el rendimiento! Asignar demasiada RAM hace que el recolector de basura se sature.
+      </p>
+      <ul>
+        <li><strong>Minecraft Vanilla / Pocos mods:</strong> Asigna entre <strong>3 GB y 4 GB</strong>.</li>
+        <li><strong>Modpacks medianos (50-100 mods):</strong> Asigna <strong>6 GB</strong>.</li>
+        <li><strong>Modpacks pesados o Shaders exigentes:</strong> Asigna <strong>8 GB</strong>.</li>
+      </ul>
+
+      <h2>4. Configuración de Video Recomendada en el Menú</h2>
+      <p>
+        Dentro del juego, entra a <em>Opciones &rarr; Gráficos</em> y aplica estos ajustes para ganar hasta 40 FPS extra sin arruinar la calidad visual:
+      </p>
+      <ul>
+        <li><strong>Distancia de Renderizado (Render Distance):</strong> Ponlo entre 8 y 12 chunks. Más de 16 chunks multiplica el consumo de memoria geométricamente.</li>
+        <li><strong>Distancia de Simulación (Simulation Distance):</strong> Fíjala en 6 chunks.</li>
+        <li><strong>Nubes:</strong> Desactivadas o Rápidas.</li>
+        <li><strong>Sincronización Vertical (V-Sync):</strong> Desactívala si quieres menor retraso de entrada (input lag), o actívala si experimentas cortes de imagen (screen tearing).</li>
+        <li><strong>Nivel de Mipmap:</strong> Redúcelo a nivel 2 o 1 para ahorrar memoria de video (VRAM).</li>
+      </ul>
+
+      <div class="cta-card">
+        <h3>¿Quieres aplicar todo esto de forma automática?</h3>
+        <p style="color: var(--text-muted); margin-bottom: 1.2rem;">
+          Nebula Launcher incluye presets de RAM inteligentes, selección automática de Java optimizado y descarga de Sodium en 1 clic.
+        </p>
+        <a href="../index.html#descargar" class="nav-btn" style="padding: 0.75rem 1.8rem; font-size: 1rem;">
+          Descargar Nebula Launcher Gratis &rarr;
+        </a>
+      </div>
+
+    </article>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h4>NEBULA DEV STUDIOS</h4>
+        <p style="font-size: 0.9rem; color: var(--text-dim); margin-top: 0.5rem;">
+          Portal oficial de guías, herramientas y lanzador de alto rendimiento para Minecraft.
+        </p>
+      </div>
+      <div class="footer-col">
+        <h4>Navegación</h4>
+        <ul>
+          <li><a href="../index.html">Inicio</a></li>
+          <li><a href="../guias.html">Guías & Tutoriales</a></li>
+          <li><a href="../about.html">Acerca de</a></li>
+          <li><a href="../contact.html">Contacto</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Otras Guías</h4>
+        <ul>
+          <li><a href="./como-instalar-modpacks-mods-minecraft.html">Instalar Mods y Modpacks</a></li>
+          <li><a href="./solucion-errores-comunes-minecraft.html">Solución de Errores de Minecraft</a></li>
+          <li><a href="./mejores-shaders-para-minecraft.html">Mejores Shaders 2026</a></li>
+          <li><a href="./guia-java-para-minecraft-versiones.html">Guía de Java para Minecraft</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="../privacy.html">Política de Privacidad</a></li>
+          <li><a href="../terms.html">Términos de Servicio</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>&copy; 2026 Nebula Dev Studios. Todos los derechos reservados.</div>
+      <div>Minecraft es marca registrada de Mojang Synergies AB.</div>
+    </div>
+  </footer>
+
+</body>
+</html>

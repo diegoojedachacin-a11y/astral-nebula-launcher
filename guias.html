@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/x-icon" href="./icon.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Centro de Guías, Tutoriales & Artículos de Minecraft | Nebula</title>
+  <meta name="description" content="Aprende a optimizar Minecraft, instalar mods en Fabric y Forge, solucionar errores comunes y configurar los mejores shaders con nuestras guías técnicas oficiales." />
+  
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6612759594307142" crossorigin="anonymous"></script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-dark: #05030d;
+      --bg-card: rgba(14, 10, 32, 0.7);
+      --bg-card-hover: rgba(24, 16, 52, 0.85);
+      --accent-purple: #c084fc;
+      --accent-purple-glow: rgba(192, 132, 252, 0.35);
+      --accent-cyan: #38bdf8;
+      --accent-emerald: #34d399;
+      --accent-amber: #fbbf24;
+      --accent-pink: #f472b6;
+      --border-glass: rgba(255, 255, 255, 0.1);
+      --border-glow: rgba(192, 132, 252, 0.4);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+      --font-heading: 'Outfit', sans-serif;
+      --font-body: 'Inter', sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: radial-gradient(circle at 50% -10%, #1c0e3d 0%, #080415 50%, var(--bg-dark) 100%);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      min-height: 100vh;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(5, 3, 13, 0.8);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border-glass);
+      padding: 1rem 6%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      text-decoration: none;
+      color: var(--text-main);
+    }
+    .brand-logo-img {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, rgba(192, 132, 252, 0.2), rgba(56, 189, 248, 0.2));
+      border: 1px solid var(--border-glass);
+      padding: 3px;
+    }
+    .brand-name {
+      font-family: var(--font-heading);
+      font-weight: 800;
+      font-size: 1.25rem;
+      letter-spacing: 0.04em;
+    }
+    .nav-links {
+      display: flex;
+      gap: 1.8rem;
+      list-style: none;
+    }
+    .nav-link {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-link:hover, .nav-link.active {
+      color: var(--text-main);
+    }
+    .nav-btn {
+      background: linear-gradient(135deg, #8b5cf6, #6366f1);
+      color: #fff;
+      padding: 0.55rem 1.25rem;
+      border-radius: 10px;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+      box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .nav-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 22px rgba(139, 92, 246, 0.6);
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 3.5rem 1.5rem 5rem;
+    }
+
+    .hero-guides {
+      text-align: center;
+      margin-bottom: 3.5rem;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.4rem 1rem;
+      border-radius: 9999px;
+      background: rgba(192, 132, 252, 0.1);
+      border: 1px solid var(--border-glow);
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--accent-purple);
+      margin-bottom: 1.25rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    h1 {
+      font-family: var(--font-heading);
+      font-size: clamp(2.2rem, 5vw, 3.4rem);
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 1.2rem;
+      background: linear-gradient(135deg, #ffffff 30%, var(--accent-purple) 70%, var(--accent-cyan) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero-sub {
+      color: var(--text-muted);
+      font-size: 1.15rem;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    /* Guides Grid */
+    .guides-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+    }
+    .guide-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-glass);
+      border-radius: 20px;
+      padding: 2.2rem;
+      backdrop-filter: blur(20px);
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+    }
+    .guide-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(192, 132, 252, 0.45);
+      box-shadow: 0 16px 45px rgba(139, 92, 246, 0.2);
+    }
+    .guide-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.2rem;
+    }
+    .cat-tag {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.3rem 0.75rem;
+      border-radius: 9999px;
+    }
+    .cat-fps { background: rgba(52, 211, 153, 0.15); color: var(--accent-emerald); border: 1px solid rgba(52, 211, 153, 0.3); }
+    .cat-mods { background: rgba(192, 132, 252, 0.15); color: var(--accent-purple); border: 1px solid rgba(192, 132, 252, 0.3); }
+    .cat-errors { background: rgba(248, 113, 113, 0.15); color: #f87171; border: 1px solid rgba(248, 113, 113, 0.3); }
+    .cat-shaders { background: rgba(251, 191, 36, 0.15); color: var(--accent-amber); border: 1px solid rgba(251, 191, 36, 0.3); }
+    .cat-java { background: rgba(129, 140, 248, 0.15); color: #818cf8; border: 1px solid rgba(129, 140, 248, 0.3); }
+
+    .read-time {
+      font-size: 0.82rem;
+      color: var(--text-dim);
+    }
+    .guide-card h3 {
+      font-family: var(--font-heading);
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.35;
+      margin-bottom: 0.85rem;
+    }
+    .guide-card p {
+      color: var(--text-muted);
+      font-size: 0.98rem;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+    .read-more {
+      color: var(--accent-cyan);
+      font-weight: 600;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: gap 0.2s;
+    }
+    .guide-card:hover .read-more {
+      gap: 0.65rem;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border-glass);
+      padding: 3.5rem 6% 2rem;
+      background: rgba(5, 3, 13, 0.95);
+      color: var(--text-dim);
+      font-size: 0.9rem;
+      margin-top: 5rem;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr repeat(3, 1fr);
+      gap: 2.5rem;
+      margin-bottom: 2.5rem;
+    }
+    .footer-col h4 {
+      font-family: var(--font-heading);
+      color: #fff;
+      font-size: 1rem;
+      margin-bottom: 1rem;
+    }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 0.6rem; }
+    .footer-col a { color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+    .footer-col a:hover { color: var(--accent-cyan); }
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      padding-top: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .footer-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <a href="./index.html" class="brand">
+      <img src="./icon.ico" class="brand-logo-img" alt="Nebula Dev Studios" />
+      <span class="brand-name">NEBULA DEV STUDIOS</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="./index.html" class="nav-link">Inicio</a></li>
+      <li><a href="./guias.html" class="nav-link active">Guías & Artículos</a></li>
+      <li><a href="./about.html" class="nav-link">Acerca de</a></li>
+      <li><a href="./contact.html" class="nav-link">Contacto</a></li>
+    </ul>
+    <a href="./index.html#descargar" class="nav-btn">Descargar Launcher</a>
+  </nav>
+
+  <div class="container">
+    <div class="hero-guides">
+      <div class="badge">✦ Centro de Conocimiento Oficial</div>
+      <h1>Guías y Tutoriales para Minecraft</h1>
+      <p class="hero-sub">
+        Aprende a optimizar tus FPS al máximo, configurar mods sin conflictos, solucionar errores de memoria y disfrutar de la mejor experiencia visual en Minecraft.
+      </p>
+    </div>
+
+    <div class="guides-grid">
+      <!-- Guía 1 -->
+      <a href="./guias/optimizar-minecraft-pc-bajos-recursos.html" class="guide-card">
+        <div>
+          <div class="guide-top">
+            <span class="cat-tag cat-fps">⚡ Rendimiento & FPS</span>
+            <span class="read-time">⏱️ 8 min</span>
+          </div>
+          <h3>Cómo Optimizar Minecraft en 2026: Guía Definitiva con Sodium y JVM</h3>
+          <p>
+            Duplica tus fotogramas por segundo y elimina los molestos micro-tirones con el stack moderno de Sodium, Lithium, FerriteCore y argumentos JVM optimizados.
+          </p>
+        </div>
+        <div class="read-more">Leer Guía Completa &rarr;</div>
+      </a>
+
+      <!-- Guía 2 -->
+      <a href="./guias/como-instalar-modpacks-mods-minecraft.html" class="guide-card">
+        <div>
+          <div class="guide-top">
+            <span class="cat-tag cat-mods">📦 Mods & Loaders</span>
+            <span class="read-time">⏱️ 7 min</span>
+          </div>
+          <h3>Cómo Instalar y Administrar Mods en Fabric, Forge y NeoForge</h3>
+          <p>
+            Descubre las diferencias entre los cargadores modernos de mods, cómo resolver dependencias obligatorias y cómo evitar que tus partidas crasheen.
+          </p>
+        </div>
+        <div class="read-more">Leer Guía Completa &rarr;</div>
+      </a>
+
+      <!-- Guía 3 -->
+      <a href="./guias/solucion-errores-comunes-minecraft.html" class="guide-card">
+        <div>
+          <div class="guide-top">
+            <span class="cat-tag cat-errors">🛠️ Soporte Técnico</span>
+            <span class="read-time">⏱️ 9 min</span>
+          </div>
+          <h3>Solución a Errores de Minecraft: Código de Salida 1, Crashes y Java</h3>
+          <p>
+            Aprende a diagnosticar y reparar los fallos más comunes al abrir Minecraft, desde falta de memoria RAM hasta incompatibilidad de librerías y drivers.
+          </p>
+        </div>
+        <div class="read-more">Leer Guía Completa &rarr;</div>
+      </a>
+
+      <!-- Guía 4 -->
+      <a href="./guias/mejores-shaders-para-minecraft.html" class="guide-card">
+        <div>
+          <div class="guide-top">
+            <span class="cat-tag cat-shaders">🎨 Gráficos & Shaders</span>
+            <span class="read-time">⏱️ 8 min</span>
+          </div>
+          <h3>Top Mejores Shaders para Minecraft 2026: Belleza y Altos FPS</h3>
+          <p>
+            Comparativa detallada de Complementary Reimagined, BSL, MakeUp Ultra Fast y Photon Shaders en Iris para jugar con gráficos de cine sin perder fluidez.
+          </p>
+        </div>
+        <div class="read-more">Leer Guía Completa &rarr;</div>
+      </a>
+
+      <!-- Guía 5 -->
+      <a href="./guias/guia-java-para-minecraft-versiones.html" class="guide-card">
+        <div>
+          <div class="guide-top">
+            <span class="cat-tag cat-java">☕ Entorno de Ejecución</span>
+            <span class="read-time">⏱️ 7 min</span>
+          </div>
+          <h3>Guía de Versiones de Java para Minecraft: Java 8 vs 17 vs 21</h3>
+          <p>
+            Todo lo que necesitas saber sobre la matriz de compatibilidad de Java, JDKs modernos de alto rendimiento (Temurin, GraalVM) y recolección de basura.
+          </p>
+        </div>
+        <div class="read-more">Leer Guía Completa &rarr;</div>
+      </a>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h4>NEBULA DEV STUDIOS</h4>
+        <p style="font-size: 0.9rem; color: var(--text-dim); margin-top: 0.5rem;">
+          Portal oficial de guías, herramientas y lanzador de alto rendimiento para Minecraft.
+        </p>
+      </div>
+      <div class="footer-col">
+        <h4>Navegación</h4>
+        <ul>
+          <li><a href="./index.html">Inicio</a></li>
+          <li><a href="./guias.html">Guías & Tutoriales</a></li>
+          <li><a href="./about.html">Acerca de</a></li>
+          <li><a href="./contact.html">Contacto</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Recursos</h4>
+        <ul>
+          <li><a href="./guias/optimizar-minecraft-pc-bajos-recursos.html">Optimización de FPS</a></li>
+          <li><a href="./guias/como-instalar-modpacks-mods-minecraft.html">Instalación de Mods</a></li>
+          <li><a href="./guias/solucion-errores-comunes-minecraft.html">Solución de Errores</a></li>
+          <li><a href="https://github.com/fonduev/astral-nebula-launcher" target="_blank" rel="noopener">Código en GitHub</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="./privacy.html">Política de Privacidad</a></li>
+          <li><a href="./terms.html">Términos de Servicio</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>&copy; 2026 Nebula Dev Studios. Todos los derechos reservados.</div>
+      <div>Minecraft es marca registrada de Mojang Synergies AB.</div>
+    </div>
+  </footer>
+
+</body>
+</html>
