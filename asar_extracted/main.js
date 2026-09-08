@@ -3918,8 +3918,8 @@ ipcMain.handle('get-screenshots', () => {
 
 // ── PVP Clients ───────────────────────────────────────────────────
 const PVP_CLIENTS = [
-    { id: 'cmpack', name: 'CMPack', icon: '⚡', color: '#a855f7', desc: 'El mejor cliente PVP optimizado con mods integrados, HUD personalizable y rendimiento máximo en FPS para 1.8.8.', url: 'https://cmpack.pl/' },
-    { id: 'nebulapvp', name: 'Nebula PVP', icon: '🌌', color: '#c084fc', desc: 'Cliente PVP propio de Nebula Launcher con optimizaciones exclusivas, HUD modular y cosméticos sincronizados. En desarrollo.', comingSoon: true }
+    { id: 'cmpack', name: 'CMPack', icon: '⚡', color: '#a855f7', desc: 'El mejor cliente PVP optimizado con mods integrados, HUD personalizable y rendimiento máximo en FPS para 1.8.8.', desc_en: 'The best PVP client optimized with built-in mods, customizable HUD, and maximum FPS for 1.8.8.', desc_pt: 'O melhor cliente PVP otimizado com mods integrados, HUD personalizável e desempenho máximo em FPS para 1.8.8.', url: 'https://cmpack.pl/' },
+    { id: 'nebulapvp', name: 'Nebula PVP', icon: '🌌', color: '#c084fc', desc: 'Cliente PVP propio de Nebula Launcher con optimizaciones exclusivas, HUD modular y cosméticos sincronizados. En desarrollo.', desc_en: "Nebula Launcher's native PVP client with exclusive optimizations, modular HUD, and synchronized cosmetics. In development.", desc_pt: 'Cliente PVP próprio do Nebula Launcher com otimizações exclusivas, HUD modular e cosméticos sincronizados. Em desenvolvimento.', comingSoon: true }
 ];
 
 ipcMain.handle('get-pvp-clients', () => PVP_CLIENTS);
