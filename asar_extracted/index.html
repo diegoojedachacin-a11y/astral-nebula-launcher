@@ -4221,7 +4221,7 @@ box-shadow:0 0 14px rgba(99,102,241,0.45);border:1px dashed rgba(255,255,255,0.3
         <h1 class="panel-title">Versiones</h1>
         <p class="panel-sub">Todas las versiones disponibles e instaladas.</p>
 
-        <div class="version-filters">
+        <div class="version-filters" style="display:flex; align-items:center; flex-wrap:wrap; gap:8px;">
           <button class="version-filter-btn active" onclick="filterVersions('all', this)">Todas</button>
           <button class="version-filter-btn" onclick="filterVersions('release', this)">Oficiales</button>
           <button class="version-filter-btn" onclick="filterVersions('snapshot', this)">Snapshots</button>
@@ -4229,6 +4229,7 @@ box-shadow:0 0 14px rgba(99,102,241,0.45);border:1px dashed rgba(255,255,255,0.3
           <button class="version-filter-btn" onclick="filterVersions('forge', this)">Forge</button>
           <button class="version-filter-btn" onclick="filterVersions('fabric', this)">Fabric</button>
           <button class="version-filter-btn" onclick="filterVersions('installed', this)">Instaladas</button>
+          <button class="btn btn-sm btn-glass" onclick="refreshAllVersions()" style="margin-left:auto; font-size:0.75rem; padding:5px 12px;" title="Refrescar catálogo desde Mojang y Forge">🔄 Refrescar</button>
         </div>
 
         <div class="versions-list" id="versions-list-container">
@@ -5814,6 +5815,9 @@ function showTab(id) {
   if (id === 'servers') {
     loadSponsoredServers();
   }
+  if (id === 'versiones') {
+    loadVersionsList();
+  }
   if (id === 'profile') {
     setTimeout(() => {
       if (typeof loadUserProfileData === 'function') {
@@ -5965,7 +5969,9 @@ function vbFilterList() {
 
 async function vbGetSupportedVersions(modifier) {
   if (modifier === 'vanilla') return null; // null = no filter, show all
-  if (vbLoaderVersionsCache[modifier]) return vbLoaderVersionsCache[modifier];
+  if (vbLoaderVersionsCache[modifier] && Array.isArray(vbLoaderVersionsCache[modifier]) && vbLoaderVersionsCache[modifier].length > 0) {
+    return vbLoaderVersionsCache[modifier];
+  }
 
   let supported = [];
   try {
@@ -5973,20 +5979,22 @@ async function vbGetSupportedVersions(modifier) {
       supported = await ipc.invoke('get-optifine-mc-versions');
     } else if (modifier === 'forge') {
       const forgeVers = await ipc.invoke('get-forge-mc-versions');
-      supported = forgeVers.map(v => v.mcVersion);
+      supported = (forgeVers || []).map(v => v.mcVersion).filter(Boolean);
     } else if (modifier === 'fabric') {
       const fabricVers = await ipc.invoke('get-fabric-mc-versions');
-      supported = fabricVers.filter(v => v.stable).map(v => v.version);
+      supported = (fabricVers || []).filter(v => v.stable).map(v => v.version).filter(Boolean);
     } else if (modifier === 'neoforge') {
       supported = await ipc.invoke('get-neoforge-mc-versions');
     } else if (modifier === 'quilt') {
       const quiltVers = await ipc.invoke('get-quilt-mc-versions');
-      supported = quiltVers.filter(v => v.stable).map(v => v.version);
+      supported = (quiltVers || []).filter(v => v.stable).map(v => v.version).filter(Boolean);
     }
   } catch(e) {
     console.warn('vbGetSupportedVersions error:', e);
   }
-  vbLoaderVersionsCache[modifier] = supported;
+  if (Array.isArray(supported) && supported.length > 0) {
+    vbLoaderVersionsCache[modifier] = supported;
+  }
   return supported;
 }
 
@@ -6036,9 +6044,19 @@ async function vbRenderList() {
     return;
   }
 
+  // Si vanilla y allVer está vacío, cargarlo de inmediato
+  if (modifier === 'vanilla' && (!allVer || allVer.length === 0)) {
+    list.innerHTML = '<div style="color:var(--text-dim);font-size:.72rem;text-align:center;padding:16px 8px;">⏳ Conectando con los servidores de Minecraft...</div>';
+    try {
+      allVer = await ipc.invoke('get-all-versions');
+    } catch(e) {
+      console.warn('Error fetching allVer in vbRenderList:', e);
+    }
+  }
+
   // Show loading spinner while fetching supported versions
   if (!vbLoaderVersionsCache[modifier] && modifier !== 'vanilla') {
-    list.innerHTML = '<div style="color:var(--text-dim);font-size:.72rem;text-align:center;padding:16px 8px;">⏳ Cargando versiones compatibles...</div>';
+    list.innerHTML = '<div style="color:var(--text-dim);font-size:.72rem;text-align:center;padding:16px 8px;">⏳ Consultando versiones compatibles...</div>';
   }
 
   const supportedSet = await vbGetSupportedVersions(modifier);
@@ -6504,6 +6522,19 @@ function refreshModSelect() {
 
 function loadVersionsList() {
   const container = document.getElementById('versions-list-container');
+  if (!container) return;
+
+  if (!allVer || allVer.length === 0) {
+    container.innerHTML = '<p style="color:var(--text-dim);text-align:center;padding:40px;">⏳ Consultando catálogo oficial de Minecraft...</p>';
+    ipc.invoke('get-all-versions').then(vers => {
+      if (vers && vers.length > 0) {
+        allVer = vers;
+        loadVersionsList();
+      }
+    });
+    return;
+  }
+
   const combined = [...allVer.map(v=>({...v, isInstalled:installed.has(v.id)})), ...installedMeta.filter(v=>!allVer.some(a=>a.id===v.id))];
   let filtered = combined;
   if (currentVersionFilter !== 'all') {
@@ -6512,6 +6543,21 @@ function loadVersionsList() {
       if (currentVersionFilter === 'fabric') return v.type === 'fabric' || v.type === 'sodium';
       return v.type === currentVersionFilter;
     });
+  }
+
+  if (filtered.length === 0) {
+    if (['forge', 'fabric', 'neoforge', 'quilt', 'optifine'].includes(currentVersionFilter)) {
+      const loaderNames = { forge: 'Forge', fabric: 'Fabric', neoforge: 'NeoForge', quilt: 'Quilt', optifine: 'OptiFine' };
+      container.innerHTML = `<div style="text-align:center;padding:36px 16px;color:var(--text-dim);font-size:0.85rem;">
+        No tienes versiones de <strong>${loaderNames[currentVersionFilter]}</strong> instaladas localmente.<br><br>
+        <button class="btn btn-primary btn-sm" onclick="showTab('play'); setPlayModifier('${currentVersionFilter}');">
+          ⚡ Ir a Jugar y elegir versión ${loaderNames[currentVersionFilter]}
+        </button>
+      </div>`;
+      return;
+    }
+    container.innerHTML = '<p style="color:var(--text-dim);text-align:center;padding:40px;">No hay versiones con el filtro seleccionado.</p>';
+    return;
   }
   container.innerHTML = filtered.map(v=>{
     const badgeClass = {release:'badge-release',snapshot:'badge-snapshot',optifine:'badge-optifine',forge:'badge-forge',fabric:'badge-fabric',neoforge:'badge-neoforge',quilt:'badge-fabric'}[v.type] || 'badge-release';
@@ -6533,11 +6579,18 @@ function filterVersions(type, el) {
 }
 
 async function refreshAllVersions() {
-  installedMeta = await ipc.invoke('get-installed-versions');
-  installed = new Set(installedMeta.map(v => v.id));
-  populateVersions();
-  loadVersionsList();
-  toast('🎮 Lista de versiones actualizada', 'success');
+  toast('🔄 Actualizando catálogo de versiones...', 'info');
+  vbLoaderVersionsCache = {};
+  try {
+    allVer = await ipc.invoke('get-all-versions');
+    installedMeta = await ipc.invoke('get-installed-versions');
+    installed = new Set(installedMeta.map(v => v.id));
+    populateVersions();
+    loadVersionsList();
+    toast(`🎮 Versiones actualizadas (${allVer.length} disponibles)`, 'success');
+  } catch(e) {
+    toast(`❌ Error al actualizar: ${e.message}`, 'error');
+  }
 }
 
 // ═══════ INSTALLERS (OptiFine, Sodium, Forge) ═══════

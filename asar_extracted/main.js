@@ -2,6 +2,8 @@
 // ║         NEBULA LAUNCHER — main.js v5.0                      ║
 // ║              Proceso principal de Electron                  ║
 // ╚══════════════════════════════════════════════════════════════╝
+const dns = require('dns');
+if (dns.setDefaultResultOrder) dns.setDefaultResultOrder('ipv4first');
 const { app, BrowserWindow, ipcMain, shell, dialog, Tray, Menu } = require('electron');
 const { Client, Authenticator } = require('minecraft-launcher-core');
 const path = require('path');
@@ -726,7 +728,7 @@ function downloadFile(url, dest, onProgress, opts = {}) {
     });
 }
 
-function httpsGet(url, customHeaders = {}, timeoutMs = 15000) {
+function httpsGet(url, customHeaders = {}, timeoutMs = 12000) {
     if (typeof customHeaders === 'number') {
         timeoutMs = customHeaders;
         customHeaders = {};
@@ -734,19 +736,27 @@ function httpsGet(url, customHeaders = {}, timeoutMs = 15000) {
     return new Promise((resolve, reject) => {
         const attempt = (reqUrl, redirectCount = 0) => {
             if (redirectCount > 10) return reject(new Error('Demasiados redirects'));
-            const lib = reqUrl.startsWith('https') ? https : http;
+            let targetUrl = reqUrl;
+            try {
+                targetUrl = new URL(reqUrl).toString();
+            } catch (e) {
+                return reject(e);
+            }
+            const lib = targetUrl.startsWith('https:') ? https : http;
             const headers = Object.assign({
                 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36',
-                'Accept-Language': 'es-ES,es;q=0.9,en;q=0.8'
+                'Accept-Language': 'es-ES,es;q=0.9,en;q=0.8',
+                'Accept': 'application/json, text/xml, */*'
             }, customHeaders);
-            const req = lib.get(reqUrl, { headers }, (res) => {
+            const req = lib.get(targetUrl, { headers }, (res) => {
                 if (res.statusCode >= 300 && res.statusCode < 400 && res.headers.location) {
                     res.resume();
-                    return attempt(res.headers.location, redirectCount + 1);
+                    const nextUrl = new URL(res.headers.location, targetUrl).toString();
+                    return attempt(nextUrl, redirectCount + 1);
                 }
                 if (res.statusCode < 200 || res.statusCode >= 300) {
                     res.resume();
-                    return reject(new Error(`HTTP ${res.statusCode} desde ${reqUrl}`));
+                    return reject(new Error(`HTTP ${res.statusCode} desde ${targetUrl}`));
                 }
                 let data = '';
                 res.on('data', c => data += c);
@@ -758,6 +768,18 @@ function httpsGet(url, customHeaders = {}, timeoutMs = 15000) {
         };
         attempt(url);
     });
+}
+
+async function httpsGetWithFallbacks(urls, customHeaders = {}, timeoutMs = 8000) {
+    let lastErr = null;
+    for (const u of urls) {
+        try {
+            return await httpsGet(u, customHeaders, timeoutMs);
+        } catch (e) {
+            lastErr = e;
+        }
+    }
+    throw lastErr || new Error('Todas las URLs fallaron');
 }
 
 function httpsPost(url, body) {
@@ -1013,11 +1035,32 @@ function getInstanceDir(mcPath, versionId) {
     return mcPath;
 }
 
-// ── Versioning ────────────────────────────────────────────────────
+// ── Versioning con URLs Robustas y Respaldo Local ─────────────────
 ipcMain.handle('get-all-versions', async () => {
     try {
         sendLog('🔍 Cargando versiones oficiales de Minecraft (Vanilla)...');
-        const data = await httpsGet('https://launchermeta.mojang.com/mc/game/version_manifest.json');
+        const urls = [
+            'https://piston-meta.mojang.com/mc/game/version_manifest_v2.json',
+            'https://launchermeta.mojang.com/mc/game/version_manifest.json',
+            'https://bmclapi2.bangbang93.com/mc/game/version_manifest_v2.json'
+        ];
+        const cacheFile = path.join(BASE_DATA_DIR, 'cache', 'version_manifest_v2.json');
+        let data;
+        try {
+            data = await httpsGetWithFallbacks(urls, {}, 8000);
+            try {
+                fs.mkdirSync(path.dirname(cacheFile), { recursive: true });
+                fs.writeFileSync(cacheFile, data, 'utf8');
+            } catch { }
+        } catch (fetchErr) {
+            sendLog(`⚠️ Error de red obteniendo versiones en línea: ${fetchErr.message}. Usando caché local...`, 'warn');
+            if (fs.existsSync(cacheFile)) {
+                data = fs.readFileSync(cacheFile, 'utf8');
+                sendLog('📦 Cargadas versiones oficiales desde caché local');
+            } else {
+                throw fetchErr;
+            }
+        }
         const manifest = JSON.parse(data);
         const releases = manifest.versions.filter(v => v.type === 'release');
         sendLog(`✅ ${manifest.versions.length} versiones oficiales cargadas (${releases.length} estables)`);
@@ -1031,7 +1074,10 @@ ipcMain.handle('get-all-versions', async () => {
 ipcMain.handle('get-fabric-mc-versions', async () => {
     try {
         sendLog('🔍 Cargando versiones de Fabric soportadas...');
-        const data = await httpsGet('https://meta.fabricmc.net/v2/versions/game');
+        const data = await httpsGetWithFallbacks([
+            'https://meta.fabricmc.net/v2/versions/game',
+            'https://bmclapi2.bangbang93.com/fabric-meta/v2/versions/game'
+        ], {}, 8000);
         const list = JSON.parse(data);
         const stableReleases = list.filter(v => v.stable);
         sendLog(`✅ ${stableReleases.length} versiones de Minecraft con soporte Fabric`);
@@ -1045,7 +1091,10 @@ ipcMain.handle('get-fabric-mc-versions', async () => {
 ipcMain.handle('get-quilt-mc-versions', async () => {
     try {
         sendLog('🔍 Cargando versiones de Quilt soportadas...');
-        const data = await httpsGet('https://meta.quiltmc.org/v3/versions/game');
+        const data = await httpsGetWithFallbacks([
+            'https://meta.quiltmc.org/v3/versions/game',
+            'https://meta.fabricmc.net/v2/versions/game'
+        ], {}, 8000);
         const list = JSON.parse(data);
         const stableReleases = list.filter(v => v.stable);
         sendLog(`✅ ${stableReleases.length} versiones de Minecraft con soporte Quilt`);
@@ -1156,14 +1205,38 @@ async function ensureMinecraftBase(mcVersion, mcPath) {
     fs.mkdirSync(versionDir, { recursive: true });
 
     // 1. Obtener el manifest de Mojang para localizar la URL del JSON de esta versión
-    const manifest = JSON.parse(await httpsGet('https://launchermeta.mojang.com/mc/game/version_manifest.json'));
+    const manifestUrls = [
+        'https://piston-meta.mojang.com/mc/game/version_manifest_v2.json',
+        'https://launchermeta.mojang.com/mc/game/version_manifest.json',
+        'https://bmclapi2.bangbang93.com/mc/game/version_manifest_v2.json'
+    ];
+    let manifestData;
+    const cacheFile = path.join(BASE_DATA_DIR, 'cache', 'version_manifest_v2.json');
+    try {
+        manifestData = await httpsGetWithFallbacks(manifestUrls, {}, 8000);
+        try {
+            fs.mkdirSync(path.dirname(cacheFile), { recursive: true });
+            fs.writeFileSync(cacheFile, manifestData, 'utf8');
+        } catch { }
+    } catch (mErr) {
+        if (fs.existsSync(cacheFile)) {
+            manifestData = fs.readFileSync(cacheFile, 'utf8');
+        } else {
+            throw mErr;
+        }
+    }
+    const manifest = JSON.parse(manifestData);
     const versionMeta = manifest.versions.find(v => v.id === mcVersion);
     if (!versionMeta) throw new Error(`No se encontró "${mcVersion}" en el manifest de Mojang`);
 
     // 2. Descargar JSON de la versión si no existe
     if (!jsonOk) {
         sendLog(`  📄 Descargando ${mcVersion}.json...`);
-        const versionJson = await httpsGet(versionMeta.url);
+        const jsonUrls = [
+            versionMeta.url,
+            `https://bmclapi2.bangbang93.com/mc/game/version/${mcVersion}.json`
+        ].filter(Boolean);
+        const versionJson = await httpsGetWithFallbacks(jsonUrls, {}, 10000);
         fs.writeFileSync(versionJsonPath, versionJson);
     }
 
@@ -1174,12 +1247,26 @@ async function ensureMinecraftBase(mcVersion, mcPath) {
         const expectedSize = versionData.downloads?.client?.size || 0;
         if (!clientUrl) throw new Error(`No hay URL de cliente para MC ${mcVersion}`);
         sendLog(`  📥 Descargando ${mcVersion}.jar (${(expectedSize / 1048576).toFixed(1)} MB)...`);
-        await downloadFile(clientUrl, versionJarPath, (p, mb) => {
-            if (p === -1) sendProgress(25, `Descargando MC ${mcVersion}: ${mb} MB`);
-            else sendProgress(20 + Math.floor(p * 0.25), `Descargando MC ${mcVersion}: ${p}%`);
-        });
-        // Verificar integridad: debe ser al menos 1MB
-        if (!fs.existsSync(versionJarPath) || fs.statSync(versionJarPath).size < 1000000) {
+        const jarCandidates = [
+            clientUrl,
+            `https://bmclapi2.bangbang93.com/version/${mcVersion}/client`
+        ].filter(Boolean);
+        let jarOkDownload = false;
+        for (const jUrl of jarCandidates) {
+            try {
+                await downloadFile(jUrl, versionJarPath, (p, mb) => {
+                    if (p === -1) sendProgress(25, `Descargando MC ${mcVersion}: ${mb} MB`);
+                    else sendProgress(20 + Math.floor(p * 0.25), `Descargando MC ${mcVersion}: ${p}%`);
+                });
+                if (fs.existsSync(versionJarPath) && fs.statSync(versionJarPath).size >= 1000000) {
+                    jarOkDownload = true;
+                    break;
+                }
+            } catch (jErr) {
+                sendLog(`⚠️ Descarga de JAR falló desde ${jUrl}: ${jErr.message}, probando mirror...`, 'warn');
+            }
+        }
+        if (!jarOkDownload) {
             try { fs.unlinkSync(versionJarPath); } catch { }
             throw new Error(`Descarga de MC ${mcVersion}.jar fallida o incompleta. Verifica tu conexión a internet.`);
         }
@@ -1511,16 +1598,58 @@ ipcMain.handle('auto-install-optifine', async (event, mcVersion) => {
 });
 
 
-// ══ FORGE: Todas las versiones MC soportadas (desde promotions_slim.json) ══
-
+// ══ FORGE: Todas las versiones MC soportadas (con mirror de respaldo) ══
 ipcMain.handle('get-forge-mc-versions', async () => {
     try {
         sendLog('🔍 Cargando versiones de Forge soportadas...');
-        const promos = JSON.parse(
-            await httpsGet('https://files.minecraftforge.net/net/minecraftforge/forge/promotions_slim.json')
-        );
+        const cacheFile = path.join(BASE_DATA_DIR, 'cache', 'forge_promos.json');
+        let data;
+        let isBmclapi = false;
+        try {
+            data = await httpsGet('https://files.minecraftforge.net/net/minecraftforge/forge/promotions_slim.json', {}, 8000);
+            try {
+                fs.mkdirSync(path.dirname(cacheFile), { recursive: true });
+                fs.writeFileSync(cacheFile, data, 'utf8');
+            } catch { }
+        } catch (e1) {
+            sendLog(`⚠️ files.minecraftforge.net no disponible (${e1.message}), usando mirror BMCLAPI...`, 'warn');
+            try {
+                data = await httpsGet('https://bmclapi2.bangbang93.com/forge/minecraft', {}, 8000);
+                isBmclapi = true;
+            } catch (e2) {
+                if (fs.existsSync(cacheFile)) {
+                    data = fs.readFileSync(cacheFile, 'utf8');
+                } else {
+                    throw e2;
+                }
+            }
+        }
+
+        if (isBmclapi) {
+            const list = JSON.parse(data);
+            const sorted = list
+                .filter(v => /^\d+\.\d+(\.\d+)?$/.test(v))
+                .sort((a, b) => {
+                    const pa = a.split('.').map(Number);
+                    const pb = b.split('.').map(Number);
+                    for (let i = 0; i < 3; i++) {
+                        const diff = (pb[i] || 0) - (pa[i] || 0);
+                        if (diff !== 0) return diff;
+                    }
+                    return 0;
+                });
+            const result = sorted.map(mcVer => ({
+                mcVersion: mcVer,
+                recommended: null,
+                latest: null
+            }));
+            sendLog(`✅ ${result.length} versiones de Minecraft con soporte Forge (vía mirror)`);
+            return result;
+        }
+
+        const promos = JSON.parse(data);
         const versions = {};
-        for (const [key, forgeVer] of Object.entries(promos.promos)) {
+        for (const [key, forgeVer] of Object.entries(promos.promos || {})) {
             const dashIdx = key.lastIndexOf('-');
             const mcVer = key.slice(0, dashIdx);
             const tag = key.slice(dashIdx + 1);
@@ -1551,11 +1680,41 @@ ipcMain.handle('get-forge-mc-versions', async () => {
     }
 });
 
-// ══ FORGE: Builds específicas para una MC version (Maven XML) ══
+// ══ FORGE: Builds específicas para una MC version (Maven XML + Mirror) ══
+let forgeXmlCache = null;
+let forgeXmlCacheTime = 0;
+
 ipcMain.handle('get-forge-versions', async (event, mcVersion) => {
     try {
         sendLog(`🔍 Buscando versiones de Forge para ${mcVersion}…`);
-        const xml = await httpsGet('https://maven.minecraftforge.net/net/minecraftforge/forge/maven-metadata.xml');
+        let xml = '';
+        const now = Date.now();
+        if (forgeXmlCache && (now - forgeXmlCacheTime < 10 * 60 * 1000)) {
+            xml = forgeXmlCache;
+        } else {
+            try {
+                xml = await httpsGetWithFallbacks([
+                    'https://maven.minecraftforge.net/net/minecraftforge/forge/maven-metadata.xml',
+                    'https://files.minecraftforge.net/maven/net/minecraftforge/forge/maven-metadata.xml'
+                ], {}, 10000);
+                forgeXmlCache = xml;
+                forgeXmlCacheTime = now;
+            } catch (xmlErr) {
+                sendLog(`⚠️ Maven XML no disponible (${xmlErr.message}), usando mirror BMCLAPI para Forge ${mcVersion}...`, 'warn');
+                const bmclData = await httpsGet(`https://bmclapi2.bangbang93.com/forge/minecraft/${mcVersion}`, {}, 8000);
+                const bmclList = JSON.parse(bmclData);
+                const versions = bmclList.map(item => ({
+                    mcVersion,
+                    forgeVersion: item.version,
+                    fullVersion: `${mcVersion}-${item.version}`,
+                    downloadUrl: `https://maven.minecraftforge.net/net/minecraftforge/forge/${mcVersion}-${item.version}/forge-${mcVersion}-${item.version}-installer.jar`,
+                    mirrorUrl: `https://bmclapi2.bangbang93.com/forge/download?mcversion=${mcVersion}&version=${item.version}&category=installer&format=jar`
+                }));
+                sendLog(`✅ ${versions.length} versiones de Forge para ${mcVersion} (vía mirror)`);
+                return versions;
+            }
+        }
+
         const regex = new RegExp(`<version>${mcVersion.replace(/\./g, '\\.')}-([^<]+)</version>`, 'g');
         const matches = [...xml.matchAll(regex)];
         const versions = [...new Set(
@@ -1563,6 +1722,17 @@ ipcMain.handle('get-forge-versions', async (event, mcVersion) => {
         )].reverse();
 
         if (versions.length === 0) {
+            try {
+                const bmclData = await httpsGet(`https://bmclapi2.bangbang93.com/forge/minecraft/${mcVersion}`, {}, 8000);
+                const bmclList = JSON.parse(bmclData);
+                return bmclList.map(item => ({
+                    mcVersion,
+                    forgeVersion: item.version,
+                    fullVersion: `${mcVersion}-${item.version}`,
+                    downloadUrl: `https://maven.minecraftforge.net/net/minecraftforge/forge/${mcVersion}-${item.version}/forge-${mcVersion}-${item.version}-installer.jar`,
+                    mirrorUrl: `https://bmclapi2.bangbang93.com/forge/download?mcversion=${mcVersion}&version=${item.version}&category=installer&format=jar`
+                }));
+            } catch { }
             sendLog(`⚠️ No se encontraron versiones de Forge para ${mcVersion}`);
             return [];
         }
@@ -1571,8 +1741,8 @@ ipcMain.handle('get-forge-versions', async (event, mcVersion) => {
             mcVersion,
             forgeVersion: v,
             fullVersion: `${mcVersion}-${v}`,
-            downloadUrl: `https://maven.minecraftforge.net/net/minecraftforge/forge/${mcVersion}-${v}/forge-${mcVersion}-${v}-installer.jar`
-
+            downloadUrl: `https://maven.minecraftforge.net/net/minecraftforge/forge/${mcVersion}-${v}/forge-${mcVersion}-${v}-installer.jar`,
+            mirrorUrl: `https://bmclapi2.bangbang93.com/forge/download?mcversion=${mcVersion}&version=${v}&category=installer&format=jar`
         }));
     } catch (err) {
         sendLog(`❌ Error buscando Forge: ${err.message}`, 'error');
@@ -1598,10 +1768,31 @@ ipcMain.handle('install-forge', async (event, forgeData) => {
 
         if (currentOperation.cancelled) throw new Error('Operación cancelada');
 
-        await downloadFile(downloadUrl, installerPath, p => {
-            if (currentOperation.cancelled) throw new Error('Operación cancelada');
-            sendProgress(10 + Math.floor(p * 0.5), `Descargando: ${p}%`);
-        });
+        const downloadCandidates = [
+            downloadUrl,
+            forgeData.mirrorUrl,
+            `https://bmclapi2.bangbang93.com/forge/download?mcversion=${mcVersion}&version=${forgeVersion}&category=installer&format=jar`,
+            `https://files.minecraftforge.net/maven/net/minecraftforge/forge/${mcVersion}-${forgeVersion}/forge-${mcVersion}-${forgeVersion}-installer.jar`
+        ].filter(Boolean);
+
+        let dlSuccess = false;
+        for (const candUrl of downloadCandidates) {
+            try {
+                await downloadFile(candUrl, installerPath, p => {
+                    if (currentOperation.cancelled) throw new Error('Operación cancelada');
+                    sendProgress(10 + Math.floor(p * 0.5), `Descargando: ${p}%`);
+                });
+                if (fs.existsSync(installerPath) && fs.statSync(installerPath).size >= 500000) {
+                    dlSuccess = true;
+                    break;
+                }
+            } catch (candErr) {
+                sendLog(`⚠️ Descarga falló desde ${candUrl}: ${candErr.message}, probando siguiente mirror...`, 'warn');
+            }
+        }
+        if (!dlSuccess) {
+            throw new Error('No se pudo descargar el instalador de Forge desde ningún mirror disponible');
+        }
 
         sendLog(`✅ Descarga completada`);
 
