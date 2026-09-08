@@ -4543,10 +4543,10 @@ box-shadow:0 0 14px rgba(99,102,241,0.45);border:1px dashed rgba(255,255,255,0.3
             <div class="settings-card">
               <h3>🎨 TEMAS CLÁSICOS</h3>
               <div class="theme-grid">
-                <div class="theme-swatch ts-nebula" onclick="setTheme('nebula')" title="Nebula (Morado Neón)"></div>
+                <div class="theme-swatch ts-nebula" onclick="selectSpecialTheme('nebula')" title="Nebula (Morado Neón)"></div>
                 <div class="theme-swatch ts-galaxy" onclick="setTheme('galaxy')" title="Galaxy (Azul Galáctico)"></div>
                 <div class="theme-swatch ts-aurora" onclick="setTheme('aurora')" title="Aurora (Verde Esmeralda)"></div>
-                <div class="theme-swatch ts-supernova" onclick="setTheme('supernova')" title="Supernova (Fuego)"></div>
+                <div class="theme-swatch ts-supernova" onclick="selectSpecialTheme('supernova')" title="Supernova (Fuego)"></div>
                 <div class="theme-swatch ts-cosmos" onclick="setTheme('cosmos')" title="Cosmos (Ámbar Dorado)"></div>
               </div>
             </div>
@@ -4562,70 +4562,70 @@ box-shadow:0 0 14px rgba(99,102,241,0.45);border:1px dashed rgba(255,255,255,0.3
               <div class="special-themes-gallery" style="display:grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 12px; -webkit-app-region: no-drag;">
                 
                 <!-- Minecraft RTX -->
-                <div class="special-theme-card theme-swatch ts-rtx" onclick="setTheme('rtx')" title="Minecraft RTX (Atardecer Shaders 4K)" style="cursor:pointer; border-radius:14px; overflow:hidden; border:1px solid rgba(255,255,255,0.12); background:rgba(15,12,32,0.65); padding:8px; display:flex; flex-direction:column; align-items:center; gap:6px; transition:all 0.22s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform=''">
+                <div class="special-theme-card theme-swatch ts-rtx" onclick="selectSpecialTheme('rtx')" title="Minecraft RTX (Atardecer Shaders 4K)" style="cursor:pointer; border-radius:14px; overflow:hidden; border:1px solid rgba(255,255,255,0.12); background:rgba(15,12,32,0.65); padding:8px; display:flex; flex-direction:column; align-items:center; gap:6px; transition:all 0.22s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform=''">
                   <img src="assets/wallpapers/cherry_sunset.jpg" style="width:100%; height:62px; border-radius:8px; object-fit:cover; display:block;" onerror="this.onerror=null; this.src='./assets/wallpapers/cherry_sunset.jpg';">
                   <span style="font-size:0.74rem; font-weight:700; color:var(--text); text-align:center;">Minecraft RTX</span>
                   <span style="font-size:0.58rem; color:var(--text-dim); text-align:center;">Atardecer Shaders</span>
                 </div>
 
                 <!-- Amethyst Void -->
-                <div class="special-theme-card theme-swatch ts-amethyst_void" onclick="setTheme('amethyst_void')" title="Amethyst Void (Islas Cósmicas 4K)" style="cursor:pointer; border-radius:14px; overflow:hidden; border:1px solid rgba(255,255,255,0.12); background:rgba(15,12,32,0.65); padding:8px; display:flex; flex-direction:column; align-items:center; gap:6px; transition:all 0.22s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform=''">
+                <div class="special-theme-card theme-swatch ts-amethyst_void" onclick="selectSpecialTheme('amethyst_void')" title="Amethyst Void (Islas Cósmicas 4K)" style="cursor:pointer; border-radius:14px; overflow:hidden; border:1px solid rgba(255,255,255,0.12); background:rgba(15,12,32,0.65); padding:8px; display:flex; flex-direction:column; align-items:center; gap:6px; transition:all 0.22s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform=''">
                   <img src="assets/wallpapers/cosmic_amethyst.jpg" style="width:100%; height:62px; border-radius:8px; object-fit:cover; display:block;" onerror="this.onerror=null; this.src='./assets/wallpapers/cosmic_amethyst.jpg';">
                   <span style="font-size:0.74rem; font-weight:700; color:var(--text); text-align:center;">Amethyst Void</span>
                   <span style="font-size:0.58rem; color:var(--text-dim); text-align:center;">Islas Cósmicas</span>
                 </div>
 
                 <!-- Van Gogh (Starry Night) -->
-                <div class="special-theme-card theme-swatch ts-vangogh" onclick="setTheme('vangogh')" title="Van Gogh (Noche Estrellada)" style="cursor:pointer; border-radius:14px; overflow:hidden; border:1px solid rgba(255,255,255,0.12); background:rgba(15,12,32,0.65); padding:8px; display:flex; flex-direction:column; align-items:center; gap:6px; transition:all 0.22s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform=''">
+                <div class="special-theme-card theme-swatch ts-vangogh" onclick="selectSpecialTheme('vangogh')" title="Van Gogh (Noche Estrellada)" style="cursor:pointer; border-radius:14px; overflow:hidden; border:1px solid rgba(255,255,255,0.12); background:rgba(15,12,32,0.65); padding:8px; display:flex; flex-direction:column; align-items:center; gap:6px; transition:all 0.22s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform=''">
                   <img src="assets/starry_night.png" style="width:100%; height:62px; border-radius:8px; object-fit:cover; display:block;" onerror="this.onerror=null; this.src='./assets/starry_night.png';">
                   <span style="font-size:0.74rem; font-weight:700; color:var(--text); text-align:center;">Noche Estrellada</span>
                   <span style="font-size:0.58rem; color:var(--text-dim); text-align:center;">Van Gogh Art</span>
                 </div>
 
                 <!-- Nebulosa Viva -->
-                <div class="special-theme-card theme-swatch ts-nebula_live" onclick="setTheme('nebula')" title="Nebulosa Viva (Animada Dinámica)" style="cursor:pointer; border-radius:14px; overflow:hidden; border:1px solid rgba(168,85,247,0.3); background:rgba(15,12,32,0.65); padding:8px; display:flex; flex-direction:column; align-items:center; gap:6px; transition:all 0.22s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform=''">
+                <div class="special-theme-card theme-swatch ts-nebula_live" onclick="selectSpecialTheme('nebula')" title="Nebulosa Viva (Animada Dinámica)" style="cursor:pointer; border-radius:14px; overflow:hidden; border:1px solid rgba(168,85,247,0.3); background:rgba(15,12,32,0.65); padding:8px; display:flex; flex-direction:column; align-items:center; gap:6px; transition:all 0.22s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform=''">
                   <div style="width:100%; height:62px; border-radius:8px; background:radial-gradient(circle, #7c3aed 0%, #1e1b4b 100%); display:flex; align-items:center; justify-content:center; font-size:1.6rem;">🌌</div>
                   <span style="font-size:0.74rem; font-weight:700; color:var(--text); text-align:center;">Nebulosa Viva</span>
                   <span style="font-size:0.58rem; color:var(--text-dim); text-align:center;">Animada / Espacio</span>
                 </div>
 
                 <!-- Sakura -->
-                <div class="special-theme-card theme-swatch ts-sakura" onclick="setTheme('sakura')" title="Sakura (Cerezo en Flor - Pétalos)" style="cursor:pointer; border-radius:14px; overflow:hidden; border:1px solid rgba(244,114,182,0.25); background:rgba(15,12,32,0.65); padding:8px; display:flex; flex-direction:column; align-items:center; gap:6px; transition:all 0.22s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform=''">
+                <div class="special-theme-card theme-swatch ts-sakura" onclick="selectSpecialTheme('sakura')" title="Sakura (Cerezo en Flor - Pétalos)" style="cursor:pointer; border-radius:14px; overflow:hidden; border:1px solid rgba(244,114,182,0.25); background:rgba(15,12,32,0.65); padding:8px; display:flex; flex-direction:column; align-items:center; gap:6px; transition:all 0.22s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform=''">
                   <div style="width:100%; height:62px; border-radius:8px; background:linear-gradient(135deg, #500724 0%, #db2777 50%, #f472b6 100%); display:flex; align-items:center; justify-content:center; font-size:1.6rem;">🌸</div>
                   <span style="font-size:0.74rem; font-weight:700; color:var(--text); text-align:center;">Sakura</span>
                   <span style="font-size:0.58rem; color:var(--text-dim); text-align:center;">Pétalos Cerezo</span>
                 </div>
 
                 <!-- Cyberpunk -->
-                <div class="special-theme-card theme-swatch ts-cyberpunk" onclick="setTheme('cyberpunk')" title="Cyberpunk (Synthwave Neon)" style="cursor:pointer; border-radius:14px; overflow:hidden; border:1px solid rgba(6,182,212,0.25); background:rgba(15,12,32,0.65); padding:8px; display:flex; flex-direction:column; align-items:center; gap:6px; transition:all 0.22s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform=''">
+                <div class="special-theme-card theme-swatch ts-cyberpunk" onclick="selectSpecialTheme('cyberpunk')" title="Cyberpunk (Synthwave Neon)" style="cursor:pointer; border-radius:14px; overflow:hidden; border:1px solid rgba(6,182,212,0.25); background:rgba(15,12,32,0.65); padding:8px; display:flex; flex-direction:column; align-items:center; gap:6px; transition:all 0.22s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform=''">
                   <div style="width:100%; height:62px; border-radius:8px; background:linear-gradient(135deg, #f43f5e 0%, #8b5cf6 50%, #06b6d4 100%); display:flex; align-items:center; justify-content:center; font-size:1.6rem;">🏙️</div>
                   <span style="font-size:0.74rem; font-weight:700; color:var(--text); text-align:center;">Cyberpunk</span>
                   <span style="font-size:0.58rem; color:var(--text-dim); text-align:center;">Synthwave Neón</span>
                 </div>
 
                 <!-- Deep Ocean -->
-                <div class="special-theme-card theme-swatch ts-deepocean" onclick="setTheme('deepocean')" title="Deep Ocean (Abismo Marino)" style="cursor:pointer; border-radius:14px; overflow:hidden; border:1px solid rgba(45,212,191,0.25); background:rgba(15,12,32,0.65); padding:8px; display:flex; flex-direction:column; align-items:center; gap:6px; transition:all 0.22s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform=''">
+                <div class="special-theme-card theme-swatch ts-deepocean" onclick="selectSpecialTheme('deepocean')" title="Deep Ocean (Abismo Marino)" style="cursor:pointer; border-radius:14px; overflow:hidden; border:1px solid rgba(45,212,191,0.25); background:rgba(15,12,32,0.65); padding:8px; display:flex; flex-direction:column; align-items:center; gap:6px; transition:all 0.22s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform=''">
                   <div style="width:100%; height:62px; border-radius:8px; background:linear-gradient(135deg, #082f49 0%, #0e7490 50%, #2dd4bf 100%); display:flex; align-items:center; justify-content:center; font-size:1.6rem;">🌊</div>
                   <span style="font-size:0.74rem; font-weight:700; color:var(--text); text-align:center;">Deep Ocean</span>
                   <span style="font-size:0.58rem; color:var(--text-dim); text-align:center;">Abismo Marino</span>
                 </div>
 
                 <!-- Retro 8-Bit -->
-                <div class="special-theme-card theme-swatch ts-pixel8bit" onclick="setTheme('pixel8bit')" title="Retro 8-Bit (Arcade Pixel)" style="cursor:pointer; border-radius:14px; overflow:hidden; border:1px solid rgba(34,197,94,0.25); background:rgba(15,12,32,0.65); padding:8px; display:flex; flex-direction:column; align-items:center; gap:6px; transition:all 0.22s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform=''">
+                <div class="special-theme-card theme-swatch ts-pixel8bit" onclick="selectSpecialTheme('pixel8bit')" title="Retro 8-Bit (Arcade Pixel)" style="cursor:pointer; border-radius:14px; overflow:hidden; border:1px solid rgba(34,197,94,0.25); background:rgba(15,12,32,0.65); padding:8px; display:flex; flex-direction:column; align-items:center; gap:6px; transition:all 0.22s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform=''">
                   <div style="width:100%; height:62px; border-radius:8px; background:linear-gradient(135deg, #064e3b 0%, #22c55e 50%, #facc15 100%); display:flex; align-items:center; justify-content:center; font-size:1.6rem;">👾</div>
                   <span style="font-size:0.74rem; font-weight:700; color:var(--text); text-align:center;">Retro 8-Bit</span>
                   <span style="font-size:0.58rem; color:var(--text-dim); text-align:center;">Arcade Pixel</span>
                 </div>
 
                 <!-- Supernova -->
-                <div class="special-theme-card theme-swatch ts-supernova" onclick="setTheme('supernova')" title="Supernova (Fuego y Llamas)" style="cursor:pointer; border-radius:14px; overflow:hidden; border:1px solid rgba(251,146,60,0.25); background:rgba(15,12,32,0.65); padding:8px; display:flex; flex-direction:column; align-items:center; gap:6px; transition:all 0.22s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform=''">
+                <div class="special-theme-card theme-swatch ts-supernova" onclick="selectSpecialTheme('supernova')" title="Supernova (Fuego y Llamas)" style="cursor:pointer; border-radius:14px; overflow:hidden; border:1px solid rgba(251,146,60,0.25); background:rgba(15,12,32,0.65); padding:8px; display:flex; flex-direction:column; align-items:center; gap:6px; transition:all 0.22s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform=''">
                   <div style="width:100%; height:62px; border-radius:8px; background:linear-gradient(135deg, #2a1008 0%, #ea580c 50%, #facc15 100%); display:flex; align-items:center; justify-content:center; font-size:1.6rem;">🔥</div>
                   <span style="font-size:0.74rem; font-weight:700; color:var(--text); text-align:center;">Supernova</span>
                   <span style="font-size:0.58rem; color:var(--text-dim); text-align:center;">Fuego Cósmico</span>
                 </div>
 
                 <!-- Personalizado -->
-                <div class="special-theme-card theme-swatch ts-custom" onclick="setTheme('custom')" title="Personalizado (Tus propios colores e imagen)" style="cursor:pointer; border-radius:14px; overflow:hidden; border:1px dashed rgba(255,255,255,0.35); background:rgba(15,12,32,0.65); padding:8px; display:flex; flex-direction:column; align-items:center; gap:6px; transition:all 0.22s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform=''">
+                <div class="special-theme-card theme-swatch ts-custom" onclick="selectSpecialTheme('custom')" title="Personalizado (Tus propios colores e imagen)" style="cursor:pointer; border-radius:14px; overflow:hidden; border:1px dashed rgba(255,255,255,0.35); background:rgba(15,12,32,0.65); padding:8px; display:flex; flex-direction:column; align-items:center; gap:6px; transition:all 0.22s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform=''">
                   <div style="width:100%; height:62px; border-radius:8px; background:linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #4f46e5 100%); display:flex; align-items:center; justify-content:center; font-size:1.6rem;">✨</div>
                   <span style="font-size:0.74rem; font-weight:700; color:var(--text); text-align:center;">Personalizado</span>
                   <span style="font-size:0.58rem; color:var(--text-dim); text-align:center;">Sube Tu Imagen</span>
@@ -4638,7 +4638,7 @@ box-shadow:0 0 14px rgba(99,102,241,0.45);border:1px dashed rgba(255,255,255,0.3
             <div class="settings-card" style="grid-column:1/-1;">
               <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; flex-wrap:wrap; gap:10px;">
                 <h3 style="margin:0;">✨ TEMA PERSONALIZADO</h3>
-                <button class="btn btn-sm btn-glass" id="btn-activate-custom-theme" onclick="setTheme('custom')">Activar Tema Personalizado</button>
+                <button class="btn btn-sm btn-glass" id="btn-activate-custom-theme" onclick="selectSpecialTheme('custom')">Activar Tema Personalizado</button>
               </div>
               <p style="font-size:.72rem; color:var(--text-dim); margin-bottom:16px;">
                 Elige tus propios colores para el launcher y sube cualquier imagen de tu computadora para el fondo animado estilo Van Gogh.
@@ -4950,6 +4950,192 @@ box-shadow:0 0 14px rgba(99,102,241,0.45);border:1px dashed rgba(255,255,255,0.3
 
 <script>
 const { ipcRenderer: ipc } = require('electron');
+
+// ═══════ SISTEMA GLOBAL DE FONDOS Y TEMAS ESPECIALES ═══════
+function applyCustomBgMediaToDOM(path) {
+  const imgEl = document.getElementById('custom-bg-img');
+  const videoEl = document.getElementById('custom-bg-video');
+  const bgDiv = document.getElementById('bg');
+  const clearBtn = document.getElementById('clearBgBtn');
+  const statusText = document.getElementById('customBgStatusText');
+
+  const activeMedia = (typeof path === 'string')
+    ? path.trim()
+    : ((localStorage.getItem('nebula_custom_bg_path') || (typeof settings !== 'undefined' && settings && settings.customTheme && settings.customTheme.bgImage) || '').trim());
+
+  if (!activeMedia) {
+    if (imgEl) {
+      imgEl.style.display = 'none';
+      imgEl.src = '';
+    }
+    if (videoEl) {
+      videoEl.style.display = 'none';
+      videoEl.pause();
+      videoEl.src = '';
+    }
+    if (clearBtn) clearBtn.style.display = 'none';
+    if (statusText) statusText.textContent = 'Sin imagen personalizada (Nebulosa Dinámica)';
+    if (bgDiv) {
+      bgDiv.style.backgroundImage = '';
+      bgDiv.classList.remove('has-custom-wallpaper');
+    }
+    document.body.classList.remove('has-custom-wallpaper');
+    if (typeof window.updatePresetWallpaperCardUI === 'function') window.updatePresetWallpaperCardUI('nebula_dynamic');
+    return;
+  }
+
+  if (bgDiv) {
+    bgDiv.style.backgroundImage = 'none';
+    bgDiv.classList.add('has-custom-wallpaper');
+  }
+  document.body.classList.add('has-custom-wallpaper');
+  if (clearBtn) clearBtn.style.display = 'inline-block';
+
+  const fname = activeMedia.split(/[\\/]/).pop() || 'Personalizado';
+  if (statusText) statusText.textContent = 'Fondo activo: ' + fname;
+
+  const fit = localStorage.getItem('nebula_custom_bg_fit') || 'cover';
+  const pos = localStorage.getItem('nebula_custom_bg_pos') || 'center center';
+  const zoom = localStorage.getItem('nebula_custom_bg_zoom') || '100';
+
+  let fileUrl = activeMedia;
+  if (!fileUrl.startsWith('file://') && !fileUrl.startsWith('http://') && !fileUrl.startsWith('https://') && !fileUrl.startsWith('blob:') && !fileUrl.startsWith('data:')) {
+    if (/^[a-zA-Z]:[\\/]/.test(fileUrl)) {
+      fileUrl = 'file:///' + fileUrl.replace(/\\/g, '/');
+    } else if (fileUrl.startsWith('\\\\') || fileUrl.startsWith('//')) {
+      fileUrl = 'file://' + fileUrl.replace(/\\/g, '/');
+    } else {
+      fileUrl = fileUrl.replace(/\\/g, '/');
+      if (fileUrl.startsWith('./')) fileUrl = fileUrl.substring(2);
+    }
+  }
+
+  const scale = (parseFloat(zoom || 100) / 100).toFixed(2);
+  const transformStyle = `translateZ(0) scale(${scale})`;
+  const isVideo = activeMedia.startsWith('data:video') || ['mp4', 'webm', 'mkv', 'mov'].some(ext => activeMedia.toLowerCase().split('?')[0].endsWith('.' + ext));
+
+  if (isVideo) {
+    if (imgEl) { imgEl.style.display = 'none'; imgEl.src = ''; }
+    if (videoEl) {
+      videoEl.src = fileUrl;
+      videoEl.style.display = 'block';
+      videoEl.style.objectFit = fit;
+      videoEl.style.objectPosition = pos;
+      videoEl.style.transform = transformStyle;
+      videoEl.play().catch(e => console.warn(e));
+    }
+  } else {
+    if (videoEl) { videoEl.style.display = 'none'; videoEl.pause(); videoEl.src = ''; }
+    if (imgEl) {
+      imgEl.src = fileUrl;
+      imgEl.style.display = 'block';
+      imgEl.style.opacity = '1';
+      imgEl.style.visibility = 'visible';
+      imgEl.style.objectFit = fit;
+      imgEl.style.objectPosition = pos;
+      imgEl.style.transform = transformStyle;
+    }
+  }
+
+  if (typeof window.updatePresetWallpaperCardUI === 'function') {
+    if (activeMedia.includes('cherry_sunset')) window.updatePresetWallpaperCardUI('cherry_sunset');
+    else if (activeMedia.includes('cosmic_amethyst')) window.updatePresetWallpaperCardUI('cosmic_amethyst');
+    else if (activeMedia.includes('starry_night')) window.updatePresetWallpaperCardUI('starry_night');
+    else window.updatePresetWallpaperCardUI('custom');
+  }
+}
+window.applyCustomBgMediaToDOM = applyCustomBgMediaToDOM;
+
+function setCustomBgMedia(path) {
+  localStorage.setItem('nebula_custom_bg_path', path || '');
+  if (typeof settings !== 'undefined' && settings) {
+    if (!settings.customTheme) settings.customTheme = {};
+    settings.customTheme.bgImage = path || null;
+    if (typeof ipc !== 'undefined') ipc.send('save-settings', settings);
+  }
+  applyCustomBgMediaToDOM(path || '');
+}
+window.setCustomBgMedia = setCustomBgMedia;
+
+function clearCustomBgImage() {
+  localStorage.removeItem('nebula_custom_bg_path');
+  if (typeof settings !== 'undefined' && settings) {
+    if (!settings.customTheme) settings.customTheme = {};
+    settings.customTheme.bgImage = null;
+    if (typeof ipc !== 'undefined') ipc.send('save-settings', settings);
+  }
+  applyCustomBgMediaToDOM('');
+}
+window.clearCustomBgImage = clearCustomBgImage;
+
+function updatePresetWallpaperCardUI(activeKey) {
+  document.querySelectorAll('.special-theme-card').forEach(card => {
+    card.classList.remove('active');
+  });
+  const themeClassMap = {
+    'cherry_sunset': 'ts-rtx',
+    'rtx': 'ts-rtx',
+    'cosmic_amethyst': 'ts-amethyst_void',
+    'amethyst_void': 'ts-amethyst_void',
+    'starry_night': 'ts-vangogh',
+    'vangogh': 'ts-vangogh',
+    'nebula_dynamic': 'ts-nebula_live',
+    'nebula': 'ts-nebula_live',
+    'sakura': 'ts-sakura',
+    'cyberpunk': 'ts-cyberpunk',
+    'deepocean': 'ts-deepocean',
+    'pixel8bit': 'ts-pixel8bit',
+    'supernova': 'ts-supernova',
+    'custom': 'ts-custom'
+  };
+  const targetClass = themeClassMap[activeKey];
+  if (targetClass) {
+    const card = document.querySelector(`.special-theme-card.${targetClass}`);
+    if (card) card.classList.add('active');
+  }
+}
+window.updatePresetWallpaperCardUI = updatePresetWallpaperCardUI;
+
+function selectSpecialTheme(themeKey) {
+  if (themeKey === 'rtx') {
+    setCustomBgMedia('assets/wallpapers/cherry_sunset.jpg');
+    setTheme('rtx');
+    updatePresetWallpaperCardUI('rtx');
+    if (typeof toast === 'function') toast('🌸 Fondo Minecraft RTX 4K aplicado.', 'success');
+  } else if (themeKey === 'amethyst_void') {
+    setCustomBgMedia('assets/wallpapers/cosmic_amethyst.jpg');
+    setTheme('amethyst_void');
+    updatePresetWallpaperCardUI('amethyst_void');
+    if (typeof toast === 'function') toast('💜 Fondo Amethyst Void aplicado.', 'success');
+  } else if (themeKey === 'vangogh') {
+    setCustomBgMedia('assets/starry_night.png');
+    setTheme('vangogh');
+    updatePresetWallpaperCardUI('vangogh');
+    if (typeof toast === 'function') toast('🎨 Fondo Noche Estrellada (Van Gogh) aplicado.', 'success');
+  } else if (themeKey === 'nebula') {
+    clearCustomBgImage();
+    setTheme('nebula');
+    updatePresetWallpaperCardUI('nebula');
+    if (typeof toast === 'function') toast('🌌 Nebulosa Dinámica activada.', 'success');
+  } else if (themeKey === 'custom') {
+    setTheme('custom');
+    updatePresetWallpaperCardUI('custom');
+    const customSection = document.getElementById('custom-theme-creator-section');
+    if (customSection) customSection.scrollIntoView({ behavior: 'smooth' });
+    if (typeof toast === 'function') toast('✨ Modo de Tema Personalizado activado.', 'info');
+  } else {
+    clearCustomBgImage();
+    setTheme(themeKey);
+    updatePresetWallpaperCardUI(themeKey);
+    if (typeof toast === 'function') toast('✨ Tema especial aplicado.', 'success');
+  }
+}
+window.selectSpecialTheme = selectSpecialTheme;
+
+window.selectPresetWallpaper = function(key) {
+  selectSpecialTheme(key);
+};
+
 
 // ═══════ STATE ═══════
 let authUser, authType, authData;
@@ -5383,36 +5569,28 @@ function setTheme(t) {
 
   // Sincronizar fondos para temas especiales
   if (t === 'rtx') {
-    if (typeof applyCustomBgMediaToDOM === 'function') {
-      applyCustomBgMediaToDOM('assets/wallpapers/cherry_sunset.jpg');
-      localStorage.setItem('nebula_custom_bg_path', 'assets/wallpapers/cherry_sunset.jpg');
-      if (typeof settings !== 'undefined' && settings) {
-        if (!settings.customTheme) settings.customTheme = {};
-        settings.customTheme.bgImage = 'assets/wallpapers/cherry_sunset.jpg';
-      }
+    applyCustomBgMediaToDOM('assets/wallpapers/cherry_sunset.jpg');
+    localStorage.setItem('nebula_custom_bg_path', 'assets/wallpapers/cherry_sunset.jpg');
+    if (typeof settings !== 'undefined' && settings) {
+      if (!settings.customTheme) settings.customTheme = {};
+      settings.customTheme.bgImage = 'assets/wallpapers/cherry_sunset.jpg';
     }
   } else if (t === 'amethyst_void') {
-    if (typeof applyCustomBgMediaToDOM === 'function') {
-      applyCustomBgMediaToDOM('assets/wallpapers/cosmic_amethyst.jpg');
-      localStorage.setItem('nebula_custom_bg_path', 'assets/wallpapers/cosmic_amethyst.jpg');
-      if (typeof settings !== 'undefined' && settings) {
-        if (!settings.customTheme) settings.customTheme = {};
-        settings.customTheme.bgImage = 'assets/wallpapers/cosmic_amethyst.jpg';
-      }
+    applyCustomBgMediaToDOM('assets/wallpapers/cosmic_amethyst.jpg');
+    localStorage.setItem('nebula_custom_bg_path', 'assets/wallpapers/cosmic_amethyst.jpg');
+    if (typeof settings !== 'undefined' && settings) {
+      if (!settings.customTheme) settings.customTheme = {};
+      settings.customTheme.bgImage = 'assets/wallpapers/cosmic_amethyst.jpg';
     }
   } else if (t === 'vangogh') {
-    if (typeof applyCustomBgMediaToDOM === 'function') {
-      applyCustomBgMediaToDOM('assets/starry_night.png');
-      localStorage.setItem('nebula_custom_bg_path', 'assets/starry_night.png');
-      if (typeof settings !== 'undefined' && settings) {
-        if (!settings.customTheme) settings.customTheme = {};
-        settings.customTheme.bgImage = 'assets/starry_night.png';
-      }
+    applyCustomBgMediaToDOM('assets/starry_night.png');
+    localStorage.setItem('nebula_custom_bg_path', 'assets/starry_night.png');
+    if (typeof settings !== 'undefined' && settings) {
+      if (!settings.customTheme) settings.customTheme = {};
+      settings.customTheme.bgImage = 'assets/starry_night.png';
     }
   } else if (t === 'nebula') {
-    if (typeof clearCustomBgImage === 'function') {
-      clearCustomBgImage();
-    }
+    clearCustomBgImage();
   }
 
   document.documentElement.setAttribute('data-theme', t);
@@ -5443,29 +5621,16 @@ function setTheme(t) {
     ipc.send('save-settings', settings);
   }
 
-  const imgEl = document.getElementById('custom-bg-img');
-  const videoEl = document.getElementById('custom-bg-video');
-  const bgDiv = document.getElementById('bg');
-
   const savedCustomBg = localStorage.getItem('nebula_custom_bg_path') || (settings && settings.customTheme && settings.customTheme.bgImage) || '';
   if (t === 'custom') {
     applyCustomTheme();
-    if (typeof applyCustomBgMediaToDOM === 'function') {
-      applyCustomBgMediaToDOM(savedCustomBg);
-    }
+    applyCustomBgMediaToDOM(savedCustomBg);
   } else {
     // Si hay un fondo HD o wallpaper activo (RTX, Amethyst, Starry Night o imagen personalizada), conservarlo
-    if (savedCustomBg && typeof applyCustomBgMediaToDOM === 'function') {
+    if (savedCustomBg) {
       applyCustomBgMediaToDOM(savedCustomBg);
     } else {
-      if (imgEl) { imgEl.style.display = 'none'; imgEl.src = ''; }
-      if (videoEl) { videoEl.style.display = 'none'; videoEl.pause(); }
-      if (bgDiv) {
-        bgDiv.style.backgroundImage = '';
-        bgDiv.style.background = '';
-        bgDiv.classList.remove('has-custom-wallpaper');
-      }
-      document.body.classList.remove('has-custom-wallpaper');
+      applyCustomBgMediaToDOM('');
     }
   }
 }
@@ -12694,93 +12859,7 @@ async function loadNebulaProfileData() {
         }
       };
 
-      function applyCustomBgMediaToDOM(path) {
-        const imgEl = document.getElementById('custom-bg-img');
-        const videoEl = document.getElementById('custom-bg-video');
-        const bgDiv = document.getElementById('bg');
-        const clearBtn = document.getElementById('clearBgBtn');
-        const statusText = document.getElementById('customBgStatusText');
-
-        const activeMedia = path || localStorage.getItem('nebula_custom_bg_path') || (typeof settings !== 'undefined' && settings && settings.customTheme && settings.customTheme.bgImage) || '';
-
-        if (!activeMedia || activeMedia.trim() === '') {
-          if (imgEl) { imgEl.style.display = 'none'; imgEl.src = ''; }
-          if (videoEl) { videoEl.style.display = 'none'; videoEl.pause(); videoEl.src = ''; }
-          if (clearBtn) clearBtn.style.display = 'none';
-          if (statusText) statusText.textContent = 'Sin imagen personalizada (Nebulosa Dinámica)';
-          if (bgDiv) {
-            bgDiv.style.backgroundImage = '';
-            bgDiv.classList.remove('has-custom-wallpaper');
-          }
-          document.body.classList.remove('has-custom-wallpaper');
-          if (typeof window.updatePresetWallpaperCardUI === 'function') window.updatePresetWallpaperCardUI('nebula_dynamic');
-          return;
-        }
-
-        if (bgDiv) {
-          bgDiv.style.backgroundImage = 'none';
-          bgDiv.classList.add('has-custom-wallpaper');
-        }
-        document.body.classList.add('has-custom-wallpaper');
-        if (clearBtn) clearBtn.style.display = 'inline-block';
-        
-        const fname = activeMedia.split(/[/\\]/).pop() || 'Personalizado';
-        if (statusText) statusText.textContent = 'Fondo activo: ' + fname;
-
-        const fit = localStorage.getItem('nebula_custom_bg_fit') || 'cover';
-        const pos = localStorage.getItem('nebula_custom_bg_pos') || 'center center';
-        const zoom = localStorage.getItem('nebula_custom_bg_zoom') || '100';
-
-        let fileUrl = activeMedia.trim();
-        if (!fileUrl.startsWith('file://') && !fileUrl.startsWith('http://') && !fileUrl.startsWith('https://') && !fileUrl.startsWith('blob:') && !fileUrl.startsWith('data:')) {
-          if (/^[a-zA-Z]:[\\/]/.test(fileUrl)) {
-            // Windows absolute path: C:\... -> file:///C:/...
-            fileUrl = 'file:///' + fileUrl.replace(/\\/g, '/');
-          } else if (fileUrl.startsWith('\\\\') || fileUrl.startsWith('//')) {
-            // UNC network path
-            fileUrl = 'file://' + fileUrl.replace(/\\/g, '/');
-          } else {
-            // Relative path inside launcher: e.g. "assets/wallpapers/cherry_sunset.jpg"
-            fileUrl = fileUrl.replace(/\\/g, '/');
-            if (fileUrl.startsWith('./')) fileUrl = fileUrl.substring(2);
-          }
-        }
-
-        const scale = (parseFloat(zoom || 100) / 100).toFixed(2);
-        const transformStyle = `translateZ(0) scale(${scale})`;
-
-        const isVideo = activeMedia.startsWith('data:video') || ['mp4', 'webm', 'mkv', 'mov'].some(ext => activeMedia.toLowerCase().split('?')[0].endsWith('.' + ext));
-
-        if (isVideo) {
-          if (imgEl) { imgEl.style.display = 'none'; imgEl.src = ''; }
-          if (videoEl) {
-            videoEl.src = fileUrl;
-            videoEl.style.display = 'block';
-            videoEl.style.objectFit = fit;
-            videoEl.style.objectPosition = pos;
-            videoEl.style.transform = transformStyle;
-            videoEl.play().catch(e => console.warn(e));
-          }
-        } else {
-          if (videoEl) { videoEl.style.display = 'none'; videoEl.pause(); videoEl.src = ''; }
-          if (imgEl) {
-            imgEl.src = fileUrl;
-            imgEl.style.display = 'block';
-            imgEl.style.objectFit = fit;
-            imgEl.style.objectPosition = pos;
-            imgEl.style.transform = transformStyle;
-          }
-        }
-
-        // Resaltar preset activo en UI
-        if (typeof window.updatePresetWallpaperCardUI === 'function') {
-          if (activeMedia.includes('cherry_sunset')) window.updatePresetWallpaperCardUI('cherry_sunset');
-          else if (activeMedia.includes('cosmic_amethyst')) window.updatePresetWallpaperCardUI('cosmic_amethyst');
-          else if (activeMedia.includes('starry_night')) window.updatePresetWallpaperCardUI('starry_night');
-          else window.updatePresetWallpaperCardUI('custom');
-        }
-      }
-
+// Usar implementacion global de applyCustomBgMediaToDOM
       window.updateCustomBgStyleUI = function() {
         const fitSelect = document.getElementById('customBgFitSelect');
         const posSelect = document.getElementById('customBgPosSelect');
