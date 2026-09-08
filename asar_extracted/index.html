@@ -3104,72 +3104,81 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;heigh
   }
 
   
-/* ═══════ TRUE CRYSTALLINE GLASSMORPHISM ═══════ */
-#main-launcher {
-  position: fixed; inset: 0; z-index: 7000; display: none; border-radius: 18px; overflow: hidden;
-  background: transparent !important;
+
+/* ═══════ MODO NÍTIDO TOTAL (SIN DIFUMINADO / ZERO BLUR) ═══════ */
+#bg .orb, .orb, #o1, #o2, #o3, #o4 {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+}
+
+*, *::before, *::after {
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
 }
-.launcher-shell {
-  width: 100%; height: 100%; display: flex; border-radius: 18px; overflow: hidden;
-  background: rgba(10, 12, 26, 0.24) !important;
-  backdrop-filter: blur(12px) saturate(135%) !important;
-  -webkit-backdrop-filter: blur(12px) saturate(135%) !important;
-  border: 1px solid rgba(255, 255, 255, 0.08) !important;
-}
-.sidebar {
-  width: var(--sidebar-w); min-width: var(--sidebar-w);
-  background: rgba(8, 10, 22, 0.40) !important;
-  backdrop-filter: blur(12px) !important;
-  -webkit-backdrop-filter: blur(12px) !important;
-  border-right: 1px solid rgba(255, 255, 255, 0.07) !important;
-}
-.tab-panel {
-  background: transparent !important;
-}
-.launch-card, .play-mod-card, .client-card, .glass-card, .settings-card {
-  background: rgba(14, 18, 36, 0.32) !important;
-  backdrop-filter: blur(10px) saturate(125%) !important;
-  -webkit-backdrop-filter: blur(10px) saturate(125%) !important;
-  border: 1px solid rgba(255, 255, 255, 0.09) !important;
-  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.12) !important;
-  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1) !important;
-}
-.launch-card:hover, .play-mod-card:hover, .client-card:hover, .glass-card:hover {
-  background: rgba(22, 26, 50, 0.44) !important;
-  border-color: rgba(168, 85, 247, 0.45) !important;
-  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.35), 0 0 25px rgba(168, 85, 247, 0.18) !important;
-  transform: translateY(-2px) !important;
+
+#bg {
+  background: #090b14 !important;
+  animation: none !important;
 }
 
-/* Reglas cuando hay un wallpaper activo: el arte se vuelve protagonista sin capas oscuras que lo tapen */
 .has-custom-wallpaper #bg {
   background: transparent !important;
 }
-.has-custom-wallpaper #bg .orb {
-  display: none !important;
+
+#main-launcher {
+  position: fixed; inset: 0; z-index: 7000; display: none; border-radius: 18px; overflow: hidden;
+  background: transparent !important;
 }
-.has-custom-wallpaper #bg .stars {
-  opacity: 0.15 !important;
+
+.launcher-shell {
+  width: 100%; height: 100%; display: flex; border-radius: 18px; overflow: hidden;
+  background: #0b0e1b !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.6) !important;
 }
-.has-custom-wallpaper #vanGoghCanvas {
-  opacity: 0.35 !important;
+
+.sidebar {
+  width: var(--sidebar-w); min-width: var(--sidebar-w);
+  background: #080a14 !important;
+  border-right: 1px solid rgba(255, 255, 255, 0.07) !important;
 }
+
+.tab-panel {
+  background: transparent !important;
+}
+
+/* Tarjetas limpias, nítidas, estilo Badlion/Lunar sin difuminado */
+.launch-card, .play-mod-card, .client-card, .glass-card, .settings-card, .changelog-card, .social-sidebar, .social-chat {
+  background: #111526 !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35) !important;
+  border-radius: 16px !important;
+  transition: border-color 0.2s, background 0.2s, transform 0.2s !important;
+}
+
+.launch-card:hover, .play-mod-card:hover, .client-card:hover {
+  background: #151a30 !important;
+  border-color: rgba(168, 85, 247, 0.45) !important;
+  transform: translateY(-2px) !important;
+}
+
+/* Cuando el usuario tiene un fondo o wallpaper activo */
 .has-custom-wallpaper .launcher-shell {
-  background: rgba(8, 10, 24, 0.18) !important;
+  background: rgba(11, 14, 27, 0.82) !important;
 }
 .has-custom-wallpaper .sidebar {
-  background: rgba(6, 8, 18, 0.32) !important;
+  background: rgba(8, 10, 20, 0.88) !important;
 }
 .has-custom-wallpaper .launch-card,
 .has-custom-wallpaper .play-mod-card,
 .has-custom-wallpaper .client-card,
 .has-custom-wallpaper .glass-card,
-.has-custom-wallpaper .settings-card {
-  background: rgba(10, 14, 28, 0.26) !important;
-  backdrop-filter: blur(8px) saturate(120%) !important;
-  -webkit-backdrop-filter: blur(8px) saturate(120%) !important;
+.has-custom-wallpaper .settings-card,
+.has-custom-wallpaper .social-sidebar,
+.has-custom-wallpaper .social-chat {
+  background: rgba(17, 21, 38, 0.85) !important;
+  border: 1px solid rgba(255, 255, 255, 0.10) !important;
 }
 
 </style>
@@ -4541,9 +4550,9 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;heigh
               <div style="border-top: .5px solid var(--border); padding-top: 14px; margin-bottom: 14px;">
                 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
                   <label class="label" style="margin:0;">Desenfoque de Cristal (Glass Blur)</label>
-                  <span style="font-size:.78rem; color:var(--text-dim); font-family:monospace;" id="customBlurVal">16px</span>
+                  <span style="font-size:.78rem; color:var(--text-dim); font-family:monospace;" id="customBlurVal">0px</span>
                 </div>
-                <input type="range" id="customBlurInp" min="0" max="50" value="16" step="1" style="width:100%; cursor:pointer;" oninput="onCustomBlurSliderInput(this.value)" onchange="saveCustomBlurFromUI(this.value)">
+                <input type="range" id="customBlurInp" min="0" max="50" value="0" step="1" style="width:100%; cursor:pointer;" oninput="onCustomBlurSliderInput(this.value)" onchange="saveCustomBlurFromUI(this.value)">
               </div>
 
               <div style="border-top: .5px solid var(--border); padding-top: 14px;">
@@ -5320,7 +5329,7 @@ function applyCustomTheme() {
     accent2: '#38bdf8',
     orb1: '#2d1b4d',
     orb2: '#1a1b4b',
-    blur: 16,
+    blur: 0,
     bgImage: null
   };
 
@@ -5390,7 +5399,7 @@ function populateCustomThemeUI() {
     accent2: '#38bdf8',
     orb1: '#2d1b4d',
     orb2: '#1a1b4b',
-    blur: 16,
+    blur: 0,
     bgImage: null
   };
 
@@ -12340,7 +12349,7 @@ async function loadNebulaProfileData() {
         pgrad.addColorStop(1, '#db2777');
         pctx.fillStyle = pgrad;
         pctx.shadowColor = 'rgba(244, 114, 182, 0.45)';
-        pctx.shadowBlur = 6;
+        pctx.shadowBlur = 0;
         pctx.beginPath();
         pctx.moveTo(32, 4);
         pctx.bezierCurveTo(54, 10, 58, 48, 32, 60);
@@ -12743,7 +12752,7 @@ async function loadNebulaProfileData() {
           const col = starColors[s.colorIndex % starColors.length];
           ctx.fillStyle = col;
           ctx.shadowColor = col;
-          ctx.shadowBlur = s.size > 1.2 ? 6 : 0;
+          ctx.shadowBlur = 0;
           ctx.beginPath();
           ctx.arc(s.x + mouseX * (s.size * 0.25), s.y + mouseY * (s.size * 0.25), s.size, 0, Math.PI * 2);
           ctx.fill();
@@ -12793,7 +12802,7 @@ async function loadNebulaProfileData() {
           ctx.globalAlpha = cp.alpha;
           ctx.fillStyle = cp.color;
           ctx.shadowColor = cp.color;
-          ctx.shadowBlur = 8;
+          ctx.shadowBlur = 0;
           ctx.beginPath();
           ctx.arc(cp.x, cp.y, cp.size, 0, Math.PI * 2);
           ctx.fill();
@@ -12816,7 +12825,7 @@ async function loadNebulaProfileData() {
             ctx.lineWidth = 1.2;
             ctx.fillStyle = 'rgba(45, 212, 191, 0.15)';
             ctx.shadowColor = '#2dd4bf';
-            ctx.shadowBlur = 6;
+            ctx.shadowBlur = 0;
             ctx.beginPath();
             ctx.arc(b.x, b.y, b.radius, 0, Math.PI * 2);
             ctx.fill();
@@ -12842,7 +12851,7 @@ async function loadNebulaProfileData() {
             ctx.globalAlpha = p.alpha;
             ctx.fillStyle = p.color;
             ctx.shadowColor = p.color;
-            ctx.shadowBlur = 8;
+            ctx.shadowBlur = 0;
             ctx.fillRect(Math.floor(p.x), Math.floor(p.y), p.size, p.size);
             ctx.restore();
           }
@@ -12907,7 +12916,7 @@ async function loadNebulaProfileData() {
             ctx.strokeStyle = l.color;
             ctx.lineWidth = 1.6;
             ctx.shadowColor = l.color;
-            ctx.shadowBlur = 10;
+            ctx.shadowBlur = 0;
             ctx.beginPath();
             ctx.moveTo(l.x, l.y);
             ctx.lineTo(l.x, l.y - l.length);
