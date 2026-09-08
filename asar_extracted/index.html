@@ -1403,7 +1403,22 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;heigh
 .ts-amethyst_void{background:linear-gradient(135deg,#3b0764,#6b21a8,#a855f7);box-shadow:0 0 14px rgba(168,85,247,0.45);}
 .ts-vangogh{background:linear-gradient(135deg,#1e3a8a,#0284c7,#facc15);box-shadow:0 0 14px rgba(250,204,21,0.45);}
 .ts-nebula_live{background:radial-gradient(circle,#7c3aed,#1e1b4b);box-shadow:0 0 14px rgba(124,58,237,0.45);}
-.ts-custom{background:linear-gradient(135deg,#1e1b4b,#312e81,#4f46e5);box-shadow:0 0 14px rgba(99,102,241,0.45);border:1px dashed rgba(255,255,255,0.35)!important;}
+.ts-custom{background:linear-gradient(135deg,#1e1b4b,#312e81,#4f46e5);
+.special-theme-card {
+  position: relative;
+  transition: all 0.22s ease !important;
+}
+.special-theme-card:hover {
+  transform: translateY(-3px) !important;
+  border-color: rgba(255, 255, 255, 0.35) !important;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4) !important;
+}
+.special-theme-card.active {
+  border-color: var(--accent, #a855f7) !important;
+  box-shadow: 0 0 0 2px var(--accent, #a855f7), 0 0 22px var(--accent-glow, rgba(168, 85, 247, 0.5)) !important;
+  background: rgba(28, 22, 58, 0.82) !important;
+}
+box-shadow:0 0 14px rgba(99,102,241,0.45);border:1px dashed rgba(255,255,255,0.35)!important;}
 
 .theme-label{font-size:.6rem;text-align:center;margin-top:4px;color:var(--text-dim);}
 
@@ -4536,20 +4551,86 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;heigh
               </div>
             </div>
 
-            <!-- 2. TEMAS ESPECIALES & WALLPAPERS HD -->
-            <div class="settings-card">
-              <h3>🌟 TEMAS ESPECIALES</h3>
-              <div class="theme-grid">
-                <div class="theme-swatch ts-rtx" onclick="setTheme('rtx')" title="Minecraft RTX (Atardecer Shaders 4K)" style="display:flex;align-items:center;justify-content:center;font-size:1.25rem;cursor:pointer;">🌅</div>
-                <div class="theme-swatch ts-amethyst_void" onclick="setTheme('amethyst_void')" title="Amethyst Void (Islas Cósmicas 4K)" style="display:flex;align-items:center;justify-content:center;font-size:1.25rem;cursor:pointer;">🔮</div>
-                <div class="theme-swatch ts-vangogh" onclick="setTheme('vangogh')" title="Van Gogh (Noche Estrellada)" style="display:flex;align-items:center;justify-content:center;font-size:1.25rem;cursor:pointer;">🎨</div>
-                <div class="theme-swatch ts-nebula_live" onclick="setTheme('nebula')" title="Nebulosa Viva (Animada Dinámica)" style="display:flex;align-items:center;justify-content:center;font-size:1.25rem;cursor:pointer;">🌌</div>
-                <div class="theme-swatch ts-sakura" onclick="setTheme('sakura')" title="Sakura (Cerezo en Flor - Pétalos)" style="display:flex;align-items:center;justify-content:center;font-size:1.25rem;cursor:pointer;">🌸</div>
-                <div class="theme-swatch ts-cyberpunk" onclick="setTheme('cyberpunk')" title="Cyberpunk (Synthwave Neon)" style="display:flex;align-items:center;justify-content:center;font-size:1.25rem;cursor:pointer;">🏙️</div>
-                <div class="theme-swatch ts-deepocean" onclick="setTheme('deepocean')" title="Deep Ocean (Abismo Marino)" style="display:flex;align-items:center;justify-content:center;font-size:1.25rem;cursor:pointer;">🌊</div>
-                <div class="theme-swatch ts-pixel8bit" onclick="setTheme('pixel8bit')" title="Retro 8-Bit (Arcade Pixel)" style="display:flex;align-items:center;justify-content:center;font-size:1.25rem;cursor:pointer;">👾</div>
-                <div class="theme-swatch ts-supernova" onclick="setTheme('supernova')" title="Supernova (Fuego y Llamas)" style="display:flex;align-items:center;justify-content:center;font-size:1.25rem;cursor:pointer;">🔥</div>
-                <div class="theme-swatch ts-custom" onclick="setTheme('custom')" title="Personalizado (Tus colores e imagen)" style="display:flex;align-items:center;justify-content:center;font-size:1.25rem;cursor:pointer;">✨</div>
+            <!-- 2. TEMAS ESPECIALES & WALLPAPERS HD (GALERÍA VISUAL) -->
+            <div class="settings-card" style="grid-column: 1 / -1;">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+                <h3 style="margin:0;">🌟 TEMAS ESPECIALES & FONDOS HD</h3>
+                <span style="font-size:0.72rem; color:var(--text-dim);">Haz clic en cualquier imagen para aplicar el tema y fondo al instante</span>
+              </div>
+              <p style="font-size:0.72rem; color:var(--text-dim); margin-bottom:14px;">Elige entre escenarios de Minecraft en 4K RTX, arte celestial, atmósferas vivas o crea tu propio estilo.</p>
+              
+              <div class="special-themes-gallery" style="display:grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 12px; -webkit-app-region: no-drag;">
+                
+                <!-- Minecraft RTX -->
+                <div class="special-theme-card theme-swatch ts-rtx" onclick="setTheme('rtx')" title="Minecraft RTX (Atardecer Shaders 4K)" style="cursor:pointer; border-radius:14px; overflow:hidden; border:1px solid rgba(255,255,255,0.12); background:rgba(15,12,32,0.65); padding:8px; display:flex; flex-direction:column; align-items:center; gap:6px; transition:all 0.22s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform=''">
+                  <img src="assets/wallpapers/cherry_sunset.jpg" style="width:100%; height:62px; border-radius:8px; object-fit:cover; display:block;" onerror="this.onerror=null; this.src='./assets/wallpapers/cherry_sunset.jpg';">
+                  <span style="font-size:0.74rem; font-weight:700; color:var(--text); text-align:center;">Minecraft RTX</span>
+                  <span style="font-size:0.58rem; color:var(--text-dim); text-align:center;">Atardecer Shaders</span>
+                </div>
+
+                <!-- Amethyst Void -->
+                <div class="special-theme-card theme-swatch ts-amethyst_void" onclick="setTheme('amethyst_void')" title="Amethyst Void (Islas Cósmicas 4K)" style="cursor:pointer; border-radius:14px; overflow:hidden; border:1px solid rgba(255,255,255,0.12); background:rgba(15,12,32,0.65); padding:8px; display:flex; flex-direction:column; align-items:center; gap:6px; transition:all 0.22s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform=''">
+                  <img src="assets/wallpapers/cosmic_amethyst.jpg" style="width:100%; height:62px; border-radius:8px; object-fit:cover; display:block;" onerror="this.onerror=null; this.src='./assets/wallpapers/cosmic_amethyst.jpg';">
+                  <span style="font-size:0.74rem; font-weight:700; color:var(--text); text-align:center;">Amethyst Void</span>
+                  <span style="font-size:0.58rem; color:var(--text-dim); text-align:center;">Islas Cósmicas</span>
+                </div>
+
+                <!-- Van Gogh (Starry Night) -->
+                <div class="special-theme-card theme-swatch ts-vangogh" onclick="setTheme('vangogh')" title="Van Gogh (Noche Estrellada)" style="cursor:pointer; border-radius:14px; overflow:hidden; border:1px solid rgba(255,255,255,0.12); background:rgba(15,12,32,0.65); padding:8px; display:flex; flex-direction:column; align-items:center; gap:6px; transition:all 0.22s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform=''">
+                  <img src="assets/starry_night.png" style="width:100%; height:62px; border-radius:8px; object-fit:cover; display:block;" onerror="this.onerror=null; this.src='./assets/starry_night.png';">
+                  <span style="font-size:0.74rem; font-weight:700; color:var(--text); text-align:center;">Noche Estrellada</span>
+                  <span style="font-size:0.58rem; color:var(--text-dim); text-align:center;">Van Gogh Art</span>
+                </div>
+
+                <!-- Nebulosa Viva -->
+                <div class="special-theme-card theme-swatch ts-nebula_live" onclick="setTheme('nebula')" title="Nebulosa Viva (Animada Dinámica)" style="cursor:pointer; border-radius:14px; overflow:hidden; border:1px solid rgba(168,85,247,0.3); background:rgba(15,12,32,0.65); padding:8px; display:flex; flex-direction:column; align-items:center; gap:6px; transition:all 0.22s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform=''">
+                  <div style="width:100%; height:62px; border-radius:8px; background:radial-gradient(circle, #7c3aed 0%, #1e1b4b 100%); display:flex; align-items:center; justify-content:center; font-size:1.6rem;">🌌</div>
+                  <span style="font-size:0.74rem; font-weight:700; color:var(--text); text-align:center;">Nebulosa Viva</span>
+                  <span style="font-size:0.58rem; color:var(--text-dim); text-align:center;">Animada / Espacio</span>
+                </div>
+
+                <!-- Sakura -->
+                <div class="special-theme-card theme-swatch ts-sakura" onclick="setTheme('sakura')" title="Sakura (Cerezo en Flor - Pétalos)" style="cursor:pointer; border-radius:14px; overflow:hidden; border:1px solid rgba(244,114,182,0.25); background:rgba(15,12,32,0.65); padding:8px; display:flex; flex-direction:column; align-items:center; gap:6px; transition:all 0.22s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform=''">
+                  <div style="width:100%; height:62px; border-radius:8px; background:linear-gradient(135deg, #500724 0%, #db2777 50%, #f472b6 100%); display:flex; align-items:center; justify-content:center; font-size:1.6rem;">🌸</div>
+                  <span style="font-size:0.74rem; font-weight:700; color:var(--text); text-align:center;">Sakura</span>
+                  <span style="font-size:0.58rem; color:var(--text-dim); text-align:center;">Pétalos Cerezo</span>
+                </div>
+
+                <!-- Cyberpunk -->
+                <div class="special-theme-card theme-swatch ts-cyberpunk" onclick="setTheme('cyberpunk')" title="Cyberpunk (Synthwave Neon)" style="cursor:pointer; border-radius:14px; overflow:hidden; border:1px solid rgba(6,182,212,0.25); background:rgba(15,12,32,0.65); padding:8px; display:flex; flex-direction:column; align-items:center; gap:6px; transition:all 0.22s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform=''">
+                  <div style="width:100%; height:62px; border-radius:8px; background:linear-gradient(135deg, #f43f5e 0%, #8b5cf6 50%, #06b6d4 100%); display:flex; align-items:center; justify-content:center; font-size:1.6rem;">🏙️</div>
+                  <span style="font-size:0.74rem; font-weight:700; color:var(--text); text-align:center;">Cyberpunk</span>
+                  <span style="font-size:0.58rem; color:var(--text-dim); text-align:center;">Synthwave Neón</span>
+                </div>
+
+                <!-- Deep Ocean -->
+                <div class="special-theme-card theme-swatch ts-deepocean" onclick="setTheme('deepocean')" title="Deep Ocean (Abismo Marino)" style="cursor:pointer; border-radius:14px; overflow:hidden; border:1px solid rgba(45,212,191,0.25); background:rgba(15,12,32,0.65); padding:8px; display:flex; flex-direction:column; align-items:center; gap:6px; transition:all 0.22s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform=''">
+                  <div style="width:100%; height:62px; border-radius:8px; background:linear-gradient(135deg, #082f49 0%, #0e7490 50%, #2dd4bf 100%); display:flex; align-items:center; justify-content:center; font-size:1.6rem;">🌊</div>
+                  <span style="font-size:0.74rem; font-weight:700; color:var(--text); text-align:center;">Deep Ocean</span>
+                  <span style="font-size:0.58rem; color:var(--text-dim); text-align:center;">Abismo Marino</span>
+                </div>
+
+                <!-- Retro 8-Bit -->
+                <div class="special-theme-card theme-swatch ts-pixel8bit" onclick="setTheme('pixel8bit')" title="Retro 8-Bit (Arcade Pixel)" style="cursor:pointer; border-radius:14px; overflow:hidden; border:1px solid rgba(34,197,94,0.25); background:rgba(15,12,32,0.65); padding:8px; display:flex; flex-direction:column; align-items:center; gap:6px; transition:all 0.22s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform=''">
+                  <div style="width:100%; height:62px; border-radius:8px; background:linear-gradient(135deg, #064e3b 0%, #22c55e 50%, #facc15 100%); display:flex; align-items:center; justify-content:center; font-size:1.6rem;">👾</div>
+                  <span style="font-size:0.74rem; font-weight:700; color:var(--text); text-align:center;">Retro 8-Bit</span>
+                  <span style="font-size:0.58rem; color:var(--text-dim); text-align:center;">Arcade Pixel</span>
+                </div>
+
+                <!-- Supernova -->
+                <div class="special-theme-card theme-swatch ts-supernova" onclick="setTheme('supernova')" title="Supernova (Fuego y Llamas)" style="cursor:pointer; border-radius:14px; overflow:hidden; border:1px solid rgba(251,146,60,0.25); background:rgba(15,12,32,0.65); padding:8px; display:flex; flex-direction:column; align-items:center; gap:6px; transition:all 0.22s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform=''">
+                  <div style="width:100%; height:62px; border-radius:8px; background:linear-gradient(135deg, #2a1008 0%, #ea580c 50%, #facc15 100%); display:flex; align-items:center; justify-content:center; font-size:1.6rem;">🔥</div>
+                  <span style="font-size:0.74rem; font-weight:700; color:var(--text); text-align:center;">Supernova</span>
+                  <span style="font-size:0.58rem; color:var(--text-dim); text-align:center;">Fuego Cósmico</span>
+                </div>
+
+                <!-- Personalizado -->
+                <div class="special-theme-card theme-swatch ts-custom" onclick="setTheme('custom')" title="Personalizado (Tus propios colores e imagen)" style="cursor:pointer; border-radius:14px; overflow:hidden; border:1px dashed rgba(255,255,255,0.35); background:rgba(15,12,32,0.65); padding:8px; display:flex; flex-direction:column; align-items:center; gap:6px; transition:all 0.22s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform=''">
+                  <div style="width:100%; height:62px; border-radius:8px; background:linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #4f46e5 100%); display:flex; align-items:center; justify-content:center; font-size:1.6rem;">✨</div>
+                  <span style="font-size:0.74rem; font-weight:700; color:var(--text); text-align:center;">Personalizado</span>
+                  <span style="font-size:0.58rem; color:var(--text-dim); text-align:center;">Sube Tu Imagen</span>
+                </div>
+
               </div>
             </div>
 
@@ -4606,32 +4687,8 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;heigh
               </div>
 
               <div style="border-top: .5px solid var(--border); padding-top: 14px;">
-                <label class="label">Fondo del Launcher & Galería HD</label>
-                <p style="font-size:.72rem; color:var(--text-dim); margin-bottom:12px;">Selecciona uno de los fondos HD o sube tu propia imagen, GIF o video para personalizar tu launcher.</p>
-
-                <!-- Galería Rápida de Fondos HD -->
-                <div style="display:grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px; margin-bottom: 16px; -webkit-app-region: no-drag;">
-                  <div class="wallpaper-preset-card" onclick="selectPresetWallpaper('nebula_dynamic')" style="cursor:pointer; border-radius:12px; overflow:hidden; border:1px solid rgba(168,85,247,0.3); background:rgba(15,12,32,0.6); padding:8px; display:flex; flex-direction:column; align-items:center; gap:6px; transition:all 0.2s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform=''">
-                    <div style="width:100%; height:52px; border-radius:8px; background:radial-gradient(circle, #7c3aed 0%, #1e1b4b 100%); display:flex; align-items:center; justify-content:center; font-size:1.3rem;">🌌</div>
-                    <span style="font-size:0.7rem; font-weight:700; color:var(--text);">Nebulosa Viva</span>
-                    <span style="font-size:0.58rem; color:var(--text-dim);">Dinámica / Animada</span>
-                  </div>
-                  <div class="wallpaper-preset-card" onclick="selectPresetWallpaper('cherry_sunset')" style="cursor:pointer; border-radius:12px; overflow:hidden; border:1px solid rgba(255,255,255,0.1); background:rgba(15,12,32,0.6); padding:8px; display:flex; flex-direction:column; align-items:center; gap:6px; transition:all 0.2s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform=''">
-                    <img src="assets/wallpapers/cherry_sunset.jpg" style="width:100%; height:52px; border-radius:8px; object-fit:cover;">
-                    <span style="font-size:0.7rem; font-weight:700; color:var(--text);">Minecraft RTX</span>
-                    <span style="font-size:0.58rem; color:var(--text-dim);">Atardecer Shaders</span>
-                  </div>
-                  <div class="wallpaper-preset-card" onclick="selectPresetWallpaper('cosmic_amethyst')" style="cursor:pointer; border-radius:12px; overflow:hidden; border:1px solid rgba(255,255,255,0.1); background:rgba(15,12,32,0.6); padding:8px; display:flex; flex-direction:column; align-items:center; gap:6px; transition:all 0.2s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform=''">
-                    <img src="assets/wallpapers/cosmic_amethyst.jpg" style="width:100%; height:52px; border-radius:8px; object-fit:cover;">
-                    <span style="font-size:0.7rem; font-weight:700; color:var(--text);">Amethyst Void</span>
-                    <span style="font-size:0.58rem; color:var(--text-dim);">Islas Cósmicas</span>
-                  </div>
-                  <div class="wallpaper-preset-card" onclick="selectPresetWallpaper('starry_night')" style="cursor:pointer; border-radius:12px; overflow:hidden; border:1px solid rgba(255,255,255,0.1); background:rgba(15,12,32,0.6); padding:8px; display:flex; flex-direction:column; align-items:center; gap:6px; transition:all 0.2s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform=''">
-                    <img src="assets/starry_night.png" style="width:100%; height:52px; border-radius:8px; object-fit:cover;">
-                    <span style="font-size:0.7rem; font-weight:700; color:var(--text);">Noche Estrellada</span>
-                    <span style="font-size:0.58rem; color:var(--text-dim);">Van Gogh Art</span>
-                  </div>
-                </div>
+                <label class="label">Sube Tu Propio Fondo (Imagen / GIF / Video)</label>
+                <p style="font-size:.72rem; color:var(--text-dim); margin-bottom:12px;">Sube cualquier imagen, GIF animado o video desde tu computadora para usarlo de fondo en Nebula Launcher.</p>
                 
                 <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin-bottom:14px;">
                   <input type="file" id="customBgFileInput" accept="image/*,video/*" style="display:none;" onchange="onCustomBgSelected(this)">
