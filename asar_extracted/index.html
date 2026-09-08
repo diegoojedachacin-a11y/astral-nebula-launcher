@@ -2324,7 +2324,44 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;heigh
   margin-bottom: 6px;
   font-style: italic;
 }
-</style>
+
+    /* ── LAUNCHER MULTILINGUAL STYLES ── */
+    .slang-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-dim);
+      font-size: 0.65rem;
+      font-weight: 700;
+      padding: 2px 5px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .slang-btn:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.1);
+    }
+    .slang-btn.active {
+      background: linear-gradient(135deg, #8b5cf6, #6366f1);
+      color: #fff;
+      box-shadow: 0 1px 6px rgba(139, 92, 246, 0.5);
+    }
+    .lang-choice-btn {
+      border: 1px solid var(--border) !important;
+      border-radius: 10px !important;
+      font-weight: 600 !important;
+      font-size: 0.82rem !important;
+      padding: 6px 14px !important;
+      transition: all 0.2s !important;
+    }
+    .lang-choice-btn.active {
+      background: linear-gradient(135deg, #8b5cf6, #6366f1) !important;
+      color: #ffffff !important;
+      border-color: #8b5cf6 !important;
+      box-shadow: 0 2px 12px rgba(139, 92, 246, 0.45) !important;
+    }
+
+  </style>
 </head>
 <body>
 <div id="bg">
@@ -2503,6 +2540,12 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;heigh
         <div style="flex:1;overflow:hidden;">
           <div class="user-name" id="username-display">Usuario</div>
           <div class="user-type" id="user-type">Offline</div>
+        </div>
+        <!-- MINI QUICK LANGUAGE SELECTOR -->
+        <div class="sidebar-lang-pill" style="display:flex; align-items:center; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1); border-radius:12px; padding:2px 4px; gap:2px;">
+          <button class="slang-btn active" id="sbtn-lang-es" onclick="setLauncherLanguage('es')" title="Español">ES</button>
+          <button class="slang-btn" id="sbtn-lang-en" onclick="setLauncherLanguage('en')" title="English">EN</button>
+          <button class="slang-btn" id="sbtn-lang-pt" onclick="setLauncherLanguage('pt')" title="Português">PT</button>
         </div>
       </div>
 
@@ -3509,6 +3552,22 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;heigh
 
         <div class="settings-scroll">
           <div class="settings-grid">
+            <!-- 🌐 IDIOMA / LANGUAGE / IDIOMA CARD -->
+            <div class="settings-card" style="grid-column: 1 / -1; background: linear-gradient(135deg, rgba(139, 92, 246, 0.12), rgba(56, 189, 248, 0.12)); border: 1px solid var(--border-glow, rgba(192, 132, 252, 0.35)); border-radius: 16px; padding: 18px 24px;">
+              <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+                <div>
+                  <h3 style="margin:0; font-family:var(--font-heading); font-size:1.15rem; color:#fff; display:flex; align-items:center; gap:8px;">
+                    <span>🌐</span> <span id="txt-lang-card-title">IDIOMA DE LA INTERFAZ</span>
+                  </h3>
+                  <p style="font-size:0.75rem; color:var(--text-dim); margin-top:4px;" id="txt-lang-card-sub">Selecciona el idioma de Nebula Launcher (Español, English, Português).</p>
+                </div>
+                <div style="display:flex; gap:8px;">
+                  <button class="btn btn-sm btn-ghost lang-choice-btn active" id="btn-llang-es" onclick="setLauncherLanguage('es')">🇪🇸 Español</button>
+                  <button class="btn btn-sm btn-ghost lang-choice-btn" id="btn-llang-en" onclick="setLauncherLanguage('en')">🇺🇸 English</button>
+                  <button class="btn btn-sm btn-ghost lang-choice-btn" id="btn-llang-pt" onclick="setLauncherLanguage('pt')">🇧🇷 Português</button>
+                </div>
+              </div>
+            </div>
             <div class="settings-card">
               <h3>☕ JAVA</h3>
               <p style="font-size:.72rem;color:var(--text-dim);margin-bottom:12px;">Ruta personalizada (opcional):</p>
@@ -12159,6 +12218,266 @@ function updateMyStatus(status, activity) {
         }
       });
     }
+  </script>
+
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       MOTOR MULTILINGÜE DEL LAUNCHER (ESPAÑOL, ENGLISH, PORTUGUÊS)
+       ═══════════════════════════════════════════════════════════════ -->
+  <script>
+    const LAUNCHER_TRANSLATIONS = {
+      es: {
+        nav_play: "Jugar",
+        nav_mods: "Modificadores & Mods",
+        nav_modpacks: "Modpacks",
+        nav_resourcepacks: "Texturas & Shaders",
+        nav_versiones: "Versiones",
+        nav_console: "Consola",
+        nav_social: "Social & Amigos",
+        nav_profile: "Mi Perfil",
+        nav_settings: "Configuración",
+        nav_servers: "Servidores",
+        nav_updates: "Actualizaciones",
+        play_title: "Iniciar Minecraft",
+        play_sub: "Minecraft cargado y listo.",
+        play_ver: "VERSIÓN",
+        play_search_ph: "🔍 Buscar versión...",
+        play_ram: "MEMORIA RAM",
+        play_assigned: "ASIGNADA",
+        play_quick: "📂 ACCESOS RÁPIDOS",
+        play_btn: "⚡ INICIAR SALTO",
+        play_btn_playing: "🎮 EN JUEGO...",
+        play_btn_downloading: "⏳ DESCARGANDO...",
+        login_premium_h: "PREMIUM",
+        login_premium_p: "Cuenta oficial de Microsoft con acceso completo a todos los servidores multijugador.",
+        login_nebula_h: "CUENTA NEBULA",
+        login_nebula_p: "Inicia sesión o regístrate en Nebula para tener tu perfil y tu propia skin en el juego.",
+        login_offline_h: "OFFLINE",
+        login_offline_p: "Juega de forma local y anónima con cualquier nickname de forma rápida.",
+        login_btn_offline: "➜ Continuar Offline",
+        login_btn_ms: "🪟 Iniciar con Microsoft",
+        login_btn_login: "➜ Iniciar Sesión",
+        login_btn_register: "🌌 Crear Cuenta y Continuar",
+        login_back: "← Volver",
+        settings_title: "Configuración",
+        settings_sub: "Ajusta el launcher a tu gusto.",
+        settings_lang_card_title: "IDIOMA DE LA INTERFAZ",
+        settings_lang_card_sub: "Selecciona el idioma de Nebula Launcher (Español, English, Português).",
+        settings_java: "☕ JAVA",
+        settings_dir: "📁 DIRECTORIO",
+        settings_ram: "⚡ RAM POR DEFECTO",
+        settings_multi: "📦 MÚLTIPLES INSTANCIAS",
+        settings_tray: "📌 BANDEJA DEL SISTEMA (AHORRO DE RECURSOS)",
+        settings_solid: "🖤 TEMAS SÓLIDOS & MINIMALISTAS (CERO DISTRACCIONES)",
+        settings_classic: "🎨 TEMAS CLÁSICOS",
+        settings_special: "🌟 TEMAS ESPECIALES",
+        settings_custom: "✨ TEMA PERSONALIZADO"
+      },
+      en: {
+        nav_play: "Play",
+        nav_mods: "Modifiers & Mods",
+        nav_modpacks: "Modpacks",
+        nav_resourcepacks: "Textures & Shaders",
+        nav_versiones: "Versions",
+        nav_console: "Console",
+        nav_social: "Friends & Social",
+        nav_profile: "My Profile",
+        nav_settings: "Settings",
+        nav_servers: "Servers",
+        nav_updates: "Updates",
+        play_title: "Launch Minecraft",
+        play_sub: "Minecraft loaded and ready.",
+        play_ver: "VERSION",
+        play_search_ph: "🔍 Search version...",
+        play_ram: "RAM MEMORY",
+        play_assigned: "ALLOCATED",
+        play_quick: "📂 QUICK ACCESS",
+        play_btn: "⚡ LAUNCH MINECRAFT",
+        play_btn_playing: "🎮 IN GAME...",
+        play_btn_downloading: "⏳ DOWNLOADING...",
+        login_premium_h: "PREMIUM",
+        login_premium_p: "Official Microsoft account with full access to all multiplayer servers.",
+        login_nebula_h: "NEBULA ACCOUNT",
+        login_nebula_p: "Sign in or register with Nebula to get your profile and custom in-game skin.",
+        login_offline_h: "OFFLINE",
+        login_offline_p: "Play locally and anonymously with any nickname right away.",
+        login_btn_offline: "➜ Continue Offline",
+        login_btn_ms: "🪟 Sign in with Microsoft",
+        login_btn_login: "➜ Sign In",
+        login_btn_register: "🌌 Create Account & Continue",
+        login_back: "← Back",
+        settings_title: "Settings",
+        settings_sub: "Customize the launcher to your preference.",
+        settings_lang_card_title: "INTERFACE LANGUAGE",
+        settings_lang_card_sub: "Choose Nebula Launcher's primary language (Español, English, Português).",
+        settings_java: "☕ JAVA",
+        settings_dir: "📁 DIRECTORY",
+        settings_ram: "⚡ DEFAULT RAM",
+        settings_multi: "📦 MULTI-INSTANCE",
+        settings_tray: "📌 SYSTEM TRAY (RESOURCE SAVER)",
+        settings_solid: "🖤 SOLID & MINIMALIST THEMES (ZERO DISTRACTIONS)",
+        settings_classic: "🎨 CLASSIC THEMES",
+        settings_special: "🌟 SPECIAL THEMES",
+        settings_custom: "✨ CUSTOM THEME"
+      },
+      pt: {
+        nav_play: "Jogar",
+        nav_mods: "Modificadores & Mods",
+        nav_modpacks: "Modpacks",
+        nav_resourcepacks: "Texturas & Shaders",
+        nav_versiones: "Versões",
+        nav_console: "Console",
+        nav_social: "Amigos & Social",
+        nav_profile: "Meu Perfil",
+        nav_settings: "Configurações",
+        nav_servers: "Servidores",
+        nav_updates: "Atualizações",
+        play_title: "Iniciar Minecraft",
+        play_sub: "Minecraft carregado e pronto.",
+        play_ver: "VERSÃO",
+        play_search_ph: "🔍 Buscar versão...",
+        play_ram: "MEMÓRIA RAM",
+        play_assigned: "ALOCADA",
+        play_quick: "📂 ACESSOS RÁPIDOS",
+        play_btn: "⚡ JOGAR MINECRAFT",
+        play_btn_playing: "🎮 EM JOGO...",
+        play_btn_downloading: "⏳ BAIXANDO...",
+        login_premium_h: "PREMIUM",
+        login_premium_p: "Conta oficial da Microsoft com acesso completo a todos os servidores multiplayer.",
+        login_nebula_h: "CONTA NEBULA",
+        login_nebula_p: "Entre ou registre-se na Nebula para ter seu perfil e sua própria skin no jogo.",
+        login_offline_h: "OFFLINE",
+        login_offline_p: "Jogue localmente e de forma anônima com qualquer apelido rapidamente.",
+        login_btn_offline: "➜ Continuar Offline",
+        login_btn_ms: "🪟 Entrar com a Microsoft",
+        login_btn_login: "➜ Iniciar Sessão",
+        login_btn_register: "🌌 Criar Conta e Continuar",
+        login_back: "← Voltar",
+        settings_title: "Configurações",
+        settings_sub: "Ajuste o launcher ao seu gosto.",
+        settings_lang_card_title: "IDIOMA DA INTERFACE",
+        settings_lang_card_sub: "Escolha o idioma principal do Nebula Launcher (Español, English, Português).",
+        settings_java: "☕ JAVA",
+        settings_dir: "📁 DIRETÓRIO",
+        settings_ram: "⚡ RAM PADRÃO",
+        settings_multi: "📦 MÚLTIPLAS INSTÂNCIAS",
+        settings_tray: "📌 BANDEJA DO SISTEMA (ECONOMIA DE RECURSOS)",
+        settings_solid: "🖤 TEMAS SÓLIDOS & MINIMALISTAS (SEM DISTRAÇÕES)",
+        settings_classic: "🎨 TEMAS CLÁSSICOS",
+        settings_special: "🌟 TEMAS ESPECIAIS",
+        settings_custom: "✨ TEMA PERSONALIZADO"
+      }
+    };
+
+    window.currentLauncherLang = 'es';
+
+    function setLauncherLanguage(lang) {
+      if (!LAUNCHER_TRANSLATIONS[lang]) lang = 'es';
+      window.currentLauncherLang = lang;
+      localStorage.setItem('nebula_launcher_lang', lang);
+
+      // Actualizar botones de configuración
+      ['es', 'en', 'pt'].forEach(l => {
+        const btn = document.getElementById('btn-llang-' + l);
+        if (btn) {
+          if (l === lang) btn.classList.add('active');
+          else btn.classList.remove('active');
+        }
+        const sbtn = document.getElementById('sbtn-lang-' + l);
+        if (sbtn) {
+          if (l === lang) sbtn.classList.add('active');
+          else sbtn.classList.remove('active');
+        }
+      });
+
+      const t = LAUNCHER_TRANSLATIONS[lang];
+
+      // 1. Sidebar Nav Items
+      const navMap = {
+        'nav-play': t.nav_play,
+        'nav-mods': t.nav_mods,
+        'nav-modpacks': t.nav_modpacks,
+        'nav-resourcepacks': t.nav_resourcepacks,
+        'nav-versiones': t.nav_versiones,
+        'nav-console': t.nav_console,
+        'nav-social': t.nav_social,
+        'nav-profile': t.nav_profile,
+        'nav-settings': t.nav_settings,
+        'nav-servers': t.nav_servers,
+        'nav-updates': t.nav_updates
+      };
+
+      document.querySelectorAll('.nav .nav-item').forEach(item => {
+        const onclickAttr = item.getAttribute('onclick') || '';
+        for (const [key, label] of Object.entries(navMap)) {
+          const tabName = key.replace('nav-', '');
+          if (onclickAttr.includes(`'${tabName}'`)) {
+            // Reemplazar texto preservando icon y badge
+            Array.from(item.childNodes).forEach(node => {
+              if (node.nodeType === 3 && node.nodeValue.trim().length > 0) {
+                node.nodeValue = ' ' + label + ' ';
+              }
+            });
+          }
+        }
+      });
+
+      // 2. Play Tab
+      const pTitle = document.getElementById('play-title');
+      if (pTitle) pTitle.textContent = t.play_title;
+      const pSub = document.getElementById('play-subtitle');
+      if (pSub) pSub.textContent = t.play_sub;
+
+      const launchBtn = document.getElementById('launchBtn');
+      if (launchBtn && !launchBtn.classList.contains('launching') && !launchBtn.classList.contains('playing')) {
+        launchBtn.textContent = t.play_btn;
+      }
+
+      const vbSearch = document.getElementById('vb-search');
+      if (vbSearch) vbSearch.placeholder = t.play_search_ph;
+
+      // 3. Settings Tab
+      const sTitle = document.querySelector('#tab-settings .panel-title');
+      if (sTitle) sTitle.textContent = t.settings_title;
+      const sSub = document.querySelector('#tab-settings .panel-sub');
+      if (sSub) sSub.textContent = t.settings_sub;
+
+      const langCardTitle = document.getElementById('txt-lang-card-title');
+      if (langCardTitle) langCardTitle.textContent = t.settings_lang_card_title;
+      const langCardSub = document.getElementById('txt-lang-card-sub');
+      if (langCardSub) langCardSub.textContent = t.settings_lang_card_sub;
+
+      // 4. Login Screen
+      const typeCards = document.querySelectorAll('.type-card');
+      if (typeCards.length >= 3) {
+        const p1 = typeCards[0].querySelector('h3'); if (p1) p1.textContent = t.login_premium_h;
+        const d1 = typeCards[0].querySelector('p'); if (d1) d1.textContent = t.login_premium_p;
+        const p2 = typeCards[1].querySelector('h3'); if (p2) p2.textContent = t.login_nebula_h;
+        const d2 = typeCards[1].querySelector('p'); if (d2) d2.textContent = t.login_nebula_p;
+        const p3 = typeCards[2].querySelector('h3'); if (p3) p3.textContent = t.login_offline_h;
+        const d3 = typeCards[2].querySelector('p'); if (d3) d3.textContent = t.login_offline_p;
+      }
+
+      document.querySelectorAll('.login-back').forEach(btn => btn.textContent = t.login_back);
+      const btnOff = document.getElementById('btnOffline'); if (btnOff) btnOff.textContent = t.login_btn_offline;
+      const btnMS = document.getElementById('btnMS'); if (btnMS) btnMS.textContent = t.login_btn_ms;
+      const btnNebLogin = document.getElementById('btnNebulaLogin'); if (btnNebLogin) btnNebLogin.textContent = t.login_btn_login;
+      const btnNebReg = document.getElementById('btnNebulaRegister'); if (btnNebReg) btnNebReg.textContent = t.login_btn_register;
+
+      console.log(`[Nebula i18n] Launcher language switched to: ${lang}`);
+    }
+
+    // Auto-detectar idioma del sistema / navegador al cargar
+    document.addEventListener('DOMContentLoaded', () => {
+      let initialLang = localStorage.getItem('nebula_launcher_lang');
+      if (!initialLang) {
+        const sysLang = (navigator.language || '').toLowerCase();
+        if (sysLang.startsWith('es')) initialLang = 'es';
+        else if (sysLang.startsWith('pt')) initialLang = 'pt';
+        else initialLang = 'en';
+      }
+      setLauncherLanguage(initialLang);
+    });
   </script>
 
 </body>
