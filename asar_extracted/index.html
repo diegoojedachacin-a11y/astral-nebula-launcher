@@ -88,9 +88,7 @@
   --btn-glass:rgba(255,255,255,0.12);--btn-border:rgba(255,255,255,0.25);
 }
 [data-theme="oled"] #bg .orb,
-[data-theme="oled"] #vanGoghCanvas {
-  display: none !important;
-}
+/* canvas visible */
 
 [data-theme="midnight"]{
   --orb1:#0b0f19;--orb2:#0f172a;--orb3:#1e293b;--orb4:#020617;
@@ -101,9 +99,7 @@
   --btn-glass:rgba(56,189,248,0.12);--btn-border:rgba(56,189,248,0.28);
 }
 [data-theme="midnight"] #bg .orb,
-[data-theme="midnight"] #vanGoghCanvas {
-  display: none !important;
-}
+/* canvas visible */
 
 [data-theme="carbon"]{
   --orb1:#121214;--orb2:#18181b;--orb3:#27272a;--orb4:#09090b;
@@ -114,9 +110,7 @@
   --btn-glass:rgba(34,197,94,0.12);--btn-border:rgba(34,197,94,0.28);
 }
 [data-theme="carbon"] #bg .orb,
-[data-theme="carbon"] #vanGoghCanvas {
-  display: none !important;
-}
+/* canvas visible */
 
 [data-theme="amethyst"]{
   --orb1:#0f0919;--orb2:#1a0f2e;--orb3:#281747;--orb4:#07030d;
@@ -127,9 +121,7 @@
   --btn-glass:rgba(168,85,247,0.12);--btn-border:rgba(168,85,247,0.28);
 }
 [data-theme="amethyst"] #bg .orb,
-[data-theme="amethyst"] #vanGoghCanvas {
-  display: none !important;
-}
+/* canvas visible */
 
 [data-theme="cyberpunk"]{
   --orb1:#2a0845;--orb2:#640d5f;--orb3:#0f172a;--orb4:#07020d;
@@ -3118,12 +3110,33 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;heigh
 }
 
 #bg {
-  background: #090b14 !important;
-  animation: none !important;
+  position: fixed; inset: 0; z-index: 0;
+  border-radius: 18px;
+  overflow: hidden;
+  background: radial-gradient(ellipse at 50% 20%, rgba(109, 40, 217, 0.35) 0%, rgba(30, 27, 75, 0.60) 45%, #06050b 100%),
+              linear-gradient(135deg, #070312 0%, #15082e 40%, #08112b 75%, #020106 100%) !important;
+  background-size: 200% 200% !important;
+  animation: cosmicDrift 28s ease-in-out infinite alternate !important;
 }
 
 .has-custom-wallpaper #bg {
-  background: transparent !important;
+  background: #050711 !important;
+  animation: none !important;
+}
+
+.has-custom-wallpaper #bg .orb {
+  display: none !important;
+}
+
+#custom-bg-img, #custom-bg-video {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; object-position: center center;
+  z-index: 0; pointer-events: none;
+}
+
+#vanGoghCanvas {
+  position: fixed; inset: 0; z-index: 1; pointer-events: none;
+  width: 100%; height: 100%; opacity: 0.85;
 }
 
 #main-launcher {
@@ -3131,16 +3144,21 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;heigh
   background: transparent !important;
 }
 
+/* Shell traslúcido, nítido, sin ningún tipo de difuminado o blur borroso */
 .launcher-shell {
   width: 100%; height: 100%; display: flex; border-radius: 18px; overflow: hidden;
-  background: #0b0e1b !important;
+  background: rgba(9, 12, 24, 0.42) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
   border: 1px solid rgba(255, 255, 255, 0.08) !important;
   box-shadow: 0 16px 48px rgba(0, 0, 0, 0.6) !important;
 }
 
 .sidebar {
   width: var(--sidebar-w); min-width: var(--sidebar-w);
-  background: #080a14 !important;
+  background: rgba(7, 9, 18, 0.62) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
   border-right: 1px solid rgba(255, 255, 255, 0.07) !important;
 }
 
@@ -3150,25 +3168,31 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;heigh
 
 /* Tarjetas limpias, nítidas, estilo Badlion/Lunar sin difuminado */
 .launch-card, .play-mod-card, .client-card, .glass-card, .settings-card, .changelog-card, .social-sidebar, .social-chat {
-  background: #111526 !important;
-  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  background: rgba(15, 19, 36, 0.70) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border: 1px solid rgba(255, 255, 255, 0.09) !important;
   box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35) !important;
   border-radius: 16px !important;
   transition: border-color 0.2s, background 0.2s, transform 0.2s !important;
 }
 
 .launch-card:hover, .play-mod-card:hover, .client-card:hover {
-  background: #151a30 !important;
+  background: rgba(22, 28, 52, 0.85) !important;
   border-color: rgba(168, 85, 247, 0.45) !important;
   transform: translateY(-2px) !important;
 }
 
-/* Cuando el usuario tiene un fondo o wallpaper activo */
+/* Cuando el usuario tiene un fondo o wallpaper activo (RTX, Amethyst, Starry Night o imagen personalizada) */
 .has-custom-wallpaper .launcher-shell {
-  background: rgba(11, 14, 27, 0.82) !important;
+  background: rgba(8, 11, 22, 0.36) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
 }
 .has-custom-wallpaper .sidebar {
-  background: rgba(8, 10, 20, 0.88) !important;
+  background: rgba(7, 9, 18, 0.56) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
 }
 .has-custom-wallpaper .launch-card,
 .has-custom-wallpaper .play-mod-card,
@@ -3177,7 +3201,9 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;heigh
 .has-custom-wallpaper .settings-card,
 .has-custom-wallpaper .social-sidebar,
 .has-custom-wallpaper .social-chat {
-  background: rgba(17, 21, 38, 0.85) !important;
+  background: rgba(14, 18, 34, 0.68) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
   border: 1px solid rgba(255, 255, 255, 0.10) !important;
 }
 
@@ -5306,19 +5332,25 @@ function setTheme(t) {
   const videoEl = document.getElementById('custom-bg-video');
   const bgDiv = document.getElementById('bg');
 
+  const savedCustomBg = localStorage.getItem('nebula_custom_bg_path') || (settings && settings.customTheme && settings.customTheme.bgImage) || '';
   if (t === 'custom') {
     applyCustomTheme();
-    const customPath = localStorage.getItem('nebula_custom_bg_path') || (settings && settings.customTheme && settings.customTheme.bgImage) || '';
     if (typeof applyCustomBgMediaToDOM === 'function') {
-      applyCustomBgMediaToDOM(customPath);
+      applyCustomBgMediaToDOM(savedCustomBg);
     }
   } else {
-    // Si el usuario cambia a un tema preestablecido (Van Gogh, Nébula, etc.), ocultar el fondo personalizado
-    if (imgEl) imgEl.style.display = 'none';
-    if (videoEl) { videoEl.style.display = 'none'; videoEl.pause(); }
-    if (bgDiv) {
-      bgDiv.style.backgroundImage = '';
-      bgDiv.style.background = '';
+    // Si hay un fondo HD o wallpaper activo (RTX, Amethyst, Starry Night o imagen personalizada), conservarlo
+    if (savedCustomBg && typeof applyCustomBgMediaToDOM === 'function') {
+      applyCustomBgMediaToDOM(savedCustomBg);
+    } else {
+      if (imgEl) { imgEl.style.display = 'none'; imgEl.src = ''; }
+      if (videoEl) { videoEl.style.display = 'none'; videoEl.pause(); }
+      if (bgDiv) {
+        bgDiv.style.backgroundImage = '';
+        bgDiv.style.background = '';
+        bgDiv.classList.remove('has-custom-wallpaper');
+      }
+      document.body.classList.remove('has-custom-wallpaper');
     }
   }
 }
@@ -7877,6 +7909,10 @@ function ensureFirebaseInitialized() {
       console.error('Error fetching version:', e);
     }
     if (settings.theme) setTheme(settings.theme);
+    const initBg = (settings.customTheme && settings.customTheme.bgImage) || localStorage.getItem('nebula_custom_bg_path') || '';
+    if (initBg && typeof applyCustomBgMediaToDOM === 'function') {
+      applyCustomBgMediaToDOM(initBg);
+    }
     // Restaurar toggle multi-instancia
     if (settings.multiInstance) {
       multiInstanceEnabled = true;
@@ -12486,10 +12522,31 @@ async function loadNebulaProfileData() {
         applyCustomBgMediaToDOM('');
       };
 
-            window.selectPresetWallpaper = function(key) {
+      window.updatePresetWallpaperCardUI = function(activeKey) {
+        document.querySelectorAll('.wallpaper-preset-card').forEach(card => {
+          card.style.borderColor = 'rgba(255, 255, 255, 0.1)';
+          card.style.boxShadow = 'none';
+        });
+        const keyMap = {
+          'nebula_dynamic': 0,
+          'cherry_sunset': 1,
+          'cosmic_amethyst': 2,
+          'starry_night': 3
+        };
+        if (keyMap[activeKey] !== undefined) {
+          const cards = document.querySelectorAll('.wallpaper-preset-card');
+          if (cards[keyMap[activeKey]]) {
+            cards[keyMap[activeKey]].style.borderColor = 'var(--accent, #a855f7)';
+            cards[keyMap[activeKey]].style.boxShadow = '0 0 14px var(--accent-glow, rgba(168, 85, 247, 0.4))';
+          }
+        }
+      };
+
+      window.selectPresetWallpaper = function(key) {
         if (key === 'nebula_dynamic') {
           clearCustomBgImage();
           toast('🌌 Nebulosa Dinámica activada.', 'success');
+          if (typeof window.updatePresetWallpaperCardUI === 'function') window.updatePresetWallpaperCardUI('nebula_dynamic');
           return;
         }
         let path = '';
@@ -12500,6 +12557,7 @@ async function loadNebulaProfileData() {
         if (path) {
           window.setCustomBgMedia(path);
           toast('🖼️ Fondo seleccionado y aplicado con éxito.', 'success');
+          if (typeof window.updatePresetWallpaperCardUI === 'function') window.updatePresetWallpaperCardUI(key);
         }
       };
 
@@ -12510,18 +12568,19 @@ async function loadNebulaProfileData() {
         const clearBtn = document.getElementById('clearBgBtn');
         const statusText = document.getElementById('customBgStatusText');
 
-        const activeMedia = path || (typeof settings !== 'undefined' && settings.customTheme && settings.customTheme.bgImage) || '';
+        const activeMedia = path || localStorage.getItem('nebula_custom_bg_path') || (typeof settings !== 'undefined' && settings && settings.customTheme && settings.customTheme.bgImage) || '';
 
         if (!activeMedia || activeMedia.trim() === '') {
           if (imgEl) { imgEl.style.display = 'none'; imgEl.src = ''; }
           if (videoEl) { videoEl.style.display = 'none'; videoEl.pause(); videoEl.src = ''; }
           if (clearBtn) clearBtn.style.display = 'none';
-          if (statusText) statusText.textContent = 'Sin imagen personalizada';
+          if (statusText) statusText.textContent = 'Sin imagen personalizada (Nebulosa Dinámica)';
           if (bgDiv) {
             bgDiv.style.backgroundImage = '';
             bgDiv.classList.remove('has-custom-wallpaper');
           }
           document.body.classList.remove('has-custom-wallpaper');
+          if (typeof window.updatePresetWallpaperCardUI === 'function') window.updatePresetWallpaperCardUI('nebula_dynamic');
           return;
         }
 
@@ -12531,15 +12590,27 @@ async function loadNebulaProfileData() {
         }
         document.body.classList.add('has-custom-wallpaper');
         if (clearBtn) clearBtn.style.display = 'inline-block';
-        if (statusText) statusText.textContent = 'Fondo personalizado activo';
+        
+        const fname = activeMedia.split(/[/\\]/).pop() || 'Personalizado';
+        if (statusText) statusText.textContent = 'Fondo activo: ' + fname;
 
         const fit = localStorage.getItem('nebula_custom_bg_fit') || 'cover';
         const pos = localStorage.getItem('nebula_custom_bg_pos') || 'center center';
         const zoom = localStorage.getItem('nebula_custom_bg_zoom') || '100';
 
-        let fileUrl = activeMedia;
-        if (!activeMedia.startsWith('file://') && !activeMedia.startsWith('http://') && !activeMedia.startsWith('https://') && !activeMedia.startsWith('blob:') && !activeMedia.startsWith('data:')) {
-          fileUrl = 'file:///' + activeMedia.replace(/\\/g, '/');
+        let fileUrl = activeMedia.trim();
+        if (!fileUrl.startsWith('file://') && !fileUrl.startsWith('http://') && !fileUrl.startsWith('https://') && !fileUrl.startsWith('blob:') && !fileUrl.startsWith('data:')) {
+          if (/^[a-zA-Z]:[\\/]/.test(fileUrl)) {
+            // Windows absolute path: C:\... -> file:///C:/...
+            fileUrl = 'file:///' + fileUrl.replace(/\\/g, '/');
+          } else if (fileUrl.startsWith('\\\\') || fileUrl.startsWith('//')) {
+            // UNC network path
+            fileUrl = 'file://' + fileUrl.replace(/\\/g, '/');
+          } else {
+            // Relative path inside launcher: e.g. "assets/wallpapers/cherry_sunset.jpg"
+            fileUrl = fileUrl.replace(/\\/g, '/');
+            if (fileUrl.startsWith('./')) fileUrl = fileUrl.substring(2);
+          }
         }
 
         const scale = (parseFloat(zoom || 100) / 100).toFixed(2);
@@ -12550,7 +12621,7 @@ async function loadNebulaProfileData() {
         if (isVideo) {
           if (imgEl) { imgEl.style.display = 'none'; imgEl.src = ''; }
           if (videoEl) {
-            if (videoEl.src !== fileUrl) videoEl.src = fileUrl;
+            videoEl.src = fileUrl;
             videoEl.style.display = 'block';
             videoEl.style.objectFit = fit;
             videoEl.style.objectPosition = pos;
@@ -12560,12 +12631,20 @@ async function loadNebulaProfileData() {
         } else {
           if (videoEl) { videoEl.style.display = 'none'; videoEl.pause(); videoEl.src = ''; }
           if (imgEl) {
-            if (imgEl.src !== fileUrl) imgEl.src = fileUrl;
+            imgEl.src = fileUrl;
             imgEl.style.display = 'block';
             imgEl.style.objectFit = fit;
             imgEl.style.objectPosition = pos;
             imgEl.style.transform = transformStyle;
           }
+        }
+
+        // Resaltar preset activo en UI
+        if (typeof window.updatePresetWallpaperCardUI === 'function') {
+          if (activeMedia.includes('cherry_sunset')) window.updatePresetWallpaperCardUI('cherry_sunset');
+          else if (activeMedia.includes('cosmic_amethyst')) window.updatePresetWallpaperCardUI('cosmic_amethyst');
+          else if (activeMedia.includes('starry_night')) window.updatePresetWallpaperCardUI('starry_night');
+          else window.updatePresetWallpaperCardUI('custom');
         }
       }
 
