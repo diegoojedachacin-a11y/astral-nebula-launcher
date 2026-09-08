@@ -1170,34 +1170,34 @@ ipcMain.handle('get-installed-versions', () => {
                 type = 'optifine';
                 const m = dir.match(/^(\d+\.\d+(?:\.\d+)?)/);
                 if (m) baseVersion = m[1];
-                displayName = `OptiFine (MC ${baseVersion})`;
+                displayName = `${baseVersion} (OptiFine)`;
             }
             else if (low.includes('neoforge')) {
                 type = 'neoforge';
                 const m = dir.match(/^(\d+\.\d+(?:\.\d+)?)/);
                 if (m) baseVersion = m[1];
-                displayName = `NeoForge (MC ${baseVersion})`;
+                displayName = `${baseVersion} (NeoForge)`;
             }
             else if (low.includes('forge')) {
                 type = 'forge';
                 const m = dir.match(/^(\d+\.\d+(?:\.\d+)?)/);
                 if (m) baseVersion = m[1];
-                const forgePart = dir.replace(new RegExp('^' + baseVersion + '-forge-?', 'i'), '').replace(/^forge/i, '');
-                displayName = forgePart ? `Forge ${forgePart} (MC ${baseVersion})` : `Forge (MC ${baseVersion})`;
+                const forgePart = dir.replace(new RegExp('^' + baseVersion + '-forge-?', 'i'), '').replace(/^forge/i, '').replace(/^-/, '');
+                displayName = forgePart ? `${baseVersion} (Forge ${forgePart})` : `${baseVersion} (Forge)`;
             }
             else if (low.includes('fabric')) {
                 type = 'fabric';
                 const m = dir.match(/fabric-loader-[^\-]+-(.+)/);
                 if (m) baseVersion = m[1];
                 const fm = dir.match(/fabric-loader-([^\-]+)/);
-                displayName = fm ? `Fabric Loader ${fm[1]} (MC ${baseVersion})` : `Fabric (MC ${baseVersion})`;
+                displayName = fm ? `${baseVersion} (Fabric ${fm[1]})` : `${baseVersion} (Fabric)`;
             }
             else if (low.includes('quilt')) {
                 type = 'quilt';
                 const m = dir.match(/quilt-loader-[^\-]+-(.+)/);
                 if (m) baseVersion = m[1];
                 const qm = dir.match(/quilt-loader-([^\-]+)/);
-                displayName = qm ? `Quilt Loader ${qm[1]} (MC ${baseVersion})` : `Quilt (MC ${baseVersion})`;
+                displayName = qm ? `${baseVersion} (Quilt ${qm[1]})` : `${baseVersion} (Quilt)`;
             }
             else if (low.includes('pvp') || low.includes('cmpack') || low.includes('client') || low.includes('flight')) {
                 type = 'pvp';
@@ -1205,11 +1205,11 @@ ipcMain.handle('get-installed-versions', () => {
                 if (m) baseVersion = m[1];
                 if (low.includes('cmpack')) displayName = `CM Pack 1.8.8`;
                 else if (low.includes('flight')) displayName = `Flight Client`;
-                else if (low.includes('nebulapvp')) displayName = `Nebula PVP ${baseVersion}`;
+                else if (low.includes('nebulapvp')) displayName = `Nebula PVP 1.8.9`;
                 else displayName = dir;
             }
             else {
-                displayName = `Minecraft ${dir}`;
+                displayName = dir;
             }
 
             installed.push({

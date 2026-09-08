@@ -6115,21 +6115,11 @@ async function vbRenderList() {
     }
     list.innerHTML = matches.map(v => {
       const safeId = v.id.replace(/[^a-zA-Z0-9-_]/g, '_');
-      const badgeMap = {
-        forge: '<span class="vb-badge vb-badge-forge" style="background:rgba(249,115,22,0.15);color:#fb923c;">FORGE</span>',
-        fabric: '<span class="vb-badge vb-badge-fabric" style="background:rgba(59,130,246,0.15);color:#60a5fa;">FABRIC</span>',
-        optifine: '<span class="vb-badge vb-badge-opti" style="background:rgba(14,165,233,0.15);color:#38bdf8;">OPTIFINE</span>',
-        neoforge: '<span class="vb-badge vb-badge-neoforge" style="background:rgba(34,197,94,0.15);color:#4ade80;">NEOFORGE</span>',
-        quilt: '<span class="vb-badge vb-badge-quilt" style="background:rgba(236,72,153,0.15);color:#f472b6;">QUILT</span>',
-        pvp: '<span class="vb-badge vb-badge-opti" style="background:rgba(168,85,247,0.2);color:#c084fc;">PVP</span>',
-        release: '<span class="vb-badge vb-badge-installed" style="background:rgba(74,222,128,0.15);color:#4ade80;">OFICIAL</span>'
-      };
-      const badgeHtml = badgeMap[v.type] || '';
-      return `<div class="vb-item installed" id="vbi-${safeId}" onclick="vbSelectVersion('${v.id}')">
-        <span class="vb-item-name">${v.displayName || v.id}</span>
+      const label = modifier === 'vanilla' ? v.id : (v.displayName || v.id);
+      return `<div class="vb-item installed" id="vbi-${safeId}" onclick="vbSelectVersion('${v.id}')" title="${v.id}">
+        <span class="vb-item-name" style="font-weight:700;font-size:0.82rem;">${label}</span>
         <span class="vb-item-badges">
-          ${badgeHtml}
-          <span class="vb-badge vb-badge-installed">✓</span>
+          <span class="vb-badge vb-badge-installed" style="color:#4ade80;background:rgba(74,222,128,0.18);font-size:0.75rem;padding:2px 7px;border-radius:5px;font-weight:bold;">✓</span>
         </span>
         <button class="vb-action-btn vb-play-btn" onclick="event.stopPropagation();vbPlay('${v.id}')">${typeof window.t === 'function' ? window.t('▶ Jugar') : '▶ Jugar'}</button>
       </div>`;
@@ -6154,12 +6144,11 @@ async function vbRenderList() {
       </div>`;
       localFiltered.forEach(v => {
         const safeId = v.id.replace(/[^a-zA-Z0-9-_]/g, '_');
-        const badgeHtml = v.type === 'snapshot'
-          ? '<span class="vb-badge vb-badge-snap">SNAP</span>'
-          : '<span class="vb-badge vb-badge-installed" style="background:rgba(74,222,128,0.15);color:#4ade80;">OFICIAL</span>';
-        itemsHtml += `<div class="vb-item installed" id="vbi-${safeId}" onclick="vbSelectVersion('${v.id}')">
-          <span class="vb-item-name">${v.displayName || v.id}</span>
-          <span class="vb-item-badges">${badgeHtml}<span class="vb-badge vb-badge-installed">✓</span></span>
+        itemsHtml += `<div class="vb-item installed" id="vbi-${safeId}" onclick="vbSelectVersion('${v.id}')" title="${v.id}">
+          <span class="vb-item-name" style="font-weight:700;font-size:0.85rem;">${v.id}</span>
+          <span class="vb-item-badges">
+            <span class="vb-badge vb-badge-installed" style="color:#4ade80;background:rgba(74,222,128,0.18);font-size:0.75rem;padding:2px 7px;border-radius:5px;font-weight:bold;">✓</span>
+          </span>
           <button class="vb-action-btn vb-play-btn" onclick="event.stopPropagation();vbPlay('${v.id}')">${typeof window.t === 'function' ? window.t('▶ Jugar') : '▶ Jugar'}</button>
         </div>`;
       });
@@ -6203,11 +6192,10 @@ async function vbRenderList() {
       </div>`;
       pvpFiltered.forEach(v => {
         const safeId = v.id.replace(/[^a-zA-Z0-9-_]/g, '_');
-        itemsHtml += `<div class="vb-item installed" id="vbi-${safeId}" onclick="vbSelectVersion('${v.id}')">
-          <span class="vb-item-name">${v.displayName || v.id}</span>
+        itemsHtml += `<div class="vb-item installed" id="vbi-${safeId}" onclick="vbSelectVersion('${v.id}')" title="${v.displayName || v.id}">
+          <span class="vb-item-name" style="font-weight:700;font-size:0.82rem;">${v.displayName || v.id}</span>
           <span class="vb-item-badges">
-            <span class="vb-badge vb-badge-opti" style="background:rgba(168,85,247,0.2);color:#c084fc;">PVP</span>
-            <span class="vb-badge vb-badge-installed">✓</span>
+            <span class="vb-badge vb-badge-installed" style="color:#4ade80;background:rgba(74,222,128,0.18);font-size:0.75rem;padding:2px 7px;border-radius:5px;font-weight:bold;">✓</span>
           </span>
           <button class="vb-action-btn vb-play-btn" onclick="event.stopPropagation();vbPlay('${v.id}')">${typeof window.t === 'function' ? window.t('▶ Jugar') : '▶ Jugar'}</button>
         </div>`;
@@ -6236,11 +6224,10 @@ async function vbRenderList() {
     </div>`;
     installedFiltered.forEach(v => {
       const safeId = v.id.replace(/[^a-zA-Z0-9-_]/g, '_');
-      itemsHtml += `<div class="vb-item installed" id="vbi-${safeId}" onclick="vbSelectVersion('${v.id}')">
-        <span class="vb-item-name">${v.displayName || v.id}</span>
+      itemsHtml += `<div class="vb-item installed" id="vbi-${safeId}" onclick="vbSelectVersion('${v.id}')" title="${v.displayName || v.id}">
+        <span class="vb-item-name" style="font-weight:700;font-size:0.82rem;">${v.displayName || v.id}</span>
         <span class="vb-item-badges">
-          <span class="vb-badge vb-badge-${modifier}">${loaderName.toUpperCase()}</span>
-          <span class="vb-badge vb-badge-installed">✓</span>
+          <span class="vb-badge vb-badge-installed" style="color:#4ade80;background:rgba(74,222,128,0.18);font-size:0.75rem;padding:2px 7px;border-radius:5px;font-weight:bold;">✓</span>
         </span>
         <button class="vb-action-btn vb-play-btn" onclick="event.stopPropagation();vbPlay('${v.id}')">${typeof window.t === 'function' ? window.t('▶ Jugar') : '▶ Jugar'}</button>
       </div>`;
