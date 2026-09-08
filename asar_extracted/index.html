@@ -4223,13 +4223,14 @@ box-shadow:0 0 14px rgba(99,102,241,0.45);border:1px dashed rgba(255,255,255,0.3
 
         <div class="version-filters" style="display:flex; align-items:center; flex-wrap:wrap; gap:8px;">
           <button class="version-filter-btn active" onclick="filterVersions('all', this)">Todas</button>
+          <button class="version-filter-btn" onclick="filterVersions('installed', this)" style="font-weight:700;">⭐ Instaladas</button>
           <button class="version-filter-btn" onclick="filterVersions('release', this)">Oficiales</button>
           <button class="version-filter-btn" onclick="filterVersions('snapshot', this)">Snapshots</button>
-          <button class="version-filter-btn" onclick="filterVersions('optifine', this)">OptiFine</button>
           <button class="version-filter-btn" onclick="filterVersions('forge', this)">Forge</button>
           <button class="version-filter-btn" onclick="filterVersions('fabric', this)">Fabric</button>
-          <button class="version-filter-btn" onclick="filterVersions('installed', this)">Instaladas</button>
-          <button class="btn btn-sm btn-glass" onclick="refreshAllVersions()" style="margin-left:auto; font-size:0.75rem; padding:5px 12px;" title="Refrescar catálogo desde Mojang y Forge">🔄 Refrescar</button>
+          <button class="version-filter-btn" onclick="filterVersions('optifine', this)">OptiFine</button>
+          <button class="version-filter-btn" onclick="filterVersions('pvp', this)">⚔️ Clientes PVP</button>
+          <button class="btn btn-sm btn-glass" onclick="refreshAllVersions()" style="margin-left:auto; font-size:0.75rem; padding:5px 12px;" title="Refrescar catálogo completo">🔄 Refrescar</button>
         </div>
 
         <div class="versions-list" id="versions-list-container">
@@ -5476,10 +5477,33 @@ async function completeLogin() {
   applyCustomTheme();
   setTheme(currentTheme);
   
-  ipc.send('renderer-ready-step', { text: 'Verificando versiones de Minecraft con Mojang...', progress: 75 });
+  ipc.send('renderer-ready-step', { text: 'Verificando versiones de Minecraft con Mojang y modloaders...', progress: 75 });
   allVer = await ipc.invoke('get-all-versions');
-  ipc.invoke('get-fabric-mc-versions').catch(()=>{});
-  ipc.invoke('get-quilt-mc-versions').catch(()=>{});
+  
+  // Consultar todos los catálogos en paralelo y pre-llenar caché
+  const [forgeRes, fabricRes, neoforgeRes, quiltRes, optifineRes] = await Promise.allSettled([
+    ipc.invoke('get-forge-mc-versions'),
+    ipc.invoke('get-fabric-mc-versions'),
+    ipc.invoke('get-neoforge-mc-versions'),
+    ipc.invoke('get-quilt-mc-versions'),
+    ipc.invoke('get-optifine-mc-versions')
+  ]);
+  if (forgeRes.status === 'fulfilled' && Array.isArray(forgeRes.value)) {
+    vbLoaderVersionsCache['forge'] = forgeRes.value.map(v => v.mcVersion).filter(Boolean);
+  }
+  if (fabricRes.status === 'fulfilled' && Array.isArray(fabricRes.value)) {
+    vbLoaderVersionsCache['fabric'] = fabricRes.value.filter(v => v.stable).map(v => v.version).filter(Boolean);
+  }
+  if (neoforgeRes.status === 'fulfilled' && Array.isArray(neoforgeRes.value)) {
+    vbLoaderVersionsCache['neoforge'] = neoforgeRes.value;
+  }
+  if (quiltRes.status === 'fulfilled' && Array.isArray(quiltRes.value)) {
+    vbLoaderVersionsCache['quilt'] = quiltRes.value.filter(v => v.stable).map(v => v.version).filter(Boolean);
+  }
+  if (optifineRes.status === 'fulfilled' && Array.isArray(optifineRes.value)) {
+    vbLoaderVersionsCache['optifine'] = optifineRes.value;
+  }
+
   installedMeta = await ipc.invoke('get-installed-versions');
   installed = new Set(installedMeta.map(v=>v.id));
   
@@ -6067,7 +6091,20 @@ async function vbRenderList() {
   let itemsToRender = [];
 
   if (modifier === 'vanilla') {
-    itemsToRender = allVer.filter(v => {
+    // 1. First add custom / pvp clients installed locally if any match search
+    const pvpInstalled = installedMeta.filter(m => m.type === 'pvp' || (!allVer.some(a => a.id === m.id) && m.type !== 'forge' && m.type !== 'fabric' && m.type !== 'neoforge' && m.type !== 'quilt' && m.type !== 'optifine'));
+    pvpInstalled.forEach(m => {
+      if (search && !m.id.toLowerCase().includes(search) && !(m.displayName && m.displayName.toLowerCase().includes(search))) return;
+      itemsToRender.push({
+        mcVersion: m.id,
+        displayName: m.displayName || m.id,
+        isInstalled: true,
+        badgeHtml: '<span class="vb-badge vb-badge-opti" style="background:rgba(168,85,247,0.2);color:#c084fc;">PVP</span>'
+      });
+    });
+
+    // 2. Add official versions
+    const officialItems = allVer.filter(v => {
       if (!vbShowSnapshots && v.type !== 'release') return false;
       if (search && !v.id.toLowerCase().includes(search)) return false;
       return true;
@@ -6077,6 +6114,10 @@ async function vbRenderList() {
       isInstalled: installed.has(v.id),
       badgeHtml: v.type === 'snapshot' ? '<span class="vb-badge vb-badge-snap">SNAP</span>' : ''
     }));
+
+    // Put installed official versions at the top, then available
+    officialItems.sort((a, b) => (b.isInstalled ? 1 : 0) - (a.isInstalled ? 1 : 0));
+    itemsToRender.push(...officialItems);
   } else {
     // Modifier (Fabric, OptiFine, Forge, NeoForge, Quilt)
     const installedMap = new Map();
@@ -6244,14 +6285,43 @@ async function vbOpenLoaderPanel(mcId, modifier) {
   const btn   = document.getElementById('vb-loader-install-btn');
   if (!panel) return;
 
-  // Check if already installed — if so show play directly
-  if (vbIsInstalled(mcId, modifier)) {
+  const loaderLabels = { forge:'Forge', fabric:'Fabric', neoforge:'NeoForge', quilt:'Quilt' };
+  const loaderName = loaderLabels[modifier] || modifier;
+
+  // Buscar todas las builds instaladas que coincidan con este MC version y modloader
+  const installedMatches = installedMeta.filter(m => {
+    const typeMatch = modifier === 'fabric' ? (m.type === 'fabric' || m.type === 'sodium') : m.type === modifier;
+    return typeMatch && (m.baseVersion === mcId || m.id === mcId);
+  });
+
+  if (installedMatches.length > 0) {
     panel.style.display = 'block';
-    title.textContent = `✓ ${modifier.charAt(0).toUpperCase()+modifier.slice(1)} instalado para ${mcId}`;
-    sel.style.display = 'none';
+    title.textContent = `✓ ${loaderName} instalado para ${mcId} (${installedMatches.length} build${installedMatches.length > 1 ? 's' : ''})`;
+    
+    if (installedMatches.length > 1) {
+      sel.style.display = '';
+      sel.innerHTML = '';
+      installedMatches.forEach(m => {
+        const opt = document.createElement('option');
+        opt.value = m.id;
+        opt.textContent = m.displayName || m.id;
+        sel.appendChild(opt);
+      });
+      sel.onchange = () => {
+        vbSetHiddenSelect(sel.value, modifier);
+      };
+      vbSetHiddenSelect(sel.value, modifier);
+    } else {
+      sel.style.display = 'none';
+      vbSetHiddenSelect(installedMatches[0].id, modifier);
+    }
+
     btn.textContent = '▶ Jugar';
-    btn.onclick = () => { vbPlay(mcId); };
-    vbSetHiddenSelect(mcId, modifier);
+    btn.onclick = () => {
+      const chosenId = installedMatches.length > 1 ? sel.value : installedMatches[0].id;
+      vbSetHiddenSelect(chosenId, modifier);
+      launchGame();
+    };
     return;
   }
 
@@ -6261,7 +6331,6 @@ async function vbOpenLoaderPanel(mcId, modifier) {
   btn.onclick = () => vbInstallLoader();
   panel.style.display = 'block';
 
-  const loaderLabels = { forge:'Forge', fabric:'Fabric', neoforge:'NeoForge', quilt:'Quilt' };
   title.textContent = `Versión de ${loaderLabels[modifier] || modifier} para MC ${mcId}`;
 
   try {
@@ -6520,6 +6589,25 @@ function refreshModSelect() {
   }
 }
 
+function directPlayVersion(versionId) {
+  showTab('play');
+  const match = installedMeta.find(m => m.id === versionId);
+  if (match) {
+    if (match.type === 'forge') setPlayModifier('forge');
+    else if (match.type === 'fabric') setPlayModifier('fabric');
+    else if (match.type === 'optifine') setPlayModifier('optifine');
+    else if (match.type === 'neoforge') setPlayModifier('neoforge');
+    else if (match.type === 'quilt') setPlayModifier('quilt');
+    else setPlayModifier('vanilla');
+    vbSetHiddenSelect(match.id, match.type);
+    toast(`🎮 Seleccionado: ${match.displayName || versionId}`, 'success');
+  } else {
+    setPlayModifier('vanilla');
+    vbSetHiddenSelect(versionId, 'vanilla');
+    toast(`🎮 Seleccionado: ${versionId}`, 'success');
+  }
+}
+
 function loadVersionsList() {
   const container = document.getElementById('versions-list-container');
   if (!container) return;
@@ -6535,15 +6623,42 @@ function loadVersionsList() {
     return;
   }
 
-  const combined = [...allVer.map(v=>({...v, isInstalled:installed.has(v.id)})), ...installedMeta.filter(v=>!allVer.some(a=>a.id===v.id))];
+  const combined = [
+    ...allVer.map(v => ({
+      ...v,
+      isInstalled: installed.has(v.id),
+      displayName: `Minecraft ${v.id}`
+    })),
+    ...installedMeta.filter(v => !allVer.some(a => a.id === v.id)).map(v => ({
+      ...v,
+      isInstalled: true
+    }))
+  ];
+
   let filtered = combined;
   if (currentVersionFilter !== 'all') {
-    filtered = combined.filter(v=>{
-      if (currentVersionFilter === 'installed') return v.isInstalled || installedMeta.some(i=>i.id===v.id);
-      if (currentVersionFilter === 'fabric') return v.type === 'fabric' || v.type === 'sodium';
+    filtered = combined.filter(v => {
+      if (currentVersionFilter === 'installed') {
+        return v.isInstalled || installed.has(v.id) || installedMeta.some(i => i.id === v.id);
+      }
+      if (currentVersionFilter === 'fabric') {
+        return v.type === 'fabric' || v.type === 'sodium';
+      }
+      if (currentVersionFilter === 'pvp') {
+        return v.type === 'pvp' || v.type === 'custom';
+      }
       return v.type === currentVersionFilter;
     });
   }
+
+  // Ordenar: instaladas arriba
+  filtered.sort((a, b) => {
+    const aInst = a.isInstalled || installed.has(a.id);
+    const bInst = b.isInstalled || installed.has(b.id);
+    if (aInst && !bInst) return -1;
+    if (!aInst && bInst) return 1;
+    return (new Date(b.releaseTime || 0)) - (new Date(a.releaseTime || 0));
+  });
 
   if (filtered.length === 0) {
     if (['forge', 'fabric', 'neoforge', 'quilt', 'optifine'].includes(currentVersionFilter)) {
@@ -6559,15 +6674,53 @@ function loadVersionsList() {
     container.innerHTML = '<p style="color:var(--text-dim);text-align:center;padding:40px;">No hay versiones con el filtro seleccionado.</p>';
     return;
   }
-  container.innerHTML = filtered.map(v=>{
-    const badgeClass = {release:'badge-release',snapshot:'badge-snapshot',optifine:'badge-optifine',forge:'badge-forge',fabric:'badge-fabric',neoforge:'badge-neoforge',quilt:'badge-fabric'}[v.type] || 'badge-release';
-    const typeLabel = {release:'OFICIAL',snapshot:'SNAPSHOT',optifine:'OPTIFINE',forge:'FORGE',fabric:'FABRIC',neoforge:'NEOFORGE',quilt:'QUILT'}[v.type] || v.type.toUpperCase();
-    const isInstalled = v.isInstalled || installedMeta.some(i=>i.id===v.id);
-    // For loader versions, show clean display: "1.21.4 (Fabric)" instead of raw ID
-    const isLoader = ['fabric','forge','neoforge','optifine','quilt'].includes(v.type);
-    const loaderNameMap = {fabric:'Fabric',forge:'Forge',neoforge:'NeoForge',optifine:'OptiFine',quilt:'Quilt'};
-    const displayId = isLoader && v.baseVersion ? `${v.baseVersion} (${loaderNameMap[v.type] || v.type})` : v.id;
-    return `<div class="version-item"><div class="version-info"><div class="version-id">${displayId} <span class="version-type-badge ${badgeClass}">${typeLabel}</span> ${isInstalled?'<span class="version-type-badge badge-release">✓ INSTALADA</span>':''}</div><div class="version-date">${new Date(v.releaseTime).toLocaleDateString()}</div></div></div>`;
+
+  container.innerHTML = filtered.map(v => {
+    const badgeClass = {
+      release: 'badge-release',
+      snapshot: 'badge-snapshot',
+      optifine: 'badge-optifine',
+      forge: 'badge-forge',
+      fabric: 'badge-fabric',
+      neoforge: 'badge-neoforge',
+      quilt: 'badge-fabric',
+      pvp: 'badge-optifine',
+      custom: 'badge-forge'
+    }[v.type] || 'badge-release';
+
+    const typeLabel = {
+      release: 'OFICIAL',
+      snapshot: 'SNAPSHOT',
+      optifine: 'OPTIFINE',
+      forge: 'FORGE',
+      fabric: 'FABRIC',
+      neoforge: 'NEOFORGE',
+      quilt: 'QUILT',
+      pvp: 'PVP CLIENT',
+      custom: 'CUSTOM'
+    }[v.type] || v.type.toUpperCase();
+
+    const isInstalled = v.isInstalled || installed.has(v.id) || installedMeta.some(i => i.id === v.id);
+    const displayId = v.displayName || v.id;
+
+    return `
+      <div class="version-item" style="display:flex;align-items:center;justify-content:space-between;padding:12px 16px;margin-bottom:8px;border-radius:10px;background:rgba(255,255,255,0.03);border:1px solid ${isInstalled ? 'rgba(74,222,128,0.35)' : 'rgba(255,255,255,0.06)'};">
+        <div class="version-info" style="display:flex;flex-direction:column;gap:4px;">
+          <div class="version-id" style="font-weight:700;font-size:0.92rem;display:flex;align-items:center;gap:8px;">
+            <span>${displayId}</span>
+            <span class="version-type-badge ${badgeClass}">${typeLabel}</span>
+            ${isInstalled ? '<span class="version-type-badge badge-release" style="background:rgba(74,222,128,0.18);color:#4ade80;border:1px solid rgba(74,222,128,0.35);">✓ INSTALADA</span>' : ''}
+          </div>
+          <div class="version-date" style="font-size:0.75rem;color:var(--text-dim);">${v.releaseTime ? new Date(v.releaseTime).toLocaleDateString() : ''} ${v.id !== displayId ? `<span style="opacity:0.6;">(${v.id})</span>` : ''}</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;">
+          ${isInstalled
+            ? `<button class="btn btn-primary btn-sm" onclick="directPlayVersion('${v.id}')" style="padding:6px 14px;font-weight:700;cursor:pointer;">▶ Jugar</button>`
+            : `<button class="btn btn-glass btn-sm" onclick="showTab('play'); setPlayModifier('${v.type === 'snapshot' ? 'vanilla' : v.type}'); vbSelectVersion('${v.id}');" style="padding:6px 14px;cursor:pointer;">⬇ Instalar</button>`
+          }
+        </div>
+      </div>
+    `;
   }).join('');
 }
 
@@ -11854,8 +12007,11 @@ async function loadNebulaProfileData() {
           card.className = 'client-card';
           card.style.setProperty('--client-color', c.color || 'var(--accent)');
           
-          // Check if CMClient (or case-insensitive matches) is installed
-          const isInstalled = c.id === 'cmpack' && installedMeta.some(v => v.id.toLowerCase() === 'cmclient' || v.id.toLowerCase().includes('cmpack'));
+          // Check if installed
+          const isInstalled = (c.id === 'cmpack' && installedMeta.some(v => v.id.toLowerCase() === 'cmclient' || v.id.toLowerCase().includes('cmpack')))
+                           || (c.id === 'nebulapvp' && installedMeta.some(v => v.id.toLowerCase().includes('nebulapvp') || v.id.toLowerCase().includes('nebula_client')))
+                           || c.isInstalledDirect
+                           || installedMeta.some(v => v.id === c.id);
           const badgeText = isInstalled ? window.t('Instalado') : (c.comingSoon ? window.t('Próximamente') : window.t('Instalable'));
           const badgeStyle = isInstalled ? 'background:rgba(16,185,129,0.15);color:#10b981;border-color:rgba(16,185,129,0.3);' : '';
 
@@ -11873,17 +12029,19 @@ async function loadNebulaProfileData() {
                 </button>
               </div>
             `;
+          } else if (isInstalled) {
+            let actualId = c.id;
+            if (c.id === 'cmpack') actualId = installedMeta.find(v => v.id.toLowerCase() === 'cmclient' || v.id.toLowerCase().includes('cmpack'))?.id || 'cmpack_1.8.8';
+            else if (c.id === 'nebulapvp') actualId = installedMeta.find(v => v.id.toLowerCase().includes('nebulapvp_1.8.9'))?.id || installedMeta.find(v => v.id.toLowerCase().includes('nebulapvp'))?.id || 'nebulapvp';
+            btnHtml = `
+              <button class="client-install-btn" style="background: linear-gradient(135deg, #10b98166, #04785722); border: 0.5px solid rgba(16,185,129,0.4); color: #10b981; font-weight:700; cursor:pointer;" onclick="playPvpClient('${actualId}')">
+                ▶ Jugar ${c.name}
+              </button>
+            `;
           } else if (c.comingSoon) {
             btnHtml = `
               <button class="client-install-btn" style="background: rgba(255,255,255,0.02); border: 0.5px solid rgba(255,255,255,0.05); color: var(--text-dim); cursor: not-allowed;" disabled>
                 🌌 Próximamente
-              </button>
-            `;
-          } else if (isInstalled) {
-            const actualId = installedMeta.find(v => v.id.toLowerCase() === 'cmclient' || v.id.toLowerCase().includes('cmpack'))?.id || 'cmpack_1.8.8';
-            btnHtml = `
-              <button class="client-install-btn" style="background: linear-gradient(135deg, #10b98166, #04785722); border: 0.5px solid rgba(16,185,129,0.4); color: #10b981; font-weight:700;" onclick="playPvpClient('${actualId}')">
-                ${window.t('▶ Jugar CM Pack')}
               </button>
             `;
           } else if (c.isJar) {

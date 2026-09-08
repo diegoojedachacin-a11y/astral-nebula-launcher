@@ -1122,62 +1122,110 @@ ipcMain.handle('get-installed-versions', () => {
 
     const installed = [];
     try {
+        sendLog('🔍 Escaneando versiones instaladas en .minecraft/versions...');
         const dirs = fs.readdirSync(versionsDir);
         for (const dir of dirs) {
-            const jsonPath = path.join(versionsDir, dir, `${dir}.json`);
-            if (fs.existsSync(jsonPath)) {
+            const versionDir = path.join(versionsDir, dir);
+            if (!fs.statSync(versionDir).isDirectory()) continue;
+
+            const jsonPath = path.join(versionDir, `${dir}.json`);
+            let versionData = {};
+            let hasJson = fs.existsSync(jsonPath);
+
+            if (hasJson) {
                 try {
-                    const versionData = JSON.parse(fs.readFileSync(jsonPath, 'utf8'));
-                    let baseVersion = versionData.inheritsFrom || dir;
-                    let type = 'release';
-
-                    if (dir.toLowerCase().includes('optifine')) {
-                        type = 'optifine';
-                        if (!versionData.inheritsFrom) {
-                            const match = dir.match(/^(\d+\.\d+(?:\.\d+)?)/);
-                            if (match) baseVersion = match[1];
-                        }
-                    }
-                    else if (dir.toLowerCase().includes('neoforge')) {
-                        type = 'neoforge';
-                        if (!versionData.inheritsFrom) {
-                            const match = dir.match(/^(\d+\.\d+(?:\.\d+)?)/);
-                            if (match) baseVersion = match[1];
-                        }
-                    }
-                    else if (dir.toLowerCase().includes('forge')) {
-                        type = 'forge';
-                        if (!versionData.inheritsFrom) {
-                            const match = dir.match(/^(\d+\.\d+(?:\.\d+)?)/);
-                            if (match) baseVersion = match[1];
-                        }
-                    }
-                    else if (dir.toLowerCase().includes('fabric')) {
-                        type = 'fabric';
-                        if (!versionData.inheritsFrom) {
-                            const match = dir.match(/fabric-loader-[^\-]+-(.+)/);
-                            if (match) baseVersion = match[1];
-                        }
-                    }
-                    else if (dir.toLowerCase().includes('quilt')) {
-                        type = 'quilt';
-                        if (!versionData.inheritsFrom) {
-                            const match = dir.match(/quilt-loader-[^\-]+-(.+)/);
-                            if (match) baseVersion = match[1];
-                        }
-                    }
-
-                    installed.push({
-                        id: dir,
-                        type: type,
-                        baseVersion: baseVersion,
-                        releaseTime: versionData.releaseTime || new Date().toISOString()
-                    });
+                    versionData = JSON.parse(fs.readFileSync(jsonPath, 'utf8'));
                 } catch (e) {
-                    sendLog(`⚠️ Error leyendo versión ${dir}: ${e.message}`);
+                    sendLog(`⚠️ Error leyendo versión ${dir}: ${e.message}`, 'warn');
+                    continue;
+                }
+            } else {
+                // Si existe jar pero no json, intentar reconstruir si es vanilla oficial
+                const jarPath = path.join(versionDir, `${dir}.jar`);
+                if (fs.existsSync(jarPath)) {
+                    const manifestCache = path.join(BASE_DATA_DIR, 'cache', 'version_manifest_v2.json');
+                    if (fs.existsSync(manifestCache)) {
+                        try {
+                            const mani = JSON.parse(fs.readFileSync(manifestCache, 'utf8'));
+                            const found = mani.versions?.find(v => v.id === dir);
+                            if (found && found.url) {
+                                httpsGet(found.url).then(content => {
+                                    fs.writeFileSync(jsonPath, content, 'utf8');
+                                    sendLog(`✅ Archivo ${dir}.json recuperado automáticamente.`);
+                                }).catch(() => {});
+                            }
+                        } catch { }
+                    }
+                } else {
+                    continue;
                 }
             }
+
+            let baseVersion = versionData.inheritsFrom || dir;
+            let type = versionData.type || 'release';
+            let displayName = dir;
+            const low = dir.toLowerCase();
+
+            if (low.includes('optifine')) {
+                type = 'optifine';
+                const m = dir.match(/^(\d+\.\d+(?:\.\d+)?)/);
+                if (m) baseVersion = m[1];
+                displayName = `OptiFine (MC ${baseVersion})`;
+            }
+            else if (low.includes('neoforge')) {
+                type = 'neoforge';
+                const m = dir.match(/^(\d+\.\d+(?:\.\d+)?)/);
+                if (m) baseVersion = m[1];
+                displayName = `NeoForge (MC ${baseVersion})`;
+            }
+            else if (low.includes('forge')) {
+                type = 'forge';
+                const m = dir.match(/^(\d+\.\d+(?:\.\d+)?)/);
+                if (m) baseVersion = m[1];
+                const forgePart = dir.replace(new RegExp('^' + baseVersion + '-forge-?', 'i'), '').replace(/^forge/i, '');
+                displayName = forgePart ? `Forge ${forgePart} (MC ${baseVersion})` : `Forge (MC ${baseVersion})`;
+            }
+            else if (low.includes('fabric')) {
+                type = 'fabric';
+                const m = dir.match(/fabric-loader-[^\-]+-(.+)/);
+                if (m) baseVersion = m[1];
+                const fm = dir.match(/fabric-loader-([^\-]+)/);
+                displayName = fm ? `Fabric Loader ${fm[1]} (MC ${baseVersion})` : `Fabric (MC ${baseVersion})`;
+            }
+            else if (low.includes('quilt')) {
+                type = 'quilt';
+                const m = dir.match(/quilt-loader-[^\-]+-(.+)/);
+                if (m) baseVersion = m[1];
+                const qm = dir.match(/quilt-loader-([^\-]+)/);
+                displayName = qm ? `Quilt Loader ${qm[1]} (MC ${baseVersion})` : `Quilt (MC ${baseVersion})`;
+            }
+            else if (low.includes('pvp') || low.includes('cmpack') || low.includes('client') || low.includes('flight')) {
+                type = 'pvp';
+                const m = dir.match(/(\d+\.\d+(?:\.\d+)?)/);
+                if (m) baseVersion = m[1];
+                if (low.includes('cmpack')) displayName = `CM Pack 1.8.8`;
+                else if (low.includes('flight')) displayName = `Flight Client`;
+                else if (low.includes('nebulapvp')) displayName = `Nebula PVP ${baseVersion}`;
+                else displayName = dir;
+            }
+            else {
+                displayName = `Minecraft ${dir}`;
+            }
+
+            installed.push({
+                id: dir,
+                type: type,
+                baseVersion: baseVersion,
+                displayName: displayName,
+                isInstalled: true,
+                releaseTime: versionData.releaseTime || new Date().toISOString()
+            });
         }
+
+        const counts = {};
+        installed.forEach(i => counts[i.type] = (counts[i.type] || 0) + 1);
+        const summary = Object.entries(counts).map(([t, c]) => `${t}: ${c}`).join(', ');
+        sendLog(`✅ ${installed.length} versiones instaladas detectadas (${summary})`);
     } catch (err) {
         sendLog(`❌ Error listando versiones instaladas: ${err.message}`, 'error');
     }
@@ -1332,6 +1380,8 @@ ipcMain.handle('get-optifine-versions', async (event, mcVersion) => {
 });
 
 ipcMain.handle('get-optifine-mc-versions', async () => {
+    sendLog('🔍 Cargando versiones de OptiFine soportadas...');
+    let result = [];
     try {
         const html = await new Promise((resolve, reject) => {
             const req = https.get('https://optifine.net/downloads', { headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)' } }, res => {
@@ -1348,22 +1398,24 @@ ipcMain.handle('get-optifine-mc-versions', async () => {
             if (match[1]) versions.add(match[1]);
         }
         if (versions.size > 0) {
-            return Array.from(versions);
+            result = Array.from(versions);
         }
     } catch (e) {
         sendLog(`⚠️ Error obteniendo versiones OptiFine de optifine.net: ${e.message}`, 'warn');
     }
 
-    try {
-        const data = await httpsGet('https://bmclapi2.bangbang93.com/optifine/versionList');
-        const list = JSON.parse(data);
-        if (Array.isArray(list)) {
-            return [...new Set(list.map(item => item.mcversion))].filter(Boolean);
-        }
-        return [];
-    } catch (e) {
-        return [];
+    if (result.length === 0) {
+        try {
+            const data = await httpsGet('https://bmclapi2.bangbang93.com/optifine/versionList', {}, 8000);
+            const list = JSON.parse(data);
+            if (Array.isArray(list)) {
+                result = [...new Set(list.map(item => item.mcversion))].filter(Boolean);
+            }
+        } catch (e) { }
     }
+
+    sendLog(`✅ ${result.length} versiones de Minecraft con soporte OptiFine`);
+    return result;
 });
 
 ipcMain.handle('auto-install-optifine', async (event, mcVersion) => {
@@ -4113,7 +4165,37 @@ const PVP_CLIENTS = [
     { id: 'nebulapvp', name: 'Nebula PVP', icon: '🌌', color: '#c084fc', desc: 'Cliente PVP propio de Nebula Launcher con optimizaciones exclusivas, HUD modular y cosméticos sincronizados. En desarrollo.', desc_en: "Nebula Launcher's native PVP client with exclusive optimizations, modular HUD, and synchronized cosmetics. In development.", desc_pt: 'Cliente PVP próprio do Nebula Launcher com otimizações exclusivas, HUD modular e cosméticos sincronizados. Em desenvolvimento.', comingSoon: true }
 ];
 
-ipcMain.handle('get-pvp-clients', () => PVP_CLIENTS);
+ipcMain.handle('get-pvp-clients', () => {
+    const s = loadSettings();
+    const mcPath = s.gameDir || path.join(BASE_DATA_DIR, '.minecraft');
+    const versionsDir = path.join(mcPath, 'versions');
+    
+    const list = [...PVP_CLIENTS];
+    if (fs.existsSync(versionsDir)) {
+        try {
+            const dirs = fs.readdirSync(versionsDir);
+            for (const d of dirs) {
+                const low = d.toLowerCase();
+                const jsonPath = path.join(versionsDir, d, `${d}.json`);
+                if (!fs.existsSync(jsonPath)) continue;
+                if (low.includes('cmpack') || low === 'cmclient' || low.includes('nebulapvp') || low.includes('nebula_client')) continue;
+                if (low.includes('flight') || low.includes('pvp') || low.includes('client')) {
+                    list.push({
+                        id: d,
+                        name: d,
+                        icon: '🗡️',
+                        color: '#38bdf8',
+                        desc: `Cliente PvP personalizado: ${d}`,
+                        desc_en: `Custom PvP client: ${d}`,
+                        desc_pt: `Cliente PvP personalizado: ${d}`,
+                        isInstalledDirect: true
+                    });
+                }
+            }
+        } catch {}
+    }
+    return list;
+});
 
 // ── Microsoft Auth ────────────────────────────────────────────────
 async function doMicrosoftAuth() {
