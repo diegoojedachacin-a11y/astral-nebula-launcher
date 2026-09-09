@@ -47,7 +47,7 @@ const comparisonSection = `
             <th style="padding:16px;" data-i18n="th_feature">Característica</th>
             <th style="padding:16px; color:var(--accent-purple); font-size:1.1rem; font-weight:800;">🌌 Nebula Launcher</th>
             <th style="padding:16px; color:var(--text-muted);">TLauncher</th>
-            <th style="padding:16px; color:var(--text-muted);">Feather / Dawn</th>
+            <th style="padding:16px; color:var(--text-muted);">Feather Client</th>
             <th style="padding:16px; color:var(--text-muted);">Lunar Client</th>
             <th style="padding:16px; color:var(--text-muted);">Mojang Oficial</th>
           </tr>

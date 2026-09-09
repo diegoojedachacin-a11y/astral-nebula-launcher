@@ -10,11 +10,11 @@ html = html.replace(oldHeader, newHeader);
 
 // 2. Add Battly Launcher column to the comparison table
 const oldTableHead = `<th style="padding:16px; color:var(--text-muted);">TLauncher</th>
-            <th style="padding:16px; color:var(--text-muted);">Feather / Dawn</th>`;
+            <th style="padding:16px; color:var(--text-muted);">Feather Client</th>`;
 
 const newTableHead = `<th style="padding:16px; color:var(--text-muted);">TLauncher</th>
             <th style="padding:16px; color:var(--text-muted);">Battly Launcher</th>
-            <th style="padding:16px; color:var(--text-muted);">Feather / Dawn</th>`;
+            <th style="padding:16px; color:var(--text-muted);">Feather Client</th>`;
 
 html = html.replace(oldTableHead, newTableHead);
 
