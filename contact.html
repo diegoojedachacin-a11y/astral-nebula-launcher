@@ -488,7 +488,7 @@
         Completa el siguiente formulario y un miembro de nuestro equipo te responderá en menos de 24 horas.
       </p>
 
-      <form onsubmit="event.preventDefault(); alert('¡Gracias por tu mensaje! El equipo de soporte técnico de Nebula responderá a la brevedad a tu correo electrónico.'); this.reset();">
+      <form onsubmit="event.preventDefault(); const n = document.getElementById('name').value; const m = document.getElementById('message').value; window.location.href = `mailto:soporte@nebuladevstudios.com?subject=Soporte Nebula Launcher - ${encodeURIComponent(n)}&body=${encodeURIComponent(m)}`; alert('Abriendo tu cliente de correo para enviar el mensaje directamente a soporte@nebuladevstudios.com'); this.reset();">
         <div class="form-grid">
           <div class="form-group">
             <label for="name">Nombre o Apodo *</label>
