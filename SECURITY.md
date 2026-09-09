@@ -2,20 +2,19 @@
 
 ## Supported Versions
 
-Use this section to tell people about which versions of your project are
-currently being supported with security updates.
+Nebula Launcher receives continuous updates and security patches. Below are the supported versions:
 
 | Version | Supported          |
 | ------- | ------------------ |
-| 5.1.x   | :white_check_mark: |
-| 5.0.x   | :x:                |
-| 4.0.x   | :white_check_mark: |
-| < 4.0   | :x:                |
+| 4.3.x   | :white_check_mark: |
+| 4.2.x   | :white_check_mark: |
+| < 4.2   | :x:                |
 
 ## Reporting a Vulnerability
 
-Use this section to tell people how to report a vulnerability.
+We take the security of Nebula Launcher and our community very seriously. If you discover a potential security vulnerability, please report it responsibly:
 
-Tell them where to go, how often they can expect to get an update on a
-reported vulnerability, what to expect if the vulnerability is accepted or
-declined, etc.
+1. **Email:** Send details directly to `soporte@nebuladevstudios.com` with the subject `[Security Disclosure] Nebula Launcher`.
+2. **Details:** Include steps to reproduce, affected version, and possible impact.
+3. **Response Time:** We aim to acknowledge receipt within 48 business hours and provide regular updates on remediation.
+4. **Public Disclosure:** Please do not open public issues on GitHub until a patch has been released to protect all active users.
